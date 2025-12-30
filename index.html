@@ -15,7 +15,7 @@
         /* --- CORE VARIABLES --- */
         :root {
             --primary: #37ca37;
-            --orange: #f6ad55;
+            --orange: #f6ad55; /* Gold/Orange Accents remain */
             --black: #000000;
             --white: #ffffff;
             --gray: #cbd5e0;
@@ -25,8 +25,10 @@
             --font-content: 'Montserrat', sans-serif;
             --font-accent: 'Poppins', sans-serif;
             
-            /* Background Colors */
-            --bg-dark: #050301; 
+            /* Background Colors - Deep Royal Blue Granite Style */
+            --bg-dark: #050810; 
+            --box-bg-blue: rgba(10, 25, 60, 0.6);
+            --box-bg-blue-light: rgba(10, 25, 60, 0.4);
         }
 
         /* --- RESET & BASE --- */
@@ -37,13 +39,11 @@
         }
 
         body {
+            /* Granit Königsblau Gradient Background */
             background-color: var(--bg-dark);
-            /* Background Image Texture */
-            background-image: url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg');
+            background: linear-gradient(180deg, #0a1124 0%, #02040a 40%, #050914 100%);
             background-size: cover;
-            background-position: center;
             background-attachment: fixed;
-            background-repeat: no-repeat;
             
             color: var(--text-color);
             font-family: var(--font-content);
@@ -80,14 +80,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- SPOTLIGHT GRADIENT (Orange/Brown Glow) --- */
+        /* --- SPOTLIGHT GRADIENT (Royal Blue Glow) --- */
         .spotlight {
             position: fixed;
             bottom: -20vh;
             left: 0;
             right: 0;
             height: 60vh;
-            background: radial-gradient(circle, rgba(246, 173, 85, 0.4) 0%, rgba(139, 69, 19, 0.3) 40%, rgba(0, 0, 0, 0) 70%);
+            /* Royal Blue Gradient */
+            background: radial-gradient(circle, rgba(65, 105, 225, 0.4) 0%, rgba(0, 35, 102, 0.3) 40%, rgba(0, 0, 0, 0) 70%);
             filter: blur(60px);
             z-index: -1;
             pointer-events: none;
@@ -100,7 +101,8 @@
             left: 0;
             right: 0;
             height: 50vh;
-            background: radial-gradient(circle, rgba(139, 69, 19, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+            /* Royal Blue Gradient Top */
+            background: radial-gradient(circle, rgba(65, 105, 225, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
             filter: blur(80px);
             z-index: -1;
             pointer-events: none;
@@ -139,24 +141,8 @@
         }
 
         /* --- LOGO TEXT STYLES --- */
-        .logo-text {
-            font-family: var(--font-headline);
-            font-weight: 800;
-            font-size: 1.2rem;
-            text-transform: uppercase;
-            color: var(--white);
-            letter-spacing: 2px;
-            border: 2px solid var(--orange);
-            padding: 10px 20px;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
+        /* Removed .logo-text class as we switched to img */
         
-        .logo-text:hover {
-            color: var(--orange);
-            border-color: var(--white);
-        }
-
         /* --- BUTTONS --- */
         .btn {
             display: inline-block;
@@ -206,15 +192,15 @@
         }
 
         .modal-content {
-            /* Matches body theme */
-            background: linear-gradient(145deg, #1a1005, #0f0802);
+            /* Changed from Brown/Black to Deep Royal Blue/Black Gradient */
+            background: linear-gradient(145deg, #050a1a, #02040a);
             border: 1px solid var(--orange);
             padding: 30px;
             border-radius: 15px;
             width: 100%;
             max-width: 500px;
             position: relative;
-            box-shadow: 0 0 30px rgba(246, 173, 85, 0.15);
+            box-shadow: 0 0 30px rgba(65, 105, 225, 0.2); /* Blueish glow */
             animation: modalFadeIn 0.3s ease-out;
         }
 
@@ -267,7 +253,8 @@
             width: 100%;
             padding: 12px 15px;
             border-radius: 5px;
-            border: 1px solid #4a3b2a; /* Subtle brown border */
+            /* Changed from brown border to dark blueish border */
+            border: 1px solid #1e3a8a; 
             background: rgba(255, 255, 255, 0.05);
             color: var(--white);
             font-family: var(--font-content);
@@ -294,9 +281,15 @@
             text-align: center;
         }
 
-        /* Removed logo-img class reference in HTML, using logo-text instead */
+        .logo-img {
+            width: 80px;
+            margin: 0 auto;
+            /* Simple placeholder style in case image is missing */
+            min-height: 40px; 
+        }
 
         @media (min-width: 768px) {
+            .logo-img { width: 120px; }
             header { padding: 20px 0 0 0; }
         }
 
@@ -310,7 +303,7 @@
 
         .hero-subheadline {
             font-family: var(--font-accent);
-            color: var(--orange);
+            /* color removed here, handled by class */
             font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -408,7 +401,8 @@
             border: 1px solid var(--white);
             padding: 15px;
             border-radius: 15px;
-            background: rgba(43, 29, 14, 0.4);
+            /* Changed to Royal Blue Tint */
+            background: var(--box-bg-blue);
             text-align: center;
         }
 
@@ -446,7 +440,8 @@
             padding: 15px;
             text-align: center;
             border-radius: 15px;
-            background: rgba(43, 29, 14, 0.2);
+            /* Changed to Lighter Royal Blue Tint */
+            background: var(--box-bg-blue-light);
         }
 
         .target-item h3 {
@@ -492,7 +487,7 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            margin: 40px auto; /* Fix: Changed from 40px 0 to 40px auto for centering */
+            margin: 40px auto; 
         }
 
         .stat-box {
@@ -523,7 +518,7 @@
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            margin: 40px auto; /* Fix: Changed from 40px 0 to 40px auto for centering */
+            margin: 40px auto; 
             border: 2px solid var(--black);
         }
 
@@ -613,7 +608,8 @@
     <header>
         <div class="container">
             <a href="https://www.ritter-fabian.de/">
-                <div class="logo-text">Florian Merzenich</div>
+                <!-- Replaced text with image placeholder as requested -->
+                <img src="logo.png" alt="Florian Merzenich Logo" class="logo-img">
             </a>
         </div>
     </header>
@@ -622,7 +618,7 @@
     <section class="hero-section">
         <div class="container">
             <!-- Orange Subheadline Box -->
-            <div class="hero-subheadline">
+            <div class="hero-subheadline gold-text-animated">
                 9 Jahre Crypto-Erfahrung in 60 Min.
             </div>
 
@@ -675,7 +671,7 @@
     <section class="target-section">
         <div class="container">
             <div class="divider"></div>
-            <h2 class="text-center orange-text uppercase" style="margin: 20px 0; font-size: 1.3rem;">Für wen ist diese Masterclass</h2>
+            <h2 class="text-center gold-text-animated uppercase" style="margin: 20px 0; font-size: 1.3rem;">Für wen ist diese Masterclass</h2>
             
             <div class="target-grid">
                 <div class="target-item">
@@ -702,7 +698,7 @@
     <!-- Reviews Section Placeholder -->
     <section class="container text-center" style="margin: 40px auto;">
         <div class="divider"></div>
-        <h2 style="font-weight: 400; margin-bottom: 20px; font-size: 1.5rem;">Das sagt meine<br><span class="orange-text bold">Community</span></h2>
+        <h2 style="font-weight: 400; margin-bottom: 20px; font-size: 1.5rem;">Das sagt meine<br><span class="gold-text-animated bold">Community</span></h2>
         <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
             <i class="fas fa-star orange-text"></i>
             <i class="fas fa-star orange-text"></i>
@@ -716,7 +712,7 @@
 
     <!-- What you will learn -->
     <section class="container" style="margin-top: 40px;">
-        <h2 class="text-center orange-text uppercase" style="margin-bottom: 20px; font-size: 1.3rem;">Was du in der exklusiven Masterclass lernen wirst</h2>
+        <h2 class="text-center gold-text-animated uppercase" style="margin-bottom: 20px; font-size: 1.3rem;">Was du in der exklusiven Masterclass lernen wirst</h2>
         
         <div class="content-list">
             <div class="content-item">
@@ -764,7 +760,7 @@
     <!-- Why Participate -->
     <section class="container" style="margin-top: 40px;">
         <div class="divider"></div>
-        <h2 class="text-center orange-text" style="margin-bottom: 20px; font-size: 1.3rem;">Warum du die Masterclass nicht verpassen solltest</h2>
+        <h2 class="text-center gold-text-animated" style="margin-bottom: 20px; font-size: 1.3rem;">Warum du die Masterclass nicht verpassen solltest</h2>
         
         <div class="target-grid">
             <div class="target-item" style="border-color: var(--orange);">
@@ -804,7 +800,7 @@
             <div class="image-placeholder">
                 Bild Platzhalter
             </div>
-            <h3 class="uppercase" style="margin-top: 10px; color: var(--orange); font-size: 1rem;">Crypto Experte & Educator</h3>
+            <h3 class="uppercase gold-text-animated" style="margin-top: 10px; font-size: 1rem;">Crypto Experte & Educator</h3>
             <h2 class="uppercase white-text" style="font-size: 1.5rem;">Florian Merzenich</h2>
         </div>
         <div class="bio-text">
@@ -825,7 +821,8 @@
             
             <div class="logo-footer">
                 <a href="https://www.ritter-fabian.de/" target="_blank">
-                    <div class="logo-text" style="font-size: 1rem; margin: 15px auto;">Florian Merzenich</div>
+                    <!-- Replaced text with image placeholder as requested -->
+                    <img src="logo.png" alt="Logo" class="logo-img">
                 </a>
             </div>
 
@@ -857,7 +854,9 @@
                     <label class="form-label">Telefonnummer (Optional)</label>
                     <input type="tel" class="form-input" placeholder="+49 123 4567890">
                 </div>
-                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Jetzt Kostenlos Anmelden</button>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="submit" class="btn">Jetzt Kostenlos Anmelden</button>
+                </div>
             </form>
         </div>
     </div>
