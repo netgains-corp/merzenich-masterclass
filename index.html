@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kostenlose Bärenmarkt Masterclass – Lerne profitabel zu investieren</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --primary: #37ca37;
+            --orange: #f6ad55;
+            --black: #000000;
+            --white: #ffffff;
+            --gray: #cbd5e0;
+            --dark-gray: #1a1a1a;
+            --text-color: #ffffff;
+            --font-headline: 'Montserrat', sans-serif;
+            --font-content: 'Montserrat', sans-serif;
+            --font-accent: 'Poppins', sans-serif;
+            
+            /* Background Colors */
+            --bg-dark: #050301; 
+        }
+
+        /* --- RESET & BASE --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            /* Background Image Texture */
+            background-image: url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
+            color: var(--text-color);
+            font-family: var(--font-content);
+            line-height: 1.4;
+            font-weight: 400;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+            33% { transform: translate(30px, -50px) scale(1.1); opacity: 0.5; }
+            66% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.3; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+        }
+
+        @keyframes float-reverse {
+            0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+            33% { transform: translate(-30px, 40px) scale(1.2); opacity: 0.3; }
+            66% { transform: translate(20px, -20px) scale(0.8); opacity: 0.15; }
+            100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
+        }
+
+        /* Gold Shine Animation */
+        @keyframes textShine {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- SPOTLIGHT GRADIENT (Orange/Brown Glow) --- */
+        .spotlight {
+            position: fixed;
+            bottom: -20vh;
+            left: 0;
+            right: 0;
+            height: 60vh;
+            background: radial-gradient(circle, rgba(246, 173, 85, 0.4) 0%, rgba(139, 69, 19, 0.3) 40%, rgba(0, 0, 0, 0) 70%);
+            filter: blur(60px);
+            z-index: -1;
+            pointer-events: none;
+            animation: float 10s infinite ease-in-out alternate;
+        }
+        
+        .spotlight-top {
+            position: fixed;
+            top: -30vh;
+            left: 0;
+            right: 0;
+            height: 50vh;
+            background: radial-gradient(circle, rgba(139, 69, 19, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+            animation: float-reverse 15s infinite ease-in-out alternate;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* --- UTILITIES --- */
+        .container {
+            width: 100%;
+            max-width: 1170px;
+            margin: 0 auto;
+            padding: 0 15px; /* Reduced padding mobile */
+            position: relative;
+            z-index: 1;
+        }
+
+        .text-center { text-align: center; }
+        .orange-text { color: var(--orange); }
+        .white-text { color: var(--white); }
+        .bold { font-weight: 700; }
+        .uppercase { text-transform: uppercase; }
+
+        /* Gold Text Class - Adjusted to be darker and slower */
+        .gold-text-animated {
+            background: linear-gradient(to right, #A37D2E, #E3C86B, #966F1B, #E3C86B, #8C5F12, #A37D2E);
+            background-size: 200% auto;
+            color: #000;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShine 8s linear infinite;
+            font-weight: 800;
+        }
+
+        /* --- LOGO TEXT STYLES --- */
+        .logo-text {
+            font-family: var(--font-headline);
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 2px;
+            border: 2px solid var(--orange);
+            padding: 10px 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-text:hover {
+            color: var(--orange);
+            border-color: var(--white);
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--orange);
+            color: var(--white);
+            font-family: var(--font-headline);
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 1px solid var(--orange);
+            cursor: pointer;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 14px 0 rgba(246, 173, 85, 0.39);
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(246, 173, 85, 0.23);
+        }
+
+        @media (min-width: 768px) {
+            .btn {
+                font-size: 1.2rem;
+                padding: 16px 32px;
+                width: auto;
+            }
+        }
+
+        /* --- MODAL / FORM STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85); /* Dark semi-transparent background */
+            z-index: 1000;
+            display: none; /* Hidden by default */
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(8px);
+            padding: 20px;
+        }
+
+        .modal-content {
+            /* Matches body theme */
+            background: linear-gradient(145deg, #1a1005, #0f0802);
+            border: 1px solid var(--orange);
+            padding: 30px;
+            border-radius: 15px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(246, 173, 85, 0.15);
+            animation: modalFadeIn 0.3s ease-out;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--gray);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            line-height: 1;
+        }
+
+        .close-modal:hover {
+            color: var(--orange);
+        }
+
+        .form-headline {
+            color: var(--orange);
+            font-family: var(--font-headline);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .form-subtext {
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--white);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 5px;
+            border: 1px solid #4a3b2a; /* Subtle brown border */
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--white);
+            font-family: var(--font-content);
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--orange);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 8px rgba(246, 173, 85, 0.3);
+        }
+
+        .form-input::placeholder {
+            color: #777;
+        }
+
+        /* --- HEADER / HERO --- */
+        header {
+            padding: 10px 0 0 0;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* Removed logo-img class reference in HTML, using logo-text instead */
+
+        @media (min-width: 768px) {
+            header { padding: 20px 0 0 0; }
+        }
+
+        .hero-section {
+            padding: 10px 0 30px 0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+        }
+
+        .hero-subheadline {
+            font-family: var(--font-accent);
+            color: var(--orange);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            border: 1px solid var(--white);
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .hero-subheadline { font-size: 1rem; padding: 8px 20px; margin-bottom: 20px; border-width: 2px; }
+        }
+
+        .hero-headline {
+            font-size: clamp(1.4rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.1;
+        }
+
+        .hero-image {
+            margin: 10px auto;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-image { margin: 20px auto; }
+        }
+
+        /* --- VIDEO CONTAINER (Responsive 16:9) --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            width: 100%;
+            border-radius: 15px;
+            background-color: #000;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* --- COUNTDOWN TIMER --- */
+        .timer-container {
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .timer-text {
+            color: var(--white);
+            font-size: 1rem;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        #countdown-display {
+            font-family: var(--font-accent);
+            color: var(--orange);
+            font-weight: 700;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            background: rgba(0,0,0,0.3);
+            padding: 5px 15px;
+            border-radius: 5px;
+            border: 1px solid var(--orange);
+            display: inline-block;
+        }
+
+        @media (min-width: 768px) {
+            #countdown-display { font-size: 2rem; padding: 10px 20px; }
+        }
+
+        /* --- FEATURES GRID (Problems) --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        @media (min-width: 768px) {
+            .features-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        }
+
+        .feature-box {
+            border: 1px solid var(--white);
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(43, 29, 14, 0.4);
+            text-align: center;
+        }
+
+        .feature-box p {
+            font-size: 0.95rem;
+        }
+
+        .feature-box p::before {
+            content: '\f071';
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--orange);
+            display: block;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- TARGET AUDIENCE SECTION --- */
+        .target-section {
+            padding: 30px 0;
+        }
+        
+        .target-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .target-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        }
+
+        .target-item {
+            border: 1px solid var(--white);
+            padding: 15px;
+            text-align: center;
+            border-radius: 15px;
+            background: rgba(43, 29, 14, 0.2);
+        }
+
+        .target-item h3 {
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .target-icon {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- CONTENT LIST --- */
+        .content-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content-item {
+            background: var(--white);
+            color: var(--black);
+            margin-bottom: 10px;
+            padding: 12px;
+            border-radius: 5px;
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .content-item i {
+            color: var(--orange);
+            font-size: 1.2rem;
+            margin-right: 12px;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        /* --- STATS --- */
+        .stats-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px 0;
+        }
+
+        .stat-box {
+            border: 1px solid var(--orange);
+            padding: 15px;
+            text-align: center;
+            min-width: 140px;
+            flex: 1;
+            background-color: #1a1a1a; 
+        }
+        
+        .stat-box:nth-child(1) { background-color: #C0C0C0; color: black; }
+        .stat-box:nth-child(2) { background-color: #424242; }
+        .stat-box:nth-child(3) { background-color: #C0C0C0; color: black; }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        /* --- BIO SECTION --- */
+        .bio-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            margin: 40px 0;
+            border: 2px solid var(--black);
+        }
+
+        .bio-text {
+            flex: 1;
+            padding: 15px;
+            min-width: 300px;
+        }
+
+        .bio-image {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            min-width: 300px;
+        }
+
+        /* Replaced bio-image img with placeholder styles */
+        .image-placeholder {
+            width: 200px;
+            height: 200px;
+            background-color: #1a1a1a;
+            border: 5px solid var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            color: var(--gray);
+            font-weight: 600;
+            font-family: var(--font-accent);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(246, 173, 85, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .image-placeholder { width: 300px; height: 300px; font-size: 1.2rem; }
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 30px 0;
+            border-top: 1px solid var(--gray);
+            margin-top: 30px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .social-icons {
+            margin-bottom: 15px;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: var(--white);
+        }
+        
+        .social-icons a:hover {
+            color: var(--orange);
+        }
+
+        .footer-links a {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin: 0 8px;
+        }
+
+        /* Divider Line */
+        .divider {
+            height: 1px;
+            background-color: var(--gray);
+            width: 60%;
+            margin: 30px auto;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Spotlight Gradient Elements (Brown/Orange Glow) -->
+    <div class="spotlight-top"></div>
+    <div class="spotlight"></div>
+
+    <!-- Header Logo -->
+    <header>
+        <div class="container">
+            <a href="https://www.ritter-fabian.de/">
+                <div class="logo-text">Florian Merzenich</div>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <!-- Orange Subheadline Box -->
+            <div class="hero-subheadline">
+                9 Jahre Crypto-Erfahrung in 60 Min.
+            </div>
+
+            <!-- Main Headline -->
+            <h1 class="hero-headline">
+                Von <span class="white-text">„Alles rot, ich check nichts“</span><br>
+                zu <span class="gold-text-animated">„In 90 Tagen im Bärenmarkt mein Fundament gebaut“</span>
+            </h1>
+
+            <!-- Hero Video Embed -->
+            <div class="hero-image">
+                <div class="video-container">
+                    <iframe src="https://player.vimeo.com/video/1116063593?h=0&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div style="margin: 10px 0;">
+                <button class="btn" onclick="openModal()">Jetzt Gratis Sichern</button>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="timer-container">
+                <div class="timer-text">Noch verfügbar bis:</div>
+                <div id="countdown-display">3d 22h 13m 47s</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Intro Text Grid -->
+    <section class="container">
+        <h2 class="text-center" style="margin-bottom: 20px; font-weight: 400; font-size: 1.5rem;"><strong>Wo stehst du nach der Masterclass</strong></h2>
+        
+        <div class="features-grid">
+            <div class="feature-box">
+                <p>Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p>
+            </div>
+            <div class="feature-box">
+                <p>Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p>
+            </div>
+            <div class="feature-box">
+                <p>Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="target-section">
+        <div class="container">
+            <div class="divider"></div>
+            <h2 class="text-center orange-text uppercase" style="margin: 20px 0; font-size: 1.3rem;">Für wen ist diese Masterclass</h2>
+            
+            <div class="target-grid">
+                <div class="target-item">
+                    <div class="target-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Für dich, wenn du schon investiert bist, aber <em>ehrlich gesagt</em> keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.</h3>
+                </div>
+                <div class="target-item">
+                    <div class="target-icon"><i class="fas fa-handshake"></i></div>
+                    <h3>Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</h3>
+                </div>
+                <div class="target-item">
+                    <div class="target-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher eher verunsichert hat.</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Mid -->
+    <div class="container text-center" style="margin: 30px auto;">
+        <button class="btn" onclick="openModal()">Jetzt Anmelden</button>
+    </div>
+
+    <!-- Reviews Section Placeholder -->
+    <section class="container text-center" style="margin: 40px auto;">
+        <div class="divider"></div>
+        <h2 style="font-weight: 400; margin-bottom: 20px; font-size: 1.5rem;">Das sagt meine<br><span class="orange-text bold">Community</span></h2>
+        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+            <i class="fas fa-star orange-text"></i>
+            <i class="fas fa-star orange-text"></i>
+            <i class="fas fa-star orange-text"></i>
+            <i class="fas fa-star orange-text"></i>
+            <i class="fas fa-star orange-text"></i>
+            <p style="margin-top: 10px;">"Absolut empfehlenswert! Florian bringt Licht ins Dunkel."</p>
+            <small>- Verifizierter Teilnehmer</small>
+        </div>
+    </section>
+
+    <!-- What you will learn -->
+    <section class="container" style="margin-top: 40px;">
+        <h2 class="text-center orange-text uppercase" style="margin-bottom: 20px; font-size: 1.3rem;">Was du in der exklusiven Masterclass lernen wirst</h2>
+        
+        <div class="content-list">
+            <div class="content-item">
+                <i class="fas fa-shoe-prints"></i>
+                <div>
+                    <strong>4-Schritte-System</strong><br>
+                    Du bekommst ein glasklares 4-Step-Framework, mit dem du dich im Bärenmarkt richtig positionierst.
+                </div>
+            </div>
+            <div class="content-item">
+                <i class="fas fa-trophy"></i>
+                <div>
+                    <strong>Gewinner-Strategien</strong><br>
+                    Du lernst die exakten Strategien, die ich selbst nutze, um in volatilen Phasen Chancen zu finden.
+                </div>
+            </div>
+            <div class="content-item">
+                <i class="fas fa-layer-group"></i>
+                <div>
+                    <strong>Portfolio-Ordnung</strong><br>
+                    Ich zeige dir, wie du Ordnung ins Chaos bringst: Welche Coins raus, welche rein.
+                </div>
+            </div>
+            <div class="content-item">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                    <strong>Fehler-Vermeider</strong><br>
+                    Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie vermeidest.
+                </div>
+            </div>
+            <div class="content-item">
+                <i class="fas fa-compass"></i>
+                <div>
+                    <strong>Zukunfts-Kompass</strong><br>
+                    Ein glasklares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten.
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center" style="margin-top: 20px;">
+            <button class="btn" onclick="openModal()">Sei Dabei</button>
+        </div>
+    </section>
+
+    <!-- Why Participate -->
+    <section class="container" style="margin-top: 40px;">
+        <div class="divider"></div>
+        <h2 class="text-center orange-text" style="margin-bottom: 20px; font-size: 1.3rem;">Warum du die Masterclass nicht verpassen solltest</h2>
+        
+        <div class="target-grid">
+            <div class="target-item" style="border-color: var(--orange);">
+                <h3>Weil du es satt hast, jedes verdammte Mal der Depp zu sein, der oben kauft und unten verkauft.</h3>
+            </div>
+            <div class="target-item" style="border-color: var(--white);">
+                <h3>Weil du keine Lust mehr hast, heimlich neidisch auf andere zu sein, die mutiger waren.</h3>
+            </div>
+            <div class="target-item" style="border-color: var(--white);">
+                <h3>Weil du nie wieder von außen zusehen willst, wie andere Gewinne holen, während du zögerst.</h3>
+            </div>
+        </div>
+        <div class="text-center" style="margin-top: 20px;">
+            <button class="btn" onclick="openModal()">Hier Klicken</button>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section container">
+        <div class="stat-box">
+            <span class="stat-number">16.5k+</span>
+            <span class="stat-label">Menschen begleitet</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-number">5.6k+</span>
+            <span class="stat-label">Besucher</span>
+        </div>
+        <div class="stat-box">
+            <span class="stat-number">9+</span>
+            <span class="stat-label">Jahre Erfahrung</span>
+        </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="container bio-section">
+        <div class="bio-image">
+            <div class="image-placeholder">
+                Bild Platzhalter
+            </div>
+            <h3 class="uppercase" style="margin-top: 10px; color: var(--orange); font-size: 1rem;">Crypto Experte & Educator</h3>
+            <h2 class="uppercase white-text" style="font-size: 1.5rem;">Florian Merzenich</h2>
+        </div>
+        <div class="bio-text">
+            <p>Florian Merzenich ist nicht zufällig zu einem der führenden Crypto-Experten Deutschlands geworden. Vor 9 Jahren hat er selbst jeden Fehler mitgenommen.</p>
+            <p style="margin-top: 10px;">Mehr als <strong>16.000 Menschen</strong> hat er seit 2019 geholfen, die Fehler zu vermeiden.</p>
+            <p style="margin-top: 10px; font-style: italic; color: var(--orange);">"Ich wusste vor ner Woche nichtmal wo ich Bitcoin kaufen kann und heute läuft mein erster Pool mit 5% die Woche."</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="https://instagram.com/fabian_ritter84" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://x.com/FabianRitter13" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://youtube.com/@fabianritter84" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+            
+            <div class="logo-footer">
+                <a href="https://www.ritter-fabian.de/" target="_blank">
+                    <div class="logo-text" style="font-size: 1rem; margin: 15px auto;">Florian Merzenich</div>
+                </a>
+            </div>
+
+            <div class="footer-links">
+                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank">Impressum</a> |
+                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank">Datenschutz</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL / FORMULAR -->
+    <div class="modal-overlay" id="registrationModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="text-center">
+                <h2 class="form-headline">Platz sichern</h2>
+                <p class="form-subtext">Trag dich jetzt ein, um Zugang zur Masterclass zu erhalten.</p>
+            </div>
+            <form onsubmit="event.preventDefault(); alert('Anmeldung erfolgreich!'); closeModal();">
+                <div class="form-group">
+                    <label class="form-label">Vorname</label>
+                    <input type="text" class="form-input" placeholder="Dein Vorname" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">E-Mail Adresse</label>
+                    <input type="email" class="form-input" placeholder="deine@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Telefonnummer (Optional)</label>
+                    <input type="tel" class="form-input" placeholder="+49 123 4567890">
+                </div>
+                <button type="submit" class="btn" style="width: 100%; margin-top: 10px;">Jetzt Kostenlos Anmelden</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // --- COUNTDOWN LOGIC ---
+        function startCountdown(durationInSeconds) {
+            let timer = durationInSeconds, days, hours, minutes, seconds;
+            const display = document.getElementById('countdown-display');
+
+            setInterval(function () {
+                days = parseInt(timer / (3600 * 24), 10);
+                hours = parseInt((timer % (3600 * 24)) / 3600, 10);
+                minutes = parseInt((timer % 3600) / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                // Add leading zeros
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+
+                if (--timer < 0) {
+                    timer = durationInSeconds; // Loop reset
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            // 3d 22h 13m 47s in seconds
+            const totalSeconds = (3 * 24 * 60 * 60) + (22 * 60 * 60) + (13 * 60) + 47;
+            startCountdown(totalSeconds);
+        };
+
+        // --- MODAL LOGIC ---
+        function openModal() {
+            document.getElementById('registrationModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('registrationModal').style.display = 'none';
+        }
+
+        // Close on outside click
+        window.onclick = function(event) {
+            const modal = document.getElementById('registrationModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+
+</body>
+</html>
