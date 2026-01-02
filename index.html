@@ -537,17 +537,27 @@
             min-width: 300px;
         }
 
-        .bio-image img {
-            border-radius: 50%;
-            border: 5px solid var(--black);
+        /* Replaced bio-image img with placeholder styles */
+        .image-placeholder {
             width: 200px;
             height: 200px;
-            object-fit: cover;
+            background-color: #1a1a1a;
+            border: 5px solid var(--black);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin: 0 auto;
+            color: var(--gray);
+            font-weight: 600;
+            font-family: var(--font-accent);
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(246, 173, 85, 0.2);
         }
 
         @media (min-width: 768px) {
-            .bio-image img { width: 300px; height: 300px; }
+            .image-placeholder { width: 300px; height: 300px; font-size: 1.2rem; }
         }
 
         /* --- FOOTER --- */
@@ -611,7 +621,7 @@
         <div class="container">
             <!-- Orange Subheadline Box -->
             <div class="hero-subheadline gold-text-animated">
-                9 Jahre Crypto-Erfahrung in 60 Min.
+                Seit 2013 Experte für Investitionen & Krypto
             </div>
 
             <!-- Main Headline -->
@@ -697,8 +707,8 @@
             <i class="fas fa-star orange-text"></i>
             <i class="fas fa-star orange-text"></i>
             <i class="fas fa-star orange-text"></i>
-            <p style="margin-top: 10px;">"Absolut empfehlenswert! Florian bringt Licht ins Dunkel."</p>
-            <small>- Verifizierter Teilnehmer</small>
+            <p style="margin-top: 10px;">"Endlich habe ich einen klaren Plan für mein Vermögen. Keine Spekulation mehr, sondern echte Strategie und Unabhängigkeit von Banken. Danke Florian!"</p>
+            <small>- Verifizierter Teilnehmer der Masterclass</small>
         </div>
     </section>
 
@@ -710,36 +720,36 @@
             <div class="content-item">
                 <i class="fas fa-shoe-prints"></i>
                 <div>
-                    <strong>4-Schritte-System</strong><br>
-                    Du bekommst ein glasklares 4-Step-Framework, mit dem du dich im Bärenmarkt richtig positionierst.
+                    <strong>System statt Finanzprodukt</strong><br>
+                    Unabhängigkeit von Banken, Trends und Hypes.
                 </div>
             </div>
             <div class="content-item">
                 <i class="fas fa-trophy"></i>
                 <div>
-                    <strong>Gewinner-Strategien</strong><br>
-                    Du lernst die exakten Strategien, die ich selbst nutze, um in volatilen Phasen Chancen zu finden.
+                    <strong>Strategie statt Spekulation</strong><br>
+                    Ø Jahresrendite von +20% bis +53% (2018–2024).
                 </div>
             </div>
             <div class="content-item">
                 <i class="fas fa-layer-group"></i>
                 <div>
-                    <strong>Portfolio-Ordnung</strong><br>
-                    Ich zeige dir, wie du Ordnung ins Chaos bringst: Welche Coins raus, welche rein.
+                    <strong>Klarheit & Kontrolle</strong><br>
+                    Vermögen selbstständig steuern ohne Abo-Modelle.
                 </div>
             </div>
             <div class="content-item">
                 <i class="fas fa-exclamation-triangle"></i>
                 <div>
-                    <strong>Fehler-Vermeider</strong><br>
-                    Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie vermeidest.
+                    <strong>Hilfe zur Selbsthilfe</strong><br>
+                    Werde zum souveränen Finanzentscheider.
                 </div>
             </div>
             <div class="content-item">
                 <i class="fas fa-compass"></i>
                 <div>
-                    <strong>Zukunfts-Kompass</strong><br>
-                    Ein glasklares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten.
+                    <strong>Mindset</strong><br>
+                    Dein Kontostand folgt deinem Kopf, nicht dem Markt.
                 </div>
             </div>
         </div>
@@ -773,16 +783,16 @@
     <!-- Stats Section -->
     <section class="stats-section container">
         <div class="stat-box">
-            <span class="stat-number">16.5k+</span>
-            <span class="stat-label">Menschen begleitet</span>
+            <span class="stat-number">5.000+</span>
+            <span class="stat-label">Begleitete Investoren</span>
         </div>
         <div class="stat-box">
-            <span class="stat-number">5.6k+</span>
-            <span class="stat-label">Besucher</span>
+            <span class="stat-number">+20-53%</span>
+            <span class="stat-label">Ø Jahresrendite</span>
         </div>
         <div class="stat-box">
-            <span class="stat-number">9+</span>
-            <span class="stat-label">Jahre Erfahrung</span>
+            <span class="stat-number">Seit 2013</span>
+            <span class="stat-label">Erfahrung</span>
         </div>
     </section>
 
@@ -790,13 +800,17 @@
     <section class="container bio-section">
         <div class="bio-image">
             <img src="portrait.jpg" alt="Florian Merzenich">
-            <h3 class="uppercase gold-text-animated" style="margin-top: 10px; font-size: 1rem;">Crypto Experte & Educator</h3>
+            <h3 class="uppercase gold-text-animated" style="margin-top: 10px; font-size: 1rem;">Marktführer Crypto-Ausbildung</h3>
             <h2 class="uppercase white-text" style="font-size: 1.5rem;">Florian Merzenich</h2>
         </div>
         <div class="bio-text">
-            <p>Florian Merzenich ist nicht zufällig zu einem der führenden Crypto-Experten Deutschlands geworden. Vor 9 Jahren hat er selbst jeden Fehler mitgenommen.</p>
-            <p style="margin-top: 10px;">Mehr als <strong>16.000 Menschen</strong> hat er seit 2019 geholfen, die Fehler zu vermeiden.</p>
-            <p style="margin-top: 10px; font-style: italic; color: var(--orange);">"Ich wusste vor ner Woche nichtmal wo ich Bitcoin kaufen kann und heute läuft mein erster Pool mit 5% die Woche."</p>
+            <p><strong>Wer ist Florian Merzenich?</strong></p>
+            <ul style="padding-left: 20px; margin-top: 10px; list-style-type: none;">
+                <li style="margin-bottom: 8px;"><strong>Expertenstatus:</strong> Er ist Experte für Investitionen und Krypto.</li>
+                <li style="margin-bottom: 8px;"><strong>Hintergrund:</strong> Mitgründer von „Usecape“ und Marktführer in der „Crypto-Investor-Ausbildung“.</li>
+                <li style="margin-bottom: 8px;"><strong>Erfahrung:</strong> Seit 2013 als Investor aktiv und hat über 120.000 € in seine eigene Persönlichkeitsentwicklung investiert.</li>
+                <li style="margin-bottom: 8px;"><strong>Medien:</strong> Herausgeber eines Podcasts und bekannt aus Focus Money, WirtschaftsWoche, ntv und Harvest.</li>
+            </ul>
         </div>
     </section>
 
