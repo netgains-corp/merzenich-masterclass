@@ -25,10 +25,11 @@
             --font-content: 'Montserrat', sans-serif;
             --font-accent: 'Poppins', sans-serif;
             
-            /* Background Colors - Deep Royal Blue Granite Style */
-            --bg-dark: #050810; 
-            --box-bg-blue: rgba(10, 25, 60, 0.6);
-            --box-bg-blue-light: rgba(10, 25, 60, 0.4);
+            /* Background Colors - Helleres Königsblau */
+            --bg-dark: #1e3a8a; 
+            /* Boxen etwas dunkler machen für Kontrast auf dem helleren Hintergrund */
+            --box-bg-blue: rgba(10, 25, 60, 0.8);
+            --box-bg-blue-light: rgba(10, 25, 60, 0.6);
         }
 
         /* --- RESET & BASE --- */
@@ -41,9 +42,9 @@
         body {
             background-color: var(--bg-dark);
             
-            /* LOKALES HINTERGRUNDBILD */
-            /* Ersetzt den externen Link durch eine lokale Datei */
-            background-image: url('background.jpg'); 
+            /* HELLERER KÖNIGSBLAU GRADIENT */
+            /* Deutlich sichtbares Blau, oben heller, unten satter */
+            background: linear-gradient(180deg, #2546a0 0%, #152c68 50%, #0a183d 100%);
             
             background-size: cover;
             background-position: center;
@@ -92,8 +93,8 @@
             left: 0;
             right: 0;
             height: 60vh;
-            /* Royal Blue Gradient */
-            background: radial-gradient(circle, rgba(65, 105, 225, 0.4) 0%, rgba(0, 35, 102, 0.3) 40%, rgba(0, 0, 0, 0) 70%);
+            /* Royal Blue Gradient - angepasst auf helleren Hintergrund */
+            background: radial-gradient(circle, rgba(100, 149, 237, 0.3) 0%, rgba(30, 60, 150, 0.2) 40%, rgba(0, 0, 0, 0) 70%);
             filter: blur(60px);
             z-index: -1;
             pointer-events: none;
@@ -106,8 +107,8 @@
             left: 0;
             right: 0;
             height: 50vh;
-            /* Royal Blue Gradient Top */
-            background: radial-gradient(circle, rgba(65, 105, 225, 0.25) 0%, rgba(0, 0, 0, 0) 70%);
+            /* Royal Blue Gradient Top - angepasst */
+            background: radial-gradient(circle, rgba(100, 149, 237, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
             filter: blur(80px);
             z-index: -1;
             pointer-events: none;
@@ -143,6 +144,25 @@
             -webkit-text-fill-color: transparent;
             animation: textShine 8s linear infinite;
             font-weight: 800;
+        }
+
+        /* --- LOGO TEXT STYLES --- */
+        .logo-text {
+            font-family: var(--font-headline);
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            color: var(--white);
+            letter-spacing: 2px;
+            border: 2px solid var(--orange);
+            padding: 10px 20px;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-text:hover {
+            color: var(--orange);
+            border-color: var(--white);
         }
 
         /* --- BUTTONS --- */
@@ -621,7 +641,7 @@
         <div class="container">
             <!-- Orange Subheadline Box -->
             <div class="hero-subheadline gold-text-animated">
-                Seit 2013 Experte für Investitionen & Krypto
+                9 Jahre Crypto-Erfahrung in 60 Min.
             </div>
 
             <!-- Main Headline -->
@@ -639,7 +659,7 @@
 
             <!-- CTA Button -->
             <div style="margin: 10px 0;">
-                <button class="btn" onclick="openModal()">Jetzt Gratis Sichern</button>
+                <a href="https://flos-funnel.pages.dev/" class="btn">Jetzt Gratis Sichern</a>
             </div>
 
             <!-- Countdown Timer -->
@@ -694,7 +714,7 @@
 
     <!-- CTA Mid -->
     <div class="container text-center" style="margin: 30px auto;">
-        <button class="btn" onclick="openModal()">Jetzt Anmelden</button>
+        <a href="https://flos-funnel.pages.dev/" class="btn">Jetzt Anmelden</a>
     </div>
 
     <!-- Reviews Section Placeholder -->
@@ -720,42 +740,42 @@
             <div class="content-item">
                 <i class="fas fa-shoe-prints"></i>
                 <div>
-                    <strong>System statt Finanzprodukt</strong><br>
-                    Unabhängigkeit von Banken, Trends und Hypes.
+                    <strong>4-Schritte-System</strong><br>
+                    Du bekommst ein glasklares 4-Step-Framework, mit dem du dich im Bärenmarkt richtig positionierst.
                 </div>
             </div>
             <div class="content-item">
                 <i class="fas fa-trophy"></i>
                 <div>
-                    <strong>Strategie statt Spekulation</strong><br>
-                    Ø Jahresrendite von +20% bis +53% (2018–2024).
+                    <strong>Gewinner-Strategien</strong><br>
+                    Du lernst die exakten Strategien, die ich selbst nutze, um in volatilen Phasen Chancen zu finden.
                 </div>
             </div>
             <div class="content-item">
                 <i class="fas fa-layer-group"></i>
                 <div>
-                    <strong>Klarheit & Kontrolle</strong><br>
-                    Vermögen selbstständig steuern ohne Abo-Modelle.
+                    <strong>Portfolio-Ordnung</strong><br>
+                    Ich zeige dir, wie du Ordnung ins Chaos bringst: Welche Coins raus, welche rein.
                 </div>
             </div>
             <div class="content-item">
                 <i class="fas fa-exclamation-triangle"></i>
                 <div>
-                    <strong>Hilfe zur Selbsthilfe</strong><br>
-                    Werde zum souveränen Finanzentscheider.
+                    <strong>Fehler-Vermeider</strong><br>
+                    Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie vermeidest.
                 </div>
             </div>
             <div class="content-item">
                 <i class="fas fa-compass"></i>
                 <div>
-                    <strong>Mindset</strong><br>
-                    Dein Kontostand folgt deinem Kopf, nicht dem Markt.
+                    <strong>Zukunfts-Kompass</strong><br>
+                    Ein glasklares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten.
                 </div>
             </div>
         </div>
 
         <div class="text-center" style="margin-top: 20px;">
-            <button class="btn" onclick="openModal()">Sei Dabei</button>
+            <a href="https://flos-funnel.pages.dev/" class="btn">Sei Dabei</a>
         </div>
     </section>
 
@@ -776,7 +796,7 @@
             </div>
         </div>
         <div class="text-center" style="margin-top: 20px;">
-            <button class="btn" onclick="openModal()">Hier Klicken</button>
+            <a href="https://flos-funnel.pages.dev/" class="btn">Hier Klicken</a>
         </div>
     </section>
 
@@ -836,34 +856,6 @@
         </div>
     </footer>
 
-    <!-- MODAL / FORMULAR -->
-    <div class="modal-overlay" id="registrationModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="text-center">
-                <h2 class="form-headline">Platz sichern</h2>
-                <p class="form-subtext">Trag dich jetzt ein, um Zugang zur Masterclass zu erhalten.</p>
-            </div>
-            <form onsubmit="event.preventDefault(); alert('Anmeldung erfolgreich!'); closeModal();">
-                <div class="form-group">
-                    <label class="form-label">Vorname</label>
-                    <input type="text" class="form-input" placeholder="Dein Vorname" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">E-Mail Adresse</label>
-                    <input type="email" class="form-input" placeholder="deine@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Telefonnummer (Optional)</label>
-                    <input type="tel" class="form-input" placeholder="+49 123 4567890">
-                </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <button type="submit" class="btn">Jetzt Kostenlos Anmelden</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script>
         // --- COUNTDOWN LOGIC ---
         function startCountdown(durationInSeconds) {
@@ -894,23 +886,6 @@
             const totalSeconds = (3 * 24 * 60 * 60) + (22 * 60 * 60) + (13 * 60) + 47;
             startCountdown(totalSeconds);
         };
-
-        // --- MODAL LOGIC ---
-        function openModal() {
-            document.getElementById('registrationModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('registrationModal').style.display = 'none';
-        }
-
-        // Close on outside click
-        window.onclick = function(event) {
-            const modal = document.getElementById('registrationModal');
-            if (event.target == modal) {
-                closeModal();
-            }
-        }
     </script>
 
 </body>
