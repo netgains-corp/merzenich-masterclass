@@ -52,9 +52,11 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* Placeholder wie gewünscht geändert */
-            background: url('hero_bg.JPG') center center / cover no-repeat;
-            /* Opazität erhöht, damit es heller wirkt (Kundenwunsch) */
+            
+            /* HIER SPÄTER ÄNDERN ZU: url('hero_bg.JPG') */
+            background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat;
+            
+            /* Deckkraft */
             opacity: 0.65; 
         }
 
@@ -159,10 +161,13 @@
             color: #ffffff;
             font-family: var(--font-heading);
             font-weight: 800;
-            font-size: 18px;
+            
+            /* Änderungen hier: Schrift größer, Padding kleiner */
+            font-size: 19px; 
+            padding: 12px 30px; 
+            
             text-transform: uppercase;
             text-decoration: none;
-            padding: 15px 40px;
             border-radius: 50px;
             border: 2px solid var(--primary-orange);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
