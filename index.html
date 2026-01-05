@@ -140,8 +140,7 @@
         .logo {
             width: 60px;
             height: auto;
-            /* Margin reduziert */
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .sub-headline {
@@ -150,13 +149,18 @@
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--primary-color);
-            /* Margin reduziert */
-            margin-bottom: 15px;
+            
+            /* Farbe auf Weiß geändert */
+            color: var(--text-white); 
+            
+            margin-bottom: 20px;
             border: 2px solid var(--text-white);
             padding: 5px 12px;
             display: inline-block;
-            border-radius: 4px;
+            
+            /* Rahmen runder gemacht (Pillen-Form) */
+            border-radius: 50px; 
+            
             line-height: 1.2;
         }
 
@@ -227,7 +231,10 @@
             font-family: var(--font-heading);
             font-weight: 800;
             font-size: 20px; 
-            padding: 12px 35px;
+            
+            /* Padding reduziert (war 12px 35px) -> Button wird kompakter */
+            padding: 10px 25px; 
+            
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 50px;
@@ -266,56 +273,66 @@
             100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
 
-        /* Countdown Style - ANGEPASST */
+        /* Countdown Style - NEU: Block-Design wie im Original */
         .countdown-wrapper {
-            border: 1px solid var(--text-white);
-            padding: 15px 10px;
-            background: rgba(0,0,0,0.6);
-            border-radius: 8px;
+            border: none; /* Äußerer Rahmen entfernt */
+            padding: 10px 0;
+            background: transparent;
             text-align: center;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 15px;
         }
 
         .countdown-label {
             font-size: 14px;
             margin-bottom: 10px;
-            color: var(--text-gray);
+            color: var(--text-white); /* Weiß für bessere Lesbarkeit */
             line-height: 1.2;
-            font-weight: 500;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .timer {
             display: flex;
             justify-content: center;
-            gap: 15px; /* Etwas mehr Abstand zwischen den Blöcken */
-            font-family: var(--font-heading);
-            font-weight: 800;
-            /* Deutlich größere Schriftgröße wie gewünscht */
-            font-size: 36px; 
-            color: var(--primary-color);
-            line-height: 1;
-            transition: color 0.5s ease;
+            gap: 10px; /* Abstand zwischen den Blöcken */
         }
 
         .timer-part {
             display: flex;
             flex-direction: column;
             align-items: center;
-            line-height: 1;
-            min-width: 60px; /* Feste Mindestbreite für Stabilität */
+            justify-content: center;
+            
+            /* Box-Design */
+            background: rgba(0, 0, 0, 0.4); /* Dunkler Hintergrund für Kontrast */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            min-width: 75px; /* Breite Blöcke */
+            padding: 10px 5px;
+            backdrop-filter: blur(4px);
         }
 
+        /* Die Zahl selbst */
+        .timer-part div {
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 42px; /* Große, fette Zahlen */
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Das Label (Tage, Std...) */
         .timer-part span {
-            font-size: 11px;
-            color: var(--text-white);
-            font-weight: 400;
-            margin-top: 5px;
+            font-size: 10px;
+            color: #cbd5e0;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-
-        /* Trennzeichen zwischen den Zahlen (optional, hier weggelassen für cleaneren Look oder man kann ':' per CSS einfügen) */
 
         /* -----------------------------------------------------------
            MARQUEE SECTION (Logos)
