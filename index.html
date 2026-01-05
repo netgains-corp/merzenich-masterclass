@@ -432,6 +432,112 @@
             color: var(--text-gray);
         }
 
+        /* NEW STRATEGY SECTION STYLES */
+        .strategy-box {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--primary-color);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            box-shadow: 0 0 40px rgba(0,0,0,0.4);
+            transition: border-color 0.5s ease;
+        }
+
+        .strategy-list {
+            list-style: none;
+            padding: 0;
+            margin: 30px 0;
+        }
+
+        .strategy-list li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            font-size: 18px;
+            color: var(--text-white);
+            line-height: 1.4;
+        }
+
+        .strategy-list i {
+            color: #22c55e; /* Green checkmark */
+            margin-right: 15px;
+            margin-top: 4px; /* Align visually with text */
+            font-size: 20px;
+            min-width: 20px; /* Prevent squishing */
+        }
+
+        .price-container {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .price-label {
+            font-size: 20px;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-value {
+            font-family: var(--font-heading);
+            font-size: 56px;
+            font-weight: 800;
+            color: var(--primary-color);
+            line-height: 1;
+            transition: color 0.5s ease;
+        }
+
+        /* NEW SCARCITY SECTION STYLES */
+        .scarcity-section {
+            padding: 50px 0;
+            background-color: rgba(127, 29, 29, 0.2); /* Red background with transparency */
+            border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+            text-align: center;
+        }
+
+        .scarcity-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .warning-badge {
+            display: inline-block;
+            background-color: #dc2626; /* Red 600 */
+            color: white;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
+            animation: scarcity-pulse 2s infinite;
+        }
+
+        @keyframes scarcity-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+
+        .scarcity-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .scarcity-text {
+            color: #d1d5db; /* Gray 300 */
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
         /* Profile Section */
         .profile-container {
             display: flex;
@@ -657,14 +763,51 @@
             </div>
         </section>
 
+        <!-- STRATEGY CALL SECTION (NEW) -->
+        <section class="strategy-section">
+            <div class="strategy-box">
+                <h3 class="section-title white" style="margin-bottom: 30px;">Was du im kostenlosen Strategiegespräch bekommst:</h3>
+                
+                <ul class="strategy-list">
+                    <li><i class="fa-solid fa-check"></i> Ausführliche Analyse deiner Ist-Situation</li>
+                    <li><i class="fa-solid fa-check"></i> Einblick in die Struktur eines 3h-Deep-Dive Calls</li>
+                    <li><i class="fa-solid fa-check"></i> Zugang zur exklusiven Telegram-Gruppe</li>
+                    <li><i class="fa-solid fa-check"></i> Erklärvideos & Vorlagen für deine Unabhängigkeit</li>
+                </ul>
+
+                <div class="price-container">
+                    <p class="price-label">Dein Investment heute:</p>
+                    <p class="price-value">0,00 €</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCARCITY SECTION (URGENCY) - NEU EINGEFÜGT -->
+        <section class="scarcity-section">
+            <div class="scarcity-container">
+                <div class="warning-badge">ACHTUNG</div>
+                <h3 class="scarcity-title">Bitte lies das, bevor du klickst:</h3>
+                <p class="scarcity-text">
+                    Ich arbeite persönlich mit meinen Klienten. Mein Tag hat auch nur 24 Stunden.
+                    <br><br>
+                    <strong style="color: white;">Bitte klicke nur auf den Button, wenn du über mind. 10.000 € freies Investitionskapital verfügst und bereit bist, Verantwortung zu übernehmen.</strong>
+                </p>
+            </div>
+        </section>
+
         <!-- PROFILE SECTION -->
         <section>
             <div class="profile-container">
-                <img src="portrait.jpg" alt="Fabian Ritter" class="profile-img">
+                <img src="portrait.jpg" alt="Florian Merzenich" class="profile-img">
                 <div class="profile-text">
-                    <h3 class="section-title" style="text-align: left; margin-bottom: 20px;">Dein Experte: Fabian Ritter</h3>
-                    <p>Fabian Ritter ist nicht zufällig zu einem der führenden Crypto-Experten Deutschlands geworden. Vor 9 Jahren hat er selbst jeden Fehler mitgenommen, den es gab, vom falschen Timing bis zu dubiosen Altcoins.</p>
-                    <p>Genau diese Erfahrung macht heute den Unterschied: Mehr als <strong>16.000 Menschen</strong> hat er seit 2019 geholfen, die Fehler zu vermeiden, die ihn damals Tausende gekostet haben.</p>
+                    <h3 class="sub-headline" style="border:none; padding:0; margin-bottom:5px; color:var(--text-gray);">Das ist</h3>
+                    <h2 class="section-title white" style="text-align: left; margin-bottom: 20px; font-size: 36px;">Florian Merzenich</h2>
+                    
+                    <p>Florian Merzenich ist Experte für Investitionen und Krypto. Er gilt als Marktführer in der „Crypto-Investor-Ausbildung“ und ist bereits seit 2013 aktiv.</p>
+                    
+                    <p>Mit über <strong>120.000 € Investition</strong> in seine eigene Persönlichkeitsentwicklung hilft er heute Unternehmern, ihr Vermögen strategisch und ohne Spekulation zu steuern.</p>
+                    
+                    <p style="font-style: italic; color: var(--primary-color);">„System statt Finanzprodukt“ – für absolute Unabhängigkeit von Banken, Trends und Hypes.</p>
                 </div>
             </div>
         </section>
