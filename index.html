@@ -52,8 +52,8 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* Das Originalbild aus deiner Quelle */
-            background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat;
+            /* Placeholder wie gewünscht geändert */
+            background: url('hero_bg.JPG') center center / cover no-repeat;
             /* Opazität erhöht, damit es heller wirkt (Kundenwunsch) */
             opacity: 0.65; 
         }
@@ -318,6 +318,38 @@
             color: var(--text-gray);
         }
 
+        /* Profile Section Styles */
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .profile-container {
+                flex-direction: row;
+                text-align: left;
+                align-items: flex-start;
+            }
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-orange);
+            flex-shrink: 0;
+        }
+
+        .profile-text p {
+            color: var(--text-gray);
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+
         /* Footer */
         footer {
             text-align: center;
@@ -325,6 +357,15 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 14px;
             color: var(--text-gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            width: 60px;
+            height: auto;
+            margin-bottom: 20px;
         }
 
         .social-icons {
@@ -358,8 +399,8 @@
         
         <!-- HERO SECTION -->
         <header class="hero-section">
-            <!-- Logo -->
-            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/67094fbb9ca0e3bd41cb6164.png" alt="Logo" class="logo">
+            <!-- Logo ausgetauscht zu xlg.jpg -->
+            <img src="xlg.jpg" alt="Logo" class="logo">
 
             <!-- Text Content -->
             <h2 class="sub-headline">12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.</h2>
@@ -368,7 +409,7 @@
                 <span style="color: var(--primary-orange);">60 Minuten für immer in seine Zukunft investieren</span>
             </h1>
 
-            <!-- Hero Image (Responsive optimiert) -->
+            <!-- Hero Image (Responsive optimiert) - Laptop bleibt -->
             <div class="hero-img-container">
                 <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Masterclass Grafik" class="hero-img">
             </div>
@@ -471,8 +512,23 @@
             </div>
         </section>
 
+        <!-- PROFILE SECTION (NEU) -->
+        <section>
+            <div class="profile-container">
+                <img src="portrait.jpg" alt="Fabian Ritter" class="profile-img">
+                <div class="profile-text">
+                    <h3 class="section-title" style="text-align: left; margin-bottom: 20px;">Dein Experte: Fabian Ritter</h3>
+                    <p>Fabian Ritter ist nicht zufällig zu einem der führenden Crypto-Experten Deutschlands geworden. Vor 9 Jahren hat er selbst jeden Fehler mitgenommen, den es gab, vom falschen Timing bis zu dubiosen Altcoins.</p>
+                    <p>Genau diese Erfahrung macht heute den Unterschied: Mehr als <strong>16.000 Menschen</strong> hat er seit 2019 geholfen, die Fehler zu vermeiden, die ihn damals Tausende gekostet haben.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- FOOTER -->
         <footer>
+            <!-- Logo auch im Footer -->
+            <img src="xlg.jpg" alt="Logo" class="footer-logo">
+
             <div class="social-icons">
                 <a href="https://instagram.com/fabian_ritter84" target="_blank"><i class="fa-brands fa-instagram"></i></a>
                 <a href="https://x.com/FabianRitter13" target="_blank"><i class="fa-brands fa-twitter"></i></a>
