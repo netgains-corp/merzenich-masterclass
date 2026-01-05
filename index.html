@@ -39,7 +39,7 @@
             color: var(--text-white);
             font-family: var(--font-body);
             line-height: 1.5;
-            overflow-x: hidden; /* Horizontales Scrollen verhindern */
+            overflow-x: hidden;
         }
 
         /* -----------------------------------------------------------
@@ -52,12 +52,9 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            
-            /* HIER SPÄTER ÄNDERN ZU: url('hero_bg.JPG') */
             background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat;
-            
-            /* Deckkraft */
-            opacity: 0.65; 
+            /* Hintergrund heller gemacht (höhere Opacity) */
+            opacity: 0.8; 
         }
 
         /* -----------------------------------------------------------
@@ -71,7 +68,7 @@
         }
 
         /* -----------------------------------------------------------
-           HERO SECTION (Der kritische Bereich)
+           HERO SECTION
         ----------------------------------------------------------- */
         .hero-section {
             display: flex;
@@ -79,41 +76,37 @@
             align-items: center;
             text-align: center;
             padding-top: 20px;
-            padding-bottom: 40px;
-            min-height: 100vh; /* Mindestens Bildschirmhöhe */
+            /* Riesigen Abstand unten entfernt (war min-height: 100vh) */
+            padding-bottom: 60px; 
         }
 
         .logo {
-            /* Logo verkleinert (Kundenwunsch) */
-            width: 80px;
+            width: 60px;
             height: auto;
             margin-bottom: 15px;
         }
 
-        /* Responsive Typografie mit clamp() - Das löst das Platzproblem */
         .sub-headline {
             font-family: var(--font-heading);
-            font-size: 13px;
+            font-size: 15px; 
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--primary-orange);
             margin-bottom: 20px;
-            
-            /* Umrandung hinzugefügt (Kundenwunsch) */
             border: 2px solid var(--text-white);
-            padding: 8px 16px;
+            padding: 5px 12px;
             display: inline-block;
             border-radius: 4px;
+            line-height: 1.2;
         }
 
         .main-headline {
             font-family: var(--font-heading);
-            /* Skaliert zwischen 24px (Mobile) und 42px (Desktop) */
             font-size: clamp(24px, 5vw, 42px); 
             font-weight: 800;
             line-height: 1.2;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
         }
 
         .main-headline span {
@@ -122,26 +115,41 @@
             margin-top: 5px;
         }
 
-        /* Das Bild */
+        /* --- LAPTOP COMPOSITE --- 
+           Hier bauen wir den Laptop und legen das Bild rein */
         .hero-img-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
-        .hero-img {
-            max-width: 100%;
+        .laptop-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Maximale Breite des Laptops */
+        }
+
+        /* Der Rahmen (Originalbild mit transparentem Bereich oder überdeckt) */
+        .laptop-frame {
+            width: 100%;
             height: auto;
-            /* Auf Handy darf das Bild nicht den ganzen Screen füllen */
-            max-height: 200px; 
-            object-fit: contain;
+            display: block;
+            position: relative;
+            z-index: 10; /* Liegt ÜBER dem Screen-Bild, falls PNG transparent wäre, hier aber egal da wir drüber legen */
         }
 
-        @media (min-width: 768px) {
-            .hero-img {
-                max-height: 400px; /* Auf Desktop größer */
-            }
+        /* Das Bild im Bildschirm (hero_bg.JPG) */
+        .laptop-screen {
+            position: absolute;
+            top: 5.5%;   /* Feinjustierung für Position im Rahmen */
+            left: 12.3%; /* Feinjustierung für Position im Rahmen */
+            width: 75.5%; /* Breite des Bildschirms im Verhältnis zum Rahmen */
+            height: 84%; /* Höhe des Bildschirms */
+            z-index: 20; /* Liegt ÜBER dem Rahmen-Bild um das alte Gesicht zu verdecken */
+            object-fit: cover;
+            border-radius: 2px;
         }
 
         /* -----------------------------------------------------------
@@ -161,11 +169,8 @@
             color: #ffffff;
             font-family: var(--font-heading);
             font-weight: 800;
-            
-            /* Änderungen hier: Schrift größer, Padding kleiner */
-            font-size: 19px; 
-            padding: 12px 30px; 
-            
+            font-size: 18px;
+            padding: 15px 40px;
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 50px;
@@ -175,8 +180,9 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            width: 100%; /* Breit auf Mobile für einfaches Klicken */
+            width: 100%; 
             justify-content: center;
+            text-align: center;
         }
 
         .btn-main:hover {
@@ -184,17 +190,15 @@
             box-shadow: 0 0 25px rgba(246, 173, 85, 0.6);
         }
 
-        /* Subtext unter dem Button */
         .cta-subtext {
             font-size: 12px;
             color: var(--text-white);
             margin-top: 5px;
             font-weight: 400;
             line-height: 1.4;
-            max-width: 400px; /* Damit es auf Desktop nicht zu breit läuft */
+            max-width: 400px;
         }
 
-        /* Pulsierender Effekt für den Button */
         .pulse {
             animation: pulse-animation 2s infinite;
         }
@@ -208,7 +212,7 @@
         /* Countdown Style */
         .countdown-wrapper {
             border: 1px solid var(--text-white);
-            padding: 10px 20px;
+            padding: 8px 20px;
             background: rgba(0,0,0,0.6);
             border-radius: 8px;
             text-align: center;
@@ -217,8 +221,9 @@
 
         .countdown-label {
             font-size: 14px;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
             color: var(--text-gray);
+            line-height: 1.2;
         }
 
         .timer {
@@ -229,6 +234,7 @@
             font-weight: 700;
             font-size: 24px;
             color: var(--primary-orange);
+            line-height: 1.2;
         }
 
         .timer-part {
@@ -242,6 +248,58 @@
             color: var(--text-white);
             font-weight: 400;
             margin-top: 2px;
+        }
+
+        /* -----------------------------------------------------------
+           MARQUEE SECTION (Logos)
+        ----------------------------------------------------------- */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            /* Fade Effekt an den Seiten */
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-content {
+            display: flex;
+            align-items: center;
+            gap: 60px; /* Abstand zwischen Logos */
+            width: max-content;
+            animation: marquee-scroll 25s linear infinite;
+        }
+
+        .marquee-logo {
+            height: 40px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .marquee-logo:hover {
+            opacity: 1;
+        }
+
+        .marquee-logo.invert {
+            filter: brightness(0) invert(1);
+        }
+
+        .marquee-text {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 5px 12px;
+            white-space: nowrap;
+        }
+
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
         /* -----------------------------------------------------------
@@ -265,16 +323,16 @@
             color: var(--text-white);
         }
 
-        /* Grid Layout (Automatisch responsive) */
+        /* Grid Layout */
         .grid-3 {
             display: grid;
-            grid-template-columns: 1fr; /* Mobile: 1 Spalte */
+            grid-template-columns: 1fr;
             gap: 20px;
         }
 
         @media (min-width: 768px) {
             .grid-3 {
-                grid-template-columns: repeat(3, 1fr); /* Desktop: 3 Spalten */
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -323,7 +381,7 @@
             color: var(--text-gray);
         }
 
-        /* Profile Section Styles */
+        /* Profile Section */
         .profile-container {
             display: flex;
             flex-direction: column;
@@ -404,7 +462,7 @@
         
         <!-- HERO SECTION -->
         <header class="hero-section">
-            <!-- Logo ausgetauscht zu xlg.jpg -->
+            <!-- Logo -->
             <img src="xlg.jpg" alt="Logo" class="logo">
 
             <!-- Text Content -->
@@ -414,9 +472,14 @@
                 <span style="color: var(--primary-orange);">60 Minuten für immer in seine Zukunft investieren</span>
             </h1>
 
-            <!-- Hero Image (Responsive optimiert) - Laptop bleibt -->
+            <!-- Hero Image: Laptop Komposition -->
             <div class="hero-img-container">
-                <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Masterclass Grafik" class="hero-img">
+                <div class="laptop-wrapper">
+                    <!-- Das Originalbild als Rahmen -->
+                    <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Laptop Frame" class="laptop-frame">
+                    <!-- Das neue Bild als Bildschirm-Inhalt -->
+                    <img src="hero_bg.JPG" alt="Screen Content" class="laptop-screen">
+                </div>
             </div>
 
             <!-- CTA & Timer -->
@@ -436,6 +499,35 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Flying Banners (Marquee) -->
+            <div class="marquee-container">
+                <div class="marquee-content">
+                    <!-- Set 1 -->
+                    <!-- Focus -->
+                    <img src="focus.png" class="marquee-logo" alt="Focus">
+                    
+                    <!-- WirtschaftsWoche (Invertiert) -->
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Wirtschaftswoche_Logo.svg" class="marquee-logo invert" alt="WirtschaftsWoche">
+                    
+                    <!-- n-tv -->
+                    <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
+                    
+                    <!-- London Daily News -->
+                    <img src="london.png" class="marquee-logo" alt="London Daily News">
+                    
+                    <!-- Business Magazin Text -->
+                    <span class="marquee-text">Business Magazin</span>
+
+                    <!-- Set 2 (Duplicate for Loop) -->
+                    <img src="focus.png" class="marquee-logo" alt="Focus">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Wirtschaftswoche_Logo.svg" class="marquee-logo invert" alt="WirtschaftsWoche">
+                    <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
+                    <img src="london.png" class="marquee-logo" alt="London Daily News">
+                    <span class="marquee-text">Business Magazin</span>
+                </div>
+            </div>
+
         </header>
 
         <!-- BENEFITS SECTION -->
@@ -517,7 +609,7 @@
             </div>
         </section>
 
-        <!-- PROFILE SECTION (NEU) -->
+        <!-- PROFILE SECTION -->
         <section>
             <div class="profile-container">
                 <img src="portrait.jpg" alt="Fabian Ritter" class="profile-img">
@@ -531,7 +623,6 @@
 
         <!-- FOOTER -->
         <footer>
-            <!-- Logo auch im Footer -->
             <img src="xlg.jpg" alt="Logo" class="footer-logo">
 
             <div class="social-icons">
@@ -549,10 +640,7 @@
 
     <!-- JAVASCRIPT TIMER -->
     <script>
-        // Einfacher 15 Minuten Loop Timer für Demo-Zwecke
-        // Startet bei jedem Neuladen bei 15 Minuten
         (function() {
-            // Setze Dauer: 15 Minuten * 60 Sekunden
             let duration = 15 * 60;
             
             const displayDays = document.getElementById('d');
@@ -575,7 +663,7 @@
                 displaySeconds.textContent = seconds;
 
                 if (--timer < 0) {
-                    timer = duration; // Timer neu starten wenn abgelaufen
+                    timer = duration; 
                 }
             }, 1000);
         })();
