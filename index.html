@@ -18,7 +18,8 @@
            BASIS SETUP & VARIABLEN
         ----------------------------------------------------------- */
         :root {
-            --primary-orange: #f6ad55;
+            /* Standard Farben */
+            --primary-color: #f6ad55; /* Bleibt immer Orange für Text/Buttons */
             --secondary-blue: #188bf6;
             --dark-bg: #050505;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -26,6 +27,19 @@
             --text-gray: #cbd5e0;
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Poppins', sans-serif;
+            
+            /* Standard Hintergrund-Tönung (Orange/Braun) */
+            --overlay-color: rgba(246, 173, 85, 0.1); 
+        }
+
+        /* THEME: BLAU (Nur Hintergrund-Tönung) */
+        body.theme-blue {
+            --overlay-color: rgba(59, 130, 246, 0.4); /* Blauer Schimmer */
+        }
+
+        /* THEME: ROT (Nur Hintergrund-Tönung) */
+        body.theme-red {
+            --overlay-color: rgba(239, 68, 68, 0.4); /* Roter Schimmer */
         }
 
         * {
@@ -40,6 +54,7 @@
             font-family: var(--font-body);
             line-height: 1.5;
             overflow-x: hidden;
+            transition: background-color 0.5s ease;
         }
 
         /* -----------------------------------------------------------
@@ -51,10 +66,51 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -2;
             background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat;
-            /* Hintergrund heller gemacht (höhere Opacity) */
-            opacity: 0.8; 
+            opacity: 0.85; 
+        }
+
+        /* Farb-Overlay für den "Ton" - Liegt über dem Bild, unter dem Text */
+        .bg-tint {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: var(--overlay-color);
+            mix-blend-mode: overlay; /* Verrechnet die Farbe mit dem Bild */
+            pointer-events: none;
+            transition: background-color 0.5s ease;
+        }
+
+        /* -----------------------------------------------------------
+           THEME TOGGLE BUTTON
+        ----------------------------------------------------------- */
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            padding: 10px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            background: var(--primary-color);
+            transform: scale(1.1);
         }
 
         /* -----------------------------------------------------------
@@ -76,7 +132,6 @@
             align-items: center;
             text-align: center;
             padding-top: 20px;
-            /* Riesigen Abstand unten entfernt (war min-height: 100vh) */
             padding-bottom: 60px; 
         }
 
@@ -92,7 +147,7 @@
             font-weight: 600;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--primary-orange);
+            color: var(--primary-color);
             margin-bottom: 20px;
             border: 2px solid var(--text-white);
             padding: 5px 12px;
@@ -115,8 +170,7 @@
             margin-top: 5px;
         }
 
-        /* --- LAPTOP COMPOSITE --- 
-           Hier bauen wir den Laptop und legen das Bild rein */
+        /* --- LAPTOP COMPOSITE --- */
         .hero-img-container {
             width: 100%;
             display: flex;
@@ -128,26 +182,24 @@
         .laptop-wrapper {
             position: relative;
             width: 100%;
-            max-width: 600px; /* Maximale Breite des Laptops */
+            max-width: 600px; 
         }
 
-        /* Der Rahmen (Originalbild mit transparentem Bereich oder überdeckt) */
         .laptop-frame {
             width: 100%;
             height: auto;
             display: block;
             position: relative;
-            z-index: 10; /* Liegt ÜBER dem Screen-Bild, falls PNG transparent wäre, hier aber egal da wir drüber legen */
+            z-index: 10;
         }
 
-        /* Das Bild im Bildschirm (hero_bg.JPG) */
         .laptop-screen {
             position: absolute;
-            top: 5.5%;   /* Feinjustierung für Position im Rahmen */
-            left: 12.3%; /* Feinjustierung für Position im Rahmen */
-            width: 75.5%; /* Breite des Bildschirms im Verhältnis zum Rahmen */
-            height: 84%; /* Höhe des Bildschirms */
-            z-index: 20; /* Liegt ÜBER dem Rahmen-Bild um das alte Gesicht zu verdecken */
+            top: 5.5%;   
+            left: 12.3%; 
+            width: 75.5%; 
+            height: 84%; 
+            z-index: 20; 
             object-fit: cover;
             border-radius: 2px;
         }
@@ -165,18 +217,18 @@
         }
 
         .btn-main {
-            background-color: var(--primary-orange);
+            background-color: var(--primary-color);
             color: #ffffff;
             font-family: var(--font-heading);
             font-weight: 800;
-            font-size: 18px;
-            padding: 15px 40px;
+            font-size: 20px; /* Schrift größer (war 18px) */
+            padding: 12px 35px; /* Button kleiner (war 15px 40px) */
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 50px;
-            border: 2px solid var(--primary-orange);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 0 15px rgba(246, 173, 85, 0.4);
+            border: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -187,7 +239,7 @@
 
         .btn-main:hover {
             transform: scale(1.02);
-            box-shadow: 0 0 25px rgba(246, 173, 85, 0.6);
+            filter: brightness(1.1);
         }
 
         .cta-subtext {
@@ -204,9 +256,9 @@
         }
 
         @keyframes pulse-animation {
-            0% { box-shadow: 0 0 0 0 rgba(246, 173, 85, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(246, 173, 85, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(246, 173, 85, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
 
         /* Countdown Style */
@@ -233,7 +285,7 @@
             font-family: var(--font-heading);
             font-weight: 700;
             font-size: 24px;
-            color: var(--primary-orange);
+            color: var(--primary-color);
             line-height: 1.2;
         }
 
@@ -258,7 +310,6 @@
             overflow: hidden;
             margin-top: 50px;
             margin-bottom: 20px;
-            /* Fade Effekt an den Seiten */
             mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
             -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
         }
@@ -266,7 +317,7 @@
         .marquee-content {
             display: flex;
             align-items: center;
-            gap: 60px; /* Abstand zwischen Logos */
+            gap: 60px;
             width: max-content;
             animation: marquee-scroll 25s linear infinite;
         }
@@ -316,7 +367,7 @@
             font-size: clamp(20px, 4vw, 32px);
             font-weight: 700;
             margin-bottom: 40px;
-            color: var(--primary-orange);
+            color: var(--primary-color);
         }
         
         .section-title.white {
@@ -352,7 +403,7 @@
 
         .card i {
             font-size: 30px;
-            color: var(--primary-orange);
+            color: var(--primary-color);
             margin-bottom: 15px;
         }
 
@@ -363,7 +414,7 @@
         /* Stats Section */
         .stat-box {
             background: rgba(255,255,255,0.05);
-            border: 1px solid var(--primary-orange);
+            border: 1px solid var(--primary-color);
             padding: 20px;
             text-align: center;
         }
@@ -403,7 +454,7 @@
             height: 180px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--primary-orange);
+            border: 3px solid var(--primary-color);
             flex-shrink: 0;
         }
 
@@ -443,7 +494,7 @@
         }
 
         .social-icons a:hover {
-            color: var(--primary-orange);
+            color: var(--primary-color);
         }
 
         footer a {
@@ -455,8 +506,14 @@
 </head>
 <body>
 
-    <!-- Hintergrund Overlay -->
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" aria-label="Hintergrundfarbe ändern">
+        <i class="fa-solid fa-palette"></i>
+    </button>
+
+    <!-- Hintergrund Overlay & Tint -->
     <div class="bg-fixed"></div>
+    <div class="bg-tint"></div>
 
     <main class="container">
         
@@ -469,7 +526,7 @@
             <h2 class="sub-headline">12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.</h2>
             <h1 class="main-headline">
                 60 Minuten Netflix oder<br>
-                <span style="color: var(--primary-orange);">60 Minuten für immer in seine Zukunft investieren</span>
+                <span style="color: var(--primary-color); transition: color 0.5s ease;">60 Minuten für immer in seine Zukunft investieren</span>
             </h1>
 
             <!-- Hero Image: Laptop Komposition -->
@@ -504,24 +561,15 @@
             <div class="marquee-container">
                 <div class="marquee-content">
                     <!-- Set 1 -->
-                    <!-- Focus -->
                     <img src="focus.png" class="marquee-logo" alt="Focus">
-                    
-                    <!-- WirtschaftsWoche (Invertiert) -->
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Wirtschaftswoche_Logo.svg" class="marquee-logo invert" alt="WirtschaftsWoche">
-                    
-                    <!-- n-tv -->
+                    <img src="wirtschaftswoche.png" class="marquee-logo invert" alt="WirtschaftsWoche">
                     <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
-                    
-                    <!-- London Daily News -->
                     <img src="london.png" class="marquee-logo" alt="London Daily News">
-                    
-                    <!-- Business Magazin Text -->
                     <span class="marquee-text">Business Magazin</span>
 
-                    <!-- Set 2 (Duplicate for Loop) -->
+                    <!-- Set 2 -->
                     <img src="focus.png" class="marquee-logo" alt="Focus">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Wirtschaftswoche_Logo.svg" class="marquee-logo invert" alt="WirtschaftsWoche">
+                    <img src="wirtschaftswoche.png" class="marquee-logo invert" alt="WirtschaftsWoche">
                     <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
                     <img src="london.png" class="marquee-logo" alt="London Daily News">
                     <span class="marquee-text">Business Magazin</span>
@@ -592,15 +640,15 @@
             <h3 class="section-title">Was du in der exklusiven Masterclass lernen wirst</h3>
             <div class="grid-3">
                 <div class="card">
-                    <h4 style="color:var(--primary-orange); margin-bottom:10px;">4-Schritte-System</h4>
+                    <h4 style="color:var(--primary-color); margin-bottom:10px; transition: color 0.5s ease;">4-Schritte-System</h4>
                     <p>Du bekommst ein glasklares 4-Step-Framework, mit dem du dich im Bärenmarkt richtig positionierst.</p>
                 </div>
                 <div class="card">
-                    <h4 style="color:var(--primary-orange); margin-bottom:10px;">Fehler-Vermeider</h4>
+                    <h4 style="color:var(--primary-color); margin-bottom:10px; transition: color 0.5s ease;">Fehler-Vermeider</h4>
                     <p>Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie für immer streichst.</p>
                 </div>
                 <div class="card">
-                    <h4 style="color:var(--primary-orange); margin-bottom:10px;">Zukunfts-Kompass</h4>
+                    <h4 style="color:var(--primary-color); margin-bottom:10px; transition: color 0.5s ease;">Zukunfts-Kompass</h4>
                     <p>Ein klares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten.</p>
                 </div>
             </div>
@@ -638,34 +686,54 @@
 
     </main>
 
-    <!-- JAVASCRIPT TIMER -->
+    <!-- SCRIPTS -->
     <script>
+        // 1. COUNTDOWN TIMER
         (function() {
             let duration = 15 * 60;
-            
             const displayDays = document.getElementById('d');
             const displayHours = document.getElementById('h');
             const displayMinutes = document.getElementById('m');
             const displaySeconds = document.getElementById('s');
-
             let timer = duration, minutes, seconds;
 
             setInterval(function () {
                 minutes = parseInt(timer / 60, 10);
                 seconds = parseInt(timer % 60, 10);
-
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
-
+                
                 displayDays.textContent = "00";
                 displayHours.textContent = "00";
                 displayMinutes.textContent = minutes;
                 displaySeconds.textContent = seconds;
 
-                if (--timer < 0) {
-                    timer = duration; 
-                }
+                if (--timer < 0) { timer = duration; }
             }, 1000);
+        })();
+
+        // 2. THEME SWITCHER
+        (function() {
+            const body = document.body;
+            const toggleBtn = document.getElementById('theme-toggle');
+            
+            // Themes: Default (Brown/Orange), Blue, Red
+            // States: 0 = Default, 1 = Blue, 2 = Red
+            let currentState = 0;
+
+            toggleBtn.addEventListener('click', () => {
+                currentState = (currentState + 1) % 3;
+
+                // Reset classes
+                body.classList.remove('theme-blue', 'theme-red');
+
+                if (currentState === 1) {
+                    body.classList.add('theme-blue');
+                } else if (currentState === 2) {
+                    body.classList.add('theme-red');
+                }
+                // State 0 ist default (keine extra Klasse)
+            });
         })();
     </script>
 </body>
