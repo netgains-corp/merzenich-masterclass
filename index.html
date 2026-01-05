@@ -131,9 +131,10 @@
             background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
         }
 
-        /* Dark Gradient for Social Proof */
+        /* Gradient for Social Proof - Jetzt Bräunlich angepasst */
         .bg-dark-gradient {
-            background: linear-gradient(to bottom, #000000, #111111);
+            /* Linearer Verlauf von Dunkelbraun zu Dunkelgrau/Schwarz */
+            background: linear-gradient(to bottom, #5c4025 0%, #1a1a1a 100%);
         }
 
         /* Chat Bubble Styling */
@@ -180,9 +181,9 @@
             border: 3px solid var(--white);
         }
 
-        /* CSS Laptop Mockup */
+        /* CSS Laptop Mockup (Reverted to Dark & Original Size) */
         .laptop-wrapper {
-            max-width: 900px;
+            max-width: 600px;
             margin: 0 auto;
             position: relative;
         }
@@ -248,18 +249,20 @@
 <body class="antialiased">
 
     <!-- Header / Logo -->
-    <header class="container mx-auto py-6 px-4 text-center">
-        <a href="https://www.ritter-fabian.de/" class="inline-block">
+    <!-- pt-6 für Abstand oben, pb-0 für keinen Abstand unten -->
+    <header class="container mx-auto pt-6 pb-0 px-4 text-center">
+        <a href="https://flos-funnel.pages.dev/" class="inline-block">
             <!-- Logo replaced with local file reference -->
-            <img src="xlg.jpg" alt="Fabian Ritter Logo" class="h-12 md:h-16 mx-auto object-contain">
+            <img src="xlg.jpg" alt="Florian Merzenich Logo" class="h-12 md:h-16 mx-auto object-contain">
         </a>
     </header>
 
     <!-- Headline Section -->
-    <section class="container mx-auto px-4 py-8 text-center">
+    <!-- pt-4 für minimalen Abstand zum Logo -->
+    <section class="container mx-auto px-4 pt-4 pb-8 text-center">
         <div class="border-2 border-white rounded-xl p-4 inline-block mx-auto mb-8">
             <h2 class="text-xl md:text-3xl font-poppins font-semibold uppercase text-orange">
-                9 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
+                12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
             </h2>
         </div>
     </section>
@@ -277,7 +280,7 @@
                 <div class="laptop-screen-frame">
                     <div class="laptop-display">
                         <!-- Dein Bild hier -->
-                        <img src="hero_bg.jpg" alt="Masterclass Vorschau" class="w-full h-full object-cover">
+                        <img src="hero_bg.JPG" alt="Masterclass Vorschau" class="w-full h-full object-cover">
                     </div>
                 </div>
                 <div class="laptop-base"></div>
@@ -286,7 +289,8 @@
 
         <!-- CTA Area -->
         <div class="max-w-xl mx-auto">
-            <a href="#register" class="btn-orange text-xl w-full md:w-auto mb-6">
+            <!-- Link angepasst -->
+            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-xl w-full md:w-auto mb-6">
                 <i class="fas fa-play-circle"></i> Jetzt Gratis Sichern
             </a>
             
@@ -348,7 +352,8 @@
         </div>
         
         <div class="text-center mt-12">
-            <a href="#register" class="btn-orange text-xl">
+            <!-- Link angepasst -->
+            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-xl">
                 Jetzt Anmelden
             </a>
         </div>
@@ -417,7 +422,8 @@
         </div>
 
         <div class="text-center mt-12">
-            <a href="#register" class="btn-orange text-xl">
+            <!-- Link angepasst -->
+            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-xl">
                 Sei Dabei
             </a>
         </div>
@@ -444,7 +450,8 @@
         </div>
 
         <div class="text-center mt-10">
-            <a href="#register" class="btn-orange text-xl">
+            <!-- Link angepasst -->
+            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-xl">
                 Hier Klicken
             </a>
         </div>
@@ -454,7 +461,7 @@
     <section class="container mx-auto px-4 py-12 border-t-2 border-b-2 border-orange bg-[#1a1a1a]">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">9+</h3>
+                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">12+</h3>
                 <p class="text-sm md:text-lg text-gray-300">Jahre Erfahrung</p>
             </div>
             <div>
@@ -576,35 +583,52 @@
             <!-- Text Column -->
             <div class="md:col-span-8 order-2 md:order-1 text-center md:text-left">
                 <h2 class="text-3xl font-poppins mb-2 uppercase">Das ist</h2>
-                <h2 class="text-4xl font-bold font-poppins text-orange mb-6 uppercase">Fabian Ritter</h2>
+                <h2 class="text-4xl font-bold font-poppins text-orange mb-6 uppercase">Florian Merzenich</h2>
                 
                 <div class="border-2 border-white p-6 rounded-xl bg-black bg-opacity-50">
-                    <p class="mb-4">Fabian Ritter ist nicht zufällig zu einem der führenden Crypto-Experten Deutschlands geworden. Vor 9 Jahren hat er selbst jeden Fehler mitgenommen, den es gab, vom falschen Timing bis zu dubiosen Altcoins. Genau diese Erfahrung macht heute den Unterschied:</p>
-                    <p class="mb-4">Mehr als <strong>16.000 Menschen</strong> hat er seit 2019 geholfen, die Fehler zu vermeiden, die ihn damals Tausende gekostet haben.</p>
-                    <p class="mb-4">Mit <strong>über 5.600 Eventteilnehmern</strong>, <strong>390x-Ergebnissen</strong> und einer Community, aus der täglich Nachrichten kommen wie:</p>
-                    <p class="italic text-gray-400">"Ich wusste vor ner Woche nicht mal wo ich Bitcoin kaufen kann und heute läuft mein erster Pool mit 5% die Woche."</p>
+                    <p class="mb-4">Florian Merzenich ist Experte für Investitionen und Krypto sowie Mitgründer von „Usecape“. Er gilt als Marktführer in der „Crypto-Investor-Ausbildung“ und ist bereits seit 2013 aktiv an den Märkten.</p>
+                    <p class="mb-4">Mit über <strong>120.000 € Investition</strong> in seine eigene Persönlichkeitsentwicklung (über 300 Coaching-Stunden) hilft er heute Unternehmern und Privatanlegern, die Kapital, aber keinen Plan haben.</p>
+                    <p class="mb-4">Sein Ziel: Dein Vermögen selbstständig, strategisch und ohne Spekulation zu steuern. Keine Standardlösungen, keine Abo-Modelle, sondern echte "Hilfe zur Selbsthilfe", damit du ein souveräner Finanzentscheider wirst.</p>
+                    <p class="italic text-gray-400">„System statt Finanzprodukt“ – für absolute Unabhängigkeit von Banken, Trends und Hypes.</p>
                 </div>
             </div>
             
-            <!-- Image Column -->
+            <!-- Image Column with Laptop Frame -->
             <div class="md:col-span-4 order-1 md:order-2 flex flex-col items-center">
-                <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249a6f37de763c99e26416.jpg" alt="Fabian Ritter" class="w-64 h-64 md:w-80 md:h-80 object-cover img-circle mb-4">
+                <div class="laptop-wrapper w-full max-w-sm mb-4">
+                    <div class="laptop-screen-frame">
+                        <div class="laptop-display">
+                            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249a6f37de763c99e26416.jpg" alt="Florian Merzenich" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                    <div class="laptop-base"></div>
+                </div>
                 <p class="text-orange font-bold text-xl font-montserrat">Crypto Experte & Educator</p>
             </div>
         </div>
     </section>
 
-    <!-- Registration Form Placeholder (ID for anchors) -->
+    <!-- SECTION 8: SCARCITY (URGENCY) -->
+    <section class="py-12 bg-red-900/20 border-b border-red-500/20">
+        <div class="container mx-auto px-4 max-w-4xl text-center">
+            <div class="inline-block bg-red-600 text-white font-bold px-4 py-1 rounded-full text-sm mb-4 animate-pulse shadow-[0_0_15px_rgba(220,38,38,0.5)]">ACHTUNG</div>
+            <h3 class="text-2xl font-bold mb-4 text-white">Bitte lies das, bevor du klickst:</h3>
+            <p class="text-gray-300 text-lg leading-relaxed">
+                Ich arbeite persönlich mit meinen Klienten. Mein Tag hat auch nur 24 Stunden.
+                <br><br>
+                <strong class="text-white">Bitte klicke nur auf den Button, wenn du über mind. 10.000 € freies Investitionskapital verfügst und bereit bist, Verantwortung zu übernehmen.</strong>
+            </p>
+        </div>
+    </section>
+
+    <!-- Final CTA (Replaces Registration Form) -->
     <div id="register" class="container mx-auto px-4 py-12 text-center">
         <div class="bg-white text-black p-8 rounded-xl max-w-lg mx-auto shadow-2xl">
-            <h2 class="text-2xl font-bold mb-4">Jetzt Anmelden</h2>
-            <div class="space-y-4">
-                <input type="text" placeholder="Vorname" class="w-full p-3 border border-gray-300 rounded">
-                <input type="text" placeholder="Nachname" class="w-full p-3 border border-gray-300 rounded">
-                <input type="email" placeholder="E-Mail Adresse" class="w-full p-3 border border-gray-300 rounded">
-                <button class="w-full btn-orange border-none text-white py-4 rounded font-bold text-lg">Kostenlos Teilnehmen</button>
-            </div>
-            <p class="text-xs text-gray-500 mt-4">Deine Daten sind sicher. Wir hassen Spam genau so sehr wie du.</p>
+            <h2 class="text-2xl font-bold mb-6">Jetzt für das Strategiegespräch bewerben</h2>
+            <a href="https://flos-funnel.pages.dev/" class="w-full btn-orange border-none text-white py-4 rounded font-bold text-lg">
+                Kostenlos Teilnehmen
+            </a>
+            <p class="text-xs text-gray-500 mt-4">Begrenzte Plätze verfügbar.</p>
         </div>
     </div>
 
@@ -613,22 +637,22 @@
         <div class="container mx-auto px-4 text-center">
             <!-- Social Icons -->
             <div class="flex justify-center gap-6 mb-6">
-                <a href="https://instagram.com/fabian_ritter84" target="_blank" class="text-white hover:text-orange text-3xl"><i class="fab fa-instagram-square"></i></a>
-                <a href="https://x.com/FabianRitter13" target="_blank" class="text-white hover:text-orange text-3xl"><i class="fab fa-twitter-square"></i></a> <!-- Using generic twitter icon if X not avail in older fontawesome -->
-                <a href="https://youtube.com/@fabianritter84" target="_blank" class="text-white hover:text-orange text-3xl"><i class="fab fa-youtube-square"></i></a>
+                <a href="#" class="text-white hover:text-orange text-3xl"><i class="fab fa-instagram-square"></i></a>
+                <a href="#" class="text-white hover:text-orange text-3xl"><i class="fab fa-twitter-square"></i></a>
+                <a href="#" class="text-white hover:text-orange text-3xl"><i class="fab fa-youtube-square"></i></a>
             </div>
             
             <div class="mb-6">
-                <a href="https://www.ritter-fabian.de/" target="_blank">
+                <a href="https://flos-funnel.pages.dev/" target="_blank">
                     <!-- Footer Logo replaced with local file reference -->
                     <img src="xlg.jpg" alt="Logo" class="h-10 mx-auto opacity-70 hover:opacity-100 transition-opacity">
                 </a>
             </div>
 
             <div class="text-sm font-medium">
-                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank" class="hover:text-orange hover:underline">Impressum</a> 
+                <a href="#" class="hover:text-orange hover:underline">Impressum</a> 
                 <span class="mx-2">|</span>
-                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank" class="hover:text-orange hover:underline">Datenschutz</a>
+                <a href="#" class="hover:text-orange hover:underline">Datenschutz</a>
             </div>
         </div>
     </footer>
