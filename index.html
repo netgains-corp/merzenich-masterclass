@@ -244,6 +244,49 @@
             h1 { font-size: 1.8rem !important; }
             h2 { font-size: 1.5rem !important; }
         }
+
+        /* Marquee Animation (Laufschrift) */
+        .marquee-container {
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .marquee-content {
+            display: flex;
+            width: max-content; /* Wichtig damit Elemente nebeneinander bleiben */
+            animation: scroll 25s linear infinite;
+        }
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Verschiebt um die Hälfte (das Duplikat) */
+        }
+
+        /* Glänzender Gold Gradient Animation */
+        .text-gold-shimmer {
+            /* Verlauf von Dunkelgold über Hellgold zurück zu Dunkelgold für den Glanzeffekt */
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            background-size: 200% auto;
+            
+            /* Text transparent machen, damit der Hintergrund durchscheint */
+            color: #000;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Animation */
+            animation: goldShine 3s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes goldShine {
+            to {
+                background-position: 200% center; /* Bewegt den Hintergrund von rechts nach links */
+            }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -261,7 +304,8 @@
     <!-- pt-4 für minimalen Abstand zum Logo -->
     <section class="container mx-auto px-4 pt-4 pb-8 text-center">
         <div class="border-2 border-white rounded-xl p-4 inline-block mx-auto mb-8">
-            <h2 class="text-xl md:text-3xl font-poppins font-semibold uppercase text-orange">
+            <!-- Klasse text-gold-shimmer hinzugefügt und text-orange entfernt -->
+            <h2 class="text-xl md:text-3xl font-poppins font-semibold uppercase text-gold-shimmer">
                 12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
             </h2>
         </div>
@@ -270,8 +314,8 @@
     <!-- Hero Section -->
     <section class="container mx-auto px-4 pb-12 text-center">
         <h1 class="text-3xl md:text-5xl font-bold mb-8 leading-tight">
-            Von „Alles rot, ich check gar nichts mehr“<br>
-            <span class="text-orange">zu „In 90 Tagen im Bärenmarkt mein Fundament gebaut“</span>
+            60 Minuten Netflix oder<br>
+            <span class="text-orange">60 Minuten für immer in seine Zukunft investieren</span>
         </h1>
 
         <!-- Hero Image inside Laptop Mockup -->
@@ -305,6 +349,38 @@
             </div>
             
             <div class="separator"></div>
+        </div>
+    </section>
+
+    <!-- Flying Banners (Marquee) - Bekannt aus -->
+    <section class="container mx-auto px-4 mb-12">
+        <p class="text-center text-gray-500 text-sm mb-6 uppercase tracking-widest">Bekannt aus</p>
+        <div class="marquee-container w-full opacity-100 transition duration-500">
+            <div class="marquee-content flex gap-16 items-center">
+                <!-- Original Logos -->
+                
+                <!-- Focus (PNG) -->
+                <img src="focus.png" class="h-8 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition duration-300" alt="Focus">
+                
+                <!-- WirtschaftsWoche (SVG, Schwarz/Transparent) - Invertiert für dunklen Hintergrund -->
+                <img src="wirtschaftswoche.png" class="h-4 md:h-6 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition duration-300" alt="WirtschaftsWoche">
+                
+                <!-- n-tv (JPG) -->
+                <img src="ntv.jpg" class="h-8 md:h-10 w-auto object-contain opacity-60 hover:opacity-100 rounded transition duration-300" alt="n-tv">
+                
+                <!-- London Daily News (PNG) -->
+                <img src="london.png" class="h-8 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition duration-300" alt="London Daily News">
+                
+                <!-- Business Magazin Text -->
+                <span class="text-lg md:text-xl font-bold uppercase border-2 border-white/30 text-white/60 px-2 py-1 hover:text-white hover:border-white transition duration-300">Business Magazin</span>
+
+                <!-- Duplicate for loop (Nahtloser Übergang) -->
+                <img src="focus.png" class="h-8 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition duration-300" alt="Focus">
+                <img src="wirtschaftswoche.png" class="h-4 md:h-6 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition duration-300" alt="WirtschaftsWoche">
+                <img src="ntv.jpg" class="h-8 md:h-10 w-auto object-contain opacity-60 hover:opacity-100 rounded transition duration-300" alt="n-tv">
+                <img src="london.png" class="h-8 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition duration-300" alt="London Daily News">
+                <span class="text-lg md:text-xl font-bold uppercase border-2 border-white/30 text-white/60 px-2 py-1 hover:text-white hover:border-white transition duration-300">Business Magazin</span>
+            </div>
         </div>
     </section>
 
@@ -596,12 +672,8 @@
             <!-- Image Column with Laptop Frame -->
             <div class="md:col-span-4 order-1 md:order-2 flex flex-col items-center">
                 <div class="laptop-wrapper w-full max-w-sm mb-4">
-                    <div class="laptop-screen-frame">
-                        <div class="laptop-display">
-                            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249a6f37de763c99e26416.jpg" alt="Florian Merzenich" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
+                    <!-- Removed laptop frame structure for simple image -->
+                    <img src="portrait.jpg" alt="Florian Merzenich" class="w-full max-w-sm rounded-xl shadow-2xl border-2 border-white/20">
                 </div>
                 <p class="text-orange font-bold text-xl font-montserrat">Crypto Experte & Educator</p>
             </div>
