@@ -4,345 +4,268 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kostenlose Bärenmarkt Masterclass – Lerne profitabel zu investieren</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS (für Layout) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Tailwind Config für Custom Colors (Gold & Neon) -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        gold: '#f6ad55',
-                        actionBlue: '#3b82f6',
-                    },
-                    boxShadow: {
-                        neon: '0 0 20px rgba(246, 173, 85, 0.2)',
-                        'neon-hover': '0 0 30px rgba(246, 173, 85, 0.4)',
-                    },
-                    fontFamily: {
-                        head: ['Montserrat', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <!-- FontAwesome (für Icons) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
             --primary: #37ca37;
-            --orange: #f6ad55;
-            --white: #ffffff;
-            --black: #000000;
+            --accent-orange: #f6ad55;
+            --dark-bg: #0b0b0b;
         }
-
         body {
-            background-color: #050505;
-            background-image: 
-                radial-gradient(circle at 50% 0%, #3e2b1f 0%, transparent 75%),
-                radial-gradient(circle at 50% 100%, #3e2b1f 0%, transparent 75%);
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: var(--white);
             font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: white;
             overflow-x: hidden;
-            min-height: 100vh;
         }
-
-        /* Laptop Mockup - Optimiert für Mobile */
-        .laptop-wrapper {
-            max-width: 260px; /* Extrem klein für Mobile */
-            margin: 0 auto;
-            position: relative;
+        .bg-gradient-custom {
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(18,18,18,0.9) 100%), 
+                        url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
-        @media (min-width: 768px) {
-            .laptop-wrapper { max-width: 500px; }
+        .btn-glow:hover {
+            box-shadow: 0 0 20px rgba(246, 173, 85, 0.4);
+            transform: translateY(-2px);
         }
-
-        .laptop-screen-frame {
-            background: #1a1a1a;
-            border-radius: 8px 8px 0 0;
-            padding: 5px 5px 0 5px;
-            box-shadow: inset 0 0 0 1px #333;
-            position: relative;
-        }
-        .laptop-display {
-            background: #000;
-            overflow: hidden;
-            position: relative;
-            aspect-ratio: 16/9;
-            border: 1px solid #222;
-        }
-        .laptop-base {
-            background: linear-gradient(to bottom, #333 0%, #111 100%);
-            height: 8px;
-            width: 106%;
-            margin-left: -3%;
-            border-radius: 0 0 6px 6px;
-            position: relative;
-        }
-
-        /* Glänzender Gold Gradient */
-        .text-gold-shimmer {
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            background-size: 200% auto;
-            color: #000;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: goldShine 3s linear infinite;
-        }
-        @keyframes goldShine { to { background-position: 200% center; } }
-
-        /* Button & Countdown */
-        .btn-orange {
-            background-color: var(--orange);
-            color: var(--white);
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 10px 20px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(246, 173, 85, 0.4);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
-        .countdown-unit {
-            background: rgba(255,255,255,0.08);
-            border-radius: 4px;
-            padding: 2px 6px;
-            min-width: 40px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .border-box {
-            border: 1px solid rgba(255,255,255,0.3);
-            background-color: #000;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        /* Marquee Animation */
-        .marquee-container { overflow: hidden; position: relative; }
-        .marquee-content { display: flex; width: max-content; animation: scroll 25s linear infinite; }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* WhatsApp Bubbles */
-        .chat-bubble {
-            background-color: rgba(255, 255, 255, 0.05);
+        .card-border {
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        .countdown-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 70px;
+            text-align: center;
         }
     </style>
 </head>
-<body class="antialiased">
+<body class="bg-gradient-custom">
 
-    <!-- Header -->
-    <header class="container mx-auto pt-2 pb-1 px-4 text-center">
-        <a href="https://flos-funnel.pages.dev/">
-            <img src="xlg.jpg" alt="Logo" class="h-6 md:h-12 mx-auto object-contain">
+    <!-- Header / Logo -->
+    <header class="py-8 px-4 flex justify-center">
+        <a href="#">
+            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/67094fbb9ca0e3bd41cb6164.png" 
+                 alt="Fabian Ritter Logo" class="h-12 md:h-16 object-contain">
         </a>
     </header>
 
-    <!-- Top Headline (Badge) -->
-    <section class="container mx-auto px-4 pt-1 pb-1 text-center">
-        <div class="border border-white/20 rounded-md p-1 inline-block mx-auto mb-1">
-            <h2 class="text-[8px] md:text-xl font-poppins font-bold uppercase text-gold-shimmer tracking-tighter">
-                12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
-            </h2>
+    <!-- Hero Section -->
+    <section class="max-w-5xl mx-auto px-4 py-12 text-center">
+        <div class="inline-block px-6 py-2 border-2 border-white rounded-full text-sm md:text-lg font-semibold text-[#f6ad55] uppercase tracking-wider mb-8">
+            9 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
         </div>
-    </section>
-
-    <!-- Hero Content -->
-    <section class="container mx-auto px-4 pb-4 text-center">
-        <!-- Kompakte H1 auf Mobile -->
-        <h1 class="text-lg md:text-5xl font-bold mb-3 leading-tight px-2">
-            60 Minuten Netflix oder<br>
-            <span class="text-orange">60 Minuten für immer in seine Zukunft investieren</span>
+        
+        <h1 class="text-3xl md:text-6xl font-extrabold leading-tight mb-8">
+            Von <span class="text-gray-300">„Alles rot, ich check gar nichts mehr“</span><br>
+            zu <span class="text-[#f6ad55]">„In 90 Tagen im Bärenmarkt mein Fundament gebaut“</span>
         </h1>
 
-        <!-- Laptop Mockup -->
-        <div class="mb-4">
-            <div class="laptop-wrapper">
-                <div class="laptop-screen-frame">
-                    <div class="laptop-display">
-                        <img src="hero_bg.JPG" alt="Masterclass" class="w-full h-full object-cover">
-                    </div>
-                </div>
-                <div class="laptop-base"></div>
-            </div>
+        <div class="max-w-4xl mx-auto mb-10">
+            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" 
+                 alt="Masterclass Video Preview" class="w-full rounded-2xl shadow-2xl border border-gray-800">
         </div>
 
-        <!-- CTA & Urgency Area -->
-        <div class="max-w-xl mx-auto px-2">
-            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-[10px] md:text-xl w-full md:w-auto mb-2 py-3 px-4">
-                <i class="fas fa-comments text-xs"></i> JETZT GRATIS 1:1 GESPRÄCH SICHERN
-            </a>
-            
-            <p class="text-[10px] md:text-sm text-gray-400 font-medium leading-tight mb-2">
-                Sichere dir 1 von 5 freien Plätzen zum persönlichen 1:1 Gespräch mit mir
+        <button onclick="togglePopup(true)" class="btn-glow bg-[#f6ad55] text-white text-xl md:text-3xl font-black px-10 py-5 rounded-full transition-all duration-300 mb-6">
+            JETZT GRATIS SICHERN
+        </button>
+
+        <p class="text-lg text-gray-400 mb-4">Noch verfügbar bis:</p>
+        
+        <!-- Simple JS Countdown -->
+        <div id="countdown" class="flex justify-center gap-4 text-2xl font-bold mb-12">
+            <div class="countdown-item"><span id="days">00</span><div class="text-xs font-light uppercase">Tage</div></div>
+            <div class="countdown-item"><span id="hours">00</span><div class="text-xs font-light uppercase">Std</div></div>
+            <div class="countdown-item"><span id="minutes">00</span><div class="text-xs font-light uppercase">Min</div></div>
+            <div class="countdown-item"><span id="seconds">00</span><div class="text-xs font-light uppercase">Sek</div></div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="max-w-4xl mx-auto px-4 py-16">
+        <h2 class="text-2xl md:text-4xl font-bold text-center mb-12">Wo stehst du nach der Masterclass</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="card-border p-8 rounded-3xl text-center flex flex-col items-center">
+                <i data-lucide="shield-check" class="text-[#f6ad55] w-12 h-12 mb-4"></i>
+                <p class="text-sm md:text-base leading-relaxed">Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist.</p>
+            </div>
+            <div class="card-border p-8 rounded-3xl text-center flex flex-col items-center">
+                <i data-lucide="trending-up" class="text-[#f6ad55] w-12 h-12 mb-4"></i>
+                <p class="text-sm md:text-base leading-relaxed">Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p>
+            </div>
+            <div class="card-border p-8 rounded-3xl text-center flex flex-col items-center">
+                <i data-lucide="smile" class="text-[#f6ad55] w-12 h-12 mb-4"></i>
+                <p class="text-sm md:text-base leading-relaxed">Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Whom Section -->
+    <section class="bg-black/50 py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-2xl md:text-4xl font-bold text-center mb-16">Für wen ist diese Masterclass</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="text-center">
+                    <div class="bg-green-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="briefcase" class="text-[#37ca37] w-10 h-10"></i>
+                    </div>
+                    <p class="text-gray-300">Für dich, wenn du schon investiert bist, aber ehrlich gesagt keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="users" class="text-[#37ca37] w-10 h-10"></i>
+                    </div>
+                    <p class="text-gray-300">Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-green-500/20 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i data-lucide="heart" class="text-[#37ca37] w-10 h-10"></i>
+                    </div>
+                    <p class="text-gray-300">Für dich, wenn du für deine Familie vorsorgen musst, aber Krypto dich bisher eher verunsichert hat.</p>
+                </div>
+            </div>
+            <div class="text-center mt-16">
+                <button onclick="togglePopup(true)" class="bg-[#f6ad55] text-white font-bold px-8 py-4 rounded-full text-xl hover:scale-105 transition-transform">
+                    JETZT ANMELDEN
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 px-4 max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+            <div class="text-4xl md:text-6xl font-black text-white mb-2">9+</div>
+            <div class="text-[#f6ad55] font-semibold">Jahre Erfahrung</div>
+        </div>
+        <div class="text-center">
+            <div class="text-4xl md:text-6xl font-black text-white mb-2">5.600+</div>
+            <div class="text-[#f6ad55] font-semibold">Event Besucher</div>
+        </div>
+        <div class="text-center">
+            <div class="text-4xl md:text-6xl font-black text-white mb-2">16.500+</div>
+            <div class="text-[#f6ad55] font-semibold">Menschen begleitet</div>
+        </div>
+        <div class="text-center">
+            <div class="text-4xl md:text-6xl font-black text-white mb-2">2.5M€+</div>
+            <div class="text-[#f6ad55] font-semibold">Crypto Gewinne</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 px-4 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+        <div class="w-64 h-64 md:w-80 md:h-80 shrink-0">
+            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249a6f37de763c99e26416.jpg" 
+                 alt="Fabian Ritter" class="w-full h-full object-cover rounded-full border-4 border-[#f6ad55]">
+        </div>
+        <div>
+            <h2 class="text-3xl md:text-5xl font-bold mb-4">DAS ist Fabian Ritter</h2>
+            <h3 class="text-[#f6ad55] text-xl font-bold mb-6 uppercase">Crypto Experte & Educator</h3>
+            <p class="text-gray-300 leading-relaxed text-lg">
+                Fabian Ritter ist nicht zufällig zu einem der führenden Crypto-Experten Deutschlands geworden. Vor 9 Jahren hat er selbst jeden Fehler mitgenommen, den es gab. <br><br>
+                Mehr als <strong>16.000 Menschen</strong> hat er seit 2019 geholfen, die Fehler zu vermeiden, die ihn damals Tausende gekostet haben. Heute teilt er dieses Wissen exklusiv in dieser Masterclass.
             </p>
-            
-            <!-- Kompakter Countdown -->
-            <div class="flex justify-center gap-2 mb-2">
-                <div class="countdown-unit"><span id="days" class="block font-bold text-xs text-orange">00</span><span class="text-[7px] uppercase text-gray-500">Tage</span></div>
-                <div class="countdown-unit"><span id="hours" class="block font-bold text-xs text-orange">00</span><span class="text-[7px] uppercase text-gray-500">Std</span></div>
-                <div class="countdown-unit"><span id="minutes" class="block font-bold text-xs text-orange">00</span><span class="text-[7px] uppercase text-gray-500">Min</span></div>
-                <div class="countdown-unit"><span id="seconds" class="block font-bold text-xs text-orange">00</span><span class="text-[7px] uppercase text-gray-500">Sek</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Marquee Section -->
-    <section class="container mx-auto px-4 mb-8">
-        <p class="text-center text-gray-700 text-[8px] uppercase tracking-widest mb-2">Bekannt aus</p>
-        <div class="marquee-container w-full opacity-60">
-            <div class="marquee-content flex gap-8 items-center">
-                <img src="focus.png" class="h-4 md:h-10 w-auto object-contain" alt="Focus">
-                <img src="wirtschaftswoche.png" class="h-2 md:h-5 w-auto object-contain brightness-0 invert" alt="WW">
-                <img src="ntv.jpg" class="h-4 md:h-8 w-auto object-contain rounded" alt="n-tv">
-                <img src="london.png" class="h-4 md:h-10 w-auto object-contain" alt="London">
-                <span class="text-[8px] md:text-lg font-bold uppercase border border-white/20 px-1">Business Magazin</span>
-                <!-- Duplicate -->
-                <img src="focus.png" class="h-4 md:h-10 w-auto object-contain" alt="Focus">
-                <img src="wirtschaftswoche.png" class="h-2 md:h-5 w-auto object-contain brightness-0 invert" alt="WW">
-                <img src="ntv.jpg" class="h-4 md:h-8 w-auto object-contain rounded" alt="n-tv">
-                <img src="london.png" class="h-4 md:h-10 w-auto object-contain" alt="London">
-                <span class="text-[8px] md:text-lg font-bold uppercase border border-white/20 px-1">Business Magazin</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Outcome Section -->
-    <section class="container mx-auto px-4 py-8">
-        <h2 class="text-xl md:text-4xl font-bold text-center mb-6 px-4 uppercase">Wo stehst du nach der Masterclass?</h2>
-        <div class="flex flex-col gap-3 max-w-2xl mx-auto">
-            <div class="border-box"><p class="text-sm md:text-lg leading-relaxed">Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p></div>
-            <div class="border-box"><p class="text-sm md:text-lg leading-relaxed">Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p></div>
-            <div class="border-box"><p class="text-sm md:text-lg leading-relaxed">Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p></div>
-        </div>
-    </section>
-
-    <!-- Target Audience -->
-    <section class="container mx-auto px-4 py-12">
-        <h2 class="text-orange text-2xl md:text-4xl font-bold text-center mb-10 uppercase">Für wen ist das?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <div class="border border-white/10 rounded-xl p-6 text-center bg-white/5">
-                <div class="text-primary text-4xl mb-4"><i class="fas fa-chart-line"></i></div>
-                <p class="text-sm">Für dich, wenn du schon investiert bist, aber <em class="underline text-orange">ehrlich gesagt</em> keinen Plan hast, ob dein Portfolio überhaupt Sinn macht.</p>
-            </div>
-            <div class="border border-white/10 rounded-xl p-6 text-center bg-white/5">
-                <div class="text-primary text-4xl mb-4"><i class="fas fa-shield-alt"></i></div>
-                <p class="text-sm">Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p>
-            </div>
-            <div class="border border-white/10 rounded-xl p-6 text-center bg-white/5">
-                <div class="text-primary text-4xl mb-4"><i class="fas fa-hand-holding-usd"></i></div>
-                <p class="text-sm">Für dich, wenn du für deine Familie vorsorgen musst, aber Krypto dich bisher eher verunsichert hat.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Social Proof (Brownish Gradient) -->
-    <section class="py-16" style="background: linear-gradient(to bottom, #2b1f15 0%, #050505 100%)">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <h2 class="text-2xl md:text-4xl font-bold text-center mb-12">Ergebnisse <span class="text-gold">lügen nicht</span></h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="space-y-4">
-                    <div class="chat-bubble">
-                        <p class="font-bold text-[10px] text-green-400 mb-1">Thomas S.</p>
-                        <p class="text-sm">Hey Florian, kurzes Update: Mein Portfolio ist heute 20% im Plus! Danke. 🙏</p>
-                    </div>
-                    <div class="chat-bubble" style="background:#111">
-                        <p class="font-bold text-[10px] text-gray-400 mb-1">Markus K.</p>
-                        <p class="text-sm">Endlich verstehe ich, was ich da mache. Das Gefühl von Kontrolle ist unbezahlbar.</p>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 gap-4">
-                    <div class="bg-white p-6 rounded-lg text-black shadow-neon">
-                        <div class="flex text-gold mb-2 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                        <p class="italic text-xs font-medium">"Beste Entscheidung 2024. Endlich Ruhe im Depot und ein klarer Plan."</p>
-                        <p class="font-bold text-[9px] mt-2">- Dennis B.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Offer -->
-    <section class="py-16 bg-black border-y border-gold/20">
-        <div class="container mx-auto px-4 max-w-4xl">
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-12 shadow-neon">
-                <h2 class="text-2xl font-bold text-center mb-8 uppercase">Das Strategiegespräch:</h2>
-                <ul class="space-y-4 text-base md:text-xl mb-10 px-2">
-                    <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-4"></i><span>Analyse deiner Situation</span></li>
-                    <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-4"></i><span>Struktur deines Masterplans</span></li>
-                    <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-4"></i><span>Telegram-Marktupdates</span></li>
-                </ul>
-                <div class="text-center pt-6 border-t border-white/10">
-                    <div class="text-gray-400 text-sm mb-1">Dein Investment heute:</div>
-                    <div class="text-5xl font-black text-gold">0,00 €</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About -->
-    <section class="container mx-auto px-4 py-16">
-        <div class="flex flex-col md:flex-row gap-8 items-center max-w-5xl mx-auto">
-            <div class="flex-1 text-center md:text-left">
-                <h2 class="text-3xl font-black text-orange mb-4 uppercase">Florian Merzenich</h2>
-                <p class="text-gray-300 leading-relaxed mb-4">Mitgründer von „Usecape“ und seit 2013 Investor. Er hilft Unternehmern, ihr Vermögen unabhängig von Banken und Hypes strategisch zu steuern.</p>
-            </div>
-            <div class="w-48 md:w-64">
-                <img src="portrait.jpg" alt="Portrait" class="rounded-2xl shadow-2xl border border-white/10">
-            </div>
-        </div>
-    </section>
-
-    <!-- Urgency Hint -->
-    <section class="py-8 bg-red-900/10 border-y border-red-500/20">
-        <div class="container mx-auto px-4 max-w-2xl text-center">
-            <div class="inline-block bg-red-600 text-white font-bold px-2 py-0.5 rounded text-[10px] mb-2">ACHTUNG</div>
-            <p class="text-[11px] text-gray-400">Nur bewerben bei mind. 10.000 € Kapital und echter Eigenverantwortung.</p>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 text-center">
-        <img src="xlg.jpg" alt="Logo" class="h-6 mx-auto mb-4 opacity-40">
-        <div class="text-[10px] text-gray-600 space-x-4">
-            <a href="#">Impressum</a><span>|</span><a href="#">Datenschutz</a>
+    <footer class="bg-black py-12 px-4 border-t border-gray-900 text-center">
+        <div class="flex justify-center gap-6 mb-8">
+            <a href="#" class="text-gray-400 hover:text-white"><i data-lucide="instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i data-lucide="twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white"><i data-lucide="youtube"></i></a>
+        </div>
+        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/67094fbb9ca0e3bd41cb6164.png" 
+             alt="Logo" class="h-10 mx-auto mb-6 opacity-50">
+        <div class="text-sm text-gray-500">
+            <a href="#" class="hover:underline">Impressum</a> | <a href="#" class="hover:underline">Datenschutz</a>
         </div>
     </footer>
 
+    <!-- Popup / Modal -->
+    <div id="popup" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-sm" onclick="togglePopup(false)"></div>
+        <div class="relative bg-white text-black max-w-lg w-full m-4 p-8 rounded-2xl shadow-2xl">
+            <button onclick="togglePopup(false)" class="absolute top-4 right-4 text-gray-400 hover:text-black">
+                <i data-lucide="x"></i>
+            </button>
+            <h2 class="text-2xl font-black mb-2 uppercase text-center">Masterclass Anmeldung</h2>
+            <p class="text-gray-600 text-center mb-8">Sichere dir jetzt deinen Zugang zur kostenlosen Masterclass.</p>
+            
+            <form class="space-y-4" onsubmit="handleFormSubmit(event)">
+                <input type="text" placeholder="Vorname" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f6ad55]">
+                <input type="email" placeholder="E-Mail Adresse" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f6ad55]">
+                <div class="flex items-start gap-2">
+                    <input type="checkbox" id="terms" required class="mt-1">
+                    <label for="terms" class="text-xs text-gray-500">Ich stimme zu, Erinnerungen und Marketinginhalte zu erhalten. Abmeldung jederzeit möglich.</label>
+                </div>
+                <button type="submit" class="w-full bg-[#f6ad55] text-white font-bold py-4 rounded-lg text-lg hover:bg-[#e59d44] transition-colors">
+                    JETZT KOSTENLOS ANMELDEN
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Message Toast -->
+    <div id="toast" class="fixed bottom-10 right-10 bg-green-500 text-white px-6 py-3 rounded-lg shadow-xl opacity-0 transition-opacity pointer-events-none">
+        Anmeldung erfolgreich! Wir senden dir die Details per E-Mail.
+    </div>
+
     <script>
-        function startTimer() {
-            const endDate = new Date();
-            endDate.setHours(23, 59, 59, 999); 
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Popup Logic
+        function togglePopup(show) {
+            const popup = document.getElementById('popup');
+            if (show) {
+                popup.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                popup.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            togglePopup(false);
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            setTimeout(() => toast.style.opacity = '0', 5000);
+        }
+
+        // Countdown Timer Logic
+        function startCountdown() {
+            // Set date to 24 hours from now for demo purposes
+            let countDate = new Date().getTime() + (24 * 60 * 60 * 1000);
+            
             setInterval(() => {
-                const now = new Date().getTime();
-                const dist = endDate - now;
-                if (dist < 0) return;
-                document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((dist % (86400000)) / (3600000));
-                document.getElementById("minutes").innerText = Math.floor((dist % (3600000)) / (60000));
-                document.getElementById("seconds").innerText = Math.floor((dist % (60000)) / 1000);
+                let now = new Date().getTime();
+                let gap = countDate - now;
+
+                let second = 1000;
+                let minute = second * 60;
+                let hour = minute * 60;
+                let day = hour * 24;
+
+                let d = Math.floor(gap / day);
+                let h = Math.floor((gap % day) / hour);
+                let m = Math.floor((gap % hour) / minute);
+                let s = Math.floor((gap % minute) / second);
+
+                document.getElementById('days').innerText = d < 10 ? '0' + d : d;
+                document.getElementById('hours').innerText = h < 10 ? '0' + h : h;
+                document.getElementById('minutes').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('seconds').innerText = s < 10 ? '0' + s : s;
             }, 1000);
         }
-        window.onload = startTimer;
+
+        startCountdown();
     </script>
 </body>
 </html>
