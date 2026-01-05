@@ -19,8 +19,8 @@
             theme: {
                 extend: {
                     colors: {
-                        gold: '#f6ad55', /* Passend zum existierenden Orange-Gold Ton */
-                        actionBlue: '#3b82f6', /* Helles Blau für Akzente */
+                        gold: '#f6ad55',
+                        actionBlue: '#3b82f6',
                     },
                     boxShadow: {
                         neon: '0 0 20px rgba(246, 173, 85, 0.2)',
@@ -43,16 +43,13 @@
             --orange: #f6ad55;
             --white: #ffffff;
             --black: #000000;
-            --dark-gray: #1a1a1a;
-            --text-gray: #cbd5e0;
         }
 
         body {
-            background-color: #000000;
-            /* Runderer Gradient (Radial): Schein von oben und unten */
+            background-color: #050505;
             background-image: 
-                radial-gradient(circle at 50% 0%, #4a332a 0%, transparent 60%),
-                radial-gradient(circle at 50% 100%, #4a332a 0%, transparent 60%);
+                radial-gradient(circle at 50% 0%, #3e2b1f 0%, transparent 75%),
+                radial-gradient(circle at 50% 100%, #3e2b1f 0%, transparent 75%);
             background-attachment: fixed;
             background-repeat: no-repeat;
             color: var(--white);
@@ -61,710 +58,291 @@
             min-height: 100vh;
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .font-poppins {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        /* Custom Button Styling */
-        .btn-orange {
-            background-color: var(--orange);
-            color: var(--white);
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 16px 32px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(246, 173, 85, 0.4);
-            border: 1px solid var(--orange);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-orange:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(246, 173, 85, 0.6);
-            background-color: #ed8936;
-            border-color: #ed8936;
-        }
-
-        /* Border Styles matching original */
-        .border-box {
-            border: 2px solid var(--white);
-            background-color: transparent;
-            padding: 20px;
-            border-radius: 20px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-        
-        .border-box:hover {
-            transform: translateY(-5px);
-            border-color: var(--orange);
-        }
-
-        .border-dark {
-            border-color: var(--black);
-        }
-
-        /* Custom Separator Line */
-        .separator {
-            height: 1px;
-            background-color: #4a5568;
-            width: 40%;
-            margin: 20px auto;
-        }
-
-        /* Orange Text Highlight */
-        .text-orange {
-            color: var(--orange);
-        }
-
-        /* Custom Class for the Royal Gradient in the new section */
-        .bg-royal-gradient {
-            background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
-        }
-
-        /* Gradient for Social Proof - Jetzt Bräunlich angepasst */
-        .bg-dark-gradient {
-            /* Linearer Verlauf von Dunkelbraun zu Dunkelgrau/Schwarz */
-            background: linear-gradient(to bottom, #5c4025 0%, #1a1a1a 100%);
-        }
-
-        /* Chat Bubble Styling */
-        .chat-bubble {
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 15px;
-            position: relative;
-            margin-bottom: 15px;
-            color: #e2e8f0;
-            font-size: 0.95rem;
-        }
-        
-        /* Countdown Style */
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--orange);
-            margin: 20px 0;
-        }
-        
-        .countdown-box {
-            background: rgba(255,255,255,0.1);
-            padding: 10px;
-            border-radius: 8px;
-            min-width: 60px;
-            text-align: center;
-        }
-        .countdown-label {
-            font-size: 0.7rem;
-            color: #aaa;
-            font-weight: normal;
-            display: block;
-        }
-
-        /* Image Styling */
-        .img-circle {
-            border-radius: 50%;
-            border: 3px solid var(--white);
-        }
-
-        /* CSS Laptop Mockup (Reverted to Dark & Original Size) */
+        /* Laptop Mockup - Optimiert für Mobile */
         .laptop-wrapper {
-            max-width: 600px;
+            max-width: 260px; /* Extrem klein für Mobile */
             margin: 0 auto;
             position: relative;
         }
-        .laptop-screen-frame {
-            background: #1a202c; /* Dark Frame */
-            border-radius: 20px 20px 0 0;
-            padding: 12px 12px 0 12px;
-            box-shadow: inset 0 0 0 2px #4a5568; /* Subtle inner bevel */
-            position: relative;
+        @media (min-width: 768px) {
+            .laptop-wrapper { max-width: 500px; }
         }
-        /* Camera Dot */
-        .laptop-screen-frame::before {
-            content: '';
-            position: absolute;
-            top: 6px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 6px;
-            background: #4a5568;
-            border-radius: 50%;
-            z-index: 10;
+
+        .laptop-screen-frame {
+            background: #1a1a1a;
+            border-radius: 8px 8px 0 0;
+            padding: 5px 5px 0 5px;
+            box-shadow: inset 0 0 0 1px #333;
+            position: relative;
         }
         .laptop-display {
             background: #000;
             overflow: hidden;
             position: relative;
-            aspect-ratio: 16/9; /* Widescreen Ratio */
-            border: 1px solid #2d3748;
+            aspect-ratio: 16/9;
+            border: 1px solid #222;
         }
         .laptop-base {
-            background: linear-gradient(to bottom, #2d3748 0%, #1a202c 100%);
-            height: 24px;
-            width: 110%;
-            margin-left: -5%;
-            border-radius: 0 0 15px 15px;
-            position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        }
-        /* Laptop Notch/Opener */
-        .laptop-base::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
+            background: linear-gradient(to bottom, #333 0%, #111 100%);
             height: 8px;
-            background: #1a202c;
-            border-radius: 0 0 8px 8px;
-        }
-
-        /* Fix for mobile stacking */
-        @media (max-width: 768px) {
-            .mobile-stack {
-                flex-direction: column;
-            }
-            h1 { font-size: 1.8rem !important; }
-            h2 { font-size: 1.5rem !important; }
-        }
-
-        /* Marquee Animation (Laufschrift) */
-        .marquee-container {
-            overflow: hidden;
+            width: 106%;
+            margin-left: -3%;
+            border-radius: 0 0 6px 6px;
             position: relative;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-        .marquee-content {
-            display: flex;
-            width: max-content; /* Wichtig damit Elemente nebeneinander bleiben */
-            animation: scroll 25s linear infinite;
-        }
-        .marquee-content:hover {
-            animation-play-state: paused;
-        }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Verschiebt um die Hälfte (das Duplikat) */
         }
 
-        /* Glänzender Gold Gradient Animation */
+        /* Glänzender Gold Gradient */
         .text-gold-shimmer {
-            /* Verlauf von Dunkelgold über Hellgold zurück zu Dunkelgold für den Glanzeffekt */
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
             background-size: 200% auto;
-            
-            /* Text transparent machen, damit der Hintergrund durchscheint */
             color: #000;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            
-            /* Animation */
             animation: goldShine 3s linear infinite;
-            display: inline-block;
+        }
+        @keyframes goldShine { to { background-position: 200% center; } }
+
+        /* Button & Countdown */
+        .btn-orange {
+            background-color: var(--orange);
+            color: var(--white);
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(246, 173, 85, 0.4);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .countdown-unit {
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+            padding: 2px 6px;
+            min-width: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .border-box {
+            border: 1px solid rgba(255,255,255,0.3);
+            background-color: #000;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
         }
 
-        @keyframes goldShine {
-            to {
-                background-position: 200% center; /* Bewegt den Hintergrund von rechts nach links */
-            }
+        /* Marquee Animation */
+        .marquee-container { overflow: hidden; position: relative; }
+        .marquee-content { display: flex; width: max-content; animation: scroll 25s linear infinite; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* WhatsApp Bubbles */
+        .chat-bubble {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 12px;
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header / Logo -->
-    <!-- pt-6 für Abstand oben, pb-0 für keinen Abstand unten -->
-    <header class="container mx-auto pt-4 md:pt-6 pb-0 px-4 text-center">
-        <a href="https://flos-funnel.pages.dev/" class="inline-block">
-            <!-- Logo replaced with local file reference -->
-            <img src="xlg.jpg" alt="Florian Merzenich Logo" class="h-10 md:h-16 mx-auto object-contain">
+    <!-- Header -->
+    <header class="container mx-auto pt-2 pb-1 px-4 text-center">
+        <a href="https://flos-funnel.pages.dev/">
+            <img src="xlg.jpg" alt="Logo" class="h-6 md:h-12 mx-auto object-contain">
         </a>
     </header>
 
-    <!-- Headline Section -->
-    <!-- Reduzierte Abstände und kleinere Schrift für Mobile -->
-    <section class="container mx-auto px-4 pt-2 pb-4 md:pt-4 md:pb-8 text-center">
-        <div class="border-2 border-white rounded-xl p-2 md:p-4 inline-block mx-auto mb-4 md:mb-8">
-            <!-- Schriftgröße auf text-xs (extra small) reduziert für Mobile, sm:text-base für Tablets -->
-            <h2 class="text-xs sm:text-base md:text-3xl font-poppins font-semibold uppercase text-gold-shimmer tracking-wide leading-snug">
+    <!-- Top Headline (Badge) -->
+    <section class="container mx-auto px-4 pt-1 pb-1 text-center">
+        <div class="border border-white/20 rounded-md p-1 inline-block mx-auto mb-1">
+            <h2 class="text-[8px] md:text-xl font-poppins font-bold uppercase text-gold-shimmer tracking-tighter">
                 12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
             </h2>
         </div>
     </section>
 
-    <!-- Hero Section -->
-    <section class="container mx-auto px-4 pb-12 text-center">
-        <h1 class="text-2xl md:text-5xl font-bold mb-6 md:mb-8 leading-tight">
+    <!-- Hero Content -->
+    <section class="container mx-auto px-4 pb-4 text-center">
+        <!-- Kompakte H1 auf Mobile -->
+        <h1 class="text-lg md:text-5xl font-bold mb-3 leading-tight px-2">
             60 Minuten Netflix oder<br>
             <span class="text-orange">60 Minuten für immer in seine Zukunft investieren</span>
         </h1>
 
-        <!-- Hero Image inside Laptop Mockup -->
-        <div class="max-w-4xl mx-auto mb-16 px-4">
+        <!-- Laptop Mockup -->
+        <div class="mb-4">
             <div class="laptop-wrapper">
                 <div class="laptop-screen-frame">
                     <div class="laptop-display">
-                        <!-- Dein Bild hier -->
-                        <img src="hero_bg.JPG" alt="Masterclass Vorschau" class="w-full h-full object-cover">
+                        <img src="hero_bg.JPG" alt="Masterclass" class="w-full h-full object-cover">
                     </div>
                 </div>
                 <div class="laptop-base"></div>
             </div>
         </div>
 
-        <!-- CTA Area -->
-        <div class="max-w-xl mx-auto">
-            <!-- Link angepasst -->
-            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-xl w-full md:w-auto mb-6">
-                <i class="fas fa-play-circle"></i> Jetzt Gratis Sichern
+        <!-- CTA & Urgency Area -->
+        <div class="max-w-xl mx-auto px-2">
+            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-[10px] md:text-xl w-full md:w-auto mb-2 py-3 px-4">
+                <i class="fas fa-comments text-xs"></i> JETZT GRATIS 1:1 GESPRÄCH SICHERN
             </a>
             
-            <p class="text-lg mb-2">Noch verfügbar bis:</p>
+            <p class="text-[10px] md:text-sm text-gray-400 font-medium leading-tight mb-2">
+                Sichere dir 1 von 5 freien Plätzen zum persönlichen 1:1 Gespräch mit mir
+            </p>
             
-            <!-- JavaScript Countdown -->
-            <div id="countdown" class="countdown-container">
-                <div class="countdown-box"><span id="days">00</span><span class="countdown-label">Tage</span></div>
-                <div class="countdown-box"><span id="hours">00</span><span class="countdown-label">Std</span></div>
-                <div class="countdown-box"><span id="minutes">00</span><span class="countdown-label">Min</span></div>
-                <div class="countdown-box"><span id="seconds">00</span><span class="countdown-label">Sek</span></div>
+            <!-- Kompakter Countdown -->
+            <div class="flex justify-center gap-2 mb-2">
+                <div class="countdown-unit"><span id="days" class="block font-bold text-xs text-orange">00</span><span class="text-[7px] uppercase text-gray-500">Tage</span></div>
+                <div class="countdown-unit"><span id="hours" class="block font-bold text-xs text-orange">00</span><span class="text-[7px] uppercase text-gray-500">Std</span></div>
+                <div class="countdown-unit"><span id="minutes" class="block font-bold text-xs text-orange">00</span><span class="text-[7px] uppercase text-gray-500">Min</span></div>
+                <div class="countdown-unit"><span id="seconds" class="block font-bold text-xs text-orange">00</span><span class="text-[7px] uppercase text-gray-500">Sek</span></div>
             </div>
-            
-            <div class="separator"></div>
         </div>
     </section>
 
-    <!-- Flying Banners (Marquee) - Bekannt aus -->
-    <section class="container mx-auto px-4 mb-12">
-        <p class="text-center text-gray-500 text-sm mb-6 uppercase tracking-widest">Bekannt aus</p>
-        <div class="marquee-container w-full opacity-100 transition duration-500">
-            <div class="marquee-content flex gap-16 items-center">
-                <!-- Original Logos -->
-                
-                <!-- Focus (PNG) -->
-                <img src="focus.png" class="h-8 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition duration-300" alt="Focus">
-                
-                <!-- WirtschaftsWoche (SVG, Schwarz/Transparent) - Invertiert für dunklen Hintergrund -->
-                <img src="wirtschaftswoche.png" class="h-4 md:h-6 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition duration-300" alt="WirtschaftsWoche">
-                
-                <!-- n-tv (JPG) -->
-                <img src="ntv.jpg" class="h-8 md:h-10 w-auto object-contain opacity-60 hover:opacity-100 rounded transition duration-300" alt="n-tv">
-                
-                <!-- London Daily News (PNG) -->
-                <img src="london.png" class="h-8 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition duration-300" alt="London Daily News">
-                
-                <!-- Business Magazin Text -->
-                <span class="text-lg md:text-xl font-bold uppercase border-2 border-white/30 text-white/60 px-2 py-1 hover:text-white hover:border-white transition duration-300">Business Magazin</span>
-
-                <!-- Duplicate for loop (Nahtloser Übergang) -->
-                <img src="focus.png" class="h-8 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition duration-300" alt="Focus">
-                <img src="wirtschaftswoche.png" class="h-4 md:h-6 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition duration-300" alt="WirtschaftsWoche">
-                <img src="ntv.jpg" class="h-8 md:h-10 w-auto object-contain opacity-60 hover:opacity-100 rounded transition duration-300" alt="n-tv">
-                <img src="london.png" class="h-8 md:h-12 w-auto object-contain opacity-60 hover:opacity-100 transition duration-300" alt="London Daily News">
-                <span class="text-lg md:text-xl font-bold uppercase border-2 border-white/30 text-white/60 px-2 py-1 hover:text-white hover:border-white transition duration-300">Business Magazin</span>
+    <!-- Marquee Section -->
+    <section class="container mx-auto px-4 mb-8">
+        <p class="text-center text-gray-700 text-[8px] uppercase tracking-widest mb-2">Bekannt aus</p>
+        <div class="marquee-container w-full opacity-60">
+            <div class="marquee-content flex gap-8 items-center">
+                <img src="focus.png" class="h-4 md:h-10 w-auto object-contain" alt="Focus">
+                <img src="wirtschaftswoche.png" class="h-2 md:h-5 w-auto object-contain brightness-0 invert" alt="WW">
+                <img src="ntv.jpg" class="h-4 md:h-8 w-auto object-contain rounded" alt="n-tv">
+                <img src="london.png" class="h-4 md:h-10 w-auto object-contain" alt="London">
+                <span class="text-[8px] md:text-lg font-bold uppercase border border-white/20 px-1">Business Magazin</span>
+                <!-- Duplicate -->
+                <img src="focus.png" class="h-4 md:h-10 w-auto object-contain" alt="Focus">
+                <img src="wirtschaftswoche.png" class="h-2 md:h-5 w-auto object-contain brightness-0 invert" alt="WW">
+                <img src="ntv.jpg" class="h-4 md:h-8 w-auto object-contain rounded" alt="n-tv">
+                <img src="london.png" class="h-4 md:h-10 w-auto object-contain" alt="London">
+                <span class="text-[8px] md:text-lg font-bold uppercase border border-white/20 px-1">Business Magazin</span>
             </div>
         </div>
     </section>
 
     <!-- Outcome Section -->
+    <section class="container mx-auto px-4 py-8">
+        <h2 class="text-xl md:text-4xl font-bold text-center mb-6 px-4 uppercase">Wo stehst du nach der Masterclass?</h2>
+        <div class="flex flex-col gap-3 max-w-2xl mx-auto">
+            <div class="border-box"><p class="text-sm md:text-lg leading-relaxed">Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p></div>
+            <div class="border-box"><p class="text-sm md:text-lg leading-relaxed">Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p></div>
+            <div class="border-box"><p class="text-sm md:text-lg leading-relaxed">Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p></div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
     <section class="container mx-auto px-4 py-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Wo stehst du nach der Masterclass?</h2>
-        
-        <!-- Changed to flex-col for vertical stacking and added bg-black to items -->
-        <div class="flex flex-col gap-6 max-w-3xl mx-auto">
-            <div class="border-box bg-black">
-                <p class="text-lg">Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p>
+        <h2 class="text-orange text-2xl md:text-4xl font-bold text-center mb-10 uppercase">Für wen ist das?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            <div class="border border-white/10 rounded-xl p-6 text-center bg-white/5">
+                <div class="text-primary text-4xl mb-4"><i class="fas fa-chart-line"></i></div>
+                <p class="text-sm">Für dich, wenn du schon investiert bist, aber <em class="underline text-orange">ehrlich gesagt</em> keinen Plan hast, ob dein Portfolio überhaupt Sinn macht.</p>
             </div>
-            <div class="border-box bg-black">
-                <p class="text-lg">Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p>
+            <div class="border border-white/10 rounded-xl p-6 text-center bg-white/5">
+                <div class="text-primary text-4xl mb-4"><i class="fas fa-shield-alt"></i></div>
+                <p class="text-sm">Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p>
             </div>
-            <div class="border-box bg-black">
-                <p class="text-lg">Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Target Audience Section -->
-    <section class="container mx-auto px-4 py-12">
-        <div class="separator"></div>
-        <h2 class="text-orange text-3xl md:text-4xl font-bold text-center mb-12 uppercase">Für wen ist diese Masterclass?</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <!-- Item 1 -->
-            <div class="border-2 border-white rounded-xl p-6 text-center h-full flex flex-col justify-center items-center">
-                <div class="text-primary text-5xl mb-4"><i class="fas fa-chart-line"></i></div>
-                <p class="text-lg">Für dich, wenn du schon investiert bist, aber <em class="underline">ehrlich gesagt</em> keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.</p>
-            </div>
-            
-            <!-- Item 2 -->
-            <div class="border-2 border-white rounded-xl p-6 text-center h-full flex flex-col justify-center items-center">
-                <div class="text-primary text-5xl mb-4"><i class="fas fa-shield-alt"></i></div>
-                <p class="text-lg">Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p>
-            </div>
-            
-            <!-- Item 3 -->
-            <div class="border-2 border-white rounded-xl p-6 text-center h-full flex flex-col justify-center items-center">
-                <div class="text-primary text-5xl mb-4"><i class="fas fa-hand-holding-usd"></i></div>
-                <p class="text-lg">Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher eher verunsichert hat.</p>
-            </div>
-        </div>
-        
-        <div class="text-center mt-12">
-            <!-- Link angepasst -->
-            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-xl">
-                Jetzt Anmelden
-            </a>
-        </div>
-    </section>
-
-    <!-- Social Proof / Reviews -->
-    <section class="container mx-auto px-4 py-12 text-center">
-        <div class="separator"></div>
-        <h3 class="text-orange text-2xl md:text-3xl font-bold mb-2">Das sagt meine</h3>
-        <h3 class="text-white text-2xl md:text-3xl font-bold mb-8">Community</h3>
-        
-        <!-- Placeholder for Reviews Widget (Iframe replacement) -->
-        <div class="bg-white text-black p-8 rounded-lg max-w-4xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="bg-gray-100 p-4 rounded text-left">
-                    <div class="flex text-orange mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-sm font-bold">"Endlich Krypto verstanden!"</p>
-                    <p class="text-xs mt-2">- Michael S.</p>
-                </div>
-                <div class="bg-gray-100 p-4 rounded text-left">
-                    <div class="flex text-orange mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-sm font-bold">"Fabians Strategien sind Gold wert."</p>
-                    <p class="text-xs mt-2">- Sarah K.</p>
-                </div>
-            </div>
-            <p class="text-xs text-gray-500 mt-4">*Dies ist ein Platzhalter für das Review-Widget*</p>
-        </div>
-    </section>
-
-    <!-- Content Breakdown Section -->
-    <section class="container mx-auto px-4 py-12">
-        <div class="separator"></div>
-        <h2 class="text-orange text-2xl md:text-3xl font-bold text-center mb-10 uppercase">Was du in der exklusiven Masterclass lernen wirst</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            
-            <div class="border-2 border-white rounded-xl p-6 text-center hover:border-orange transition-colors">
-                <div class="text-orange text-3xl mb-3"><i class="fas fa-layer-group"></i></div>
-                <h3 class="text-xl font-bold mb-2">4-Schritte-System</h3>
-                <p>Ein glasklares Framework, mit dem du dich im Bärenmarkt richtig positionierst und systematisch Vermögen aufbaust.</p>
-            </div>
-
-            <div class="border-2 border-white rounded-xl p-6 text-center hover:border-orange transition-colors">
-                <div class="text-orange text-3xl mb-3"><i class="fas fa-search-dollar"></i></div>
-                <h3 class="text-xl font-bold mb-2">Gewinner-Strategien</h3>
-                <p>Die exakten Strategien, um in volatilen Phasen Chancen zu finden, bevor sie alle sehen.</p>
-            </div>
-
-            <div class="border-2 border-white rounded-xl p-6 text-center hover:border-orange transition-colors">
-                <div class="text-orange text-3xl mb-3"><i class="fas fa-balance-scale"></i></div>
-                <h3 class="text-xl font-bold mb-2">Portfolio-Ordnung</h3>
-                <p>Ordnung ins Chaos bringen: Welche Coins raus, welche rein, damit du endlich ruhig schlafen kannst.</p>
-            </div>
-
-            <div class="border-2 border-white rounded-xl p-6 text-center hover:border-orange transition-colors">
-                <div class="text-orange text-3xl mb-3"><i class="fas fa-exclamation-triangle"></i></div>
-                <h3 class="text-xl font-bold mb-2">Fehler-Vermeider</h3>
-                <p>Lerne die 4 größten Fehler, die 99% der Anleger machen, und streiche sie für immer aus deinem Verhalten.</p>
-            </div>
-
-            <div class="border-2 border-white rounded-xl p-6 text-center md:col-span-2 hover:border-orange transition-colors">
-                <div class="text-orange text-3xl mb-3"><i class="fas fa-compass"></i></div>
-                <h3 class="text-xl font-bold mb-2">Zukunfts-Kompass</h3>
-                <p>Ein glasklares Bild der nächsten 6–18 Monate im Markt, um Chancen nicht nur zu sehen, sondern zu nutzen.</p>
-            </div>
-        </div>
-
-        <div class="text-center mt-12">
-            <!-- Link angepasst -->
-            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-xl">
-                Sei Dabei
-            </a>
-        </div>
-    </section>
-
-    <!-- Why Section -->
-    <section class="container mx-auto px-4 py-12">
-        <h2 class="text-orange text-2xl md:text-3xl font-bold text-center mb-10">Warum du die Bärenmarkt Masterclass nicht verpassen solltest</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto text-center">
-            <div class="p-4">
-                <p class="text-lg font-medium">Weil du es satt hast, jedes verdammte Mal der Depp zu sein, der oben kauft und unten verkauft, und das endlich beenden willst.</p>
-            </div>
-            <div class="p-4 border-l-0 md:border-l border-r-0 md:border-r border-white border-opacity-30">
-                <p class="text-lg font-medium">Weil du keine Lust mehr hast, heimlich neidisch auf andere zu sein, die mutiger, schlauer und früher gehandelt haben als du.</p>
-            </div>
-            <div class="p-4">
-                <p class="text-lg font-medium">Weil du nie wieder von außen zusehen willst, wie andere aus denselben Marktbewegungen Gewinne holen, während du zögerst.</p>
-            </div>
-        </div>
-        
-        <div class="text-center mt-8 max-w-3xl mx-auto border-t border-b border-white border-opacity-30 py-6">
-            <p class="text-xl font-bold">Weil du es dir selbst schuldig bist, endlich aufzuhören, wie ein Amateur zu handeln, und anzufangen, wie jemand, der Vermögen aufbaut.</p>
-        </div>
-
-        <div class="text-center mt-10">
-            <!-- Link angepasst -->
-            <a href="https://flos-funnel.pages.dev/" class="btn-orange text-xl">
-                Hier Klicken
-            </a>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="container mx-auto px-4 py-12 border-t-2 border-b-2 border-orange bg-[#1a1a1a]">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            <div>
-                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">12+</h3>
-                <p class="text-sm md:text-lg text-gray-300">Jahre Erfahrung</p>
-            </div>
-            <div>
-                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">5.600+</h3>
-                <p class="text-sm md:text-lg text-gray-300">Event Besucher</p>
-            </div>
-            <div>
-                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">16.500+</h3>
-                <p class="text-sm md:text-lg text-gray-300">Menschen begleitet</p>
-            </div>
-            <div>
-                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">2.5M€+</h3>
-                <p class="text-sm md:text-lg text-gray-300">Crypto Gewinne</p>
+            <div class="border border-white/10 rounded-xl p-6 text-center bg-white/5">
+                <div class="text-primary text-4xl mb-4"><i class="fas fa-hand-holding-usd"></i></div>
+                <p class="text-sm">Für dich, wenn du für deine Familie vorsorgen musst, aber Krypto dich bisher eher verunsichert hat.</p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 6: SOCIAL PROOF -->
-    <section class="py-20 bg-dark-gradient">
+    <!-- Social Proof (Brownish Gradient) -->
+    <section class="py-16" style="background: linear-gradient(to bottom, #2b1f15 0%, #050505 100%)">
         <div class="container mx-auto px-4 max-w-6xl">
-            <h2 class="text-3xl md:text-4xl font-head font-bold text-center mb-16">Ergebnisse <span class="text-gold">lügen nicht</span></h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-                <!-- WhatsApp Mockups -->
-                <div class="space-y-6">
-                    <div class="chat-bubble ml-auto w-4/5 md:w-3/4 shadow-lg transform hover:scale-105 transition">
-                        <p class="font-bold text-xs text-green-400 mb-1">Thomas S.</p>
-                        Hey Florian, kurzes Update: Mein Portfolio ist heute 20% im Plus! Danke für die Ruhe, die du reingebracht hast. 🙏
+            <h2 class="text-2xl md:text-4xl font-bold text-center mb-12">Ergebnisse <span class="text-gold">lügen nicht</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="space-y-4">
+                    <div class="chat-bubble">
+                        <p class="font-bold text-[10px] text-green-400 mb-1">Thomas S.</p>
+                        <p class="text-sm">Hey Florian, kurzes Update: Mein Portfolio ist heute 20% im Plus! Danke. 🙏</p>
                     </div>
-                    <div class="chat-bubble ml-auto w-4/5 md:w-3/4 bg-gray-800 text-white border border-white/10 shadow-lg transform hover:scale-105 transition" style="background:#1f2937">
-                        <p class="font-bold text-xs text-gray-400 mb-1">Markus K.</p>
-                        Endlich verstehe ich, was ich da eigentlich mache. Das Gefühl von Kontrolle ist unbezahlbar.
-                    </div>
-                    <div class="chat-bubble ml-auto w-4/5 md:w-3/4 shadow-lg transform hover:scale-105 transition">
-                        <p class="font-bold text-xs text-green-400 mb-1">Sabine L.</p>
-                        Die Strategie mit den Edelmetallen als Anker war genau richtig für meine Nerven. Danke für das Mentoring!
+                    <div class="chat-bubble" style="background:#111">
+                        <p class="font-bold text-[10px] text-gray-400 mb-1">Markus K.</p>
+                        <p class="text-sm">Endlich verstehe ich, was ich da mache. Das Gefühl von Kontrolle ist unbezahlbar.</p>
                     </div>
                 </div>
-
-                <!-- Reviews - Mit Neon Shadow -->
-                <div class="grid grid-cols-1 gap-6">
-                    <!-- Review 1 -->
-                    <div class="bg-white p-6 rounded-lg shadow-neon hover:shadow-neon-hover text-gray-900 transition duration-300">
-                        <div class="flex text-gold mb-2">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="italic text-gray-700 text-sm mb-4">"Kurz und knapp: Beste Entscheidung 2024. Endlich Ruhe im Depot und ein klarer Plan. Danke Flo!"</p>
-                        <p class="font-bold text-xs uppercase tracking-wide text-actionBlue">- Dennis B.</p>
-                    </div>
-                    <!-- Review 2 -->
-                    <div class="bg-white p-6 rounded-lg shadow-neon hover:shadow-neon-hover text-gray-900 transition duration-300">
-                        <div class="flex text-gold mb-2">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="italic text-gray-700 text-sm mb-4">"Ich bin eigentlich sehr vorsichtig... Aber bei Florian merkt man sofort, dass er das schon seit 2013 macht... Er hat mir im Gespräch eine klare Struktur für mein Portfolio gegeben... Kein 'Kauf Coin X und werd reich', sondern echte Strategie."</p>
-                        <p class="font-bold text-xs uppercase tracking-wide text-actionBlue">- Elena P.</p>
-                    </div>
-                    <!-- Review 3 -->
-                    <div class="bg-white p-6 rounded-lg shadow-neon hover:shadow-neon-hover text-gray-900 transition duration-300">
-                        <div class="flex text-gold mb-2">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="italic text-gray-700 text-sm mb-4">"Super Typ, sehr direkt. Hat mir extrem geholfen meine Panik in den Griff zu kriegen. Das Coaching ist jeden Cent wert."</p>
-                        <p class="font-bold text-xs uppercase tracking-wide text-actionBlue">- Ali C.</p>
-                    </div>
-                    <!-- Review 4 -->
-                    <div class="bg-white p-6 rounded-lg shadow-neon hover:shadow-neon-hover text-gray-900 transition duration-300">
-                        <div class="flex text-gold mb-2">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="italic text-gray-700 text-sm mb-4">"Bevor ich zu Florian kam, hatte ich zwar Coins, aber null Plan... Im Mentoring haben wir das komplett auf links gedreht. Was mir besonders wichtig war: Unabhängigkeit... Mache jetzt keine dummen Fehler mehr."</p>
-                        <p class="font-bold text-xs uppercase tracking-wide text-actionBlue">- Eugen W.</p>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="bg-white p-6 rounded-lg text-black shadow-neon">
+                        <div class="flex text-gold mb-2 text-xs"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                        <p class="italic text-xs font-medium">"Beste Entscheidung 2024. Endlich Ruhe im Depot und ein klarer Plan."</p>
+                        <p class="font-bold text-[9px] mt-2">- Dennis B.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 7: THE STACK (OFFER) -->
-    <section class="py-20 bg-royal-gradient border-y border-gold/30">
+    <!-- Offer -->
+    <section class="py-16 bg-black border-y border-gold/20">
         <div class="container mx-auto px-4 max-w-4xl">
-            <div class="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-neon">
-                <!-- Background Glow -->
-                <div class="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-                
-                <h2 class="text-3xl font-head font-bold text-center mb-10">Was du im kostenlosen Strategiegespräch bekommst:</h2>
-                
-                <ul class="space-y-6 text-lg md:text-xl mb-12">
-                    <li class="flex items-center">
-                        <i class="fas fa-check-square text-green-500 text-2xl mr-4 shadow-[0_0_10px_rgba(34,197,94,0.5)] rounded"></i>
-                        <span class="font-bold">Ausführliche Analyse deiner Ist-Situation</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-square text-green-500 text-2xl mr-4 shadow-[0_0_10px_rgba(34,197,94,0.5)] rounded"></i>
-                        <span class="font-bold">Einblick in die Struktur eines 3h-Deep-Dive Calls</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-square text-green-500 text-2xl mr-4 shadow-[0_0_10px_rgba(34,197,94,0.5)] rounded"></i>
-                        <span>Zugang zur exklusiven Telegram-Gruppe für Marktupdates</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-check-square text-green-500 text-2xl mr-4 shadow-[0_0_10px_rgba(34,197,94,0.5)] rounded"></i>
-                        <span>Erklärvideos & Vorlagen für deine Unabhängigkeit</span>
-                    </li>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-12 shadow-neon">
+                <h2 class="text-2xl font-bold text-center mb-8 uppercase">Das Strategiegespräch:</h2>
+                <ul class="space-y-4 text-base md:text-xl mb-10 px-2">
+                    <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-4"></i><span>Analyse deiner Situation</span></li>
+                    <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-4"></i><span>Struktur deines Masterplans</span></li>
+                    <li class="flex items-start"><i class="fas fa-check text-green-500 mt-1 mr-4"></i><span>Telegram-Marktupdates</span></li>
                 </ul>
-
-                <div class="text-center border-t border-white/10 pt-8">
-                    <div class="text-gray-400 text-lg mb-2">Dein Investment heute:</div>
-                    <div class="text-5xl md:text-6xl font-extrabold text-gold mb-8 drop-shadow-lg">0,00 €</div>
-                    <p class="text-sm text-gray-400 mb-0">*Nur für ernsthafte Interessenten</p>
+                <div class="text-center pt-6 border-t border-white/10">
+                    <div class="text-gray-400 text-sm mb-1">Dein Investment heute:</div>
+                    <div class="text-5xl font-black text-gold">0,00 €</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Bio / About Section -->
+    <!-- About -->
     <section class="container mx-auto px-4 py-16">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center max-w-6xl mx-auto">
-            <!-- Text Column -->
-            <div class="md:col-span-8 order-2 md:order-1 text-center md:text-left">
-                <h2 class="text-3xl font-poppins mb-2 uppercase">Das ist</h2>
-                <h2 class="text-4xl font-bold font-poppins text-orange mb-6 uppercase">Florian Merzenich</h2>
-                
-                <div class="border-2 border-white p-6 rounded-xl bg-black bg-opacity-50">
-                    <p class="mb-4">Florian Merzenich ist Experte für Investitionen und Krypto sowie Mitgründer von „Usecape“. Er gilt als Marktführer in der „Crypto-Investor-Ausbildung“ und ist bereits seit 2013 aktiv an den Märkten.</p>
-                    <p class="mb-4">Mit über <strong>120.000 € Investition</strong> in seine eigene Persönlichkeitsentwicklung (über 300 Coaching-Stunden) hilft er heute Unternehmern und Privatanlegern, die Kapital, aber keinen Plan haben.</p>
-                    <p class="mb-4">Sein Ziel: Dein Vermögen selbstständig, strategisch und ohne Spekulation zu steuern. Keine Standardlösungen, keine Abo-Modelle, sondern echte "Hilfe zur Selbsthilfe", damit du ein souveräner Finanzentscheider wirst.</p>
-                    <p class="italic text-gray-400">„System statt Finanzprodukt“ – für absolute Unabhängigkeit von Banken, Trends und Hypes.</p>
-                </div>
+        <div class="flex flex-col md:flex-row gap-8 items-center max-w-5xl mx-auto">
+            <div class="flex-1 text-center md:text-left">
+                <h2 class="text-3xl font-black text-orange mb-4 uppercase">Florian Merzenich</h2>
+                <p class="text-gray-300 leading-relaxed mb-4">Mitgründer von „Usecape“ und seit 2013 Investor. Er hilft Unternehmern, ihr Vermögen unabhängig von Banken und Hypes strategisch zu steuern.</p>
             </div>
-            
-            <!-- Image Column with Laptop Frame -->
-            <div class="md:col-span-4 order-1 md:order-2 flex flex-col items-center">
-                <div class="laptop-wrapper w-full max-w-sm mb-4">
-                    <!-- Removed laptop frame structure for simple image -->
-                    <img src="portrait.jpg" alt="Florian Merzenich" class="w-full max-w-sm rounded-xl shadow-2xl border-2 border-white/20">
-                </div>
-                <p class="text-orange font-bold text-xl font-montserrat">Crypto Experte & Educator</p>
+            <div class="w-48 md:w-64">
+                <img src="portrait.jpg" alt="Portrait" class="rounded-2xl shadow-2xl border border-white/10">
             </div>
         </div>
     </section>
 
-    <!-- SECTION 8: SCARCITY (URGENCY) -->
-    <section class="py-12 bg-red-900/20 border-b border-red-500/20">
-        <div class="container mx-auto px-4 max-w-4xl text-center">
-            <div class="inline-block bg-red-600 text-white font-bold px-4 py-1 rounded-full text-sm mb-4 animate-pulse shadow-[0_0_15px_rgba(220,38,38,0.5)]">ACHTUNG</div>
-            <h3 class="text-2xl font-bold mb-4 text-white">Bitte lies das, bevor du klickst:</h3>
-            <p class="text-gray-300 text-lg leading-relaxed">
-                Ich arbeite persönlich mit meinen Klienten. Mein Tag hat auch nur 24 Stunden.
-                <br><br>
-                <strong class="text-white">Bitte klicke nur auf den Button, wenn du über mind. 10.000 € freies Investitionskapital verfügst und bereit bist, Verantwortung zu übernehmen.</strong>
-            </p>
+    <!-- Urgency Hint -->
+    <section class="py-8 bg-red-900/10 border-y border-red-500/20">
+        <div class="container mx-auto px-4 max-w-2xl text-center">
+            <div class="inline-block bg-red-600 text-white font-bold px-2 py-0.5 rounded text-[10px] mb-2">ACHTUNG</div>
+            <p class="text-[11px] text-gray-400">Nur bewerben bei mind. 10.000 € Kapital und echter Eigenverantwortung.</p>
         </div>
     </section>
-
-    <!-- Final CTA (Replaces Registration Form) -->
-    <div id="register" class="container mx-auto px-4 py-12 text-center">
-        <div class="bg-white text-black p-8 rounded-xl max-w-lg mx-auto shadow-2xl">
-            <h2 class="text-2xl font-bold mb-6">Jetzt für das Strategiegespräch bewerben</h2>
-            <a href="https://flos-funnel.pages.dev/" class="w-full btn-orange border-none text-white py-4 rounded font-bold text-lg">
-                Kostenlos Teilnehmen
-            </a>
-            <p class="text-xs text-gray-500 mt-4">Begrenzte Plätze verfügbar.</p>
-        </div>
-    </div>
 
     <!-- Footer -->
-    <footer class="bg-black border-t border-white border-opacity-20 py-8 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <!-- Social Icons -->
-            <div class="flex justify-center gap-6 mb-6">
-                <a href="#" class="text-white hover:text-orange text-3xl"><i class="fab fa-instagram-square"></i></a>
-                <a href="#" class="text-white hover:text-orange text-3xl"><i class="fab fa-twitter-square"></i></a>
-                <a href="#" class="text-white hover:text-orange text-3xl"><i class="fab fa-youtube-square"></i></a>
-            </div>
-            
-            <div class="mb-6">
-                <a href="https://flos-funnel.pages.dev/" target="_blank">
-                    <!-- Footer Logo replaced with local file reference -->
-                    <img src="xlg.jpg" alt="Logo" class="h-10 mx-auto opacity-70 hover:opacity-100 transition-opacity">
-                </a>
-            </div>
-
-            <div class="text-sm font-medium">
-                <a href="#" class="hover:text-orange hover:underline">Impressum</a> 
-                <span class="mx-2">|</span>
-                <a href="#" class="hover:text-orange hover:underline">Datenschutz</a>
-            </div>
+    <footer class="py-12 border-t border-white/5 text-center">
+        <img src="xlg.jpg" alt="Logo" class="h-6 mx-auto mb-4 opacity-40">
+        <div class="text-[10px] text-gray-600 space-x-4">
+            <a href="#">Impressum</a><span>|</span><a href="#">Datenschutz</a>
         </div>
     </footer>
 
-    <!-- Countdown Script -->
     <script>
-        // Simple countdown timer logic
-        function startTimer(duration, display) {
-            // Set end time to 24 hours from now if no specific date
+        function startTimer() {
             const endDate = new Date();
             endDate.setHours(23, 59, 59, 999); 
-            
-            const timerInterval = setInterval(function () {
+            setInterval(() => {
                 const now = new Date().getTime();
-                const distance = endDate - now;
-
-                if (distance < 0) {
-                    clearInterval(timerInterval);
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById("days").textContent = days < 10 ? "0" + days : days;
-                document.getElementById("hours").textContent = hours < 10 ? "0" + hours : hours;
-                document.getElementById("minutes").textContent = minutes < 10 ? "0" + minutes : minutes;
-                document.getElementById("seconds").textContent = seconds < 10 ? "0" + seconds : seconds;
+                const dist = endDate - now;
+                if (dist < 0) return;
+                document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((dist % (86400000)) / (3600000));
+                document.getElementById("minutes").innerText = Math.floor((dist % (3600000)) / (60000));
+                document.getElementById("seconds").innerText = Math.floor((dist % (60000)) / 1000);
             }, 1000);
         }
-
-        window.onload = function () {
-            startTimer();
-        };
+        window.onload = startTimer;
     </script>
 </body>
 </html>
