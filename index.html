@@ -3,1199 +3,668 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kostenloses Strategiegespräch – Lerne profitabel zu investieren</title>
-    <meta name="description" content="Krypto-Investment-Strategien & Finanzcoaching in Halsenbach: Maximieren Sie Renditen mit expertenberatung! Sichern Sie sich personalisierte Tipps für Bitcoin, Altcoins & Vermögensaufbau. Jetzt Termin buchen!">
-    <meta name="keywords" content="Krypto Investment, Finanzcoaching, Krypto Beratung, Investment Strategie, Krypto Strategie, Finanzberater, Krypto Coach, Bitcoin Beratung, Altcoin Investment, Vermögensaufbau, Krypto Trading, Finanzstrategie, Investment Coaching, Krypto Experte, Halsenbach Finanz, Krypto Rendite, Blockchain Beratung, Finanzinvestment, Krypto Portfolio, DeFi Strategie, NFT Investment, Crypto Coaching, Investment Tipps, Finanzplanung, Krypto Makler, Vermögen Krypto, Halsenbach Krypto, Finanzcoaching lokal, Krypto Anlage, Bitcoin Coaching, Altcoin Strategie, Crypto Beratung, Investment Halsenbach, Krypto Finanzberatung, Blockchain Coaching, DeFi Beratung, NFT Coaching, Crypto Investment, Finanzstrategien, Krypto Vermögensberatung, Krypto Investment Strategie in Halsenbach, Finanzcoaching für Anfänger Halsenbach, Beste Krypto Beratung nahe Halsenbach, Wie baue ich ein profitables Krypto Portfolio auf?, Finanzberater Krypto Investment Halsenbach, Bitcoin Strategie Beratung in der Region, Altcoin Investment Tipps von Experten, Krypto Coaching für maximale Rendite, Vermögensaufbau mit Krypto in Halsenbach, DeFi Strategien für Einsteiger erklärt, Wo finde ich Krypto Finanzcoaching lokal?, NFT Investment Beratung Halsenbach, Persönliche Krypto Trading Strategie erstellen, Finanzplanung mit Blockchain in Halsenbach, Beste Investment Coach für Crypto nahe mir, Wie investiere ich sicher in Krypto 2026?, Krypto Portfolio Optimierung Halsenbach, Finanzberatung für Bitcoin und Altcoins, Lokales Krypto Coaching in Rheinland-Pfalz, Strategieberatung für Krypto Vermögen aufbauen">
+    <title>Kostenlose Bärenmarkt Masterclass – Lerne profitabel zu investieren</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (für Layout) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config für Custom Colors (Gold & Neon) -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#f6ad55', /* Passend zum existierenden Orange-Gold Ton */
+                        actionBlue: '#3b82f6', /* Helles Blau für Akzente */
+                    },
+                    boxShadow: {
+                        neon: '0 0 20px rgba(246, 173, 85, 0.2)',
+                        'neon-hover': '0 0 30px rgba(246, 173, 85, 0.4)',
+                    },
+                    fontFamily: {
+                        head: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome (für Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CORE VARIABLES --- */
         :root {
             --primary: #37ca37;
-            --orange: #f6ad55; /* Gold/Orange Accents remain */
-            --black: #000000;
+            --orange: #f6ad55;
             --white: #ffffff;
-            --gray: #cbd5e0;
+            --black: #000000;
             --dark-gray: #1a1a1a;
-            --text-color: #ffffff;
-            --font-headline: 'Montserrat', sans-serif;
-            --font-content: 'Montserrat', sans-serif;
-            --font-accent: 'Poppins', sans-serif;
-            
-            /* Background Colors - Helleres Königsblau */
-            --bg-dark: #1e3a8a; 
-            /* Boxen etwas dunkler machen für Kontrast auf dem helleren Hintergrund */
-            --box-bg-blue: rgba(10, 25, 60, 0.8);
-            --box-bg-blue-light: rgba(10, 25, 60, 0.6);
-        }
-
-        /* --- RESET & BASE --- */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --text-gray: #cbd5e0;
         }
 
         body {
-            background-color: var(--bg-dark);
-            
-            /* HELLERER KÖNIGSBLAU GRADIENT */
-            /* Deutlich sichtbares Blau, oben heller, unten satter */
-            background: linear-gradient(180deg, #2546a0 0%, #152c68 50%, #0a183d 100%);
-            
-            background-size: cover;
-            background-position: center;
+            background-color: var(--black);
+            /* Angepasster Hintergrund: Satterer hellbrauner Gradient Verlauf */
+            background: radial-gradient(circle at 50% 0%, #8c6239 0%, #1a1a1a 60%, #000000 100%);
             background-attachment: fixed;
-            background-repeat: no-repeat;
-            
-            color: var(--text-color);
-            font-family: var(--font-content);
-            line-height: 1.4;
-            font-weight: 400;
-            overflow-x: hidden;
-            position: relative;
-            min-height: 100vh;
-        }
-
-        /* --- ANIMATIONS --- */
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-            33% { transform: translate(30px, -50px) scale(1.1); opacity: 0.5; }
-            66% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.3; }
-            100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
-        }
-
-        @keyframes float-reverse {
-            0% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-            33% { transform: translate(-30px, 40px) scale(1.2); opacity: 0.3; }
-            66% { transform: translate(20px, -20px) scale(0.8); opacity: 0.15; }
-            100% { transform: translate(0, 0) scale(1); opacity: 0.2; }
-        }
-
-        /* Gold Shine Animation */
-        @keyframes textShine {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
-        }
-        
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- SPOTLIGHT GRADIENT (Royal Blue Glow) --- */
-        .spotlight {
-            position: fixed;
-            bottom: -20vh;
-            left: 0;
-            right: 0;
-            height: 60vh;
-            /* Royal Blue Gradient - angepasst auf helleren Hintergrund */
-            background: radial-gradient(circle, rgba(100, 149, 237, 0.3) 0%, rgba(30, 60, 150, 0.2) 40%, rgba(0, 0, 0, 0) 70%);
-            filter: blur(60px);
-            z-index: -1;
-            pointer-events: none;
-            animation: float 10s infinite ease-in-out alternate;
-        }
-        
-        .spotlight-top {
-            position: fixed;
-            top: -30vh;
-            left: 0;
-            right: 0;
-            height: 50vh;
-            /* Royal Blue Gradient Top - angepasst */
-            background: radial-gradient(circle, rgba(100, 149, 237, 0.2) 0%, rgba(0, 0, 0, 0) 70%);
-            filter: blur(80px);
-            z-index: -1;
-            pointer-events: none;
-            animation: float-reverse 15s infinite ease-in-out alternate;
-        }
-
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        a:hover { color: var(--orange); }
-        img { max-width: 100%; height: auto; display: block; }
-
-        /* --- UTILITIES --- */
-        .container {
-            width: 100%;
-            max-width: 1170px;
-            margin: 0 auto;
-            padding: 0 15px; /* Reduced padding mobile */
-            position: relative;
-            z-index: 1;
-        }
-
-        .text-center { text-align: center; }
-        .orange-text { color: var(--orange); }
-        .white-text { color: var(--white); }
-        .bold { font-weight: 700; }
-        .uppercase { text-transform: uppercase; }
-
-        /* Gold Text Class - Adjusted to be darker and slower */
-        .gold-text-animated {
-            background: linear-gradient(to right, #A37D2E, #E3C86B, #966F1B, #E3C86B, #8C5F12, #A37D2E);
-            background-size: 200% auto;
-            color: #000;
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textShine 8s linear infinite;
-            font-weight: 800;
-        }
-
-        /* --- LOGO TEXT STYLES --- */
-        .logo-text {
-            font-family: var(--font-headline);
-            font-weight: 800;
-            font-size: 1.2rem;
-            text-transform: uppercase;
             color: var(--white);
-            letter-spacing: 2px;
-            border: 2px solid var(--orange);
-            padding: 10px 20px;
-            display: inline-block;
-            transition: all 0.3s ease;
-        }
-        
-        .logo-text:hover {
-            color: var(--orange);
-            border-color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
         }
 
-        /* --- BUTTONS --- */
-        .btn {
-            display: inline-block;
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .font-poppins {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom Button Styling */
+        .btn-orange {
             background-color: var(--orange);
             color: var(--white);
-            font-family: var(--font-headline);
-            font-weight: 800;
-            font-size: 1rem;
-            padding: 12px 24px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 16px 32px;
             border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(246, 173, 85, 0.4);
             border: 1px solid var(--orange);
-            cursor: pointer;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 14px 0 rgba(246, 173, 85, 0.39);
-            width: 100%;
-            max-width: 350px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
-        .btn:hover {
+        .btn-orange:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(246, 173, 85, 0.23);
+            box-shadow: 0 6px 20px rgba(246, 173, 85, 0.6);
+            background-color: #ed8936;
+            border-color: #ed8936;
         }
 
-        @media (min-width: 768px) {
-            .btn {
-                font-size: 1.2rem;
-                padding: 16px 32px;
-                width: auto;
-            }
-        }
-
-        /* --- MODAL / FORM STYLES --- */
-        /* Used for Impressum popup as well */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
+        /* Border Styles matching original */
+        .border-box {
+            border: 2px solid var(--white);
+            background-color: transparent;
+            padding: 20px;
+            border-radius: 20px;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85); /* Dark semi-transparent background */
-            z-index: 1000;
-            display: none; /* Hidden by default */
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(8px);
-            padding: 20px;
-        }
-
-        .modal-content {
-            /* Changed from Brown/Black to Deep Royal Blue/Black Gradient */
-            background: linear-gradient(145deg, #050a1a, #02040a);
-            border: 1px solid var(--orange);
-            padding: 30px;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 500px;
-            /* Scrollbar for long content (like Datenschutz) */
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-            box-shadow: 0 0 30px rgba(65, 105, 225, 0.2); /* Blueish glow */
-            animation: modalFadeIn 0.3s ease-out;
-            color: var(--white);
-            text-align: left;
-        }
-
-        /* Custom Scrollbar for Modal */
-        .modal-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        .modal-content::-webkit-scrollbar-track {
-            background: #0a1124;
-            border-radius: 4px;
-        }
-        .modal-content::-webkit-scrollbar-thumb {
-            background: var(--orange);
-            border-radius: 4px;
-        }
-
-        .close-modal {
-            position: sticky; /* Keep close button visible when scrolling */
-            top: 0;
-            float: right;
-            margin-top: -10px; /* Adjust for padding */
-            margin-right: -10px;
-            color: var(--gray);
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: 0.2s;
-            line-height: 1;
-            z-index: 10;
-            background: rgba(0,0,0,0.5); /* Background for visibility over text */
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
             text-align: center;
-        }
-
-        .close-modal:hover {
-            color: var(--orange);
-        }
-
-        .form-headline {
-            color: var(--orange);
-            font-family: var(--font-headline);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .form-subtext {
-            color: var(--gray);
-            text-align: center;
-            margin-bottom: 25px;
-            font-size: 0.9rem;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .form-label {
-            display: block;
-            color: var(--white);
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 12px 15px;
-            border-radius: 5px;
-            /* Changed from brown border to dark blueish border */
-            border: 1px solid #1e3a8a; 
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--white);
-            font-family: var(--font-content);
-            font-size: 1rem;
-            transition: 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--orange);
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 8px rgba(246, 173, 85, 0.3);
-        }
-
-        .form-input::placeholder {
-            color: #777;
-        }
-
-        /* --- HEADER / HERO --- */
-        header {
-            padding: 15px 0 5px 0; /* Unten etwas Platz für das Logo, aber nicht zu viel */
-            display: flex;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .logo-img {
-            width: 80px;
-            margin: 0 auto;
-            /* Simple placeholder style in case image is missing */
-            min-height: 40px; 
-            display: block; /* Verhindert extra Abstand durch inline-Elemente */
-        }
-
-        @media (min-width: 768px) {
-            .logo-img { width: 120px; }
-            header { padding: 20px 0 10px 0; }
-        }
-
-        .hero-section {
-            padding: 0 0 30px 0; /* Padding oben auf 0 gesetzt */
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; 
-        }
-
-        .hero-subheadline {
-            font-family: var(--font-accent);
-            color: var(--orange);
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            border: 1px solid var(--white);
-            display: inline-block;
-            padding: 6px 12px;
-            margin-bottom: 10px;
-            margin-top: 0; /* Sicherstellen, dass kein Margin oben stört */
-        }
-
-        .logo-img {
-            width: 80px;
-            margin: 0 auto;
-            /* Simple placeholder style in case image is missing */
-            min-height: 40px; 
-        }
-
-        @media (min-width: 768px) {
-            .logo-img { width: 120px; }
-            header { padding: 20px 0 0 0; }
-        }
-
-        .hero-section {
-            padding: 10px 0 30px 0;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; 
-        }
-
-        .hero-subheadline {
-            font-family: var(--font-accent);
-            color: var(--orange);
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            border: 1px solid var(--white);
-            display: inline-block;
-            padding: 6px 12px;
-            margin-bottom: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .hero-subheadline { font-size: 1rem; padding: 8px 20px; margin-bottom: 20px; border-width: 2px; }
-        }
-
-        .hero-headline {
-            font-size: clamp(1.4rem, 5vw, 3.5rem);
-            font-weight: 700;
-            margin-bottom: 10px;
-            line-height: 1.1;
-        }
-
-        .hero-image {
-            margin: 10px auto;
-            max-width: 800px;
-            width: 100%;
+            transition: transform 0.3s ease;
         }
         
-        @media (min-width: 768px) {
-            .hero-image { margin: 20px auto; }
+        .border-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--orange);
         }
 
-        /* --- VIDEO CONTAINER (Responsive 16:9) --- */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            width: 100%;
+        .border-dark {
+            border-color: var(--black);
+        }
+
+        /* Custom Separator Line */
+        .separator {
+            height: 1px;
+            background-color: #4a5568;
+            width: 40%;
+            margin: 20px auto;
+        }
+
+        /* Orange Text Highlight */
+        .text-orange {
+            color: var(--orange);
+        }
+
+        /* Custom Class for the Royal Gradient in the new section */
+        .bg-royal-gradient {
+            background: linear-gradient(to bottom, #1a1a1a, #0d0d0d);
+        }
+
+        /* Dark Gradient for Social Proof */
+        .bg-dark-gradient {
+            background: linear-gradient(to bottom, #000000, #111111);
+        }
+
+        /* Chat Bubble Styling */
+        .chat-bubble {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            background-color: #000;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            padding: 15px;
+            position: relative;
+            margin-bottom: 15px;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+        }
+        
+        /* Countdown Style */
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--orange);
+            margin: 20px 0;
+        }
+        
+        .countdown-box {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            min-width: 60px;
+            text-align: center;
+        }
+        .countdown-label {
+            font-size: 0.7rem;
+            color: #aaa;
+            font-weight: normal;
+            display: block;
         }
 
-        .video-container iframe {
+        /* Image Styling */
+        .img-circle {
+            border-radius: 50%;
+            border: 3px solid var(--white);
+        }
+
+        /* CSS Laptop Mockup */
+        .laptop-wrapper {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .laptop-screen-frame {
+            background: #1a202c; /* Dark Frame */
+            border-radius: 20px 20px 0 0;
+            padding: 12px 12px 0 12px;
+            box-shadow: inset 0 0 0 2px #4a5568; /* Subtle inner bevel */
+            position: relative;
+        }
+        /* Camera Dot */
+        .laptop-screen-frame::before {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #4a5568;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .laptop-display {
+            background: #000;
+            overflow: hidden;
+            position: relative;
+            aspect-ratio: 16/9; /* Widescreen Ratio */
+            border: 1px solid #2d3748;
+        }
+        .laptop-base {
+            background: linear-gradient(to bottom, #2d3748 0%, #1a202c 100%);
+            height: 24px;
+            width: 110%;
+            margin-left: -5%;
+            border-radius: 0 0 15px 15px;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+        /* Laptop Notch/Opener */
+        .laptop-base::after {
+            content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 8px;
+            background: #1a202c;
+            border-radius: 0 0 8px 8px;
         }
 
-        /* --- COUNTDOWN TIMER --- */
-        .timer-container {
-            margin-top: 15px;
-            display: inline-block;
+        /* Fix for mobile stacking */
+        @media (max-width: 768px) {
+            .mobile-stack {
+                flex-direction: column;
+            }
+            h1 { font-size: 1.8rem !important; }
+            h2 { font-size: 1.5rem !important; }
         }
-
-        .timer-text {
-            color: var(--white);
-            font-size: 1rem;
-            margin-bottom: 5px;
-            font-weight: 500;
-        }
-
-        #countdown-display {
-            font-family: var(--font-accent);
-            color: var(--orange);
-            font-weight: 700;
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            background: rgba(0,0,0,0.3);
-            padding: 5px 15px;
-            border-radius: 5px;
-            border: 1px solid var(--orange);
-            display: inline-block;
-        }
-
-        @media (min-width: 768px) {
-            #countdown-display { font-size: 2rem; padding: 10px 20px; }
-        }
-
-        /* --- FEATURES GRID (Problems) --- */
-        .features-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        @media (min-width: 768px) {
-            .features-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        }
-
-        .feature-box {
-            border: 1px solid var(--white);
-            padding: 15px;
-            border-radius: 15px;
-            /* Changed to Royal Blue Tint */
-            background: var(--box-bg-blue);
-            text-align: center;
-        }
-
-        .feature-box p {
-            font-size: 0.95rem;
-        }
-
-        .feature-box p::before {
-            content: '\f071';
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            color: var(--orange);
-            display: block;
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        /* --- TARGET AUDIENCE SECTION --- */
-        .target-section {
-            padding: 30px 0;
-        }
-        
-        .target-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .target-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        }
-
-        .target-item {
-            border: 1px solid var(--white);
-            padding: 15px;
-            text-align: center;
-            border-radius: 15px;
-            /* Changed to Lighter Royal Blue Tint */
-            background: var(--box-bg-blue-light);
-        }
-
-        .target-item h3 {
-            font-size: 1rem;
-            font-weight: 400;
-        }
-
-        .target-icon {
-            color: var(--primary);
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        /* --- CONTENT LIST --- */
-        .content-list {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .content-item {
-            background: var(--white);
-            color: var(--black);
-            margin-bottom: 10px;
-            padding: 12px;
-            border-radius: 5px;
-            display: flex;
-            align-items: flex-start;
-            text-align: left;
-            font-size: 0.95rem;
-        }
-
-        .content-item i {
-            color: var(--orange);
-            font-size: 1.2rem;
-            margin-right: 12px;
-            margin-top: 3px;
-            flex-shrink: 0;
-        }
-
-        /* --- STATS --- */
-        .stats-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            margin: 40px auto; 
-        }
-
-        .stat-box {
-            border: 1px solid var(--orange);
-            padding: 15px;
-            text-align: center;
-            min-width: 140px;
-            flex: 1;
-            background-color: #1a1a1a; 
-        }
-        
-        .stat-box:nth-child(1) { background-color: #C0C0C0; color: black; }
-        .stat-box:nth-child(2) { background-color: #424242; }
-        .stat-box:nth-child(3) { background-color: #C0C0C0; color: black; }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            display: block;
-        }
-        .stat-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-
-        /* --- BIO SECTION --- */
-        .bio-section {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            margin: 40px auto; 
-            border: 2px solid var(--black);
-        }
-
-        .bio-text {
-            flex: 1;
-            padding: 15px;
-            min-width: 300px;
-        }
-
-        .bio-image {
-            flex: 1;
-            padding: 15px;
-            text-align: center;
-            min-width: 300px;
-        }
-
-        /* Replaced bio-image img with placeholder styles */
-        .image-placeholder {
-            width: 200px;
-            height: 200px;
-            background-color: #1a1a1a;
-            border: 5px solid var(--black);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto;
-            color: var(--gray);
-            font-weight: 600;
-            font-family: var(--font-accent);
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            box-shadow: 0 0 20px rgba(246, 173, 85, 0.2);
-        }
-
-        @media (min-width: 768px) {
-            .image-placeholder { width: 300px; height: 300px; font-size: 1.2rem; }
-        }
-
-        /* --- FOOTER --- */
-        footer {
-            padding: 30px 0;
-            border-top: 1px solid var(--gray);
-            margin-top: 30px;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .social-icons {
-            margin-bottom: 15px;
-        }
-
-        .social-icons a {
-            font-size: 1.5rem;
-            margin: 0 10px;
-            color: var(--white);
-        }
-        
-        .social-icons a:hover {
-            color: var(--orange);
-        }
-
-        .footer-links a {
-            font-size: 0.8rem;
-            color: var(--gray);
-            margin: 0 8px;
-            cursor: pointer;
-        }
-
-        /* Divider Line */
-        .divider {
-            height: 1px;
-            background-color: var(--gray);
-            width: 60%;
-            margin: 30px auto;
-        }
-
-        /* Impressum & Datenschutz Content Style */
-        .modal-text {
-            color: #ccc;
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-        .modal-text h3 {
-            color: var(--orange);
-            margin-bottom: 15px;
-            font-family: var(--font-headline);
-            font-size: 1.3rem;
-        }
-        .modal-text h4 {
-            color: var(--white);
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-size: 1.1rem;
-        }
-        .modal-text p {
-            margin-bottom: 10px;
-        }
-
     </style>
 </head>
-<body>
+<body class="antialiased">
 
-    <!-- Spotlight Gradient Elements (Brown/Orange Glow) -->
-    <div class="spotlight-top"></div>
-    <div class="spotlight"></div>
-
-    <!-- Header Logo -->
-    <header>
-        <div class="container">
-            <a href="https://www.ritter-fabian.de/">
-                <!-- Replaced text with image placeholder as requested -->
-                <img src="logo.png" alt="Florian Merzenich Logo" class="logo-img">
-            </a>
-        </div>
+    <!-- Header / Logo -->
+    <header class="container mx-auto py-6 px-4 text-center">
+        <a href="https://www.ritter-fabian.de/" class="inline-block">
+            <!-- Logo replaced with local file reference -->
+            <img src="xlg.jpg" alt="Fabian Ritter Logo" class="h-12 md:h-16 mx-auto object-contain">
+        </a>
     </header>
 
+    <!-- Headline Section -->
+    <section class="container mx-auto px-4 py-8 text-center">
+        <div class="border-2 border-white rounded-xl p-4 inline-block mx-auto mb-8">
+            <h2 class="text-xl md:text-3xl font-poppins font-semibold uppercase text-orange">
+                9 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
+            </h2>
+        </div>
+    </section>
+
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <!-- Orange Subheadline Box -->
-            <div class="hero-subheadline gold-text-animated">
-                Exklusives Strategiegespräch für Investoren
-            </div>
+    <section class="container mx-auto px-4 pb-12 text-center">
+        <h1 class="text-3xl md:text-5xl font-bold mb-8 leading-tight">
+            Von „Alles rot, ich check gar nichts mehr“<br>
+            <span class="text-orange">zu „In 90 Tagen im Bärenmarkt mein Fundament gebaut“</span>
+        </h1>
 
-            <!-- Main Headline -->
-            <h1 class="hero-headline">
-                <span class="white-text">90 % geben im Bärenmarkt auf.</span><br>
-                <span class="gold-text-animated">Die anderen 10 % legen den Grundstein für ihren Reichtum.</span>
-            </h1>
-
-            <!-- Hero Video Embed -->
-            <div class="hero-image">
-                <div class="video-container">
-                    <iframe src="https://player.vimeo.com/video/1116063593?h=0&autoplay=1&loop=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        <!-- Hero Image inside Laptop Mockup -->
+        <div class="max-w-4xl mx-auto mb-16 px-4">
+            <div class="laptop-wrapper">
+                <div class="laptop-screen-frame">
+                    <div class="laptop-display">
+                        <!-- Dein Bild hier -->
+                        <img src="hero_bg.jpg" alt="Masterclass Vorschau" class="w-full h-full object-cover">
+                    </div>
                 </div>
-            </div>
-
-            <!-- CTA Button -->
-            <div style="margin: 10px 0;">
-                <a href="https://flos-funnel.pages.dev/" class="btn">Jetzt Gespräch Vereinbaren</a>
-            </div>
-
-            <!-- Countdown Timer -->
-            <div class="timer-container">
-                <div class="timer-text">Noch verfügbar bis:</div>
-                <div id="countdown-display">3d 22h 13m 47s</div>
+                <div class="laptop-base"></div>
             </div>
         </div>
-    </section>
 
-    <div class="divider"></div>
-
-    <!-- Intro Text Grid -->
-    <section class="container">
-        <h2 class="text-center" style="margin-bottom: 20px; font-weight: 400; font-size: 1.5rem;"><strong>Deine Situation nach dem Strategiegespräch</strong></h2>
-        
-        <div class="features-grid">
-            <div class="feature-box">
-                <p>Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p>
-            </div>
-            <div class="feature-box">
-                <p>Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p>
-            </div>
-            <div class="feature-box">
-                <p>Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Target Audience -->
-    <section class="target-section">
-        <div class="container">
-            <div class="divider"></div>
-            <h2 class="text-center gold-text-animated uppercase" style="margin: 20px 0; font-size: 1.3rem;">Für wen ist dieses Strategiegespräch</h2>
+        <!-- CTA Area -->
+        <div class="max-w-xl mx-auto">
+            <a href="#register" class="btn-orange text-xl w-full md:w-auto mb-6">
+                <i class="fas fa-play-circle"></i> Jetzt Gratis Sichern
+            </a>
             
-            <div class="target-grid">
-                <div class="target-item">
-                    <div class="target-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3>Für dich, wenn du schon investiert bist, aber <em>ehrlich gesagt</em> keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.</h3>
-                </div>
-                <div class="target-item">
-                    <div class="target-icon"><i class="fas fa-handshake"></i></div>
-                    <h3>Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</h3>
-                </div>
-                <div class="target-item">
-                    <div class="target-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h3>Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher eher verunsichert hat.</h3>
-                </div>
+            <p class="text-lg mb-2">Noch verfügbar bis:</p>
+            
+            <!-- JavaScript Countdown -->
+            <div id="countdown" class="countdown-container">
+                <div class="countdown-box"><span id="days">00</span><span class="countdown-label">Tage</span></div>
+                <div class="countdown-box"><span id="hours">00</span><span class="countdown-label">Std</span></div>
+                <div class="countdown-box"><span id="minutes">00</span><span class="countdown-label">Min</span></div>
+                <div class="countdown-box"><span id="seconds">00</span><span class="countdown-label">Sek</span></div>
             </div>
+            
+            <div class="separator"></div>
         </div>
     </section>
 
-    <!-- CTA Mid -->
-    <div class="container text-center" style="margin: 30px auto;">
-        <a href="https://flos-funnel.pages.dev/" class="btn">Jetzt Anmelden</a>
-    </div>
-
-    <!-- Reviews Section Placeholder -->
-    <section class="container text-center" style="margin: 40px auto;">
-        <div class="divider"></div>
-        <h2 style="font-weight: 400; margin-bottom: 20px; font-size: 1.5rem;">Das sagt meine<br><span class="gold-text-animated bold">Community</span></h2>
-        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
-            <i class="fas fa-star orange-text"></i>
-            <i class="fas fa-star orange-text"></i>
-            <i class="fas fa-star orange-text"></i>
-            <i class="fas fa-star orange-text"></i>
-            <i class="fas fa-star orange-text"></i>
-            <p style="margin-top: 10px;">"Endlich habe ich einen klaren Plan für mein Vermögen. Keine Spekulation mehr, sondern echte Strategie und Unabhängigkeit von Banken. Danke Florian!"</p>
-            <small>- Verifizierter Strategie-Kunde</small>
-        </div>
-    </section>
-
-    <!-- What you will learn -->
-    <section class="container" style="margin-top: 40px;">
-        <h2 class="text-center gold-text-animated uppercase" style="margin-bottom: 20px; font-size: 1.3rem;">Was wir im Strategiegespräch analysieren</h2>
+    <!-- Outcome Section -->
+    <section class="container mx-auto px-4 py-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-10">Wo stehst du nach der Masterclass?</h2>
         
-        <div class="content-list">
-            <div class="content-item">
-                <i class="fas fa-shoe-prints"></i>
-                <div>
-                    <strong>System statt Finanzprodukt</strong><br>
-                    Unabhängigkeit von Banken, Trends und Hypes. Wir schaffen Klarheit und Kontrolle über deine Finanzen.
-                </div>
+        <!-- Changed to flex-col for vertical stacking and added bg-black to items -->
+        <div class="flex flex-col gap-6 max-w-3xl mx-auto">
+            <div class="border-box bg-black">
+                <p class="text-lg">Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p>
             </div>
-            <div class="content-item">
-                <i class="fas fa-trophy"></i>
-                <div>
-                    <strong>Strategie statt Spekulation</strong><br>
-                    Wir erarbeiten einen Plan für strategischen Vermögensaufbau, basierend auf bewährten Methoden (Ø 20-53% Jahresrendite 2018-2024).
-                </div>
+            <div class="border-box bg-black">
+                <p class="text-lg">Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p>
             </div>
-            <div class="content-item">
-                <i class="fas fa-layer-group"></i>
-                <div>
-                    <strong>Hilfe zur Selbsthilfe</strong><br>
-                    Kein Abo-Modell oder Standardlösung. Ziel ist es, dich zum souveränen Finanzentscheider zu machen.
-                </div>
+            <div class="border-box bg-black">
+                <p class="text-lg">Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p>
             </div>
-            <div class="content-item">
-                <i class="fas fa-exclamation-triangle"></i>
-                <div>
-                    <strong>Individueller Fahrplan</strong><br>
-                    Wir prüfen deine aktuelle Situation (Kapital vorhanden, aber kein Plan?) und skizzieren den Weg zur finanziellen Unabhängigkeit.
-                </div>
-            </div>
-            <div class="content-item">
-                <i class="fas fa-compass"></i>
-                <div>
-                    <strong>Mindset & Psychologie</strong><br>
-                    „Dein Kontostand folgt deinem Kopf – nicht dem Markt.“ Wir sprechen über die richtige Einstellung für langfristigen Erfolg.
-                </div>
-            </div>
-        </div>
-
-        <div class="text-center" style="margin-top: 20px;">
-            <a href="https://flos-funnel.pages.dev/" class="btn">Sei Dabei</a>
         </div>
     </section>
 
-    <!-- Why Participate -->
-    <section class="container" style="margin-top: 40px;">
-        <div class="divider"></div>
-        <h2 class="text-center gold-text-animated" style="margin-bottom: 20px; font-size: 1.3rem;">Warum du dir diesen Termin sichern solltest</h2>
+    <!-- Target Audience Section -->
+    <section class="container mx-auto px-4 py-12">
+        <div class="separator"></div>
+        <h2 class="text-orange text-3xl md:text-4xl font-bold text-center mb-12 uppercase">Für wen ist diese Masterclass?</h2>
         
-        <div class="target-grid">
-            <div class="target-item" style="border-color: var(--orange);">
-                <h3>Weil du es satt hast, jedes verdammte Mal der Depp zu sein, der oben kauft und unten verkauft.</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <!-- Item 1 -->
+            <div class="border-2 border-white rounded-xl p-6 text-center h-full flex flex-col justify-center items-center">
+                <div class="text-primary text-5xl mb-4"><i class="fas fa-chart-line"></i></div>
+                <p class="text-lg">Für dich, wenn du schon investiert bist, aber <em class="underline">ehrlich gesagt</em> keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.</p>
             </div>
-            <div class="target-item" style="border-color: var(--white);">
-                <h3>Weil du keine Lust mehr hast, heimlich neidisch auf andere zu sein, die mutiger waren.</h3>
+            
+            <!-- Item 2 -->
+            <div class="border-2 border-white rounded-xl p-6 text-center h-full flex flex-col justify-center items-center">
+                <div class="text-primary text-5xl mb-4"><i class="fas fa-shield-alt"></i></div>
+                <p class="text-lg">Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p>
             </div>
-            <div class="target-item" style="border-color: var(--white);">
-                <h3>Weil du nie wieder von außen zusehen willst, wie andere Gewinne holen, während du zögerst.</h3>
+            
+            <!-- Item 3 -->
+            <div class="border-2 border-white rounded-xl p-6 text-center h-full flex flex-col justify-center items-center">
+                <div class="text-primary text-5xl mb-4"><i class="fas fa-hand-holding-usd"></i></div>
+                <p class="text-lg">Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher eher verunsichert hat.</p>
             </div>
         </div>
-        <div class="text-center" style="margin-top: 20px;">
-            <a href="https://flos-funnel.pages.dev/" class="btn">Hier Klicken</a>
+        
+        <div class="text-center mt-12">
+            <a href="#register" class="btn-orange text-xl">
+                Jetzt Anmelden
+            </a>
+        </div>
+    </section>
+
+    <!-- Social Proof / Reviews -->
+    <section class="container mx-auto px-4 py-12 text-center">
+        <div class="separator"></div>
+        <h3 class="text-orange text-2xl md:text-3xl font-bold mb-2">Das sagt meine</h3>
+        <h3 class="text-white text-2xl md:text-3xl font-bold mb-8">Community</h3>
+        
+        <!-- Placeholder for Reviews Widget (Iframe replacement) -->
+        <div class="bg-white text-black p-8 rounded-lg max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-gray-100 p-4 rounded text-left">
+                    <div class="flex text-orange mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-sm font-bold">"Endlich Krypto verstanden!"</p>
+                    <p class="text-xs mt-2">- Michael S.</p>
+                </div>
+                <div class="bg-gray-100 p-4 rounded text-left">
+                    <div class="flex text-orange mb-2"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="text-sm font-bold">"Fabians Strategien sind Gold wert."</p>
+                    <p class="text-xs mt-2">- Sarah K.</p>
+                </div>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">*Dies ist ein Platzhalter für das Review-Widget*</p>
+        </div>
+    </section>
+
+    <!-- Content Breakdown Section -->
+    <section class="container mx-auto px-4 py-12">
+        <div class="separator"></div>
+        <h2 class="text-orange text-2xl md:text-3xl font-bold text-center mb-10 uppercase">Was du in der exklusiven Masterclass lernen wirst</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            
+            <div class="border-2 border-white rounded-xl p-6 text-center hover:border-orange transition-colors">
+                <div class="text-orange text-3xl mb-3"><i class="fas fa-layer-group"></i></div>
+                <h3 class="text-xl font-bold mb-2">4-Schritte-System</h3>
+                <p>Ein glasklares Framework, mit dem du dich im Bärenmarkt richtig positionierst und systematisch Vermögen aufbaust.</p>
+            </div>
+
+            <div class="border-2 border-white rounded-xl p-6 text-center hover:border-orange transition-colors">
+                <div class="text-orange text-3xl mb-3"><i class="fas fa-search-dollar"></i></div>
+                <h3 class="text-xl font-bold mb-2">Gewinner-Strategien</h3>
+                <p>Die exakten Strategien, um in volatilen Phasen Chancen zu finden, bevor sie alle sehen.</p>
+            </div>
+
+            <div class="border-2 border-white rounded-xl p-6 text-center hover:border-orange transition-colors">
+                <div class="text-orange text-3xl mb-3"><i class="fas fa-balance-scale"></i></div>
+                <h3 class="text-xl font-bold mb-2">Portfolio-Ordnung</h3>
+                <p>Ordnung ins Chaos bringen: Welche Coins raus, welche rein, damit du endlich ruhig schlafen kannst.</p>
+            </div>
+
+            <div class="border-2 border-white rounded-xl p-6 text-center hover:border-orange transition-colors">
+                <div class="text-orange text-3xl mb-3"><i class="fas fa-exclamation-triangle"></i></div>
+                <h3 class="text-xl font-bold mb-2">Fehler-Vermeider</h3>
+                <p>Lerne die 4 größten Fehler, die 99% der Anleger machen, und streiche sie für immer aus deinem Verhalten.</p>
+            </div>
+
+            <div class="border-2 border-white rounded-xl p-6 text-center md:col-span-2 hover:border-orange transition-colors">
+                <div class="text-orange text-3xl mb-3"><i class="fas fa-compass"></i></div>
+                <h3 class="text-xl font-bold mb-2">Zukunfts-Kompass</h3>
+                <p>Ein glasklares Bild der nächsten 6–18 Monate im Markt, um Chancen nicht nur zu sehen, sondern zu nutzen.</p>
+            </div>
+        </div>
+
+        <div class="text-center mt-12">
+            <a href="#register" class="btn-orange text-xl">
+                Sei Dabei
+            </a>
+        </div>
+    </section>
+
+    <!-- Why Section -->
+    <section class="container mx-auto px-4 py-12">
+        <h2 class="text-orange text-2xl md:text-3xl font-bold text-center mb-10">Warum du die Bärenmarkt Masterclass nicht verpassen solltest</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto text-center">
+            <div class="p-4">
+                <p class="text-lg font-medium">Weil du es satt hast, jedes verdammte Mal der Depp zu sein, der oben kauft und unten verkauft, und das endlich beenden willst.</p>
+            </div>
+            <div class="p-4 border-l-0 md:border-l border-r-0 md:border-r border-white border-opacity-30">
+                <p class="text-lg font-medium">Weil du keine Lust mehr hast, heimlich neidisch auf andere zu sein, die mutiger, schlauer und früher gehandelt haben als du.</p>
+            </div>
+            <div class="p-4">
+                <p class="text-lg font-medium">Weil du nie wieder von außen zusehen willst, wie andere aus denselben Marktbewegungen Gewinne holen, während du zögerst.</p>
+            </div>
+        </div>
+        
+        <div class="text-center mt-8 max-w-3xl mx-auto border-t border-b border-white border-opacity-30 py-6">
+            <p class="text-xl font-bold">Weil du es dir selbst schuldig bist, endlich aufzuhören, wie ein Amateur zu handeln, und anzufangen, wie jemand, der Vermögen aufbaut.</p>
+        </div>
+
+        <div class="text-center mt-10">
+            <a href="#register" class="btn-orange text-xl">
+                Hier Klicken
+            </a>
         </div>
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section container">
-        <div class="stat-box">
-            <span class="stat-number">5.000+</span>
-            <span class="stat-label">Begleitete Investoren</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number">+20-53%</span>
-            <span class="stat-label">Ø Jahresrendite (18-24)</span>
-        </div>
-        <div class="stat-box">
-            <span class="stat-number">Seit 2013</span>
-            <span class="stat-label">Erfahrung</span>
-        </div>
-    </section>
-
-    <!-- Bio Section -->
-    <section class="container bio-section">
-        <div class="bio-image">
-            <img src="portrait.jpg" alt="Florian Merzenich">
-            <h3 class="uppercase gold-text-animated" style="margin-top: 10px; font-size: 1rem;">Marktführer Crypto-Ausbildung</h3>
-            <h2 class="uppercase white-text" style="font-size: 1.5rem;">Florian Merzenich</h2>
-        </div>
-        <div class="bio-text">
-            <p><strong>Wer ist Florian Merzenich?</strong></p>
-            <ul style="padding-left: 20px; margin-top: 10px; list-style-type: none;">
-                <li style="margin-bottom: 8px;"><strong>Expertenstatus:</strong> Experte für Investitionen & Krypto, Mitgründer von „Usecape“.</li>
-                <li style="margin-bottom: 8px;"><strong>Erfahrung:</strong> Seit 2013 als Investor aktiv. Über 120.000 € in eigene Persönlichkeitsentwicklung investiert.</li>
-                <li style="margin-bottom: 8px;"><strong>Ansatz:</strong> Strategischer Vermögensaufbau ohne Spekulation. Hilfe zur Selbsthilfe für Unternehmer & Privatanleger.</li>
-                <li style="margin-bottom: 8px;"><strong>Medien:</strong> Host eines eigenen Podcasts. Bekannt aus Focus Money, WirtschaftsWoche, ntv und Harvest.</li>
-            </ul>
+    <section class="container mx-auto px-4 py-12 border-t-2 border-b-2 border-orange bg-[#1a1a1a]">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">9+</h3>
+                <p class="text-sm md:text-lg text-gray-300">Jahre Erfahrung</p>
+            </div>
+            <div>
+                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">5.600+</h3>
+                <p class="text-sm md:text-lg text-gray-300">Event Besucher</p>
+            </div>
+            <div>
+                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">16.500+</h3>
+                <p class="text-sm md:text-lg text-gray-300">Menschen begleitet</p>
+            </div>
+            <div>
+                <h3 class="text-3xl md:text-5xl font-bold font-poppins mb-2">2.5M€+</h3>
+                <p class="text-sm md:text-lg text-gray-300">Crypto Gewinne</p>
+            </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="social-icons">
-                <a href="https://www.instagram.com/florian.merzenich_official/" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.youtube.com/@FlorianMerzenich" target="_blank"><i class="fab fa-youtube"></i></a>
+    <!-- SECTION 6: SOCIAL PROOF -->
+    <section class="py-20 bg-dark-gradient">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl md:text-4xl font-head font-bold text-center mb-16">Ergebnisse <span class="text-gold">lügen nicht</span></h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                <!-- WhatsApp Mockups -->
+                <div class="space-y-6">
+                    <div class="chat-bubble ml-auto w-4/5 md:w-3/4 shadow-lg transform hover:scale-105 transition">
+                        <p class="font-bold text-xs text-green-400 mb-1">Thomas S.</p>
+                        Hey Florian, kurzes Update: Mein Portfolio ist heute 20% im Plus! Danke für die Ruhe, die du reingebracht hast. 🙏
+                    </div>
+                    <div class="chat-bubble ml-auto w-4/5 md:w-3/4 bg-gray-800 text-white border border-white/10 shadow-lg transform hover:scale-105 transition" style="background:#1f2937">
+                        <p class="font-bold text-xs text-gray-400 mb-1">Markus K.</p>
+                        Endlich verstehe ich, was ich da eigentlich mache. Das Gefühl von Kontrolle ist unbezahlbar.
+                    </div>
+                    <div class="chat-bubble ml-auto w-4/5 md:w-3/4 shadow-lg transform hover:scale-105 transition">
+                        <p class="font-bold text-xs text-green-400 mb-1">Sabine L.</p>
+                        Die Strategie mit den Edelmetallen als Anker war genau richtig für meine Nerven. Danke für das Mentoring!
+                    </div>
+                </div>
+
+                <!-- Reviews - Mit Neon Shadow -->
+                <div class="grid grid-cols-1 gap-6">
+                    <!-- Review 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-neon hover:shadow-neon-hover text-gray-900 transition duration-300">
+                        <div class="flex text-gold mb-2">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-700 text-sm mb-4">"Kurz und knapp: Beste Entscheidung 2024. Endlich Ruhe im Depot und ein klarer Plan. Danke Flo!"</p>
+                        <p class="font-bold text-xs uppercase tracking-wide text-actionBlue">- Dennis B.</p>
+                    </div>
+                    <!-- Review 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-neon hover:shadow-neon-hover text-gray-900 transition duration-300">
+                        <div class="flex text-gold mb-2">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-700 text-sm mb-4">"Ich bin eigentlich sehr vorsichtig... Aber bei Florian merkt man sofort, dass er das schon seit 2013 macht... Er hat mir im Gespräch eine klare Struktur für mein Portfolio gegeben... Kein 'Kauf Coin X und werd reich', sondern echte Strategie."</p>
+                        <p class="font-bold text-xs uppercase tracking-wide text-actionBlue">- Elena P.</p>
+                    </div>
+                    <!-- Review 3 -->
+                    <div class="bg-white p-6 rounded-lg shadow-neon hover:shadow-neon-hover text-gray-900 transition duration-300">
+                        <div class="flex text-gold mb-2">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-700 text-sm mb-4">"Super Typ, sehr direkt. Hat mir extrem geholfen meine Panik in den Griff zu kriegen. Das Coaching ist jeden Cent wert."</p>
+                        <p class="font-bold text-xs uppercase tracking-wide text-actionBlue">- Ali C.</p>
+                    </div>
+                    <!-- Review 4 -->
+                    <div class="bg-white p-6 rounded-lg shadow-neon hover:shadow-neon-hover text-gray-900 transition duration-300">
+                        <div class="flex text-gold mb-2">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="italic text-gray-700 text-sm mb-4">"Bevor ich zu Florian kam, hatte ich zwar Coins, aber null Plan... Im Mentoring haben wir das komplett auf links gedreht. Was mir besonders wichtig war: Unabhängigkeit... Mache jetzt keine dummen Fehler mehr."</p>
+                        <p class="font-bold text-xs uppercase tracking-wide text-actionBlue">- Eugen W.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: THE STACK (OFFER) -->
+    <section class="py-20 bg-royal-gradient border-y border-gold/30">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 relative overflow-hidden shadow-neon">
+                <!-- Background Glow -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+                
+                <h2 class="text-3xl font-head font-bold text-center mb-10">Was du im kostenlosen Strategiegespräch bekommst:</h2>
+                
+                <ul class="space-y-6 text-lg md:text-xl mb-12">
+                    <li class="flex items-center">
+                        <i class="fas fa-check-square text-green-500 text-2xl mr-4 shadow-[0_0_10px_rgba(34,197,94,0.5)] rounded"></i>
+                        <span class="font-bold">Ausführliche Analyse deiner Ist-Situation</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-square text-green-500 text-2xl mr-4 shadow-[0_0_10px_rgba(34,197,94,0.5)] rounded"></i>
+                        <span class="font-bold">Einblick in die Struktur eines 3h-Deep-Dive Calls</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-square text-green-500 text-2xl mr-4 shadow-[0_0_10px_rgba(34,197,94,0.5)] rounded"></i>
+                        <span>Zugang zur exklusiven Telegram-Gruppe für Marktupdates</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-check-square text-green-500 text-2xl mr-4 shadow-[0_0_10px_rgba(34,197,94,0.5)] rounded"></i>
+                        <span>Erklärvideos & Vorlagen für deine Unabhängigkeit</span>
+                    </li>
+                </ul>
+
+                <div class="text-center border-t border-white/10 pt-8">
+                    <div class="text-gray-400 text-lg mb-2">Dein Investment heute:</div>
+                    <div class="text-5xl md:text-6xl font-extrabold text-gold mb-8 drop-shadow-lg">0,00 €</div>
+                    <p class="text-sm text-gray-400 mb-0">*Nur für ernsthafte Interessenten</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bio / About Section -->
+    <section class="container mx-auto px-4 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center max-w-6xl mx-auto">
+            <!-- Text Column -->
+            <div class="md:col-span-8 order-2 md:order-1 text-center md:text-left">
+                <h2 class="text-3xl font-poppins mb-2 uppercase">Das ist</h2>
+                <h2 class="text-4xl font-bold font-poppins text-orange mb-6 uppercase">Fabian Ritter</h2>
+                
+                <div class="border-2 border-white p-6 rounded-xl bg-black bg-opacity-50">
+                    <p class="mb-4">Fabian Ritter ist nicht zufällig zu einem der führenden Crypto-Experten Deutschlands geworden. Vor 9 Jahren hat er selbst jeden Fehler mitgenommen, den es gab, vom falschen Timing bis zu dubiosen Altcoins. Genau diese Erfahrung macht heute den Unterschied:</p>
+                    <p class="mb-4">Mehr als <strong>16.000 Menschen</strong> hat er seit 2019 geholfen, die Fehler zu vermeiden, die ihn damals Tausende gekostet haben.</p>
+                    <p class="mb-4">Mit <strong>über 5.600 Eventteilnehmern</strong>, <strong>390x-Ergebnissen</strong> und einer Community, aus der täglich Nachrichten kommen wie:</p>
+                    <p class="italic text-gray-400">"Ich wusste vor ner Woche nicht mal wo ich Bitcoin kaufen kann und heute läuft mein erster Pool mit 5% die Woche."</p>
+                </div>
             </div>
             
-            <div class="logo-footer">
+            <!-- Image Column -->
+            <div class="md:col-span-4 order-1 md:order-2 flex flex-col items-center">
+                <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249a6f37de763c99e26416.jpg" alt="Fabian Ritter" class="w-64 h-64 md:w-80 md:h-80 object-cover img-circle mb-4">
+                <p class="text-orange font-bold text-xl font-montserrat">Crypto Experte & Educator</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form Placeholder (ID for anchors) -->
+    <div id="register" class="container mx-auto px-4 py-12 text-center">
+        <div class="bg-white text-black p-8 rounded-xl max-w-lg mx-auto shadow-2xl">
+            <h2 class="text-2xl font-bold mb-4">Jetzt Anmelden</h2>
+            <div class="space-y-4">
+                <input type="text" placeholder="Vorname" class="w-full p-3 border border-gray-300 rounded">
+                <input type="text" placeholder="Nachname" class="w-full p-3 border border-gray-300 rounded">
+                <input type="email" placeholder="E-Mail Adresse" class="w-full p-3 border border-gray-300 rounded">
+                <button class="w-full btn-orange border-none text-white py-4 rounded font-bold text-lg">Kostenlos Teilnehmen</button>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">Deine Daten sind sicher. Wir hassen Spam genau so sehr wie du.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-white border-opacity-20 py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <!-- Social Icons -->
+            <div class="flex justify-center gap-6 mb-6">
+                <a href="https://instagram.com/fabian_ritter84" target="_blank" class="text-white hover:text-orange text-3xl"><i class="fab fa-instagram-square"></i></a>
+                <a href="https://x.com/FabianRitter13" target="_blank" class="text-white hover:text-orange text-3xl"><i class="fab fa-twitter-square"></i></a> <!-- Using generic twitter icon if X not avail in older fontawesome -->
+                <a href="https://youtube.com/@fabianritter84" target="_blank" class="text-white hover:text-orange text-3xl"><i class="fab fa-youtube-square"></i></a>
+            </div>
+            
+            <div class="mb-6">
                 <a href="https://www.ritter-fabian.de/" target="_blank">
-                    <!-- Replaced text with image placeholder as requested -->
-                    <img src="logo.png" alt="Logo" class="logo-img">
+                    <!-- Footer Logo replaced with local file reference -->
+                    <img src="xlg.jpg" alt="Logo" class="h-10 mx-auto opacity-70 hover:opacity-100 transition-opacity">
                 </a>
             </div>
 
-            <div class="footer-links">
-                <!-- onclick triggers the modal -->
-                <a onclick="openImpressumModal()">Impressum</a> |
-                <!-- onclick triggers the privacy modal -->
-                <a onclick="openDatenschutzModal()">Datenschutz</a>
+            <div class="text-sm font-medium">
+                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank" class="hover:text-orange hover:underline">Impressum</a> 
+                <span class="mx-2">|</span>
+                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank" class="hover:text-orange hover:underline">Datenschutz</a>
             </div>
         </div>
     </footer>
 
-    <!-- IMPRESSUM MODAL -->
-    <div class="modal-overlay" id="impressumModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeImpressumModal()">&times;</span>
-            <div class="modal-text">
-                <h3>Impressum</h3>
-                <p>
-                    <strong>Florian Merzenich</strong><br>
-                    Am Eichelgärtchen 36B<br>
-                    56283 Halsenbach<br><br>
-                    015253846630<br>
-                    managment@florian-merzenich.de<br><br>
-                    <strong>Vertretungsberechtigte/r Geschäftsführer/in:</strong><br>Florian Merzenich<br><br>
-                    <strong>Registernummer:</strong><br>
-                    HE461931
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <!-- DATENSCHUTZ MODAL -->
-    <div class="modal-overlay" id="datenschutzModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeDatenschutzModal()">&times;</span>
-            <div class="modal-text">
-                <h3>Datenschutz</h3>
-                <p><strong>Merzenix LTD legt großen Wert auf den Schutz Ihrer Daten.</strong> Datenschutz ist uns wichtig und wir möchten, dass Sie sich beim Besuch unserer Website sicher fühlen. Bitte beachten Sie, dass diese Datenschutzerklärung Beispieltexte enthält und nicht vollständig ist. Je nach den Funktionen unserer Website kann der Inhalt unserer Datenschutzerklärung variieren. Wir als Website-Betreiber müssen sicherstellen, dass die Datenschutzerklärung alle Drittkomponenten auflistet, die auf unserer Website verwendet werden. Der Link zur Datenschutzerklärung muss von jeder Seite unserer Website aus erreichbar sein.</p>
-
-                <h4>Datenerhebung, -nutzung und Weitergabe</h4>
-                <p><strong>Kontrolle über Daten</strong><br>
-                Wir informieren Sie über die Art der gesammelten Informationen auf unserer Website, wie wir sie nutzen und ob wir sie an Dritte weitergeben.</p>
-
-                <p><strong>Datensicherheit</strong><br>
-                Sie haben das Recht, Ihre personenbezogenen Informationen und Daten einzusehen, zu ändern und zu aktualisieren. Wenn Sie Bedenken bezüglich der Datenverwendung haben, können Sie sich gerne an uns wenden.</p>
-
-                <p><strong>Datensicherheit</strong><br>
-                Der Schutz Ihrer Daten ist uns ein wichtiges Anliegen. Wir ergreifen verschiedene Schutzmaßnahmen, um die Sicherheit Ihrer Daten zu gewährleisten, einschließlich Datenverschlüsselung und sichere Serverstandorte. Erfahren Sie hier mehr über unsere Datenschutzpraktiken.</p>
-
-                <h4>Grundsätzliches</h4>
-                <p>Als Betreiber dieser Seite nehmen wir den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung. Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder e-Mail-Adresse) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben. Wir weisen darauf hin, daß die Datenübertragung im Internet (z.B. bei der Kommunikation per e-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
-
-                <h4>Begriffserläuterungen</h4>
-                <p>Die Datenschutzerklärung dieses Unternehmens beruht auf den Begriffen, die durch den Europäischen Richtlinien- und Verordnungsgeber beim Erlaß der Datenschutz-Grundverordnung (DS-GVO) verwendet wurden. Unsere Datenschutzerklärung soll sowohl für die Öffentlichkeit als auch für unsere Kunden und Geschäftspartner einfach lesbar und verständlich sein. Um dies zu gewährleisten, möchten wir vorab die verwendeten Begriffe erläutern.</p>
-
-                <p><strong>Personenbezogene Daten:</strong><br>
-                Alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person (im Folgenden „betroffene Person“) beziehen. Als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt, insbesondere mittels Zuordnung zu einer Kennung wie einem Namen, zu einer Kennnummer, zu Standortdaten, zu einer Online-Kennung oder zu einem oder mehreren besonderen Merkmalen, die Ausdruck der wie auch immer gearteten Identität dieser natürlichen Person sind, identifiziert werden kann.</p>
-
-                <p><strong>Betroffene Person:</strong><br>
-                Jede identifizierte oder identifizierbare natürliche Person, deren personenbezogene Daten von dem für die Verarbeitung Verantwortlichen verarbeitet werden.</p>
-
-                <p><strong>Verarbeitung:</strong><br>
-                Jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang oder jede solche Vorgangsreihe im Zusammenhang mit personenbezogenen Daten wie das Erheben, das Erfassen, die Organisation, das Ordnen, die Speicherung, die Anpassung oder Veränderung, das Auslesen, das Abfragen, die Verwendung, die Offenlegung durch Übermittlung, Verbreitung oder eine andere Form der Bereitstellung, den Abgleich oder die Verknüpfung, die Einschränkung, das Löschen oder die Vernichtung.</p>
-
-                <p><strong>Einschränkung der Verarbeitung:</strong><br>
-                Die Markierung gespeicherter personenbezogener Daten mit dem Ziel, ihre künftige Verarbeitung einzuschränken.</p>
-
-                <p><strong>Profiling:</strong><br>
-                Jede Art der automatisierten Verarbeitung personenbezogener Daten, die darin besteht, daß diese personenbezogenen Daten verwendet werden, um bestimmte persönliche Aspekte, die sich auf eine natürliche Person beziehen, zu bewerten, insbesondere, um Aspekte bezüglich Arbeitsleistung, wirtschaftlicher Lage, Gesundheit, persönlicher Vorlieben, Interessen, Zuverlässigkeit, Verhalten, Aufenthaltsort oder Ortswechsel dieser natürlichen Person zu analysieren oder vorherzusagen.</p>
-
-                <p><strong>Pseudonymisierung:</strong><br>
-                Die Verarbeitung personenbezogener Daten in einer Weise, auf welche die personenbezogenen Daten ohne Hinzuziehung zusätzlicher Informationen nicht mehr einer spezifischen betroffenen Person zugeordnet werden können, sofern diese zusätzlichen Informationen gesondert aufbewahrt werden und technischen und organisatorischen Maßnahmen unterliegen, die gewährleisten, daß die personenbezogenen Daten nicht einer identifizierten oder identifizierbaren natürlichen Person zugewiesen werden.</p>
-
-                <p><strong>Verantwortlicher oder für die Verarbeitung Verantwortlicher:</strong><br>
-                Die natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet. Sind die Zwecke und Mittel dieser Verarbeitung durch das Unionsrecht oder das Recht der Mitgliedstaaten vorgegeben, so kann der Verantwortliche beziehungsweise können die bestimmten Kriterien seiner Benennung nach dem Unionsrecht oder dem Recht der Mitgliedstaaten vorgesehen werden.</p>
-
-                <p><strong>Auftragsverarbeiter:</strong><br>
-                Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die personenbezogene Daten im Auftrag des Verantwortlichen verarbeitet.</p>
-
-                <p><strong>Empfänger:</strong><br>
-                Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, der personenbezogene Daten offengelegt werden, unabhängig davon, ob es sich bei ihr um einen Dritten handelt oder nicht. Behörden, die im Rahmen eines bestimmten Untersuchungsauftrags nach dem Unionsrecht oder dem Recht der Mitgliedstaaten möglicherweise personenbezogene Daten erhalten, gelten jedoch nicht als Empfänger.</p>
-
-                <p><strong>Dritter:</strong><br>
-                Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle außer der betroffenen Person, dem Verantwortlichen, dem Auftragsverarbeiter und den Personen, die unter der unmittelbaren Verantwortung des Verantwortlichen oder des Auftragsverarbeiters befugt sind, die personenbezogenen Daten zu verarbeiten.</p>
-
-                <p><strong>Einwilligung:</strong><br>
-                Jede von der betroffenen Person freiwillig für den bestimmten Fall in informierter Weise und unmissverständlich abgegebene Willensbekundung in Form einer Erklärung oder einer sonstigen eindeutigen bestätigenden Handlung, mit der die betroffene Person zu verstehen gibt, daß sie mit der Verarbeitung der sie betreffenden personenbezogenen Daten einverstanden ist.</p>
-
-                <h4>Rechtsgrundlage der Verarbeitung</h4>
-                <p>Art. 6 I lit. a DS-GVO dient unserem Unternehmen als Rechtsgrundlage für Verarbeitungsvorgänge, bei denen wir eine Einwilligung für einen bestimmten Verarbeitungszweck einholen. Ist die Verarbeitung personenbezogener Daten zur Erfüllung eines Kundenauftrags erforderlich, wie z.B. bei Verarbeitungsvorgängen im Rahmen einer Warenlieferung oder der Erbringung von Dienstleistungen, so beruht die Verarbeitung auf Art. 6 I lit. b DS-GVO. Gleiches gilt für solche Verarbeitungsvorgänge, die zur Durchführung vorvertraglicher Maßnahmen erforderlich sind, etwa in Fällen von Anfragen zu unseren Produkten oder Dienstleistungen. Unterliegt unser Unternehmen einer rechtlichen Verpflichtung, durch welche eine Verarbeitung von personenbezogenen Daten erforderlich wird, wie z.B. zur Erfüllung steuerlicher Pflichten, so basiert die Verarbeitung auf Art. 6 I lit. c DS-GVO.</p>
-
-                <p>Ebenfalls könnten Verarbeitungsvorgänge auf Art. 6 I lit. f DS-GVO beruhen. Auf dieser Rechtsgrundlage basieren Verarbeitungsvorgänge, die von keiner der vorgenannten Rechtsgrundlagen erfasst werden, wenn die Verarbeitung zur Wahrung eines berechtigten Interesses unseres Unternehmens oder eines Dritten erforderlich ist, sofern die Interessen, Grundrechte und Grundfreiheiten der betroffenen Person nicht überwiegen. Solche Verarbeitungsvorgänge sind uns insbesondere deshalb gestattet, weil sie durch den Europäischen Gesetzgeber besonders erwähnt wurden. Er vertrat insoweit die Auffassung, daß ein berechtigtes Interesse anzunehmen sein könnte, wenn die betroffene Person ein Kunde des Unternehmens ist (Erwägungsgrund 47 Satz 2 DS-GVO).</p>
-
-                <p>Basiert die Verarbeitung personenbezogener Daten auf Artikel 6 I lit. f DS-GVO, ist unser berechtigtes Interesse die Durchführung unserer Geschäftstätigkeit zugunsten des Wohlergehens unserer Mitarbeiter.</p>
-
-                <h4>Cookies</h4>
-                <p>Unsere Internetseite verwendet sogenannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Sie dienen lediglich dazu, unser Angebot benutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert. Die meisten der von uns verwendeten Cookies sind so genannte „Session-Cookies“. Sie werden nach Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen. Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browser aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.</p>
-
-                <h4>Server-Log-Files</h4>
-                <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log Files, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
-                <ul>
-                    <li>Browsertyp und Browserversion</li>
-                    <li>verwendetes Betriebssystem</li>
-                    <li>Referrer URL</li>
-                    <li>Hostname des zugreifenden Rechners</li>
-                    <li>Datum und Uhrzeit der Serveranfrage</li>
-                    <li>eine Internet-Protokoll-Adresse (IP-Adresse)</li>
-                    <li>der Internet-Service-Provider des zugreifenden Systems</li>
-                </ul>
-                <p>Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Wir behalten uns vor, diese Daten nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.</p>
-
-                <h4>Kontaktformular</h4>
-                <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-
-                <h4>SSL-Verschlüsselung</h4>
-                <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und an dem Schloß-Symbol in Ihrer Browserzeile. Wenn die SSL-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
-
-                <h4>Routinemäßige Löschung / Sperrung personenbezogener Daten</h4>
-                <p>Der für die Verarbeitung Verantwortliche verarbeitet und speichert personenbezogene Daten der betroffenen Person nur für den Zeitraum, der zur Erreichung des Speicherungszwecks erforderlich ist oder sofern dies durch den Europäischen Richtlinien- und Verordnungsgeber oder einen anderen Gesetzgeber in Gesetzen oder Vorschriften, welchen der für die Verarbeitung Verantwortliche unterliegt, vorgesehen wurde. Entfällt der Speicherungszweck oder läuft eine vom Europäischen Richtlinien- und Verordnungsgeber oder einem anderen zuständigen Gesetzgeber vorgeschriebene Speicherfrist ab, werden die personenbezogenen Daten routinemäßig und entsprechend den gesetzlichen Vorschriften gesperrt bzw. gelöscht.</p>
-
-                <h4>Rechte der betroffenen Person</h4>
-                <p>Möchte eine betroffene Person eines oder mehrere dieser Rechte in Anspruch nehmen, kann sie sich hierzu jederzeit an einen Mitarbeiter des für die Verarbeitung Verantwortlichen wenden.</p>
-
-                <p><strong>Recht auf Bestätigung</strong><br>
-                Jede betroffene Person hat das Recht, von dem für die Verarbeitung Verantwortlichen eine Bestätigung darüber zu verlangen, ob sie betreffende personenbezogene Daten verarbeitet werden.</p>
-
-                <p><strong>Recht auf Auskunft</strong><br>
-                Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, jederzeit von dem für die Verarbeitung Verantwortlichen unentgeltliche Auskunft über die zu seiner Person gespeicherten personenbezogenen Daten und eine Kopie dieser Auskunft zu erhalten. Ferner hat die betroffene Person das Recht auf Auskunft über folgende Informationen:</p>
-                <ul>
-                    <li>die Verarbeitungszwecke</li>
-                    <li>die Kategorien personenbezogener Daten, die verarbeitet werden</li>
-                    <li>die Empfänger oder Kategorien von Empfängern, gegenüber denen die personenbezogenen Daten offengelegt worden sind oder noch offengelegt werden, insbesondere bei Empfängern in Drittländern oder bei internationalen Organisationen</li>
-                    <li>falls möglich die geplante Dauer, für die die personenbezogenen Daten gespeichert werden, oder, falls dies nicht möglich ist, die Kriterien für die Festlegung dieser Dauer</li>
-                    <li>das Bestehen eines Rechts auf Berichtigung oder Löschung der sie betreffenden personenbezogenen Daten oder auf Einschränkung der Verarbeitung durch den Verantwortlichen oder eines Widerspruchsrechts gegen diese Verarbeitung</li>
-                    <li>das Bestehen eines Beschwerderechts bei einer Aufsichtsbehörde</li>
-                    <li>wenn die personenbezogenen Daten nicht bei der betroffenen Person erhoben werden: Alle verfügbaren Informationen über die Herkunft der Daten</li>
-                    <li>das Bestehen einer automatisierten Entscheidungsfindung einschließlich Profiling gemäß Artikel 22 Abs.1 und 4 DS-GVO und — zumindest in diesen Fällen — aussagekräftige Informationen über die involvierte Logik sowie die Tragweite und die angestrebten Auswirkungen einer derartigen Verarbeitung für die betroffene Person</li>
-                </ul>
-                <p>Desweiteren steht der betroffenen Person ein Auskunftsrecht darüber zu, ob personenbezogene Daten an ein Drittland oder an eine internationale Organisation übermittelt wurden. Sofern dies der Fall ist, so steht der betroffenen Person im Übrigen das Recht zu, Auskunft über die geeigneten Garantien im Zusammenhang mit der Übermittlung zu erhalten.</p>
-
-                <p><strong>Recht auf Berichtigung</strong><br>
-                Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, die unverzügliche Berichtigung sie betreffender unrichtiger personenbezogener Daten zu verlangen. Ferner steht der betroffenen Person das Recht zu, unter Berücksichtigung der Zwecke der Verarbeitung, die Vervollständigung unvollständiger personenbezogener Daten – auch mittels einer ergänzenden Erklärung – zu verlangen.</p>
-
-                <p><strong>Recht auf Löschung</strong><br>
-                Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, von dem Verantwortlichen zu verlangen, daß die sie betreffenden personenbezogenen Daten unverzüglich gelöscht werden, sofern einer der folgenden Gründe zutrifft und soweit die Verarbeitung nicht erforderlich ist:</p>
-                <ul>
-                    <li>Die personenbezogenen Daten wurden für solche Zwecke erhoben oder auf sonstige Weise verarbeitet, für welche sie nicht mehr notwendig sind.</li>
-                    <li>Die betroffene Person widerruft ihre Einwilligung, auf die sich die Verarbeitung gemäß Art. 6 Abs. 1 Buchstabe a DS-GVO oder Art. 9 Abs. 2 Buchstabe a DS-GVO stützte, und es fehlt an einer anderweitigen Rechtsgrundlage für die Verarbeitung.</li>
-                    <li>Die betroffene Person legt gemäß Art. 21 Abs. 1 DS-GVO Widerspruch gegen die Verarbeitung ein, und es liegen keine vorrangigen berechtigten Gründe für die Verarbeitung vor, oder die betroffene Person legt gemäß Art. 21 Abs. 2 DS-GVO Widerspruch gegen die Verarbeitung ein.</li>
-                    <li>Die personenbezogenen Daten wurden unrechtmäßig verarbeitet.</li>
-                    <li>Die Löschung der personenbezogenen Daten ist zur Erfüllung einer rechtlichen Verpflichtung nach dem Unionsrecht oder dem Recht der Mitgliedstaaten erforderlich, dem der Verantwortliche unterliegt.</li>
-                    <li>Die personenbezogenen Daten wurden in Bezug auf angebotene Dienste der Informationsgesellschaft gemäß Art. 8 Abs. 1 DS-GVO erhoben.</li>
-                </ul>
-
-                <p>Sofern einer der oben genannten Gründe zutrifft und eine betroffene Person die Löschung von personenbezogenen Daten, die beim Verantwortlichen gespeichert sind, veranlassen möchte, kann sie sich hierzu jederzeit an einen Mitarbeiter des für die Verarbeitung Verantwortlichen wenden. Dieser Mitarbeiter wird veranlassen, daß dem Löschverlangen unverzüglich nachgekommen wird.</p>
-
-                <p>Wurden die personenbezogenen Daten vom Verantwortlichen öffentlich gemacht und ist unser Unternehmen als Verantwortlicher gemäß Art. 17 Abs. 1 DS-GVO zur Löschung der personenbezogenen Daten verpflichtet, so trifft der Verantwortliche unter Berücksichtigung der verfügbaren Technologie und der Implementierungskosten angemessene Maßnahmen (auch technischer Art), um andere für die Datenverarbeitung Verantwortliche, welche die veröffentlichten personenbezogenen Daten verarbeiten, darüber in Kenntnis zu setzen, daß die betroffene Person von diesen anderen für die Datenverarbeitung Verantwortlichen die Löschung sämtlicher Links zu diesen personenbezogenen Daten oder von Kopien oder Replikationen dieser personenbezogenen Daten verlangt hat, soweit die Verarbeitung nicht erforderlich ist. Der Mitarbeiter unseres Unternehmens wird im Einzelfall das Notwendige veranlassen.</p>
-
-                <h4>Recht auf Einschränkung der Verarbeitung</h4>
-                <p>Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, von dem Verantwortlichen die Einschränkung der Verarbeitung zu verlangen, wenn eine der folgenden Voraussetzungen gegeben ist:</p>
-                <ul>
-                    <li>Die Richtigkeit der personenbezogenen Daten wird von der betroffenen Person bestritten, und zwar für eine Dauer, die es dem Verantwortlichen ermöglicht, die Richtigkeit der personenbezogenen Daten zu überprüfen.</li>
-                    <li>Die Verarbeitung ist unrechtmäßig, die betroffene Person lehnt die Löschung der personenbezogenen Daten ab und verlangt stattdessen die Einschränkung der Nutzung der personenbezogenen Daten.</li>
-                    <li>Der Verantwortliche benötigt die personenbezogenen Daten für die Zwecke der Verarbeitung nicht länger, die betroffene Person benötigt sie jedoch zur Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</li>
-                    <li>Die betroffene Person hat Widerspruch gegen die Verarbeitung gem. Art. 21 Abs. 1 DS-GVO eingelegt und es steht noch nicht fest, ob die berechtigten Gründe des Verantwortlichen gegenüber denen der betroffenen Person überwiegen.</li>
-                </ul>
-                <p>Sofern eine der oben genannten Voraussetzungen gegeben ist und eine betroffene Person die Einschränkung von personenbezogenen Daten, die bei unserem Unternehmen gespeichert sind, verlangen möchte, kann sie sich hierzu jederzeit an einen Mitarbeiter des für die Verarbeitung Verantwortlichen wenden. Dieser Mitarbeiter wird die Einschränkung der Verarbeitung veranlassen.</p>
-
-                <h4>Recht auf Datenübertragbarkeit</h4>
-                <p>Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, die sie betreffenden personenbezogenen Daten, welche durch die betroffene Person einem Verantwortlichen bereitgestellt wurden, in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten. Sie hat außerdem das Recht, diese Daten einem anderen Verantwortlichen ohne Behinderung durch den Verantwortlichen, dem die personenbezogenen Daten bereitgestellt wurden, zu übermitteln, sofern die Verarbeitung auf der Einwilligung gemäß Art. 6 Abs. 1 Buchstabe a DS-GVO oder Art. 9 Abs. 2 Buchstabe a DS-GVO oder auf einem Vertrag gemäß Art. 6 Abs. 1 Buchstabe b DS-GVO beruht und die Verarbeitung mithilfe automatisierter Verfahren erfolgt, sofern die Verarbeitung nicht für die Wahrnehmung einer Aufgabe erforderlich ist, die im öffentlichen Interesse liegt oder in Ausübung öffentlicher Gewalt erfolgt, welche dem Verantwortlichen übertragen wurde.</p>
-
-                <p>Desweiteren hat die betroffene Person bei der Ausübung ihres Rechts auf Datenübertragbarkeit gemäß Art. 20 Abs. 1 DS-GVO das Recht, zu erwirken, daß die personenbezogenen Daten direkt von einem Verantwortlichen an einen anderen Verantwortlichen übermittelt werden, soweit dies technisch möglich ist und sofern hiervon nicht die Rechte und Freiheiten anderer Personen beeinträchtigt werden.</p>
-
-                <h4>Recht auf Widerspruch</h4>
-                <p>Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, aus Gründen, die sich aus ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung sie betreffender personenbezogener Daten, die aufgrund von Art. 6 Abs. 1 Buchstaben e oder f DS-GVO erfolgt, Widerspruch einzulegen. Dies gilt auch für ein auf diese Bestimmungen gestütztes Profiling. Unser Unternehmen verarbeitet die personenbezogenen Daten im Falle des Widerspruchs nicht mehr, es sei denn, wir können zwingende schutzwürdige Gründe für die Verarbeitung nachweisen, die den Interessen, Rechten und Freiheiten der betroffenen Person überwiegen, oder die Verarbeitung dient der Geltendmachung, Ausübung oder Verteidigung von Rechtsansprüchen.</p>
-
-                <p>Verarbeiten wir personenbezogene Daten, um Direktwerbung zu betreiben, so hat die betroffene Person das Recht, jederzeit Widerspruch gegen die Verarbeitung der personenbezogenen Daten zum Zwecke derartiger Werbung einzulegen. Widerspricht die betroffene Person gegenüber dem Verantwortlichen der Verarbeitung für Zwecke der Direktwerbung, so wird dieser die personenbezogenen Daten nicht mehr für diese Zwecke verarbeiten. Außerdem hat die betroffene Person das Recht, aus Gründen, die sich aus ihrer besonderen Situation ergeben, gegen die sie betreffende Verarbeitung personenbezogener Daten, die bei unserem Unternehmen zu wissenschaftlichen oder historischen Forschungszwecken oder zu statistischen Zwecken gemäß Art. 89 Abs. 1 DS-GVO erfolgen, Widerspruch einzulegen, es sei denn, eine solche Verarbeitung ist zur Erfüllung einer im öffentlichen Interesse liegenden Aufgabe erforderlich.</p>
-
-                <p>Zur Ausübung des Rechts auf Widerspruch kann sich die betroffene Person direkt an jeden Mitarbeiter unseres Unternehmens wenden. Der betroffenen Person steht es ferner frei, im Zusammenhang mit der Nutzung von Diensten der Informationsgesellschaft, ungeachtet der Richtlinie 2002/58/EG, ihr Widerspruchsrecht mittels automatisierter Verfahren auszuüben, bei denen technische Spezifikationen verwendet werden.</p>
-
-                <h4>Automatisierte Entscheidungen im Einzelfall einschließlich Profiling</h4>
-                <p>Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, nicht einer ausschließlich auf einer automatisierten Verarbeitung — einschließlich Profiling — beruhenden Entscheidung unterworfen zu werden, die ihr gegenüber rechtliche Wirkung entfaltet oder sie in ähnlicher Weise erheblich beeinträchtigt, sofern die Entscheidung</p>
-                <ul>
-                    <li>nicht für den Abschluß oder die Erfüllung eines Vertrags zwischen der betroffenen Person und dem Verantwortlichen erforderlich ist, oder</li>
-                    <li>aufgrund von Rechtsvorschriften der Union oder der Mitgliedstaaten, denen der Verantwortliche unterliegt, zulässig ist und diese Rechtsvorschriften angemessene Maßnahmen zur Wahrung der Rechte und Freiheiten sowie der berechtigten Interessen der betroffenen Person enthalten oder</li>
-                    <li>mit ausdrücklicher Einwilligung der betroffenen Person erfolgt</li>
-                </ul>
-                <p>Ist die Entscheidung für den Abschluß oder die Erfüllung eines Vertrags zwischen der betroffenen Person und dem Verantwortlichen erforderlich oder erfolgt sie mit ausdrücklicher Einwilligung der betroffenen Person, trifft das Unternehmen angemessene Maßnahmen, um die Rechte und Freiheiten sowie die berechtigten Interessen der betroffenen Person zu wahren, wozu mindestens das Recht auf Erwirkung des Eingreifens einer Person seitens des Verantwortlichen, auf Darlegung des eigenen Standpunkts und auf Anfechtung der Entscheidung gehört.</p>
-
-                <h4>Recht auf Widerruf einer datenschutzrechtlichen Einwilligung</h4>
-                <p>Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, eine Einwilligung zur Verarbeitung personenbezogener Daten jederzeit zu widerrufen.</p>
-
-                <h4>Name und Anschrift des für die Verarbeitung Verantwortlichen</h4>
-                <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung, sonstiger in den Mitgliedstaaten der Europäischen Union geltenden Datenschutzgesetze und anderer Bestimmungen mit datenschutzrechtlichem Charakter ist das Unternehmen:</p>
-
-                <p>© 2025 Florian Merzenich</p>
-            </div>
-        </div>
-    </div>
-
+    <!-- Countdown Script -->
     <script>
-        // --- COUNTDOWN LOGIC ---
-        function startCountdown(durationInSeconds) {
-            let timer = durationInSeconds, days, hours, minutes, seconds;
-            const display = document.getElementById('countdown-display');
+        // Simple countdown timer logic
+        function startTimer(duration, display) {
+            // Set end time to 24 hours from now if no specific date
+            const endDate = new Date();
+            endDate.setHours(23, 59, 59, 999); 
+            
+            const timerInterval = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = endDate - now;
 
-            setInterval(function () {
-                days = parseInt(timer / (3600 * 24), 10);
-                hours = parseInt((timer % (3600 * 24)) / 3600, 10);
-                minutes = parseInt((timer % 3600) / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-
-                // Add leading zeros
-                hours = hours < 10 ? "0" + hours : hours;
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                display.textContent = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
-
-                if (--timer < 0) {
-                    timer = durationInSeconds; // Loop reset
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    return;
                 }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("days").textContent = days < 10 ? "0" + days : days;
+                document.getElementById("hours").textContent = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").textContent = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").textContent = seconds < 10 ? "0" + seconds : seconds;
             }, 1000);
         }
 
         window.onload = function () {
-            // 3d 22h 13m 47s in seconds
-            const totalSeconds = (3 * 24 * 60 * 60) + (22 * 60 * 60) + (13 * 60) + 47;
-            startCountdown(totalSeconds);
+            startTimer();
         };
-
-        // --- IMPRESSUM MODAL LOGIC ---
-        function openImpressumModal() {
-            document.getElementById('impressumModal').style.display = 'flex';
-        }
-
-        function closeImpressumModal() {
-            document.getElementById('impressumModal').style.display = 'none';
-        }
-
-        // --- DATENSCHUTZ MODAL LOGIC ---
-        function openDatenschutzModal() {
-            document.getElementById('datenschutzModal').style.display = 'flex';
-        }
-
-        function closeDatenschutzModal() {
-            document.getElementById('datenschutzModal').style.display = 'none';
-        }
-
-        // Close on outside click
-        window.onclick = function(event) {
-            const impressumModal = document.getElementById('impressumModal');
-            const datenschutzModal = document.getElementById('datenschutzModal');
-            
-            if (event.target == impressumModal) {
-                closeImpressumModal();
-            }
-            if (event.target == datenschutzModal) {
-                closeDatenschutzModal();
-            }
-        }
     </script>
-
 </body>
 </html>
