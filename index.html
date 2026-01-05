@@ -132,14 +132,16 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            padding-top: 20px;
-            padding-bottom: 60px; 
+            /* Padding reduziert (war 20px / 60px) */
+            padding-top: 10px;
+            padding-bottom: 40px; 
         }
 
         .logo {
             width: 60px;
             height: auto;
-            margin-bottom: 15px;
+            /* Margin reduziert */
+            margin-bottom: 10px;
         }
 
         .sub-headline {
@@ -149,7 +151,8 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            /* Margin reduziert */
+            margin-bottom: 15px;
             border: 2px solid var(--text-white);
             padding: 5px 12px;
             display: inline-block;
@@ -162,7 +165,8 @@
             font-size: clamp(24px, 5vw, 42px); 
             font-weight: 800;
             line-height: 1.2;
-            margin-bottom: 25px;
+            /* Margin reduziert */
+            margin-bottom: 15px;
         }
 
         .main-headline span {
@@ -222,8 +226,8 @@
             color: #ffffff;
             font-family: var(--font-heading);
             font-weight: 800;
-            font-size: 20px; /* Schrift größer (war 18px) */
-            padding: 12px 35px; /* Button kleiner (war 15px 40px) */
+            font-size: 20px; 
+            padding: 12px 35px;
             text-transform: uppercase;
             text-decoration: none;
             border-radius: 50px;
@@ -262,46 +266,56 @@
             100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
         }
 
-        /* Countdown Style */
+        /* Countdown Style - ANGEPASST */
         .countdown-wrapper {
             border: 1px solid var(--text-white);
-            padding: 8px 20px;
+            padding: 15px 10px;
             background: rgba(0,0,0,0.6);
             border-radius: 8px;
             text-align: center;
             width: 100%;
+            margin-top: 10px;
         }
 
         .countdown-label {
             font-size: 14px;
-            margin-bottom: 2px;
+            margin-bottom: 10px;
             color: var(--text-gray);
             line-height: 1.2;
+            font-weight: 500;
         }
 
         .timer {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 15px; /* Etwas mehr Abstand zwischen den Blöcken */
             font-family: var(--font-heading);
-            font-weight: 700;
-            font-size: 24px;
+            font-weight: 800;
+            /* Deutlich größere Schriftgröße wie gewünscht */
+            font-size: 36px; 
             color: var(--primary-color);
-            line-height: 1.2;
+            line-height: 1;
+            transition: color 0.5s ease;
         }
 
         .timer-part {
             display: flex;
             flex-direction: column;
+            align-items: center;
             line-height: 1;
+            min-width: 60px; /* Feste Mindestbreite für Stabilität */
         }
 
         .timer-part span {
-            font-size: 10px;
+            font-size: 11px;
             color: var(--text-white);
             font-weight: 400;
-            margin-top: 2px;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+
+        /* Trennzeichen zwischen den Zahlen (optional, hier weggelassen für cleaneren Look oder man kann ':' per CSS einfügen) */
 
         /* -----------------------------------------------------------
            MARQUEE SECTION (Logos)
@@ -656,9 +670,10 @@
                 <div class="countdown-wrapper">
                     <p class="countdown-label">Noch verfügbar bis:</p>
                     <div id="countdown" class="timer">
-                        <div class="timer-part"><div id="d">00</div><span>Tage</span></div>:
-                        <div class="timer-part"><div id="h">00</div><span>Std</span></div>:
-                        <div class="timer-part"><div id="m">15</div><span>Min</span></div>:
+                        <div class="timer-part"><div id="d">00</div><span>Tage</span></div>
+                        <!-- Doppelpunkte visuell nicht nötig bei Block-Layout, aber hier drin gelassen oder entfernt je nach Geschmack. Hier durch Abstand in CSS gelöst -->
+                        <div class="timer-part"><div id="h">00</div><span>Std</span></div>
+                        <div class="timer-part"><div id="m">15</div><span>Min</span></div>
                         <div class="timer-part"><div id="s">00</div><span>Sek</span></div>
                     </div>
                 </div>
