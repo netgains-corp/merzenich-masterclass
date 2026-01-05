@@ -4,740 +4,501 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kostenlose Bärenmarkt Masterclass – Lerne profitabel zu investieren</title>
+    
+    <!-- Fonts laden: Montserrat & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons laden (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* -----------------------------------------------------------
+           BASIS SETUP & VARIABLEN
+        ----------------------------------------------------------- */
+        :root {
+            --primary-orange: #f6ad55;
+            --secondary-blue: #188bf6;
+            --dark-bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-white: #ffffff;
+            --text-gray: #cbd5e0;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Poppins', sans-serif;
+        }
+
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Montserrat', Arial, sans-serif;
-            color: #ffffff;
-            background-color: #000000;
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-color: var(--dark-bg);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            line-height: 1.5;
+            overflow-x: hidden; /* Horizontales Scrollen verhindern */
         }
 
-        /* Background Image */
+        /* -----------------------------------------------------------
+           HINTERGRUND (Fixed)
+        ----------------------------------------------------------- */
         .bg-fixed {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
             z-index: -1;
+            /* Das Originalbild aus deiner Quelle */
+            background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat;
+            opacity: 0.25; /* Abgedunkelt für Lesbarkeit */
         }
 
-        .bg-fixed::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
+        /* -----------------------------------------------------------
+           LAYOUT CONTAINER
+        ----------------------------------------------------------- */
         .container {
-            max-width: 1170px;
+            width: 100%;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 0 15px;
+            padding: 0 20px;
         }
 
-        /* Header */
-        header {
-            padding: 15px 0;
-            text-align: center;
-        }
-
-        .logo img {
-            max-width: 120px;
-            height: auto;
-        }
-
-        /* Main Content */
-        main {
-            position: relative;
-            z-index: 1;
-            padding: 20px 0;
-        }
-
+        /* -----------------------------------------------------------
+           HERO SECTION (Der kritische Bereich)
+        ----------------------------------------------------------- */
         .hero-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            margin-bottom: 30px;
+            padding-top: 20px;
+            padding-bottom: 40px;
+            min-height: 100vh; /* Mindestens Bildschirmhöhe */
         }
 
-        .badge {
-            background-color: transparent;
-            color: #f6ad55;
-            text-transform: uppercase;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 10px 0;
+        .logo {
+            width: 120px;
+            height: auto;
             margin-bottom: 15px;
         }
 
-        .headline {
-            font-size: 24px;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 20px;
-            padding: 0 10px;
+        /* Responsive Typografie mit clamp() - Das löst das Platzproblem */
+        .sub-headline {
+            font-family: var(--font-heading);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--primary-orange);
+            margin-bottom: 10px;
         }
 
-        .headline span {
-            color: #ffffff;
-        }
-
-        /* Main Box */
-        .main-box {
-            background-color: #000000;
-            border: 1px solid #ffffff;
-            border-radius: 20px;
-            padding: 25px 15px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .main-heading {
-            font-size: 28px;
-            font-weight: 700;
-            line-height: 1.3;
-            margin-bottom: 20px;
-        }
-
-        .hero-image {
-            width: 100%;
-            max-width: 700px;
-            height: auto;
-            margin: 20px auto;
-            display: block;
-        }
-
-        .cta-button {
-            background-color: #f6ad55;
-            color: #ffffff;
-            border: 1px solid #f6ad55;
-            border-radius: 25px;
-            padding: 14px 28px;
-            font-size: 22px;
+        .main-headline {
+            font-family: var(--font-heading);
+            /* Skaliert zwischen 24px (Mobile) und 42px (Desktop) */
+            font-size: clamp(24px, 5vw, 42px); 
             font-weight: 800;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin: 15px 0;
+            line-height: 1.2;
+            margin-bottom: 15px;
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 15px rgba(246, 173, 85, 0.3);
+        .main-headline span {
+            color: var(--text-white);
+            display: block;
+            margin-top: 5px;
         }
 
-        .countdown-text {
-            font-size: 20px;
-            margin: 15px 0 10px;
-        }
-
-        .countdown {
-            background-color: transparent;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 15px auto;
-            max-width: 400px;
-        }
-
-        .countdown img {
+        /* Das Bild */
+        .hero-img-container {
             width: 100%;
-            max-width: 350px;
-            height: auto;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
-        /* After Masterclass Section */
-        .after-section {
-            margin: 30px 0;
+        .hero-img {
+            max-width: 100%;
+            height: auto;
+            /* Auf Handy darf das Bild nicht den ganzen Screen füllen */
+            max-height: 200px; 
+            object-fit: contain;
+        }
+
+        @media (min-width: 768px) {
+            .hero-img {
+                max-height: 400px; /* Auf Desktop größer */
+            }
+        }
+
+        /* -----------------------------------------------------------
+           CTA BUTTON & COUNTDOWN
+        ----------------------------------------------------------- */
+        .cta-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .btn-main {
+            background-color: var(--primary-orange);
+            color: #ffffff;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            font-size: 18px;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            border: 2px solid var(--primary-orange);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 0 15px rgba(246, 173, 85, 0.4);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%; /* Breit auf Mobile für einfaches Klicken */
+            justify-content: center;
+        }
+
+        .btn-main:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 25px rgba(246, 173, 85, 0.6);
+        }
+
+        /* Pulsierender Effekt für den Button */
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(246, 173, 85, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(246, 173, 85, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(246, 173, 85, 0); }
+        }
+
+        /* Countdown Style */
+        .countdown-wrapper {
+            border: 1px solid var(--text-white);
+            padding: 10px 20px;
+            background: rgba(0,0,0,0.6);
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .countdown-label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: var(--text-gray);
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--primary-orange);
+        }
+
+        .timer-part {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .timer-part span {
+            font-size: 10px;
+            color: var(--text-white);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        /* -----------------------------------------------------------
+           SECTIONS (Allgemein)
+        ----------------------------------------------------------- */
+        section {
+            padding: 60px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         .section-title {
-            font-size: 32px;
-            font-weight: 400;
             text-align: center;
-            margin-bottom: 25px;
-            padding: 0 10px;
-        }
-
-        .benefit-box {
-            background-color: #000000;
-            border: 1px solid #ffffff;
-            border-radius: 20px;
-            padding: 18px;
-            margin-bottom: 15px;
-            font-size: 18px;
-            line-height: 1.4;
-        }
-
-        /* Who Section */
-        .who-section {
-            margin: 40px 0;
-        }
-
-        .feature-columns {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .feature-card {
-            background-color: transparent;
-            border: 1px solid #ffffff;
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            color: #37ca37;
-            margin-bottom: 10px;
-        }
-
-        .feature-text {
-            font-size: 16px;
-            line-height: 1.4;
-        }
-
-        /* Reviews */
-        .reviews-section {
-            margin: 40px 0;
-            text-align: center;
-        }
-
-        .reviews-widget {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            min-height: 200px;
-        }
-
-        /* Learn Section */
-        .learn-section {
-            margin: 40px 0;
-        }
-
-        .learn-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .learn-item {
-            margin-bottom: 15px;
-        }
-
-        .learn-title {
-            font-size: 24px;
+            font-family: var(--font-heading);
+            font-size: clamp(20px, 4vw, 32px);
             font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 10px;
+            margin-bottom: 40px;
+            color: var(--primary-orange);
+        }
+        
+        .section-title.white {
+            color: var(--text-white);
         }
 
-        .learn-description {
-            background-color: #ffffff;
-            color: #000000;
-            border: 1px solid #000000;
-            border-radius: 20px;
-            padding: 15px;
-            font-size: 17px;
-        }
-
-        /* Why Section */
-        .why-boxes {
+        /* Grid Layout (Automatisch responsive) */
+        .grid-3 {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-            margin: 30px 0;
+            grid-template-columns: 1fr; /* Mobile: 1 Spalte */
+            gap: 20px;
         }
 
-        .why-box {
-            background-color: transparent;
-            border: 1px solid #ffffff;
-            border-radius: 20px;
-            padding: 20px;
-            font-size: 16px;
-            line-height: 1.5;
+        @media (min-width: 768px) {
+            .grid-3 {
+                grid-template-columns: repeat(3, 1fr); /* Desktop: 3 Spalten */
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .card p {
+            font-size: 15px;
+            color: var(--text-gray);
+        }
+
+        .card i {
+            font-size: 30px;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        .card.white-border {
+            border: 1px solid var(--text-white);
         }
 
         /* Stats Section */
-        .stats-section {
-            margin: 40px 0;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .stat-card {
-            border: 1px solid #f6ad55;
-            border-radius: 20px;
-            padding: 25px 15px;
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--primary-orange);
+            padding: 20px;
             text-align: center;
         }
 
-        .stat-card:nth-child(odd) {
-            background-color: #C0C0C0;
-        }
-
-        .stat-card:nth-child(even) {
-            background-color: #424242;
-        }
-
         .stat-number {
-            font-size: 36px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 10px;
+            font-family: var(--font-heading);
+            font-size: 40px;
+            font-weight: 800;
+            color: var(--text-white);
+            display: block;
         }
 
         .stat-label {
             font-size: 16px;
-            color: #ffffff;
-        }
-
-        /* About Section */
-        .about-section {
-            background-color: transparent;
-            border: 1px solid #000000;
-            border-radius: 10px;
-            padding: 30px 20px;
-            margin: 50px auto;
-            max-width: 900px;
-        }
-
-        .about-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: block;
-            object-fit: cover;
-        }
-
-        .about-title {
-            color: #FF6F61;
-            font-size: 22px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .about-subtitle {
-            font-weight: 700;
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 20px;
-            color: #66CCCC;
-        }
-
-        .about-text {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #ffffff;
+            color: var(--text-gray);
         }
 
         /* Footer */
         footer {
-            background-color: transparent;
-            border-top: 1px solid #000000;
-            padding: 30px 0;
             text-align: center;
-            margin-top: 50px;
-        }
-
-        .footer-logo {
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 15px;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: var(--text-gray);
         }
 
         .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
 
         .social-icons a {
-            display: inline-block;
-        }
-
-        .social-icons img {
-            width: 40px;
-            height: 40px;
-        }
-
-        .footer-links {
-            font-size: 16px;
-            margin-top: 15px;
-        }
-
-        .footer-links a {
-            color: #ffffff;
-            text-decoration: none;
+            color: var(--text-white);
+            font-size: 24px;
             margin: 0 10px;
+            transition: color 0.3s;
         }
 
-        .footer-links a:hover {
-            text-decoration: underline;
+        .social-icons a:hover {
+            color: var(--primary-orange);
         }
 
-        /* Tablet and Desktop */
-        @media (min-width: 768px) {
-            .logo img {
-                max-width: 150px;
-            }
-
-            .headline {
-                font-size: 35px;
-            }
-
-            .main-heading {
-                font-size: 50px;
-            }
-
-            .cta-button {
-                font-size: 28px;
-                padding: 16px 32px;
-            }
-
-            .section-title {
-                font-size: 38px;
-            }
-
-            .benefit-box {
-                font-size: 20px;
-                padding: 22px;
-            }
-
-            .feature-columns {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
-            }
-
-            .feature-icon {
-                font-size: 48px;
-            }
-
-            .feature-text {
-                font-size: 18px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(4, 1fr);
-            }
-
-            .stat-number {
-                font-size: 48px;
-            }
-
-            .stat-label {
-                font-size: 18px;
-            }
-
-            .why-boxes {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .about-image {
-                width: 250px;
-                height: 250px;
-            }
-
-            .about-title {
-                font-size: 28px;
-            }
-
-            .about-subtitle {
-                font-size: 40px;
-            }
-
-            .about-text {
-                font-size: 16px;
-            }
+        footer a {
+            color: var(--text-gray);
+            text-decoration: none;
         }
 
-        /* Divider */
-        .divider {
-            width: 40%;
-            height: 1px;
-            background-color: #cbd5e0;
-            margin: 30px auto;
-        }
-
-        /* Smooth scroll */
-        html {
-            scroll-behavior: smooth;
-        }
     </style>
 </head>
 <body>
-    <!-- Background -->
+
+    <!-- Hintergrund Overlay -->
     <div class="bg-fixed"></div>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <a href="https://www.ritter-fabian.de/">
-                    <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/67094fbb9ca0e3bd41cb6164.png" alt="Logo">
+    <main class="container">
+        
+        <!-- HERO SECTION -->
+        <header class="hero-section">
+            <!-- Logo -->
+            <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/67094fbb9ca0e3bd41cb6164.png" alt="Logo" class="logo">
+
+            <!-- Text Content -->
+            <h2 class="sub-headline">9 JAHRE CRYPTO-ERFAHRUNG IN 60 MIN.</h2>
+            <h1 class="main-headline">
+                Von „Alles rot, ich check gar nichts mehr“<br>
+                <span style="color: var(--primary-orange);">zu „In 90 Tagen im Bärenmarkt mein Fundament gebaut“</span>
+            </h1>
+
+            <!-- Hero Image (Responsive optimiert) -->
+            <div class="hero-img-container">
+                <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Masterclass Grafik" class="hero-img">
+            </div>
+
+            <!-- CTA & Timer -->
+            <div class="cta-wrapper">
+                <a href="#register" class="btn-main pulse">
+                    <i class="fa-solid fa-play"></i> Jetzt Gratis Sichern
                 </a>
-            </div>
-        </div>
-    </header>
 
-    <!-- Main Content -->
-    <main>
-        <div class="container">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="badge">
-                    9 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
-                </div>
-            </section>
-
-            <!-- Main Box -->
-            <div class="main-box">
-                <h1 class="main-heading">
-                    Von "Alles rot, ich check gar nichts mehr"<br>
-                    zu <strong>"In 90 Tagen im Bärenmarkt mein Fundament gebaut"</strong>
-                </h1>
-
-                <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Bärenmarkt Masterclass" class="hero-image">
-
-                <a href="#anmeldung" class="cta-button">Jetzt Gratis Sichern</a>
-
-                <p class="countdown-text">Noch verfügbar bis:</p>
-                
-                <div class="countdown">
-                    <img src="https://services.leadconnectorhq.com/countdown-timer/render/688afaae06d769000d586226?uniqueId=demo&startDate=YYYY-MM-DDTHH:mm:ss.sssZ" alt="Countdown Timer">
-                </div>
-
-                <div class="divider"></div>
-
-                <h2 class="section-title"><strong>Wo stehst du nach der Masterclass</strong></h2>
-
-                <div class="benefit-box">
-                    Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.
-                </div>
-
-                <div class="benefit-box">
-                    Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.
-                </div>
-
-                <div class="benefit-box">
-                    Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.
+                <div class="countdown-wrapper">
+                    <p class="countdown-label">Noch verfügbar bis:</p>
+                    <div id="countdown" class="timer">
+                        <div class="timer-part"><div id="d">00</div><span>Tage</span></div>:
+                        <div class="timer-part"><div id="h">00</div><span>Std</span></div>:
+                        <div class="timer-part"><div id="m">15</div><span>Min</span></div>:
+                        <div class="timer-part"><div id="s">00</div><span>Sek</span></div>
+                    </div>
                 </div>
             </div>
+        </header>
 
-            <!-- For Who Section -->
-            <section class="who-section">
-                <div class="divider"></div>
-                <h2 class="section-title"><strong>Für wen ist diese Masterclass</strong></h2>
-
-                <div class="feature-columns">
-                    <div class="feature-card">
-                        <div class="feature-icon">✓</div>
-                        <p class="feature-text">
-                            Für dich, wenn du schon investiert bist, aber <em>ehrlich gesagt</em> keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">✓</div>
-                        <p class="feature-text">
-                            Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.
-                        </p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">✓</div>
-                        <p class="feature-text">
-                            Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher eher verunsichert hat.
-                        </p>
-                    </div>
+        <!-- BENEFITS SECTION -->
+        <section>
+            <h3 class="section-title white">Wo stehst du nach der Masterclass?</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <p>Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p>
                 </div>
-
-                <a href="#anmeldung" class="cta-button">Jetzt Anmelden</a>
-            </section>
-
-            <!-- Reviews Section -->
-            <section class="reviews-section">
-                <div class="divider"></div>
-                <h2 class="section-title"><strong>Das sagt meine Community</strong></h2>
-                <div class="reviews-widget">
-                    <p style="font-size: 18px; color: #ffffff;">⭐⭐⭐⭐⭐</p>
-                    <p style="margin-top: 15px; font-size: 16px;">Über 5.600 zufriedene Event-Teilnehmer</p>
+                <div class="card">
+                    <p>Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p>
                 </div>
-            </section>
-
-            <!-- What You'll Learn -->
-            <section class="learn-section">
-                <div class="divider"></div>
-                <h2 class="section-title"><strong>Was du in der exklusiven Masterclass lernen wirst</strong></h2>
-
-                <div class="learn-grid">
-                    <div class="learn-item">
-                        <h3 class="learn-title">✅ 4-Schritte-System</h3>
-                        <div class="learn-description">
-                            Du bekommst ein glasklares 4-Step-Framework, mit dem du dich im Bärenmarkt richtig positionierst, Fehler vermeidest und systematisch Vermögen aufbaust, ohne zu raten, ohne zu zocken.
-                        </div>
-                    </div>
-
-                    <div class="learn-item">
-                        <h3 class="learn-title">✅ Gewinner-Strategien</h3>
-                        <div class="learn-description">
-                            Du lernst die exakten Strategien, die ich selbst nutze, um in volatilen oder fallenden Phasen Chancen zu finden, bevor sie alle sehen.
-                        </div>
-                    </div>
-
-                    <div class="learn-item">
-                        <h3 class="learn-title">✅ Portfolio-Ordnung</h3>
-                        <div class="learn-description">
-                            Ich zeige dir, wie du Ordnung ins Chaos bringst: Welche Coins raus, welche rein, und wie du dein Portfolio so strukturiert, dass du endlich ruhig schlafen kannst.
-                        </div>
-                    </div>
-
-                    <div class="learn-item">
-                        <h3 class="learn-title">✅ Fehler-Vermeider</h3>
-                        <div class="learn-description">
-                            Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie für immer aus deinem Verhalten streichst.
-                        </div>
-                    </div>
-
-                    <div class="learn-item">
-                        <h3 class="learn-title">✅ Zukunfts-Kompass</h3>
-                        <div class="learn-description">
-                            Du bekommst ein glasklares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten und wie du dich darauf vorbereitest, um Chancen nicht nur zu sehen, sondern zu nutzen.
-                        </div>
-                    </div>
+                <div class="card">
+                    <p>Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p>
                 </div>
+            </div>
+        </section>
 
-                <a href="#anmeldung" class="cta-button">Sei Dabei</a>
-            </section>
-
-            <!-- Why Section -->
-            <section class="why-section">
-                <div class="divider"></div>
-                <h2 class="section-title"><strong>Warum du die Bärenmarkt Masterclass nicht verpassen solltest</strong></h2>
-
-                <div class="why-boxes">
-                    <div class="why-box">
-                        Weil du es satt hast, jedes verdammte Mal der Depp zu sein, der oben kauft und unten verkauft, und das endlich beenden willst.
-                    </div>
-
-                    <div class="why-box">
-                        Weil du keine Lust mehr hast, heimlich neidisch auf andere zu sein, die mutiger, schlauer und früher gehandelt haben als du.
-                    </div>
-
-                    <div class="why-box">
-                        Weil du nie wieder von außen zusehen willst, wie andere aus denselben Marktbewegungen Gewinne holen, während du wieder zögerst.
-                    </div>
-
-                    <div class="why-box">
-                        Weil du es dir selbst schuldig bist, endlich aufzuhören, wie ein Amateur zu handeln, und anzufangen, wie jemand, der Vermögen aufbaut.
-                    </div>
+        <!-- AUDIENCE SECTION -->
+        <section>
+            <h3 class="section-title">Für wen ist diese Masterclass?</h3>
+            <div class="grid-3">
+                <div class="card white-border">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <p>Für dich, wenn du schon investiert bist, aber <em>ehrlich gesagt</em> keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.</p>
                 </div>
-
-                <a href="#anmeldung" class="cta-button">Hier Klicken</a>
-            </section>
-
-            <!-- Stats Section -->
-            <section class="stats-section">
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">9+</div>
-                        <div class="stat-label">Jahre Erfahrung</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-number">5.600+</div>
-                        <div class="stat-label">Event Besucher</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-number">16.500+</div>
-                        <div class="stat-label">Menschen begleitet</div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-number">2,5M€+</div>
-                        <div class="stat-label">Crypto Gewinne</div>
-                    </div>
+                <div class="card white-border">
+                    <i class="fa-solid fa-user-shield"></i>
+                    <p>Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p>
                 </div>
-            </section>
-
-            <!-- About Section -->
-            <section class="about-section">
-                <div class="divider"></div>
-                <h2 class="about-subtitle">DAS ist Fabian Ritter</h2>
-
-                <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/69249a6f37de763c99e26416.jpg" alt="Fabian Ritter" class="about-image">
-
-                <p class="about-title"><strong>Crypto Experte & Educator</strong></p>
-
-                <div class="about-text">
-                    <p>Fabian Ritter ist nicht zufällig zu einem der führenden Crypto-Experten Deutschlands geworden. Vor 9 Jahren hat er selbst jeden Fehler mitgenommen, den es gab, vom falschen Timing bis zu dubiosen Altcoins. Genau diese Erfahrung macht heute den Unterschied:</p>
-                    <p>Mehr als <strong>16.000 Menschen</strong> hat er seit 2019 geholfen, die Fehler zu vermeiden, die ihn damals Tausende gekostet haben.</p>
-                    <p><br>Mit <strong>über 5.600 Eventteilnehmern</strong>, <strong>390x-Ergebnissen</strong> und einer Community, aus der täglich nachrichten kommen wie:</p>
-                    <p><em>"Ich wusste vor ner Woche nichtmal wo ich Bitcooin kaufen kann und heute läuft mein erster Pool mit 5% die Woche."</em></p>
+                <div class="card white-border">
+                    <i class="fa-solid fa-coins"></i>
+                    <p>Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher verunsichert hat.</p>
                 </div>
-            </section>
+            </div>
+            
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="#register" class="btn-main">Jetzt Anmelden</a>
+            </div>
+        </section>
 
-            <!-- Final CTA -->
-            <section id="anmeldung" style="text-align: center; margin: 50px 0;">
-                <a href="https://webinar.ritter-fabian.de/masterclass" class="cta-button">Jetzt Kostenlos Anmelden</a>
-            </section>
-        </div>
+        <!-- STATS SECTION -->
+        <section>
+            <div class="grid-3">
+                <div class="stat-box">
+                    <span class="stat-number">9+</span>
+                    <span class="stat-label">Jahre Erfahrung</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">16.500+</span>
+                    <span class="stat-label">Menschen begleitet</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">2.5 Mio €+</span>
+                    <span class="stat-label">Crypto Gewinne</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTENT SECTION -->
+        <section>
+            <h3 class="section-title">Was du in der exklusiven Masterclass lernen wirst</h3>
+            <div class="grid-3">
+                <div class="card">
+                    <h4 style="color:var(--primary-orange); margin-bottom:10px;">4-Schritte-System</h4>
+                    <p>Du bekommst ein glasklares 4-Step-Framework, mit dem du dich im Bärenmarkt richtig positionierst.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color:var(--primary-orange); margin-bottom:10px;">Fehler-Vermeider</h4>
+                    <p>Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie für immer streichst.</p>
+                </div>
+                <div class="card">
+                    <h4 style="color:var(--primary-orange); margin-bottom:10px;">Zukunfts-Kompass</h4>
+                    <p>Ein klares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten.</p>
+                </div>
+            </div>
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="#register" class="btn-main pulse">Sei Dabei</a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="social-icons">
+                <a href="https://instagram.com/fabian_ritter84" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://x.com/FabianRitter13" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://youtube.com/@fabianritter84" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <p>
+                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank">Impressum</a> | 
+                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank">Datenschutz</a>
+            </p>
+        </footer>
+
     </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="social-icons">
-                <a href="https://instagram.com/fabian_ritter84" target="_blank" aria-label="Instagram">
-                    <img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/instagram-square.svg" alt="Instagram">
-                </a>
-                <a href="https://x.com/FabianRitter13" target="_blank" aria-label="X">
-                    <img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/x-square.svg" alt="X">
-                </a>
-                <a href="https://youtube.com/@fabianritter84" target="_blank" aria-label="Youtube">
-                    <img src="https://stcdn.leadconnectorhq.com/funnel/icons/square/youtube-square.svg" alt="Youtube">
-                </a>
-            </div>
+    <!-- JAVASCRIPT TIMER -->
+    <script>
+        // Einfacher 15 Minuten Loop Timer für Demo-Zwecke
+        // Startet bei jedem Neuladen bei 15 Minuten
+        (function() {
+            // Setze Dauer: 15 Minuten * 60 Sekunden
+            let duration = 15 * 60;
+            
+            const displayDays = document.getElementById('d');
+            const displayHours = document.getElementById('h');
+            const displayMinutes = document.getElementById('m');
+            const displaySeconds = document.getElementById('s');
 
-            <div class="footer-logo">
-                <a href="https://www.ritter-fabian.de/" target="_blank">
-                    <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/67094fbb9ca0e3bd41cb6164.png" alt="Logo">
-                </a>
-            </div>
+            let timer = duration, minutes, seconds;
 
-            <div class="footer-links">
-                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank">Impressum</a>
-                ⎜
-                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank">Datenschutz</a>
-            </div>
-        </div>
-    </footer>
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                displayDays.textContent = "00";
+                displayHours.textContent = "00";
+                displayMinutes.textContent = minutes;
+                displaySeconds.textContent = seconds;
+
+                if (--timer < 0) {
+                    timer = duration; // Timer neu starten wenn abgelaufen
+                }
+            }, 1000);
+        })();
+    </script>
 </body>
 </html>
