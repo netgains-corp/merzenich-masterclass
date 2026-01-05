@@ -48,13 +48,17 @@
         }
 
         body {
-            background-color: var(--black);
-            /* Angepasster Hintergrund: Satterer hellbrauner Gradient Verlauf */
-            background: radial-gradient(circle at 50% 0%, #8c6239 0%, #1a1a1a 60%, #000000 100%);
+            background-color: #000000;
+            /* Runderer Gradient (Radial): Schein von oben und unten */
+            background-image: 
+                radial-gradient(circle at 50% 0%, #4a332a 0%, transparent 60%),
+                radial-gradient(circle at 50% 100%, #4a332a 0%, transparent 60%);
             background-attachment: fixed;
+            background-repeat: no-repeat;
             color: var(--white);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -293,19 +297,19 @@
 
     <!-- Header / Logo -->
     <!-- pt-6 für Abstand oben, pb-0 für keinen Abstand unten -->
-    <header class="container mx-auto pt-6 pb-0 px-4 text-center">
+    <header class="container mx-auto pt-4 md:pt-6 pb-0 px-4 text-center">
         <a href="https://flos-funnel.pages.dev/" class="inline-block">
             <!-- Logo replaced with local file reference -->
-            <img src="xlg.jpg" alt="Florian Merzenich Logo" class="h-12 md:h-16 mx-auto object-contain">
+            <img src="xlg.jpg" alt="Florian Merzenich Logo" class="h-10 md:h-16 mx-auto object-contain">
         </a>
     </header>
 
     <!-- Headline Section -->
-    <!-- pt-4 für minimalen Abstand zum Logo -->
-    <section class="container mx-auto px-4 pt-4 pb-8 text-center">
-        <div class="border-2 border-white rounded-xl p-4 inline-block mx-auto mb-8">
-            <!-- Klasse text-gold-shimmer hinzugefügt und text-orange entfernt -->
-            <h2 class="text-xl md:text-3xl font-poppins font-semibold uppercase text-gold-shimmer">
+    <!-- Reduzierte Abstände und kleinere Schrift für Mobile -->
+    <section class="container mx-auto px-4 pt-2 pb-4 md:pt-4 md:pb-8 text-center">
+        <div class="border-2 border-white rounded-xl p-2 md:p-4 inline-block mx-auto mb-4 md:mb-8">
+            <!-- Schriftgröße auf text-xs (extra small) reduziert für Mobile, sm:text-base für Tablets -->
+            <h2 class="text-xs sm:text-base md:text-3xl font-poppins font-semibold uppercase text-gold-shimmer tracking-wide leading-snug">
                 12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.
             </h2>
         </div>
@@ -313,7 +317,7 @@
 
     <!-- Hero Section -->
     <section class="container mx-auto px-4 pb-12 text-center">
-        <h1 class="text-3xl md:text-5xl font-bold mb-8 leading-tight">
+        <h1 class="text-2xl md:text-5xl font-bold mb-6 md:mb-8 leading-tight">
             60 Minuten Netflix oder<br>
             <span class="text-orange">60 Minuten für immer in seine Zukunft investieren</span>
         </h1>
