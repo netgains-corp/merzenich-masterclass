@@ -54,7 +54,7 @@
             z-index: -1;
             /* Das Originalbild aus deiner Quelle */
             background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat;
-            /* Opazität erhöht, damit es heller wirkt */
+            /* Opazität erhöht, damit es heller wirkt (Kundenwunsch) */
             opacity: 0.45; 
         }
 
@@ -82,7 +82,7 @@
         }
 
         .logo {
-            /* Logo verkleinert */
+            /* Logo verkleinert (Kundenwunsch) */
             width: 80px;
             height: auto;
             margin-bottom: 15px;
@@ -98,7 +98,7 @@
             color: var(--primary-orange);
             margin-bottom: 20px;
             
-            /* Umrandung hinzugefügt */
+            /* Umrandung hinzugefügt (Kundenwunsch) */
             border: 2px solid var(--text-white);
             padding: 8px 16px;
             display: inline-block;
@@ -177,6 +177,16 @@
         .btn-main:hover {
             transform: scale(1.02);
             box-shadow: 0 0 25px rgba(246, 173, 85, 0.6);
+        }
+
+        /* Subtext unter dem Button */
+        .cta-subtext {
+            font-size: 12px;
+            color: var(--text-white);
+            margin-top: 5px;
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 400px; /* Damit es auf Desktop nicht zu breit läuft */
         }
 
         /* Pulsierender Effekt für den Button */
@@ -308,148 +318,6 @@
             color: var(--text-gray);
         }
 
-        /* Offer Stack Section */
-        .offer-section {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.8) 100%);
-            border-top: 1px solid rgba(246, 173, 85, 0.2);
-            border-bottom: 1px solid rgba(246, 173, 85, 0.2);
-            padding: 60px 0;
-        }
-
-        .offer-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            max-width: 800px;
-            margin: 0 auto;
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-        }
-
-        .offer-glow {
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background: rgba(246, 173, 85, 0.15);
-            border-radius: 50%;
-            filter: blur(60px);
-            pointer-events: none;
-        }
-
-        .offer-list {
-            list-style: none;
-            padding: 0;
-            margin: 30px 0;
-        }
-
-        .offer-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            font-size: 18px;
-            color: var(--text-white);
-        }
-
-        .check-icon {
-            color: #22c55e;
-            font-size: 24px;
-            margin-right: 15px;
-            text-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
-            min-width: 24px;
-        }
-
-        /* -----------------------------------------------------------
-           SOCIAL PROOF SECTION
-        ----------------------------------------------------------- */
-        .social-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            align-items: start;
-        }
-
-        @media (min-width: 768px) {
-            .social-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        .chat-column {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        /* Chat Bubbles */
-        .chat-bubble {
-            background: #1f2937; /* Dunkles Grau für Nachrichten */
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 15px 20px;
-            border-radius: 12px;
-            /* Ein kleiner "Nippel" für den Sprechblasen-Look */
-            border-bottom-left-radius: 2px; 
-            position: relative;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
-            color: var(--text-gray);
-            font-size: 14px;
-        }
-
-        .chat-bubble:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary-orange);
-        }
-
-        .chat-author {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--primary-orange);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Review Card (Weiß) */
-        .review-card {
-            background: #ffffff;
-            color: #1a202c; /* Dunkler Text für Kontrast */
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 25px rgba(246, 173, 85, 0.3); /* Neon Glow Effekt */
-            transition: transform 0.3s ease;
-        }
-
-        .review-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 35px rgba(246, 173, 85, 0.5);
-        }
-
-        .review-stars {
-            color: var(--primary-orange);
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-
-        .review-text {
-            font-style: italic;
-            font-size: 15px;
-            margin-bottom: 15px;
-            color: #4a5568;
-            line-height: 1.6;
-        }
-
-        .review-author {
-            font-weight: 800;
-            font-size: 13px;
-            text-transform: uppercase;
-            color: var(--secondary-blue);
-            letter-spacing: 1px;
-        }
-
         /* Footer */
         footer {
             text-align: center;
@@ -494,10 +362,10 @@
             <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/67094fbb9ca0e3bd41cb6164.png" alt="Logo" class="logo">
 
             <!-- Text Content -->
-            <h2 class="sub-headline">9 JAHRE CRYPTO-ERFAHRUNG IN 60 MIN.</h2>
+            <h2 class="sub-headline">12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.</h2>
             <h1 class="main-headline">
-                Von „Alles rot, ich check gar nichts mehr“<br>
-                <span style="color: var(--primary-orange);">zu „In 90 Tagen im Bärenmarkt mein Fundament gebaut“</span>
+                60 Minuten Netflix oder<br>
+                <span style="color: var(--primary-orange);">60 Minuten für immer in seine Zukunft investieren</span>
             </h1>
 
             <!-- Hero Image (Responsive optimiert) -->
@@ -507,9 +375,10 @@
 
             <!-- CTA & Timer -->
             <div class="cta-wrapper">
-                <a href="#register" class="btn-main pulse">
-                    <i class="fa-solid fa-play"></i> Jetzt Gratis Sichern
+                <a href="https://flos-funnel.pages.dev/" class="btn-main pulse">
+                    JETZT GRATIS 1:1 GESPRÄCH SICHERN
                 </a>
+                <p class="cta-subtext">Sichere dir 1 von 5 freien Plätzen zum persönlichen 1:1 Gespräch mit mir</p>
 
                 <div class="countdown-wrapper">
                     <p class="countdown-label">Noch verfügbar bis:</p>
@@ -558,7 +427,7 @@
             </div>
             
             <div style="margin-top: 40px; text-align: center;">
-                <a href="#register" class="btn-main">Jetzt Anmelden</a>
+                <a href="https://flos-funnel.pages.dev/" class="btn-main">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
             </div>
         </section>
 
@@ -598,70 +467,7 @@
                 </div>
             </div>
             <div style="margin-top: 40px; text-align: center;">
-                <a href="#register" class="btn-main pulse">Sei Dabei</a>
-            </div>
-        </section>
-
-        <!-- OFFER STACK SECTION -->
-        <section class="offer-section">
-            <div class="offer-box">
-                <!-- Glow Effect -->
-                <div class="offer-glow"></div>
-                
-                <h3 class="section-title white" style="margin-bottom: 20px;">Was du im kostenlosen Strategiegespräch bekommst:</h3>
-                
-                <ul class="offer-list">
-                    <li class="offer-item">
-                        <i class="fas fa-check-square check-icon"></i>
-                        <span style="font-weight: 700;">Ausführliche Analyse deiner Ist-Situation</span>
-                    </li>
-                    <li class="offer-item">
-                        <i class="fas fa-check-square check-icon"></i>
-                        <span style="font-weight: 700;">Einblick in die Struktur eines 3h-Deep-Dive Calls</span>
-                    </li>
-                    <li class="offer-item">
-                        <i class="fas fa-check-square check-icon"></i>
-                        <span style="font-weight: 700;">Dein persönlicher Fahrplan für die nächsten 90 Tage</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- SOCIAL PROOF SECTION (NEU) -->
-        <section class="social-proof-section">
-            <h3 class="section-title white">Ergebnisse <span style="color: var(--primary-orange);">lügen nicht</span></h3>
-            
-            <div class="social-grid">
-                
-                <!-- Linke Spalte: WhatsApp Mockups -->
-                <div class="chat-column">
-                    <div class="chat-bubble">
-                        <p class="chat-author">Thomas S.</p>
-                        <p>Hey Fabian, kurzes Update: Mein Portfolio ist heute 20% im Plus! Danke für die Ruhe, die du reingebracht hast. 🙏</p>
-                    </div>
-                    
-                    <div class="chat-bubble">
-                        <p class="chat-author">Markus K.</p>
-                        <p>Endlich verstehe ich, was ich da eigentlich mache. Das Gefühl von Kontrolle ist unbezahlbar.</p>
-                    </div>
-                    
-                    <div class="chat-bubble">
-                        <p class="chat-author">Sabine L.</p>
-                        <p>Die Strategie mit den Edelmetallen als Anker war genau richtig für meine Nerven. Danke für das Mentoring!</p>
-                    </div>
-                </div>
-
-                <!-- Rechte Spalte: Review Card -->
-                <div class="review-column">
-                    <div class="review-card">
-                        <div class="review-stars">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"Kurz und knapp: Beste Entscheidung 2024. Endlich Ruhe im Depot und ein klarer Plan. Danke Fabian!"</p>
-                        <p class="review-author">- Dennis B.</p>
-                    </div>
-                </div>
-
+                <a href="https://flos-funnel.pages.dev/" class="btn-main pulse">Sei Dabei</a>
             </div>
         </section>
 
