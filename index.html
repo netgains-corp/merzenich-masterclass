@@ -40,7 +40,8 @@
 
         /* THEME: ROT (Nur Hintergrund-Tönung) */
         body.theme-red {
-            --overlay-color: rgba(239, 68, 68, 0.4); /* Roter Schimmer */
+            /* Intensiveres, dunkleres Rot mit hoher Deckkraft */
+            --overlay-color: rgba(160, 0, 0, 0.85); 
         }
 
         * {
@@ -204,13 +205,14 @@
 
         .laptop-screen {
             position: absolute;
-            top: 5.5%;   
-            left: 12.3%; 
-            width: 75.5%; 
-            height: 84%; 
+            /* Werte angepasst, um das Originalbild besser zu verdecken */
+            top: 5.0%;   
+            left: 12.0%; 
+            width: 76.0%; 
+            height: 85.0%; 
             z-index: 20; 
             object-fit: cover;
-            border-radius: 2px;
+            border-radius: 3px;
         }
 
         /* -----------------------------------------------------------
@@ -280,7 +282,8 @@
             background: transparent;
             text-align: center;
             width: 100%;
-            margin-top: 15px;
+            /* Abstand nach oben verringert (war 15px) */
+            margin-top: 5px;
         }
 
         .countdown-label {
@@ -421,7 +424,8 @@
 
         /* Cards */
         .card {
-            background: var(--card-bg);
+            /* Hintergrund auf Schwarz geändert */
+            background: #000000;
             border: 1px solid rgba(255,255,255,0.2);
             padding: 25px;
             border-radius: 15px;
