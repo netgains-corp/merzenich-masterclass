@@ -1023,7 +1023,8 @@
                 <a href="#" class="btn-main pulse">
                     JETZT GRATIS 1:1 GESPRÄCH SICHERN
                 </a>
-                <p class="cta-subtext">Sichere dir 1 von 5 freien Plätzen zum persönlichen 1:1 Gespräch mit mir</p>
+                <!-- ID hinzugefügt bei der Zahl -->
+                <p class="cta-subtext">Sichere dir 1 von <span id="daily-slots">3</span> freien Plätzen zum persönlichen 1:1 Gespräch mit mir</p>
 
                 <div class="countdown-wrapper">
                     <p class="countdown-label">Noch verfügbar bis:</p>
@@ -1305,6 +1306,25 @@
                     }
                 });
             });
+        })();
+
+        // 5. DYNAMIC SLOTS (1-3 Plätze pro Tag, basierend auf Datum)
+        (function() {
+            const slotsElement = document.getElementById('daily-slots');
+            if (slotsElement) {
+                const today = new Date();
+                // Erzeuge einen Seed aus dem Datum (z.B. 2023 + 10 + 27 = 2060)
+                // Damit bleibt die Zahl den ganzen Tag über gleich.
+                const seed = today.getFullYear() + today.getMonth() + today.getDate();
+                
+                // Einfacher Pseudo-Zufallsgenerator basierend auf dem Seed
+                // Modulo 3 ergibt 0, 1 oder 2. Plus 1 ergibt 1, 2 oder 3.
+                // Wir nutzen Math.sin für etwas mehr Variation als einfaches Hochzählen.
+                const x = Math.sin(seed) * 10000;
+                const slots = Math.floor((x - Math.floor(x)) * 3) + 1;
+
+                slotsElement.textContent = slots;
+            }
         })();
     </script>
 </body>
