@@ -211,7 +211,7 @@
         .laptop-screen {
             position: absolute;
             /* Werte angepasst, um das Originalbild besser zu verdecken */
-            top: 5.0%;   
+            top: 5.0%;    
             left: 12.0%; 
             width: 76.0%; 
             height: 85.0%; 
@@ -649,6 +649,7 @@
         footer a {
             color: var(--text-gray);
             text-decoration: none;
+            cursor: pointer;
         }
 
         /* -----------------------------------------------------------
@@ -659,7 +660,7 @@
             bottom: 20px;
             right: 20px;
             background-color: #ffffff;
-            width: 140px;
+            width: 110px; /* Breite reduziert von 140px auf 110px */
             padding: 10px;
             border-radius: 4px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
@@ -716,6 +717,99 @@
             padding-top: 5px;
         }
 
+        /* -----------------------------------------------------------
+           MODAL STYLES (POPUP)
+        ----------------------------------------------------------- */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            border: 1px solid var(--primary-color);
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 600px; /* Breiter für viel Text */
+            width: 90%;
+            position: relative;
+            text-align: left;
+            color: var(--text-gray);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            /* Scrollbar für lange Inhalte */
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        /* Scrollbar Styling */
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+        .modal-content::-webkit-scrollbar-track {
+            background: #000; 
+            border-radius: 4px;
+        }
+        .modal-content::-webkit-scrollbar-thumb {
+            background: var(--primary-color); 
+            border-radius: 4px;
+        }
+
+        .modal-content h3 {
+            color: var(--text-white);
+            font-family: var(--font-heading);
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 10px;
+        }
+        
+        .modal-content h4 {
+            color: var(--text-white);
+            font-family: var(--font-heading);
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .modal-content p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .modal-content strong {
+            color: var(--text-white);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: var(--text-gray);
+            font-size: 32px;
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+            z-index: 10;
+        }
+
+        .close-modal:hover {
+            color: var(--primary-color);
+        }
+
     </style>
 </head>
 <body>
@@ -741,12 +835,167 @@
         <div class="pe-date" id="pe-date-display">Stand: ...</div>
     </div>
 
+    <!-- IMPRESSUM MODAL (POPUP) -->
+    <div id="impressum-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" data-target="impressum-modal">&times;</span>
+            <h3>Impressum</h3>
+            <p>
+                <strong>Florian Merzenich</strong><br>
+                Am Eichelgärtchen 36B<br>
+                56283 Halsenbach
+            </p>
+            <p>
+                Telefon: 015253846630<br>
+                E-Mail: managment@florian-merzenich.de
+            </p>
+            <p>
+                <strong>Vertretungsberechtigte/r Geschäftsführer/in:</strong><br>
+                Florian Merzenich
+            </p>
+            <p>
+                <strong>Registernummer:</strong><br>
+                HE461931
+            </p>
+        </div>
+    </div>
+
+    <!-- DATENSCHUTZ MODAL (POPUP) -->
+    <div id="datenschutz-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" data-target="datenschutz-modal">&times;</span>
+            <h3>Datenschutzerklärung</h3>
+            
+            <p><strong>Merzenix LTD</strong> legt großen Wert auf den Schutz Ihrer Daten. Datenschutz ist uns wichtig und wir möchten, dass Sie sich beim Besuch unserer Website sicher fühlen. Bitte beachten Sie, dass diese Datenschutzerklärung Beispieltexte enthält und nicht vollständig ist. Je nach den Funktionen unserer Website kann der Inhalt unserer Datenschutzerklärung variieren. Wir als Website-Betreiber müssen sicherstellen, dass die Datenschutzerklärung alle Drittkomponenten auflistet, die auf unserer Website verwendet werden. Der Link zur Datenschutzerklärung muss von jeder Seite unserer Website aus erreichbar sein.</p>
+
+            <h4>Datenerhebung, -nutzung und Weitergabe</h4>
+            <p><strong>Kontrolle über Daten</strong><br>
+            Wir informieren Sie über die Art der gesammelten Informationen auf unserer Website, wie wir sie nutzen und ob wir sie an Dritte weitergeben.</p>
+            <p><strong>Datensicherheit</strong><br>
+            Sie haben das Recht, Ihre personenbezogenen Informationen und Daten einzusehen, zu ändern und zu aktualisieren. Wenn Sie Bedenken bezüglich der Datenverwendung haben, können Sie sich gerne an uns wenden.</p>
+            <p>Der Schutz Ihrer Daten ist uns ein wichtiges Anliegen. Wir ergreifen verschiedene Schutzmaßnahmen, um die Sicherheit Ihrer Daten zu gewährleisten, einschließlich Datenverschlüsselung und sichere Serverstandorte. Erfahren Sie hier mehr über unsere Datenschutzpraktiken.</p>
+
+            <h4>Grundsätzliches</h4>
+            <p>Als Betreiber dieser Seite nehmen wir den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung. Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder e-Mail-Adresse) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben. Wir weisen darauf hin, daß die Datenübertragung im Internet (z.B. bei der Kommunikation per e-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
+
+            <h4>Begriffserläuterungen</h4>
+            <p>Die Datenschutzerklärung dieses Unternehmens beruht auf den Begriffen, die durch den Europäischen Richtlinien- und Verordnungsgeber beim Erlaß der Datenschutz-Grundverordnung (DS-GVO) verwendet wurden. Unsere Datenschutzerklärung soll sowohl für die Öffentlichkeit als auch für unsere Kunden und Geschäftspartner einfach lesbar und verständlich sein. Um dies zu gewährleisten, möchten wir vorab die verwendeten Begriffe erläutern.</p>
+            
+            <p><strong>Personenbezogene Daten:</strong><br>
+            Alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person (im Folgenden „betroffene Person“) beziehen. Als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt, insbesondere mittels Zuordnung zu einer Kennung wie einem Namen, zu einer Kennummer, zu Standortdaten, zu einer Online-Kennung oder zu einem oder mehreren besonderen Merkmalen, die Ausdruck der wie auch immer gearteten Identität dieser natürlichen Person sind, identifiziert werden kann.</p>
+            
+            <p><strong>Betroffene Person:</strong><br>
+            Jede identifizierte oder identifizierbare natürliche Person, deren personenbezogene Daten von dem für die Verarbeitung Verantwortlichen verarbeitet werden.</p>
+            
+            <p><strong>Verarbeitung:</strong><br>
+            Jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang oder jede solche Vorgangsreihe im Zusammenhang mit personenbezogenen Daten wie das Erheben, das Erfassen, die Organisation, das Ordnen, die Speicherung, die Anpassung oder Veränderung, das Auslesen, das Abfragen, die Verwendung, die Offenlegung durch Übermittlung, Verbreitung oder eine andere Form der Bereitstellung, den Abgleich oder die Verknüpfung, die Einschränkung, das Löschen oder die Vernichtung.</p>
+            
+            <p><strong>Einschränkung der Verarbeitung:</strong><br>
+            Die Markierung gespeicherter personenbezogener Daten mit dem Ziel, ihre künftige Verarbeitung einzuschränken.</p>
+            
+            <p><strong>Profiling:</strong><br>
+            Jede Art der automatisierten Verarbeitung personenbezogener Daten, die darin besteht, daß diese personenbezogenen Daten verwendet werden, um bestimmte persönliche Aspekte, die sich auf eine natürliche Person beziehen, zu bewerten, insbesondere, um Aspekte bezüglich Arbeitsleistung, wirtschaftlicher Lage, Gesundheit, persönlicher Vorlieben, Interessen, Zuverlässigkeit, Verhalten, Aufenthaltsort oder Ortswechsel dieser natürlichen Person zu analysieren oder vorherzusagen.</p>
+            
+            <p><strong>Pseudonymisierung:</strong><br>
+            Die Verarbeitung personenbezogener Daten in einer Weise, auf welche die personenbezogenen Daten ohne Hinzuziehung zusätzlicher Informationen nicht mehr einer spezifischen betroffenen Person zugeordnet werden können, sofern diese zusätzlichen Informationen gesondert aufbewahrt werden und technischen und organisatorischen Maßnahmen unterliegen, die gewährleisten, daß die personenbezogenen Daten nicht einer identifizierten oder identifizierbaren natürlichen Person zugewiesen werden.</p>
+            
+            <p><strong>Verantwortlicher oder für die Verarbeitung Verantwortlicher:</strong><br>
+            Die natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
+
+            <p><strong>Auftragsverarbeiter:</strong><br>
+            Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die personenbezogene Daten im Auftrag des Verantwortlichen verarbeitet.</p>
+
+            <p><strong>Empfänger:</strong><br>
+            Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, der personenbezogene Daten offengelegt werden, unabhängig davon, ob es sich bei ihr um einen Dritten handelt oder nicht.</p>
+
+            <p><strong>Dritter:</strong><br>
+            Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle außer der betroffenen Person, dem Verantwortlichen, dem Auftragsverarbeiter und den Personen, die unter der unmittelbaren Verantwortung des Verantwortlichen oder des Auftragsverarbeiters befugt sind, die personenbezogenen Daten zu verarbeiten.</p>
+            
+            <p><strong>Einwilligung:</strong><br>
+            Jede von der betroffenen Person freiwillig für den bestimmten Fall in informierter Weise und unmissverständlich abgegebene Willensbekundung in Form einer Erklärung oder einer sonstigen eindeutigen bestätigenden Handlung, mit der die betroffene Person zu verstehen gibt, daß sie mit der Verarbeitung der sie betreffenden personenbezogenen Daten einverstanden ist.</p>
+
+            <h4>Rechtsgrundlage der Verarbeitung</h4>
+            <p>Art. 6 I lit. a DS-GVO dient unserem Unternehmen als Rechtsgrundlage für Verarbeitungsvorgänge, bei denen wir eine Einwilligung für einen bestimmten Verarbeitungszweck einholen. Ist die Verarbeitung personenbezogener Daten zur Erfüllung eines Kundenauftrags erforderlich, wie z.B. bei Verarbeitungsvorgängen im Rahmen einer Warenlieferung oder der Erbringung von Dienstleistungen, so beruht die Verarbeitung auf Art. 6 I lit. b DS-GVO. Gleiches gilt für solche Verarbeitungsvorgänge, die zur Durchführung vorvertraglicher Maßnahmen erforderlich sind, etwa in Fällen von Anfragen zu unseren Produkten oder Dienstleistungen. Unterliegt unser Unternehmen einer rechtlichen Verpflichtung, durch welche eine Verarbeitung von personenbezogenen Daten erforderlich wird, wie z.B. zur Erfüllung steuerlicher Pflichten, so basiert die Verarbeitung auf Art. 6 I lit. c DS-GVO.</p>
+            <p>Ebenfalls könnten Verarbeitungsvorgänge auf Art. 6 I lit. f DS-GVO beruhen. Auf dieser Rechtsgrundlage basieren Verarbeitungsvorgänge, die von keiner der vorgenannten Rechtsgrundlagen erfasst werden, wenn die Verarbeitung zur Wahrung eines berechtigten Interesses unseres Unternehmens oder eines Dritten erforderlich ist, sofern die Interessen, Grundrechte und Grundfreiheiten der betroffenen Person nicht überwiegen.</p>
+            <p>Basiert die Verarbeitung personenbezogener Daten auf Artikel 6 I lit. f DS-GVO, ist unser berechtigtes Interesse die Durchführung unserer Geschäftstätigkeit zugunsten des Wohlergehens unserer Mitarbeiter.</p>
+
+            <h4>Cookies</h4>
+            <p>Unsere Internetseite verwendet sogenannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Sie dienen lediglich dazu, unser Angebot benutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert. Die meisten der von uns verwendeten Cookies sind so genannte „Session-Cookies“. Sie werden nach Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen. Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browser aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.</p>
+
+            <h4>Server-Log-Files</h4>
+            <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log Files, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
+            <ul>
+                <li>Browsertyp und Browserversion</li>
+                <li>verwendetes Betriebssystem</li>
+                <li>Referrer URL</li>
+                <li>Hostname des zugreifenden Rechners</li>
+                <li>Datum und Uhrzeit der Serveranfrage</li>
+                <li>eine Internet-Protokoll-Adresse (IP-Adresse)</li>
+                <li>der Internet-Service-Provider des zugreifenden Systems</li>
+            </ul>
+            <p>Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Wir behalten uns vor, diese Daten nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.</p>
+
+            <h4>Kontaktformular</h4>
+            <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+
+            <h4>SSL-Verschlüsselung</h4>
+            <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und an dem Schloß-Symbol in Ihrer Browserzeile. Wenn die SSL-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
+
+            <h4>Routinemäßige Löschung / Sperrung personenbezogener Daten</h4>
+            <p>Der für die Verarbeitung Verantwortliche verarbeitet und speichert personenbezogene Daten der betroffenen Person nur für den Zeitraum, der zur Erreichung des Speicherungszwecks erforderlich ist oder sofern dies durch den Europäischen Richtlinien- und Verordnungsgeber oder einen anderen Gesetzgeber in Gesetzen oder Vorschriften, welchen der für die Verarbeitung Verantwortliche unterliegt, vorgesehen wurde. Entfällt der Speicherungszweck oder läuft eine vom Europäischen Richtlinien- und Verordnungsgeber oder einem anderen zuständigen Gesetzgeber vorgeschriebene Speicherfrist ab, werden die personenbezogenen Daten routinemäßig und entsprechend den gesetzlichen Vorschriften gesperrt bzw. gelöscht.</p>
+
+            <h4>Rechte der betroffenen Person</h4>
+            <p>Möchte eine betroffene Person eines oder mehrere dieser Rechte in Anspruch nehmen, kann sie sich hierzu jederzeit an einen Mitarbeiter des für die Verarbeitung Verantwortlichen wenden.</p>
+
+            <p><strong>Recht auf Bestätigung</strong><br>
+            Jede betroffene Person hat das Recht, von dem für die Verarbeitung Verantwortlichen eine Bestätigung darüber zu verlangen, ob sie betreffende personenbezogene Daten verarbeitet werden.</p>
+
+            <p><strong>Recht auf Auskunft</strong><br>
+            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, jederzeit von dem für die Verarbeitung Verantwortlichen unentgeltliche Auskunft über die zu seiner Person gespeicherten personenbezogenen Daten und eine Kopie dieser Auskunft zu erhalten. Ferner hat die betroffene Person das Recht auf Auskunft über folgende Informationen:</p>
+            <ul>
+                <li>die Verarbeitungszwecke</li>
+                <li>die Kategorien personenbezogener Daten, die verarbeitet werden</li>
+                <li>die Empfänger oder Kategorien von Empfängern, gegenüber denen die personenbezogenen Daten offengelegt worden sind oder noch offengelegt werden</li>
+                <li>falls möglich die geplante Dauer, für die die personenbezogenen Daten gespeichert werden</li>
+                <li>das Bestehen eines Rechts auf Berichtigung oder Löschung der sie betreffenden personenbezogenen Daten</li>
+                <li>das Bestehen eines Beschwerderechts bei einer Aufsichtsbehörde</li>
+                <li>wenn die personenbezogenen Daten nicht bei der betroffenen Person erhoben werden: Alle verfügbaren Informationen über die Herkunft der Daten</li>
+                <li>das Bestehen einer automatisierten Entscheidungsfindung einschließlich Profiling</li>
+            </ul>
+
+            <p><strong>Recht auf Berichtigung</strong><br>
+            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, die unverzügliche Berichtigung sie betreffender unrichtiger personenbezogener Daten zu verlangen.</p>
+
+            <p><strong>Recht auf Löschung</strong><br>
+            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, von dem Verantwortlichen zu verlangen, daß die sie betreffenden personenbezogenen Daten unverzüglich gelöscht werden, sofern einer der gesetzlich geregelten Gründe zutrifft (z.B. Zweckentfall, Widerruf der Einwilligung).</p>
+
+            <p><strong>Recht auf Einschränkung der Verarbeitung</strong><br>
+            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, von dem Verantwortlichen die Einschränkung der Verarbeitung zu verlangen, wenn eine der gesetzlichen Voraussetzungen gegeben ist (z.B. Bestreiten der Richtigkeit).</p>
+
+            <p><strong>Recht auf Datenübertragbarkeit</strong><br>
+            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, die sie betreffenden personenbezogenen Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten.</p>
+
+            <p><strong>Recht auf Widerspruch</strong><br>
+            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, aus Gründen, die sich aus ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung sie betreffender personenbezogener Daten Widerspruch einzulegen.</p>
+
+            <p><strong>Automatisierte Entscheidungen im Einzelfall einschließlich Profiling</strong><br>
+            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, nicht einer ausschließlich auf einer automatisierten Verarbeitung beruhenden Entscheidung unterworfen zu werden.</p>
+
+            <p><strong>Recht auf Widerruf einer datenschutzrechtlichen Einwilligung</strong><br>
+            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, eine Einwilligung zur Verarbeitung personenbezogener Daten jederzeit zu widerrufen.</p>
+
+            <h4>Name und Anschrift des für die Verarbeitung Verantwortlichen</h4>
+            <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung, sonstiger in den Mitgliedstaaten der Europäischen Union geltenden Datenschutzgesetze und anderer Bestimmungen mit datenschutzrechtlichem Charakter ist das Unternehmen:</p>
+            <p>© 2025 Florian Merzenich</p>
+        </div>
+    </div>
+
     <main class="container">
         
         <!-- HERO SECTION -->
         <header class="hero-section">
             <!-- Logo -->
-            <img src="logo_weiß.png" alt="Logo" class="logo">
+            <img src="https://placehold.co/240x100/transparent/white?text=LOGO" alt="Logo" class="logo">
 
             <!-- Text Content -->
             <h2 class="sub-headline">12 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.</h2>
@@ -761,13 +1010,13 @@
                     <!-- Das Originalbild als Rahmen -->
                     <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Laptop Frame" class="laptop-frame">
                     <!-- Das neue Bild als Bildschirm-Inhalt -->
-                    <img src="hero_bg.JPG" alt="Screen Content" class="laptop-screen">
+                    <img src="https://placehold.co/800x600/101010/f6ad55?text=Masterclass+Vorschau" alt="Screen Content" class="laptop-screen">
                 </div>
             </div>
 
             <!-- CTA & Timer -->
             <div class="cta-wrapper">
-                <a href="https://flos-funnel.pages.dev/" class="btn-main pulse">
+                <a href="#" class="btn-main pulse">
                     JETZT GRATIS 1:1 GESPRÄCH SICHERN
                 </a>
                 <p class="cta-subtext">Sichere dir 1 von 5 freien Plätzen zum persönlichen 1:1 Gespräch mit mir</p>
@@ -776,7 +1025,6 @@
                     <p class="countdown-label">Noch verfügbar bis:</p>
                     <div id="countdown" class="timer">
                         <div class="timer-part"><div id="d">00</div><span>Tage</span></div>
-                        <!-- Doppelpunkte visuell nicht nötig bei Block-Layout, aber hier drin gelassen oder entfernt je nach Geschmack. Hier durch Abstand in CSS gelöst -->
                         <div class="timer-part"><div id="h">00</div><span>Std</span></div>
                         <div class="timer-part"><div id="m">15</div><span>Min</span></div>
                         <div class="timer-part"><div id="s">00</div><span>Sek</span></div>
@@ -788,17 +1036,17 @@
             <div class="marquee-container">
                 <div class="marquee-content">
                     <!-- Set 1 -->
-                    <img src="focus.png" class="marquee-logo" alt="Focus">
-                    <img src="wirtschaftswoche.png" class="marquee-logo invert" alt="WirtschaftsWoche">
-                    <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
-                    <img src="london.png" class="marquee-logo" alt="London Daily News">
+                    <img src="https://placehold.co/150x40/transparent/white?text=FOCUS" class="marquee-logo" alt="Focus">
+                    <img src="https://placehold.co/150x40/transparent/white?text=WirtschaftsWoche" class="marquee-logo invert" alt="WirtschaftsWoche">
+                    <img src="https://placehold.co/150x40/transparent/white?text=n-tv" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
+                    <img src="https://placehold.co/150x40/transparent/white?text=London+Daily" class="marquee-logo" alt="London Daily News">
                     <span class="marquee-text">Business Magazin</span>
 
                     <!-- Set 2 -->
-                    <img src="focus.png" class="marquee-logo" alt="Focus">
-                    <img src="wirtschaftswoche.png" class="marquee-logo invert" alt="WirtschaftsWoche">
-                    <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
-                    <img src="london.png" class="marquee-logo" alt="London Daily News">
+                    <img src="https://placehold.co/150x40/transparent/white?text=FOCUS" class="marquee-logo" alt="Focus">
+                    <img src="https://placehold.co/150x40/transparent/white?text=WirtschaftsWoche" class="marquee-logo invert" alt="WirtschaftsWoche">
+                    <img src="https://placehold.co/150x40/transparent/white?text=n-tv" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
+                    <img src="https://placehold.co/150x40/transparent/white?text=London+Daily" class="marquee-logo" alt="London Daily News">
                     <span class="marquee-text">Business Magazin</span>
                 </div>
             </div>
@@ -840,7 +1088,7 @@
             </div>
             
             <div style="margin-top: 40px; text-align: center;">
-                <a href="https://flos-funnel.pages.dev/" class="btn-main">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
+                <a href="#" class="btn-main">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
             </div>
         </section>
 
@@ -880,7 +1128,7 @@
                 </div>
             </div>
             <div style="margin-top: 40px; text-align: center;">
-                <a href="https://flos-funnel.pages.dev/" class="btn-main pulse">Sei Dabei</a>
+                <a href="#" class="btn-main pulse">Sei Dabei</a>
             </div>
         </section>
 
@@ -919,7 +1167,7 @@
         <!-- PROFILE SECTION -->
         <section>
             <div class="profile-container">
-                <img src="profilbild.png" alt="Florian Merzenich" class="profile-img">
+                <img src="xlg.jpg" alt="Florian Merzenich" class="profile-img">
                 <div class="profile-text">
                     <h3 class="sub-headline" style="border:none; padding:0; margin-bottom:5px; color:var(--text-gray);">Das ist</h3>
                     <h2 class="section-title white" style="text-align: left; margin-bottom: 20px; font-size: 36px;">Florian Merzenich</h2>
@@ -935,16 +1183,16 @@
 
         <!-- FOOTER -->
         <footer>
-            <img src="logo_weiß.png" alt="Logo" class="footer-logo">
+            <img src="https://placehold.co/240x100/transparent/white?text=LOGO" alt="Logo" class="footer-logo">
 
             <div class="social-icons">
-                <a href="https://instagram.com/fabian_ritter84" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                <a href="https://x.com/FabianRitter13" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://youtube.com/@fabianritter84" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
             </div>
             <p>
-                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank">Impressum</a> | 
-                <a href="https://www.ritter-fabian.de/datenschutz-agb" target="_blank">Datenschutz</a>
+                <a href="#" id="impressum-link">Impressum</a> | 
+                <a href="#" id="datenschutz-link">Datenschutz</a>
             </p>
         </footer>
 
@@ -967,10 +1215,10 @@
                 minutes = minutes < 10 ? "0" + minutes : minutes;
                 seconds = seconds < 10 ? "0" + seconds : seconds;
                 
-                displayDays.textContent = "00";
-                displayHours.textContent = "00";
-                displayMinutes.textContent = minutes;
-                displaySeconds.textContent = seconds;
+                if (displayDays) displayDays.textContent = "00";
+                if (displayHours) displayHours.textContent = "00";
+                if (displayMinutes) displayMinutes.textContent = minutes;
+                if (displaySeconds) displaySeconds.textContent = seconds;
 
                 if (--timer < 0) { timer = duration; }
             }, 1000);
@@ -1000,18 +1248,58 @@
             // States: 0 = Default, 1 = Blue, 2 = Red
             let currentState = 0;
 
-            toggleBtn.addEventListener('click', () => {
-                currentState = (currentState + 1) % 3;
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    currentState = (currentState + 1) % 3;
 
-                // Reset classes
-                body.classList.remove('theme-blue', 'theme-red');
+                    // Reset classes
+                    body.classList.remove('theme-blue', 'theme-red');
 
-                if (currentState === 1) {
-                    body.classList.add('theme-blue');
-                } else if (currentState === 2) {
-                    body.classList.add('theme-red');
-                }
-                // State 0 ist default (keine extra Klasse)
+                    if (currentState === 1) {
+                        body.classList.add('theme-blue');
+                    } else if (currentState === 2) {
+                        body.classList.add('theme-red');
+                    }
+                    // State 0 ist default (keine extra Klasse)
+                });
+            }
+        })();
+
+        // 4. MODAL FUNKTIONALITÄT (IMPRESSUM & DATENSCHUTZ)
+        (function() {
+            const triggers = document.querySelectorAll('#impressum-link, #datenschutz-link');
+            const closeButtons = document.querySelectorAll('.close-modal');
+            const modals = document.querySelectorAll('.modal-overlay');
+
+            // Öffnen
+            triggers.forEach(trigger => {
+                trigger.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    let targetId;
+                    if(trigger.id === 'impressum-link') targetId = 'impressum-modal';
+                    if(trigger.id === 'datenschutz-link') targetId = 'datenschutz-modal';
+                    
+                    const modal = document.getElementById(targetId);
+                    if(modal) modal.classList.add('active');
+                });
+            });
+
+            // Schließen via X
+            closeButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetId = btn.getAttribute('data-target');
+                    const modal = document.getElementById(targetId);
+                    if(modal) modal.classList.remove('active');
+                });
+            });
+
+            // Schließen via Klick außerhalb
+            modals.forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
             });
         })();
     </script>
