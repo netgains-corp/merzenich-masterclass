@@ -586,63 +586,61 @@
         }
 
         /* -----------------------------------------------------------
-           NEW: TEAM SECTION STYLES
+           NEW: TEAM SECTION STYLES (Slider & Transparent)
         ----------------------------------------------------------- */
         .team-section {
-            background-color: #080808; 
+            /* Hintergrund transparent gemacht */
+            background-color: transparent; 
             padding: 80px 0;
         }
 
-        /* CEO Highlight Container */
-        .ceo-highlight {
+        /* Slider Container Styles */
+        .team-slider-container {
+            width: 100%;
+            overflow-x: auto; /* Horizontal scrolling */
+            padding-bottom: 20px; /* Space for scrollbar if visible */
+            
+            /* Hide scrollbar visually but keep functionality */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+            scroll-behavior: smooth;
+        }
+        
+        .team-slider-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+
+        .team-slider-track {
             display: flex;
-            justify-content: center;
-            margin-bottom: 60px;
+            gap: 25px; /* Abstand zwischen den Karten */
+            padding: 0 10px; /* Kleiner Puffer an den Seiten */
+            width: max-content; /* Track so breit wie der Inhalt */
         }
 
-        /* Das Grid für den Rest des Teams */
-        .team-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-        }
-
-        @media (min-width: 768px) {
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1100px) {
-            .team-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        /* Team Card Design */
+        /* Team Card Design - Angepasst für Slider und Lesbarkeit */
         .team-card {
-            background: rgba(255, 255, 255, 0.03);
+            /* Dunklerer Hintergrund für Lesbarkeit auf transparentem Section-Background */
+            background: rgba(0, 0, 0, 0.75); 
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 35px 25px;
             border-radius: 20px;
             text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100%; /* Damit alle Karten gleich hoch wirken */
+            
+            /* Fixe Breite für den Slider */
+            width: 320px; 
+            flex-shrink: 0; /* Verhindert Schrumpfen im Flex-Container */
+            
+            /* Optional: Snap-Align für schöneres Scrollen auf Mobile */
+            scroll-snap-align: center;
         }
 
         .team-card:hover {
             transform: translateY(-7px);
             border-color: var(--primary-color);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        /* Spezielles Styling für die CEO Karte (breiter) */
-        .team-card.ceo {
-            max-width: 900px;
-            padding: 50px 30px;
         }
 
         /* Runde Bilder */
@@ -655,17 +653,12 @@
             margin-bottom: 25px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
-        
-        .team-card.ceo .team-img {
-             width: 200px;
-             height: 200px;
-        }
 
         /* Typografie */
         .team-name {
             font-family: var(--font-heading);
             color: var(--text-white);
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             margin-bottom: 5px;
         }
@@ -675,24 +668,22 @@
             color: var(--primary-color);
             font-family: var(--font-body);
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 20px;
+            min-height: 40px; /* Einheitliche Höhe für Alignment */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .team-desc {
             color: var(--text-gray);
-            font-size: 15px;
-            line-height: 1.7;
+            font-size: 14px;
+            line-height: 1.6;
             text-align: left;
             width: 100%;
-        }
-
-        .team-card.ceo .team-desc {
-            text-align: center;
-            max-width: 800px;
-            font-size: 16px;
         }
 
         /* Hilfsklasse für Paragraphen-Abstand im Text */
@@ -1284,121 +1275,120 @@
             </div>
         </section>
 
-        <!-- NEW TEAM SECTION -->
+        <!-- NEW TEAM SECTION (SLIDER MODE) -->
         <section class="team-section">
             <h3 class="section-title">Das Experten-Team an deiner Seite</h3>
             
-            <!-- 1. Florian CEO Highlight (Einzeln oben) -->
-            <div class="ceo-highlight">
-                <div class="team-card ceo">
-                    <img src="gitarbeiter/florian.JPG" alt="Florian Merzenich" class="team-img">
-                    <h4 class="team-name">Florian Merzenich</h4>
-                    <span class="team-role">Founder · Geschäftsführer · CEO</span>
-                    <p class="team-desc">
-                        Florian Merzenich ist Gründer, Inhaber und Geschäftsführer der Blockchain-Akademie und steht für klare Finanzbildung, Verantwortung und echte Begleitung auf Augenhöhe. Er kommt aus dem Raum Koblenz, die Geschäftsstelle des Unternehmens befindet sich im Raum Koblenz.
-                        <span class="desc-spacer"></span>
-                        Mit einem starken unternehmerischen Mindset, langjähriger Erfahrung und dem Anspruch, Menschen wirklich an die Hand zu nehmen, hat Florian eine Akademie aufgebaut, die weit über reine Theorie hinausgeht. Sein Fokus liegt darauf, komplexe Finanz- und Krypto-Themen verständlich, praxisnah und nachhaltig zu vermitteln.
-                        <span class="desc-spacer" style="color: var(--primary-color); font-weight: 600;">
-                            👉 Sein Ziel: Menschen befähigen, selbstbestimmte finanzielle Entscheidungen zu treffen und langfristig Vermögen aufzubauen.
-                        </span>
-                    </p>
-                </div>
-            </div>
+            <div class="team-slider-container">
+                <div class="team-slider-track">
+                    
+                    <!-- 1. Florian (CEO) -->
+                    <div class="team-card">
+                        <img src="gitarbeiter/florian.jpg" alt="Florian Merzenich" class="team-img">
+                        <h4 class="team-name">Florian Merzenich</h4>
+                        <span class="team-role">Founder · Geschäftsführer · CEO</span>
+                        <p class="team-desc">
+                            Florian Merzenich ist Gründer, Inhaber und Geschäftsführer der Blockchain-Akademie und steht für klare Finanzbildung, Verantwortung und echte Begleitung auf Augenhöhe. Er kommt aus dem Raum Koblenz, die Geschäftsstelle des Unternehmens befindet sich im Raum Koblenz.
+                            <span class="desc-spacer"></span>
+                            Mit einem starken unternehmerischen Mindset, langjähriger Erfahrung und dem Anspruch, Menschen wirklich an die Hand zu nehmen, hat Florian eine Akademie aufgebaut, die weit über reine Theorie hinausgeht. Sein Fokus liegt darauf, komplexe Finanz- und Krypto-Themen verständlich, praxisnah und nachhaltig zu vermitteln.
+                            <span class="desc-spacer" style="color: var(--primary-color); font-weight: 600;">
+                                👉 Sein Ziel: Menschen befähigen, selbstbestimmte finanzielle Entscheidungen zu treffen und langfristig Vermögen aufzubauen.
+                            </span>
+                        </p>
+                    </div>
 
-            <!-- 2. Das Team Grid (3 Spalten) -->
-            <div class="team-grid">
-                
-                <!-- Jonathan (Jonas) -->
-                <div class="team-card">
-                    <img src="gitarbeiter/jonas.JPG" alt="Jonathan Rosenfeld" class="team-img">
-                    <h4 class="team-name">Jonathan Rosenfeld</h4>
-                    <span class="team-role">Head of Education · Blockchain-Trainer</span>
-                    <p class="team-desc">
-                        Jonathan Rosenfeld ist Head of Education und verantwortlich für die inhaltliche und fachliche Exzellenz unserer Blockchain-Akademie. Er entwickelt und strukturiert die Lerninhalte, analysiert kontinuierlich die Krypto- und Blockchain-Märkte, bildet unsere Trainer aus und stellt sicher, dass alle Inhalte und Strategien höchsten Qualitätsstandards entsprechen.
-                        <span class="desc-spacer">
-                            Als erfahrener Blockchain-Trainer begleitet Jonathan zudem unsere Masterplan-Goldkunden persönlich und sorgt dafür, dass komplexe Strategien klar verstanden und sauber umgesetzt werden.
-                        </span>
-                        <span class="desc-spacer">
-                            👉 Sein Fokus: Qualität, Struktur und nachhaltige Ergebnisse auf höchstem Niveau.
-                        </span>
-                    </p>
-                </div>
+                    <!-- 2. Jonathan (Jona) -->
+                    <div class="team-card">
+                        <img src="gitarbeiter/jona.jpg" alt="Jonathan Rosenfeld" class="team-img">
+                        <h4 class="team-name">Jonathan Rosenfeld</h4>
+                        <span class="team-role">Head of Education · Blockchain-Trainer</span>
+                        <p class="team-desc">
+                            Jonathan Rosenfeld ist Head of Education und verantwortlich für die inhaltliche und fachliche Exzellenz unserer Blockchain-Akademie. Er entwickelt und strukturiert die Lerninhalte, analysiert kontinuierlich die Krypto- und Blockchain-Märkte, bildet unsere Trainer aus und stellt sicher, dass alle Inhalte und Strategien höchsten Qualitätsstandards entsprechen.
+                            <span class="desc-spacer">
+                                Als erfahrener Blockchain-Trainer begleitet Jonathan zudem unsere Masterplan-Goldkunden persönlich und sorgt dafür, dass komplexe Strategien klar verstanden und sauber umgesetzt werden.
+                            </span>
+                            <span class="desc-spacer">
+                                👉 Sein Fokus: Qualität, Struktur und nachhaltige Ergebnisse auf höchstem Niveau.
+                            </span>
+                        </p>
+                    </div>
 
-                <!-- Markus -->
-                <div class="team-card">
-                    <img src="gitarbeiter/markus.JPG" alt="Markus Hoffmann" class="team-img">
-                    <h4 class="team-name">Markus Hoffmann</h4>
-                    <span class="team-role">Ultimate Mastermind Platinum · CCFE-zertifiziert</span>
-                    <p class="team-desc">
-                        Markus Hoffmann ist verantwortlich für unsere Ultimate Mastermind Platinum Kunden und begleitet sie persönlich und eng auf ihrem Weg im Krypto-Markt. Als CCFE-zertifizierter Blockchain-Trainer verbindet er fundiertes Fachwissen mit strategischem Denken und einem hohen Qualitätsanspruch.
-                        <span class="desc-spacer">
-                            Er übernimmt persönliche High-Value-Calls, sorgt für klare Qualitätsstandards, begleitet die einzelnen Kunden individuell und stellt mit seinem 24-Stunden-Support sicher, dass Fragen, Entscheidungen und Umsetzungen jederzeit professionell betreut werden.
-                        </span>
-                        <span class="desc-spacer">
-                            👉 Sein Fokus: Exzellenz, Nähe zum Kunden und Umsetzung auf höchstem Niveau.
-                        </span>
-                    </p>
-                </div>
+                    <!-- 3. Markus -->
+                    <div class="team-card">
+                        <img src="gitarbeiter/markus.jpg" alt="Markus Hoffmann" class="team-img">
+                        <h4 class="team-name">Markus Hoffmann</h4>
+                        <span class="team-role">Ultimate Mastermind Platinum · CCFE-zertifiziert</span>
+                        <p class="team-desc">
+                            Markus Hoffmann ist verantwortlich für unsere Ultimate Mastermind Platinum Kunden und begleitet sie persönlich und eng auf ihrem Weg im Krypto-Markt. Als CCFE-zertifizierter Blockchain-Trainer verbindet er fundiertes Fachwissen mit strategischem Denken und einem hohen Qualitätsanspruch.
+                            <span class="desc-spacer">
+                                Er übernimmt persönliche High-Value-Calls, sorgt für klare Qualitätsstandards, begleitet die einzelnen Kunden individuell und stellt mit seinem 24-Stunden-Support sicher, dass Fragen, Entscheidungen und Umsetzungen jederzeit professionell betreut werden.
+                            </span>
+                            <span class="desc-spacer">
+                                👉 Sein Fokus: Exzellenz, Nähe zum Kunden und Umsetzung auf höchstem Niveau.
+                            </span>
+                        </p>
+                    </div>
 
-                <!-- Alexander (Alex) -->
-                <div class="team-card">
-                    <img src="gitarbeiter/alex.JPG" alt="Alexander von Berg" class="team-img">
-                    <h4 class="team-name">Alexander von Berg</h4>
-                    <span class="team-role">Blockchain-Trainer (CCFE-zertifiziert)</span>
-                    <p class="team-desc">
-                        Alexander begleitet unsere Teilnehmer Schritt für Schritt in die Welt der Kryptowährungen.
-                        Als CCFE-zertifizierter Blockchain-Trainer vermittelt er praxisnahes Wissen rund um Wallets, Börsen, Strategien und Sicherheit und sorgt dafür, dass unsere Kunden fundierte Entscheidungen treffen und souverän handeln können.
-                        <span class="desc-spacer">
-                            👉 Sein Fokus: Verständnis, Sicherheit und nachhaltiger Erfolg im Krypto-Markt.
-                        </span>
-                    </p>
-                </div>
+                    <!-- 4. Alexander (Alex) -->
+                    <div class="team-card">
+                        <img src="gitarbeiter/alex.jpg" alt="Alexander von Berg" class="team-img">
+                        <h4 class="team-name">Alexander von Berg</h4>
+                        <span class="team-role">Blockchain-Trainer (CCFE-zertifiziert)</span>
+                        <p class="team-desc">
+                            Alexander begleitet unsere Teilnehmer Schritt für Schritt in die Welt der Kryptowährungen.
+                            Als CCFE-zertifizierter Blockchain-Trainer vermittelt er praxisnahes Wissen rund um Wallets, Börsen, Strategien und Sicherheit und sorgt dafür, dass unsere Kunden fundierte Entscheidungen treffen und souverän handeln können.
+                            <span class="desc-spacer">
+                                👉 Sein Fokus: Verständnis, Sicherheit und nachhaltiger Erfolg im Krypto-Markt.
+                            </span>
+                        </p>
+                    </div>
 
-                <!-- Maximilian (Maxi) -->
-                <div class="team-card">
-                    <img src="gitarbeiter/maxi.JPG" alt="Maximilian Steger" class="team-img">
-                    <h4 class="team-name">Maximilian Steger</h4>
-                    <span class="team-role">Blockchain-Trainer</span>
-                    <p class="team-desc">
-                        Maximilian kommt aus dem wunderschönen Frankfurt am Main, wo er auch seine Ausbildung im Finanzbereich absolviert hat, und lebt heute vor den Toren Frankfurts in Bad Soden.
-                        Als Teil der jüngeren Generation bringt er Leidenschaft, Disziplin und ein starkes Praxisverständnis in die Arbeit mit Kryptowährungen ein und begleitet unsere Teilnehmer klar, ruhig und verständlich bei der Umsetzung im Krypto-Markt.
-                        <span class="desc-spacer">
-                            👉 Sein Fokus: moderne Finanzbildung, Sicherheit und saubere Umsetzung.
-                        </span>
-                    </p>
-                </div>
+                    <!-- 5. Maximilian (Maxi) -->
+                    <div class="team-card">
+                        <img src="gitarbeiter/maxi.jpg" alt="Maximilian Steger" class="team-img">
+                        <h4 class="team-name">Maximilian Steger</h4>
+                        <span class="team-role">Blockchain-Trainer</span>
+                        <p class="team-desc">
+                            Maximilian kommt aus dem wunderschönen Frankfurt am Main, wo er auch seine Ausbildung im Finanzbereich absolviert hat, und lebt heute vor den Toren Frankfurts in Bad Soden.
+                            Als Teil der jüngeren Generation bringt er Leidenschaft, Disziplin und ein starkes Praxisverständnis in die Arbeit mit Kryptowährungen ein und begleitet unsere Teilnehmer klar, ruhig und verständlich bei der Umsetzung im Krypto-Markt.
+                            <span class="desc-spacer">
+                                👉 Sein Fokus: moderne Finanzbildung, Sicherheit und saubere Umsetzung.
+                            </span>
+                        </p>
+                    </div>
 
-                <!-- Leonie -->
-                <div class="team-card">
-                    <img src="gitarbeiter/leonie.JPG" alt="Leonie Falkner" class="team-img">
-                    <h4 class="team-name">Leonie Falkner</h4>
-                    <span class="team-role">Marketing & Content Managerin</span>
-                    <p class="team-desc">
-                        Leonie ist verantwortlich für die Außenwirkung unserer Blockchain-Akademie.
-                        Sie entwickelt und steuert unseren Content auf Social Media, sorgt für klare Positionierung, Vertrauen und Sichtbarkeit und übersetzt komplexe Krypto-Themen in verständliche, ansprechende Inhalte.
-                        <span class="desc-spacer">
-                            👉 Ihr Ziel: Menschen abholen, informieren und für den nächsten Schritt begeistern.
-                        </span>
-                    </p>
-                </div>
+                    <!-- 6. Leonie -->
+                    <div class="team-card">
+                        <img src="gitarbeiter/leonie.jpg" alt="Leonie Falkner" class="team-img">
+                        <h4 class="team-name">Leonie Falkner</h4>
+                        <span class="team-role">Marketing & Content Managerin</span>
+                        <p class="team-desc">
+                            Leonie ist verantwortlich für die Außenwirkung unserer Blockchain-Akademie.
+                            Sie entwickelt und steuert unseren Content auf Social Media, sorgt für klare Positionierung, Vertrauen und Sichtbarkeit und übersetzt komplexe Krypto-Themen in verständliche, ansprechende Inhalte.
+                            <span class="desc-spacer">
+                                👉 Ihr Ziel: Menschen abholen, informieren und für den nächsten Schritt begeistern.
+                            </span>
+                        </p>
+                    </div>
 
-                <!-- Anja (Anna) -->
-                <div class="team-card">
-                    <img src="gitarbeiter/anna.JPG" alt="Anja Dautzenberg" class="team-img">
-                    <h4 class="team-name">Anja Dautzenberg</h4>
-                    <span class="team-role">Organisation & Backoffice</span>
-                    <p class="team-desc">
-                        Anja Dautzenberg ist die zentrale organisatorische Schnittstelle unseres Unternehmens und die rechte Hand der Geschäftsführung.
-                        Sie sorgt für Struktur, Ordnung und reibungslose Abläufe und verantwortet das Backoffice, die Teamorganisation, Rechnungen und Verträge, sowie die Dokumentation und Prozessdarstellung.
-                        <span class="desc-spacer">
-                            Darüber hinaus führt Anja Onboarding-Gespräche, übernimmt Bedarfsanalysen, sammelt systematisch Feedback und begleitet unsere Teilnehmer zuverlässig über WhatsApp und Telegram im Support.
-                        </span>
-                        <span class="desc-spacer">
-                            👉 Ihr Fokus: Stabilität, Verlässlichkeit und ein professionelles Erlebnis für Team und Teilnehmer.
-                        </span>
-                    </p>
-                </div>
+                    <!-- 7. Anja (Anna) -->
+                    <div class="team-card">
+                        <img src="gitarbeiter/anna.jpg" alt="Anja Dautzenberg" class="team-img">
+                        <h4 class="team-name">Anja Dautzenberg</h4>
+                        <span class="team-role">Organisation & Backoffice</span>
+                        <p class="team-desc">
+                            Anja Dautzenberg ist die zentrale organisatorische Schnittstelle unseres Unternehmens und die rechte Hand der Geschäftsführung.
+                            Sie sorgt für Struktur, Ordnung und reibungslose Abläufe und verantwortet das Backoffice, die Teamorganisation, Rechnungen und Verträge, sowie die Dokumentation und Prozessdarstellung.
+                            <span class="desc-spacer">
+                                Darüber hinaus führt Anja Onboarding-Gespräche, übernimmt Bedarfsanalysen, sammelt systematisch Feedback und begleitet unsere Teilnehmer zuverlässig über WhatsApp und Telegram im Support.
+                            </span>
+                            <span class="desc-spacer">
+                                👉 Ihr Fokus: Stabilität, Verlässlichkeit und ein professionelles Erlebnis für Team und Teilnehmer.
+                            </span>
+                        </p>
+                    </div>
 
+                </div>
             </div>
         </section>
 
