@@ -16,6 +16,9 @@
     <!-- Icons laden (FontAwesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Buttery Smooth Scrolling (Lenis) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
     <style>
         /* -----------------------------------------------------------
            BASIS SETUP & VARIABLEN
@@ -45,6 +48,23 @@
         body.theme-red {
             /* Intensiveres, dunkleres Rot mit hoher Deckkraft */
             --overlay-color: rgba(160, 0, 0, 0.85); 
+        }
+
+        /* --- LENIS SMOOTH SCROLLING CSS --- */
+        html.lenis {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
         }
 
         * {
@@ -1521,6 +1541,41 @@
 
     <!-- SCRIPTS -->
     <script>
+        // 0. BUTTERY SMOOTH SCROLLING (LENIS) INIT
+        (function() {
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing Funktion für "Butter" Gefühl
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+
+            requestAnimationFrame(raf);
+
+            // Optional: Macht Anker-Links auch smooth
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            lenis.scrollTo(targetElement);
+                        }
+                    }
+                });
+            });
+        })();
+
         // 1. COUNTDOWN TIMER
         (function() {
             let duration = 15 * 60;
