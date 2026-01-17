@@ -123,9 +123,24 @@
             transition: background-color 0.5s ease;
         }
 
-        /* VIEW CONTAINER LOGIC */
-        .view-section { display: block; opacity: 1; transition: opacity 0.5s ease-in-out; }
+        /* VIEW CONTAINER LOGIC & MASKS & RUBBER BANDING */
+        .view-section { 
+            display: block; 
+            opacity: 1; 
+            transition: opacity 0.5s ease-in-out;
+            
+            /* (1) STATIC CSS MASK: Fade out top/bottom 40px */
+            /* Damit der Inhalt hinter der Maske scrollt, muss die Maske auf dem festen Container liegen */
+            mask-image: linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+        }
         .view-hidden { display: none !important; opacity: 0; }
+
+        /* Für die Inhalte in den Views, damit Skew funktioniert, brauchen wir eine Transition */
+        main {
+            transition: transform 0.1s ease-out; /* Smooth return from skew */
+            will-change: transform;
+        }
 
         /* -----------------------------------------------------------
            NAVIGATION CONTROLS
@@ -301,6 +316,13 @@
             
             /* Padding für Abstände oben/unten */
             padding: 40px 20px;
+            
+            /* Scroll-Fix für Mobile/Overlays */
+            -webkit-overflow-scrolling: touch; 
+            overscroll-behavior: contain;
+            
+            /* (3) Rubber Banding Support: auto erlaubt native OS Bounce Effekte */
+            overscroll-behavior-y: auto; 
         }
 
         /* Die "Magie" für sicheres Zentrieren: margin: auto sorgt in Flexbox für Zentrierung WENN Platz da ist */
@@ -1154,6 +1176,15 @@
                     lucideInitialized = true;
                 }
 
+                // SCROLL LOGIC FIX:
+                // Wenn wir in einem Overlay sind (state > 0), stoppen wir Lenis, damit das Overlay nativ scrollen kann.
+                // Wenn wir auf der Startseite sind (state 0), starten wir Lenis wieder für den Smooth Scroll Effekt.
+                if (state > 0) {
+                    if (window.lenisInstance) window.lenisInstance.stop();
+                } else {
+                    if (window.lenisInstance) window.lenisInstance.start();
+                }
+
                 if (state === 1) { // Starter
                     viewStarter.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-bronze');
@@ -1203,7 +1234,10 @@
             });
 
             // Init Load
-            updateUI(getStateFromHash());
+            // Timeout to ensure Lenis is ready before we potentially stop it
+            setTimeout(() => {
+                updateUI(getStateFromHash());
+            }, 50);
         })();
 
         // OTHER SCRIPTS
