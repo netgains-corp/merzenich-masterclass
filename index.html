@@ -285,6 +285,7 @@
         #view-platinum, #view-gold, #view-starter, #view-infinity {
             min-height: 100vh; display: flex; align-items: center; justify-content: center;
             width: 100%; position: fixed; top: 0; left: 0; z-index: 500;
+            overflow: hidden; /* Wichtig damit riesige Icons nicht scrollen */
         }
 
         #view-platinum { background: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%); }
@@ -292,42 +293,40 @@
         /* Starter: Dark Bronze/Copper radial background */
         #view-starter { background: radial-gradient(circle at 50% 0%, #431407 0%, #0c0a09 100%); }
         
-        /* BACKGROUND ICON STYLE (Giant Watermark) */
+        /* BACKGROUND ICON STYLE (Giant Watermark - GOLD Only) */
         .bg-icon-watermark {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 60vh; /* RIESIG */
-            opacity: 0.05; /* Sehr transparent */
+            /* RIESIG gemacht, wie gewünscht */
+            font-size: 120vh; 
+            opacity: 0.05; 
             z-index: -1;
             pointer-events: none;
             color: white;
-            filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.1));
+            white-space: nowrap;
         }
 
         /* Gold Icon Specifics */
         #view-gold .bg-icon-watermark {
             color: #fbbf24; /* Amber-400 */
-            opacity: 0.07;
+            opacity: 0.08;
+            /* Leicht rotieren für Dynamik */
+            transform: translate(-50%, -50%) rotate(-15deg);
         }
 
-        /* Platinum Icon Specifics */
-        #view-platinum .bg-icon-watermark {
-            color: #e2e8f0; /* Slate-200 */
-            opacity: 0.04;
-        }
-
-        /* Infinity Icon Specifics */
-        #view-infinity .bg-icon-watermark {
-            color: #d946ef; /* Fuchsia-500 */
-            opacity: 0.06;
-            animation: pulse-slow 8s infinite ease-in-out;
-        }
-
-        @keyframes pulse-slow {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.06; }
-            50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.08; }
+        /* PLATINUM PATTERN (Emblemed Out - Many small icons) */
+        #view-platinum::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* SVG Diamant Pattern als Data URI */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='rgba(226, 232, 240, 0.1)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3h12l4 6-10 13L2 9z'/%3E%3Cpath d='M11 3 8 9l4 13 4-13-3-6'/%3E%3Cpath d='M2 9h20'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 60px 60px;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
         }
 
         /* INFINITY BACKGROUND (Animated Gradient) */
@@ -341,6 +340,36 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        /* Moving stars/particles effect for Infinity (WIEDER DA) */
+        #view-infinity::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.4) 2px, transparent 3px),
+                radial-gradient(white, rgba(255,255,255,.3) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px);
+            background-size: 550px 550px, 350px 350px, 250px 250px;
+            background-position: 0 0, 40px 60px, 130px 270px;
+            opacity: 0.6;
+            z-index: -1;
+            animation: stars-move 100s linear infinite;
+        }
+        @keyframes stars-move { from { transform: translateY(0); } to { transform: translateY(-1000px); } }
+
+        /* INFINITY SPARKLE (Extra layer) */
+        #view-infinity::after {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(white, rgba(255,255,255,.6) 1px, transparent 2px),
+                radial-gradient(white, rgba(255,255,255,.4) 1px, transparent 2px);
+            background-size: 400px 400px, 200px 200px;
+            background-position: 20px 20px, 150px 150px;
+            animation: twinkle 4s infinite alternate;
+            z-index: -1;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        @keyframes twinkle { 0% { opacity: 0.4; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1.2); } }
 
         .bg-blob-1 { position: fixed; top: -10%; left: -10%; width: 50%; height: 50%; background: #1d4ed8; filter: blur(150px); opacity: 0.15; z-index: -1; animation: float 10s ease-in-out infinite; }
         .bg-blob-2 { position: fixed; bottom: -10%; right: -10%; width: 50%; height: 50%; background: #4f46e5; filter: blur(150px); opacity: 0.15; z-index: -1; animation: float 12s ease-in-out infinite reverse; }
@@ -712,7 +741,7 @@
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
-        <!-- Huge Background Icon for Gold -->
+        <!-- Huge Background Icon for Gold (Visible & Huge) -->
         <i class="fa-solid fa-coins bg-icon-watermark"></i>
 
         <main class="w-full max-w-6xl bg-stone-900/80 backdrop-blur-xl border border-gold-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
@@ -832,8 +861,7 @@
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
-        <!-- Huge Background Icon for Platinum -->
-        <i class="fa-regular fa-gem bg-icon-watermark"></i>
+        <!-- Icon entfernt, da jetzt als Pattern im CSS (::before) -->
 
         <main class="w-full max-w-6xl bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
             
@@ -927,8 +955,7 @@
          ============================================== -->
     <div id="view-infinity" class="view-section view-hidden p-4 md:p-8">
         
-        <!-- Huge Background Icon for Infinity -->
-        <i class="fa-solid fa-infinity bg-icon-watermark"></i>
+        <!-- Icon entfernt, da Sternenhimmel wiederhergestellt -->
 
         <main class="w-full max-w-6xl bg-black/60 backdrop-blur-2xl border border-infinity-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
             
