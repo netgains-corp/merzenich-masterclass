@@ -283,9 +283,37 @@
         ----------------------------------------------------------- */
         /* Common for additional views */
         #view-platinum, #view-gold, #view-starter, #view-infinity {
-            min-height: 100vh; display: flex; align-items: center; justify-content: center;
-            width: 100%; position: fixed; top: 0; left: 0; z-index: 500;
-            overflow: hidden; /* Wichtig damit riesige Icons nicht scrollen */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 500;
+            
+            /* WICHTIG: Flexbox für Zentrierung, aber sicherstellen dass Scrollen geht */
+            display: flex;
+            align-items: flex-start; /* Start oben, damit bei Überlänge nicht oben abgeschnitten wird */
+            justify-content: center;
+            
+            /* Scrollen der ganzen Seite erlauben */
+            overflow-y: auto; 
+            overflow-x: hidden;
+            
+            /* Padding für Abstände oben/unten */
+            padding: 40px 20px;
+        }
+
+        /* Die "Magie" für sicheres Zentrieren: margin: auto sorgt in Flexbox für Zentrierung WENN Platz da ist */
+        #view-platinum > main, 
+        #view-gold > main, 
+        #view-starter > main, 
+        #view-infinity > main {
+            margin-top: auto;
+            margin-bottom: auto;
+            width: 100%;
+            max-width: 1000px;
+            /* Kein overflow hidden auf der Karte selbst, falls Schatten etc. */
+            flex-shrink: 0; /* Verhindert das Zusammenquetschen */
         }
 
         #view-platinum { background: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%); }
@@ -645,15 +673,16 @@
     <!-- ==============================================
          VIEW 2: KRYPTO-STARTER (NEU - BRONZE)
          ============================================== -->
-    <div id="view-starter" class="view-section view-hidden p-4 md:p-8">
+    <div id="view-starter" class="view-section view-hidden">
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
 
-        <main class="w-full max-w-6xl bg-stone-950/80 backdrop-blur-xl border border-bronze-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
+        <main class="bg-stone-950/80 backdrop-blur-xl border border-bronze-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
-            <div class="relative h-auto bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-bronze-900/30">
+            <!-- h-full sorgt dafür, dass das Bild mitwächst, wenn der Text länger ist -->
+            <div class="relative bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-bronze-900/30 h-full">
                 <!-- ÄNDERUNG: aspect-square statt aspect-video und max-width hinzugefügt für gute Proportionen -->
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-bronze-700/40 aspect-square w-full max-w-sm mx-auto">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
@@ -677,7 +706,8 @@
             </div>
 
             <!-- RIGHT: CONTENT -->
-            <div class="p-6 md:p-8 lg:p-10 flex flex-col max-h-[90vh] lg:max-h-[85vh] overflow-y-auto custom-scroll lg:order-2">
+            <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
+            <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
                     <span class="text-[10px] font-bold text-bronze-300 uppercase tracking-widest border border-bronze-700/50 bg-bronze-900/20 px-2 py-1 rounded-full">Sicherheit & Basis</span>
                 </div>
@@ -756,16 +786,16 @@
     <!-- ==============================================
          VIEW 3: MASTERPLAN GOLD
          ============================================== -->
-    <div id="view-gold" class="view-section view-hidden p-4 md:p-8">
+    <div id="view-gold" class="view-section view-hidden">
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
         <!-- Huge Background Icon removed, replaced by CSS Pattern -->
 
-        <main class="w-full max-w-6xl bg-stone-900/80 backdrop-blur-xl border border-gold-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
+        <main class="bg-stone-900/80 backdrop-blur-xl border border-gold-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
-            <div class="relative h-auto bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-gold-900/30">
+            <div class="relative bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-gold-900/30 h-full">
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-gold-700/40 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
                     <!-- .webp ersetzt & lazy -->
@@ -788,7 +818,8 @@
             </div>
 
             <!-- RIGHT: CONTENT -->
-            <div class="p-6 md:p-8 lg:p-10 flex flex-col max-h-[90vh] lg:max-h-[85vh] overflow-y-auto custom-scroll lg:order-2">
+            <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
+            <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
                     <span class="text-[10px] font-bold text-gold-300 uppercase tracking-widest border border-gold-700/50 bg-gold-900/20 px-2 py-1 rounded-full">Klarheit & Strategie</span>
                 </div>
@@ -875,15 +906,15 @@
     <!-- ==============================================
          VIEW 4: MASTERMIND PLATINUM (Original)
          ============================================== -->
-    <div id="view-platinum" class="view-section view-hidden p-4 md:p-8">
+    <div id="view-platinum" class="view-section view-hidden">
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
         <!-- Icon entfernt, da jetzt als Pattern im CSS (::before) -->
 
-        <main class="w-full max-w-6xl bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
+        <main class="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
-            <div class="relative h-auto bg-slate-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-slate-800">
+            <div class="relative bg-slate-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-slate-800 h-full">
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-slate-800/50 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
                     <!-- .webp ersetzt & lazy -->
@@ -905,7 +936,8 @@
                 </div>
             </div>
 
-            <div class="p-6 md:p-8 lg:p-10 flex flex-col max-h-[90vh] lg:max-h-[85vh] overflow-y-auto custom-scroll lg:order-2">
+            <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
+            <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
                     <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest border border-blue-900/50 bg-blue-900/10 px-2 py-1 rounded-full">Exklusiver Zugang</span>
                 </div>
@@ -971,14 +1003,14 @@
     <!-- ==============================================
          VIEW 5: MASTERMIND INFINITY (NEU)
          ============================================== -->
-    <div id="view-infinity" class="view-section view-hidden p-4 md:p-8">
+    <div id="view-infinity" class="view-section view-hidden">
         
         <!-- Icon entfernt, da Sternenhimmel wiederhergestellt -->
 
-        <main class="w-full max-w-6xl bg-black/60 backdrop-blur-2xl border border-infinity-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
+        <main class="bg-black/60 backdrop-blur-2xl border border-infinity-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
-            <div class="relative h-auto bg-black/80 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-infinity-900/50">
+            <div class="relative bg-black/80 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-infinity-900/50 h-full">
                 
                 <!-- TOP HALF: INFINITY PRODUCT -->
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-infinity-500/40 aspect-video lg:aspect-auto lg:h-80">
@@ -1009,7 +1041,8 @@
             </div>
 
             <!-- RIGHT: CONTENT -->
-            <div class="p-6 md:p-8 lg:p-10 flex flex-col max-h-[90vh] lg:max-h-[85vh] overflow-y-auto custom-scroll lg:order-2">
+            <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
+            <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
                     <span class="text-[10px] font-bold text-infinity-300 uppercase tracking-widest border border-infinity-700/50 bg-infinity-900/20 px-2 py-1 rounded-full animate-pulse">Highest Tier Access</span>
                 </div>
