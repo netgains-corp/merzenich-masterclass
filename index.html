@@ -46,6 +46,7 @@
                     animation: {
                         'blob': 'blob 7s infinite',
                         'spin-slow': 'spin 15s linear infinite',
+                        'float-slow': 'float 20s ease-in-out infinite',
                     },
                     keyframes: {
                         blob: {
@@ -53,6 +54,10 @@
                             '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
                             '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
                             '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
                         }
                     }
                 }
@@ -287,7 +292,45 @@
         /* Starter: Dark Bronze/Copper radial background */
         #view-starter { background: radial-gradient(circle at 50% 0%, #431407 0%, #0c0a09 100%); }
         
-        /* INFINITY BACKGROUND (Animated) */
+        /* BACKGROUND ICON STYLE (Giant Watermark) */
+        .bg-icon-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60vh; /* RIESIG */
+            opacity: 0.05; /* Sehr transparent */
+            z-index: -1;
+            pointer-events: none;
+            color: white;
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.2));
+        }
+
+        /* Gold Icon Specifics */
+        #view-gold .bg-icon-watermark {
+            color: #fbbf24; /* Amber-400 */
+            opacity: 0.07;
+        }
+
+        /* Platinum Icon Specifics */
+        #view-platinum .bg-icon-watermark {
+            color: #e2e8f0; /* Slate-200 */
+            opacity: 0.04;
+        }
+
+        /* Infinity Icon Specifics */
+        #view-infinity .bg-icon-watermark {
+            color: #d946ef; /* Fuchsia-500 */
+            opacity: 0.06;
+            animation: pulse-slow 8s infinite ease-in-out;
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.06; }
+            50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.08; }
+        }
+
+        /* INFINITY BACKGROUND (Animated Gradient) */
         #view-infinity {
             background: linear-gradient(-45deg, #0f172a, #312e81, #4c1d95, #020617);
             background-size: 400% 400%;
@@ -298,21 +341,6 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
-        /* Moving stars/particles effect for Infinity */
-        #view-infinity::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            opacity: 0.3;
-            z-index: -1;
-            animation: stars-move 100s linear infinite;
-        }
-        @keyframes stars-move { from { transform: translateY(0); } to { transform: translateY(-1000px); } }
 
         .bg-blob-1 { position: fixed; top: -10%; left: -10%; width: 50%; height: 50%; background: #1d4ed8; filter: blur(150px); opacity: 0.15; z-index: -1; animation: float 10s ease-in-out infinite; }
         .bg-blob-2 { position: fixed; bottom: -10%; right: -10%; width: 50%; height: 50%; background: #4f46e5; filter: blur(150px); opacity: 0.15; z-index: -1; animation: float 12s ease-in-out infinite reverse; }
@@ -412,9 +440,9 @@
                 </h1>
                 <div class="hero-img-container">
                     <div class="laptop-wrapper">
-                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Laptop Frame" class="laptop-frame" loading="lazy" decoding="async">
-                        <!-- .webp ersetzt & lazy -->
-                        <img src="hero_bg.webp" alt="Screen Content" class="laptop-screen" loading="lazy" decoding="async">
+                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Laptop Frame" class="laptop-frame" decoding="async">
+                        <!-- .webp ersetzt & lazy entfernt wie gefordert für dieses eine Bild -->
+                        <img src="hero_bg.webp" alt="Screen Content" class="laptop-screen" decoding="async">
                     </div>
                 </div>
                 <div class="cta-wrapper">
@@ -684,6 +712,8 @@
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
+        <!-- Huge Background Icon for Gold -->
+        <i class="fa-solid fa-coins bg-icon-watermark"></i>
 
         <main class="w-full max-w-6xl bg-stone-900/80 backdrop-blur-xl border border-gold-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
             
@@ -802,6 +832,8 @@
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
+        <!-- Huge Background Icon for Platinum -->
+        <i class="fa-regular fa-gem bg-icon-watermark"></i>
 
         <main class="w-full max-w-6xl bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
             
@@ -895,6 +927,9 @@
          ============================================== -->
     <div id="view-infinity" class="view-section view-hidden p-4 md:p-8">
         
+        <!-- Huge Background Icon for Infinity -->
+        <i class="fa-solid fa-infinity bg-icon-watermark"></i>
+
         <main class="w-full max-w-6xl bg-black/60 backdrop-blur-2xl border border-infinity-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
             
             <!-- LEFT: IMAGES -->
@@ -903,8 +938,8 @@
                 <!-- TOP HALF: INFINITY PRODUCT -->
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-infinity-500/40 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 z-10 transition-opacity group-hover:opacity-40"></div>
-                    <!-- .webp ersetzt & lazy -->
-                    <img src="infinity.webp" alt="Mastermind Infinity" class="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110" loading="lazy" decoding="async">
+                    <!-- .webp ersetzt & lazy entfernt -->
+                    <img src="infinity.webp" alt="Mastermind Infinity" class="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110" decoding="async">
                     <div class="absolute top-3 right-3 z-20"><span class="text-[9px] font-bold text-black bg-infinity-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Invite Only</span></div>
                     
                     <div class="absolute bottom-6 left-6 z-20">
@@ -974,6 +1009,7 @@
                     <div class="flex justify-between items-end mb-4">
                         <div>
                             <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Exklusives Investment</p>
+                            <!-- PREIS ANPASSUNG -->
                             <div class="text-3xl md:text-4xl font-black text-white leading-none">49.999 €</div>
                             <p class="text-[9px] text-stone-500 mt-0.5">oder auf Anfrage</p>
                         </div>
