@@ -302,40 +302,52 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            /* WICHTIG: dvh für mobile Browser (Adressleiste) */
+            height: 100dvh; 
             z-index: 500;
             
-            /* WICHTIG: Flexbox für Zentrierung, aber sicherstellen dass Scrollen geht */
+            /* Layout für sicheres Scrollen */
             display: flex;
-            align-items: flex-start; /* Start oben, damit bei Überlänge nicht oben abgeschnitten wird */
-            justify-content: center;
+            flex-direction: column;
+            align-items: center; /* Horizontale Zentrierung */
+            /* Vertikale Zentrierung erfolgt via margin: auto im Child, 
+               damit Scrollen bei Überlänge funktioniert */
+            justify-content: flex-start; 
             
-            /* Scrollen der ganzen Seite erlauben */
+            /* Scrollen ermöglichen */
             overflow-y: auto; 
             overflow-x: hidden;
             
-            /* Padding für Abstände oben/unten */
-            padding: 40px 20px;
+            /* Padding für Abstände, besonders unten wichtig für Mobile */
+            padding: 40px 20px 80px 20px;
             
-            /* Scroll-Fix für Mobile/Overlays */
+            /* Scroll-Performance */
             -webkit-overflow-scrolling: touch; 
             overscroll-behavior: contain;
-            
-            /* (3) Rubber Banding Support: auto erlaubt native OS Bounce Effekte */
             overscroll-behavior-y: auto; 
+            
+            /* Maske für Fade-Out Effekt oben/unten */
+            mask-image: linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
         }
 
-        /* Die "Magie" für sicheres Zentrieren: margin: auto sorgt in Flexbox für Zentrierung WENN Platz da ist */
+        /* Kind-Elemente (Die Karten) */
         #view-platinum > main, 
         #view-gold > main, 
         #view-starter > main, 
         #view-infinity > main {
+            /* Magie: margin: auto zentriert vertikal WENN Platz da ist. 
+               Wenn kein Platz, klebt es oben und erlaubt Scrollen. */
             margin-top: auto;
             margin-bottom: auto;
+            
             width: 100%;
             max-width: 1000px;
-            /* Kein overflow hidden auf der Karte selbst, falls Schatten etc. */
-            flex-shrink: 0; /* Verhindert das Zusammenquetschen */
+            flex-shrink: 0; /* Verhindert Zusammenquetschen */
+            
+            /* Transform für den Skew-Effekt */
+            transition: transform 0.1s ease-out;
+            will-change: transform;
         }
 
         #view-platinum { background: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%); }
@@ -700,10 +712,10 @@
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
 
+        <!-- class "my-auto" entfernt, da wir das jetzt über CSS regeln -->
         <main class="bg-stone-950/80 backdrop-blur-xl border border-bronze-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
-            <!-- h-full sorgt dafür, dass das Bild mitwächst, wenn der Text länger ist -->
             <div class="relative bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-bronze-900/30 h-full">
                 <!-- ÄNDERUNG: aspect-square statt aspect-video und max-width hinzugefügt für gute Proportionen -->
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-bronze-700/40 aspect-square w-full max-w-sm mx-auto">
@@ -812,8 +824,8 @@
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
-        <!-- Huge Background Icon removed, replaced by CSS Pattern -->
 
+        <!-- class "my-auto" entfernt -->
         <main class="bg-stone-900/80 backdrop-blur-xl border border-gold-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
@@ -932,8 +944,8 @@
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
-        <!-- Icon entfernt, da jetzt als Pattern im CSS (::before) -->
-
+        
+        <!-- class "my-auto" entfernt -->
         <main class="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <div class="relative bg-slate-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-slate-800 h-full">
@@ -1027,8 +1039,9 @@
          ============================================== -->
     <div id="view-infinity" class="view-section view-hidden">
         
-        <!-- Icon entfernt, da Sternenhimmel wiederhergestellt -->
+        <i class="fa-solid fa-infinity bg-icon-watermark"></i>
 
+        <!-- class "my-auto" entfernt -->
         <main class="bg-black/60 backdrop-blur-2xl border border-infinity-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
@@ -1177,39 +1190,80 @@
                 }
 
                 // SCROLL LOGIC FIX:
-                // Wenn wir in einem Overlay sind (state > 0), stoppen wir Lenis, damit das Overlay nativ scrollen kann.
-                // Wenn wir auf der Startseite sind (state 0), starten wir Lenis wieder für den Smooth Scroll Effekt.
+                // Wenn Overlay offen (state > 0), sperren wir den Body-Scroll, damit das Overlay exklusiv scrollt.
                 if (state > 0) {
-                    if (window.lenisInstance) window.lenisInstance.stop();
+                    document.body.style.overflow = 'hidden'; // Body einfrieren
+                    if (window.lenisInstance) window.lenisInstance.stop(); // Lenis stoppen
                 } else {
-                    if (window.lenisInstance) window.lenisInstance.start();
+                    document.body.style.overflow = ''; // Body freigeben
+                    if (window.lenisInstance) window.lenisInstance.start(); // Lenis starten
                 }
 
                 if (state === 1) { // Starter
                     viewStarter.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-bronze');
-                    btnIcon.classList.add('fa-solid', 'fa-coins'); // Next: Gold
+                    btnIcon.classList.add('fa-solid', 'fa-coins'); 
                 } else if (state === 2) { // Gold
                     viewGold.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-gold');
-                    btnIcon.classList.add('fa-regular', 'fa-gem'); // Next: Platinum
+                    btnIcon.classList.add('fa-regular', 'fa-gem'); 
                 } else if (state === 3) { // Platinum
                     viewPlatinum.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-platinum');
-                    btnIcon.classList.add('fa-solid', 'fa-infinity'); // Next: Infinity
+                    btnIcon.classList.add('fa-solid', 'fa-infinity'); 
                 } else if (state === 4) { // Infinity
                     viewInfinity.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-infinity');
-                    btnIcon.classList.add('fa-solid', 'fa-house'); // Next: Home
+                    btnIcon.classList.add('fa-solid', 'fa-house'); 
                 } else { // Standard (0)
                     viewStandard.classList.remove('view-hidden');
-                    btnIcon.classList.add('fa-solid', 'fa-layer-group'); // Next: Starter
-                    // Lenis Resize call to fix potential scroll issues after switching back
+                    btnIcon.classList.add('fa-solid', 'fa-layer-group'); 
                     if(window.lenisInstance) window.lenisInstance.resize();
                 }
                 
                 window.scrollTo(0, 0);
             }
+
+            // VELOCITY SKEW EFFECT (Wackelpudding beim Scrollen in Overlays)
+            const scrollContainers = [
+                document.getElementById('view-starter'),
+                document.getElementById('view-gold'),
+                document.getElementById('view-platinum'),
+                document.getElementById('view-infinity')
+            ];
+
+            scrollContainers.forEach(container => {
+                let lastScrollTop = 0;
+                let skew = 0;
+                let request;
+
+                const content = container.querySelector('main');
+
+                const loop = () => {
+                    // Trägheit: Skew langsam gegen 0 bewegen
+                    skew *= 0.9;
+                    if (Math.abs(skew) < 0.01) skew = 0;
+                    
+                    content.style.transform = `skewY(${skew}deg)`;
+                    
+                    if (Math.abs(skew) > 0.01) {
+                        request = requestAnimationFrame(loop);
+                    }
+                };
+
+                container.addEventListener('scroll', () => {
+                    const currentScroll = container.scrollTop;
+                    const speed = currentScroll - lastScrollTop;
+                    
+                    // Skew basierend auf Geschwindigkeit berechnen (Limitieren auf max 5 Grad)
+                    skew = Math.max(Math.min(speed * 0.1, 5), -5);
+                    
+                    lastScrollTop = currentScroll;
+                    
+                    cancelAnimationFrame(request);
+                    request = requestAnimationFrame(loop);
+                }, { passive: true });
+            });
 
             // Event Listener: Hash Change
             window.addEventListener('hashchange', () => {
@@ -1219,7 +1273,7 @@
             // Event Listener: Button Click
             toggleBtn.addEventListener('click', () => {
                 const currentState = getStateFromHash();
-                const nextState = (currentState + 1) % 5; // Modulo 5 für 5 States
+                const nextState = (currentState + 1) % 5; 
                 
                 if (nextState === 0) window.location.hash = ''; 
                 else if (nextState === 1) window.location.hash = '#startup';
@@ -1234,7 +1288,6 @@
             });
 
             // Init Load
-            // Timeout to ensure Lenis is ready before we potentially stop it
             setTimeout(() => {
                 updateUI(getStateFromHash());
             }, 50);
