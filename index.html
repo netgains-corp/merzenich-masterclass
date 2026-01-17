@@ -8,24 +8,44 @@
     <!-- Favicon -->
     <link rel="icon" href="xlg.jpg" type="image/jpeg">
 
-    <!-- Fonts laden: Montserrat & Poppins -->
+    <!-- Fonts laden -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Poppins:wght@300;400;600&family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
     
     <!-- Icons laden (FontAwesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Icons (Lucide für Platinum/Gold/Starter) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        platinum: { 200: '#e2e8f0', 300: '#cbd5e1' },
+                        gold: { 100: '#fef3c7', 300: '#fcd34d', 500: '#f59e0b', 700: '#b45309', 900: '#78350f' },
+                        bronze: { 100: '#ffedd5', 300: '#fdba74', 500: '#f97316', 700: '#c2410c', 900: '#7c2d12' }
+                    }
+                }
+            },
+            corePlugins: { preflight: false } // Wichtig: Verhindert Konflikte mit Seite 1
+        }
+    </script>
 
     <!-- Buttery Smooth Scrolling (Lenis) -->
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 
     <style>
         /* -----------------------------------------------------------
-           BASIS SETUP & VARIABLEN
+           GLOBALER RESET & BASIS
         ----------------------------------------------------------- */
         :root {
             /* Standard Farben */
-            --primary-color: #f6ad55; /* Bleibt immer Orange für Text/Buttons */
+            --primary-color: #f6ad55; 
             --secondary-blue: #188bf6;
             --dark-bg: #050505;
             --card-bg: rgba(255, 255, 255, 0.05);
@@ -33,46 +53,20 @@
             --text-gray: #cbd5e0;
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Poppins', sans-serif;
-            
-            /* Standard Hintergrund-Tönung (Orange/Braun) */
-            --overlay-color: rgba(246, 173, 85, 0.1); 
-        }
-
-        /* THEME: BLAU (Nur Hintergrund-Tönung) */
-        body.theme-blue {
-            /* Intensives Blau mit höherer Deckkraft gegen den braunen Hintergrund */
             --overlay-color: rgba(0, 40, 255, 0.85); 
+            
+            /* Platinum Vars */
+            --shimmer-1: #e2e8f0; --shimmer-2: #a5f3fc; --shimmer-3: #f5d0fe; --shimmer-4: #94a3b8;
+
+            /* Gold Vars */
+            --gold-1: #fffbeb; --gold-2: #fcd34d; --gold-3: #fbbf24; --gold-4: #d97706;
+
+            /* Bronze/Starter Vars */
+            --bronze-1: #fff7ed; --bronze-2: #fdba74; --bronze-3: #f97316; --bronze-4: #9a3412;
         }
 
-        /* THEME: ROT (Nur Hintergrund-Tönung) */
-        body.theme-red {
-            /* Intensiveres, dunkleres Rot mit hoher Deckkraft */
-            --overlay-color: rgba(160, 0, 0, 0.85); 
-        }
-
-        /* --- LENIS SMOOTH SCROLLING CSS --- */
-        html.lenis {
-            height: auto;
-        }
-        .lenis.lenis-smooth {
-            scroll-behavior: auto;
-        }
-        .lenis.lenis-smooth [data-lenis-prevent] {
-            overscroll-behavior: contain;
-        }
-        .lenis.lenis-stopped {
-            overflow: hidden;
-        }
-        .lenis.lenis-scrolling iframe {
-            pointer-events: none;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
             background-color: var(--dark-bg);
             color: var(--text-white);
@@ -82,1642 +76,856 @@
             transition: background-color 0.5s ease;
         }
 
-        /* -----------------------------------------------------------
-           HINTERGRUND (Fixed)
-        ----------------------------------------------------------- */
-        .bg-fixed {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            /* Hintergrundbild wiederhergestellt */
-            background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat;
-            opacity: 0.85; 
-        }
-
-        /* Farb-Overlay für den "Ton" - Liegt über dem Bild, unter dem Text */
-        .bg-tint {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-color: var(--overlay-color);
-            mix-blend-mode: overlay; /* Verrechnet die Farbe mit dem Bild */
-            pointer-events: none;
-            transition: background-color 0.5s ease;
-        }
+        /* VIEW CONTAINER LOGIC */
+        .view-section { display: block; opacity: 1; transition: opacity 0.5s ease-in-out; }
+        .view-hidden { display: none !important; opacity: 0; }
 
         /* -----------------------------------------------------------
-           THEME TOGGLE BUTTON
+           NAVIGATION CONTROLS
         ----------------------------------------------------------- */
-        #theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
+        .nav-controls {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; gap: 15px; align-items: center;
+        }
+
+        .ctrl-btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             color: var(--text-white);
-            padding: 10px;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
+            padding: 10px; border-radius: 50%; width: 40px; height: 40px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            backdrop-filter: blur(5px); transition: all 0.3s ease;
         }
+        .ctrl-btn:hover { background: var(--primary-color); transform: scale(1.1); }
 
-        #theme-toggle:hover {
-            background: var(--primary-color);
-            transform: scale(1.1);
-        }
+        /* Navigation Button Active States */
+        .nav-btn-bronze { background: #fdba74 !important; color: #431407 !important; box-shadow: 0 0 15px rgba(253, 186, 116, 0.5); }
+        .nav-btn-gold { background: #f59e0b !important; color: #000 !important; box-shadow: 0 0 15px rgba(245, 158, 11, 0.5); }
+        .nav-btn-platinum { background: #e2e8f0 !important; color: #000 !important; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
 
         /* -----------------------------------------------------------
-           LAYOUT CONTAINER
+           STYLES FÜR SEITE 1 (Original)
         ----------------------------------------------------------- */
-        .container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+        body.theme-orange { --overlay-color: rgba(246, 173, 85, 0.1); }
+        body.theme-red { --overlay-color: rgba(160, 0, 0, 0.85); }
 
-        /* -----------------------------------------------------------
-           HERO SECTION
-        ----------------------------------------------------------- */
-        .hero-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            /* Padding weiter reduziert */
-            padding-top: 5px; 
-            padding-bottom: 30px; 
-        }
+        .bg-fixed { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat; opacity: 0.85; }
+        .bg-tint { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-color: var(--overlay-color); mix-blend-mode: overlay; pointer-events: none; transition: background-color 0.5s ease; }
 
-        .logo {
-            /* Logo nochmals vergrößert (auf 240px) */
-            width: 240px;
-            height: auto;
-            /* Margin leicht angepasst */
-            margin-bottom: 15px;
-        }
+        .container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .hero-section { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 5px; padding-bottom: 30px; }
+        .logo { width: 240px; height: auto; margin-bottom: 15px; }
+        .sub-headline { font-family: var(--font-heading); font-size: 15px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-white); margin-bottom: 10px; border: 2px solid var(--text-white); padding: 5px 12px; display: inline-block; border-radius: 50px; line-height: 1.2; }
+        .main-headline { font-family: var(--font-heading); font-size: clamp(24px, 5vw, 42px); font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
+        .main-headline > span { color: var(--text-white); display: block; margin-top: 5px; }
+        .netflix-strike { position: relative; display: inline-block; font-family: 'Bebas Neue', sans-serif; color: #E50914; font-size: 1.1em; letter-spacing: 1px; }
+        .netflix-strike::after { content: ''; position: absolute; left: -5%; right: -5%; top: 45%; height: 4px; background: #ef4444; transform: rotate(-15deg); opacity: 0.9; border-radius: 2px; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
 
-        .sub-headline {
-            font-family: var(--font-heading);
-            font-size: 15px; 
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            
-            /* Farbe auf Weiß geändert */
-            color: var(--text-white); 
-            
-            /* Margin reduziert */
-            margin-bottom: 10px;
-            border: 2px solid var(--text-white);
-            padding: 5px 12px;
-            display: inline-block;
-            
-            /* Rahmen runder gemacht (Pillen-Form) */
-            border-radius: 50px; 
-            
-            line-height: 1.2;
-        }
+        .hero-img-container { width: 100%; display: flex; justify-content: center; margin-bottom: 15px; position: relative; }
+        .laptop-wrapper { position: relative; width: 100%; max-width: 600px; }
+        .laptop-frame { width: 100%; height: auto; display: block; position: relative; z-index: 10; }
+        .laptop-screen { position: absolute; top: 2.8%; left: 12.0%; width: 76.0%; height: 89.0%; z-index: 20; object-fit: cover; border-radius: 3px; background-color: #000000; }
 
-        .main-headline {
-            font-family: var(--font-heading);
-            font-size: clamp(24px, 5vw, 42px); 
-            font-weight: 800;
-            line-height: 1.2;
-            /* Margin reduziert */
-            margin-bottom: 10px;
-        }
+        .cta-wrapper { display: flex; flex-direction: column; align-items: center; gap: 15px; width: 100%; max-width: 500px; }
+        .btn-main { background-color: var(--primary-color); color: #ffffff; font-family: var(--font-heading); font-weight: 800; font-size: 20px; padding: 10px 25px; text-transform: uppercase; text-decoration: none; border-radius: 50px; border: 2px solid var(--primary-color); transition: all 0.3s ease; box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); display: inline-flex; align-items: center; gap: 10px; width: 100%; justify-content: center; text-align: center; }
+        .btn-main:hover { transform: scale(1.02); filter: brightness(1.1); }
+        .cta-subtext { font-size: 12px; color: var(--text-white); margin-top: 5px; font-weight: 400; line-height: 1.4; max-width: 400px; }
+        .pulse { animation: pulse-animation 2s infinite; }
+        @keyframes pulse-animation { 0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); } 70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); } }
 
-        .main-headline span {
-            color: var(--text-white);
-            display: block;
-            margin-top: 5px;
-        }
+        .countdown-wrapper { border: none; padding: 10px 0; background: transparent; text-align: center; width: 100%; margin-top: 5px; }
+        .countdown-label { font-size: 14px; margin-bottom: 10px; color: var(--text-white); line-height: 1.2; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        .timer { display: flex; justify-content: center; gap: 10px; }
+        .timer-part { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 6px; min-width: 75px; padding: 10px 5px; backdrop-filter: blur(4px); }
+        .timer-part div { font-family: var(--font-heading); font-weight: 800; font-size: 42px; color: var(--primary-color); line-height: 1; margin-bottom: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .timer-part span { font-size: 10px; color: #cbd5e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* --- LAPTOP COMPOSITE --- */
-        .hero-img-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            /* Margin reduziert */
-            margin-bottom: 15px;
-            position: relative;
-        }
+        .marquee-container { width: 100%; overflow: hidden; margin-top: 50px; margin-bottom: 20px; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        .marquee-content { display: flex; align-items: center; gap: 60px; width: max-content; animation: marquee-scroll 25s linear infinite; }
+        .marquee-logo { height: 40px; width: auto; object-fit: contain; opacity: 0.7; transition: opacity 0.3s; }
+        .marquee-logo:hover { opacity: 1; }
+        .marquee-logo.invert { filter: brightness(0) invert(1); }
+        .marquee-text { font-size: 18px; font-weight: 700; text-transform: uppercase; border: 2px solid rgba(255, 255, 255, 0.3); color: rgba(255, 255, 255, 0.8); padding: 5px 12px; white-space: nowrap; }
+        @keyframes marquee-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        .laptop-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 600px; 
-        }
-
-        .laptop-frame {
-            width: 100%;
-            height: auto;
-            display: block;
-            position: relative;
-            z-index: 10;
-        }
-
-        .laptop-screen {
-            position: absolute;
-            /* Werte angepasst, um das Originalbild besser zu verdecken */
-            /* UPDATE: Noch weiter nach oben geschoben, um Durchscheinen zu verhindern */
-            top: 2.8%;    
-            left: 12.0%; 
-            width: 76.0%; 
-            height: 89.0%; 
-            z-index: 20; 
-            object-fit: cover;
-            border-radius: 3px;
-            /* NEU: Schwarzer Hintergrund verhindert das Aufblitzen des alten Bildes beim Laden */
-            background-color: #000000; 
-        }
-
-        /* -----------------------------------------------------------
-           CTA BUTTON & COUNTDOWN
-        ----------------------------------------------------------- */
-        .cta-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .btn-main {
-            background-color: var(--primary-color);
-            color: #ffffff;
-            font-family: var(--font-heading);
-            font-weight: 800;
-            font-size: 20px; 
-            
-            /* Padding reduziert (war 12px 35px) -> Button wird kompakter */
-            padding: 10px 25px; 
-            
-            text-transform: uppercase;
-            text-decoration: none;
-            border-radius: 50px;
-            border: 2px solid var(--primary-color);
-            transition: all 0.3s ease;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%; 
-            justify-content: center;
-            text-align: center;
-        }
-
-        .btn-main:hover {
-            transform: scale(1.02);
-            filter: brightness(1.1);
-        }
-
-        .cta-subtext {
-            font-size: 12px;
-            color: var(--text-white);
-            margin-top: 5px;
-            font-weight: 400;
-            line-height: 1.4;
-            max-width: 400px;
-        }
-
-        .pulse {
-            animation: pulse-animation 2s infinite;
-        }
-
-        @keyframes pulse-animation {
-            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
-        }
-
-        /* Countdown Style - NEU: Block-Design wie im Original */
-        .countdown-wrapper {
-            border: none; /* Äußerer Rahmen entfernt */
-            padding: 10px 0;
-            background: transparent;
-            text-align: center;
-            width: 100%;
-            /* Abstand nach oben verringert (war 15px) */
-            margin-top: 5px;
-        }
-
-        .countdown-label {
-            font-size: 14px;
-            margin-bottom: 10px;
-            color: var(--text-white); /* Weiß für bessere Lesbarkeit */
-            line-height: 1.2;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .timer {
-            display: flex;
-            justify-content: center;
-            gap: 10px; /* Abstand zwischen den Blöcken */
-        }
-
-        .timer-part {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            
-            /* Box-Design */
-            background: rgba(0, 0, 0, 0.4); /* Dunkler Hintergrund für Kontrast */
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
-            min-width: 75px; /* Breite Blöcke */
-            padding: 10px 5px;
-            backdrop-filter: blur(4px);
-        }
-
-        /* Die Zahl selbst */
-        .timer-part div {
-            font-family: var(--font-heading);
-            font-weight: 800;
-            font-size: 42px; /* Große, fette Zahlen */
-            color: var(--primary-color);
-            line-height: 1;
-            margin-bottom: 2px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-
-        /* Das Label (Tage, Std...) */
-        .timer-part span {
-            font-size: 10px;
-            color: #cbd5e0;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* -----------------------------------------------------------
-           MARQUEE SECTION (Logos)
-        ----------------------------------------------------------- */
-        .marquee-container {
-            width: 100%;
-            overflow: hidden;
-            margin-top: 50px;
-            margin-bottom: 20px;
-            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-        }
-
-        .marquee-content {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            width: max-content;
-            animation: marquee-scroll 25s linear infinite;
-        }
-
-        .marquee-logo {
-            height: 40px;
-            width: auto;
-            object-fit: contain;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-
-        .marquee-logo:hover {
-            opacity: 1;
-        }
-
-        .marquee-logo.invert {
-            filter: brightness(0) invert(1);
-        }
-
-        .marquee-text {
-            font-size: 18px;
-            font-weight: 700;
-            text-transform: uppercase;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 5px 12px;
-            white-space: nowrap;
-        }
-
-        @keyframes marquee-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* -----------------------------------------------------------
-           SECTIONS (Allgemein)
-        ----------------------------------------------------------- */
-        section {
-            padding: 60px 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .section-title {
-            text-align: center;
-            font-family: var(--font-heading);
-            font-size: clamp(20px, 4vw, 32px);
-            font-weight: 700;
-            margin-bottom: 40px;
-            color: var(--primary-color);
-        }
+        section { padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.1); }
+        .section-title { text-align: center; font-family: var(--font-heading); font-size: clamp(20px, 4vw, 32px); font-weight: 700; margin-bottom: 40px; color: var(--primary-color); }
+        .section-title.white { color: var(--text-white); }
+        .grid-3 { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        @media (min-width: 768px) { .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+        .card { background: #000000; border: 1px solid rgba(255,255,255,0.2); padding: 25px; border-radius: 15px; text-align: center; }
+        .card p { font-size: 15px; color: var(--text-gray); }
+        .card i { font-size: 30px; color: var(--primary-color); margin-bottom: 15px; }
+        .card.white-border { border: 1px solid var(--text-white); }
         
-        .section-title.white {
-            color: var(--text-white);
-        }
+        .stat-box { background: rgba(255,255,255,0.05); border: 1px solid var(--primary-color); padding: 20px; text-align: center; }
+        .stat-number { font-family: var(--font-heading); font-size: 40px; font-weight: 800; color: var(--text-white); display: block; }
+        .stat-label { font-size: 16px; color: var(--text-gray); }
+        .strategy-box { background: rgba(255, 255, 255, 0.05); border: 2px solid var(--primary-color); border-radius: 20px; padding: 40px 30px; max-width: 800px; margin: 0 auto; text-align: left; box-shadow: 0 0 40px rgba(0,0,0,0.4); transition: border-color 0.5s ease; }
+        .strategy-list { list-style: none; padding: 0; margin: 30px 0; }
+        .strategy-list li { display: flex; align-items: flex-start; margin-bottom: 20px; font-size: 18px; color: var(--text-white); line-height: 1.4; }
+        .strategy-list i { color: #22c55e; margin-right: 15px; margin-top: 4px; font-size: 20px; min-width: 20px; }
+        .price-container { text-align: center; margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .price-label { font-size: 20px; color: var(--text-gray); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .price-value { font-family: var(--font-heading); font-size: 56px; font-weight: 800; color: var(--primary-color); line-height: 1; transition: color 0.5s ease; }
 
-        /* Grid Layout */
-        .grid-3 {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
+        .scarcity-section { padding: 50px 0; background-color: rgba(127, 29, 29, 0.2); border-bottom: 1px solid rgba(239, 68, 68, 0.2); text-align: center; }
+        .scarcity-container { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+        .warning-badge { display: inline-block; background-color: #dc2626; color: white; font-weight: 700; padding: 4px 16px; border-radius: 50px; font-size: 14px; margin-bottom: 15px; box-shadow: 0 0 15px rgba(220, 38, 38, 0.5); animation: scarcity-pulse 2s infinite; }
+        @keyframes scarcity-pulse { 0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); } 70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); } 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); } }
+        .scarcity-title { font-size: 24px; font-weight: 700; margin-bottom: 15px; color: white; }
+        .scarcity-text { color: #d1d5db; font-size: 18px; line-height: 1.6; }
 
-        @media (min-width: 768px) {
-            .grid-3 {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
+        .team-section { background-color: transparent; padding: 80px 0; }
+        .slider-wrapper { position: relative; width: 100%; }
+        .team-slider-container { width: 100%; overflow-x: auto; padding-bottom: 20px; -ms-overflow-style: none; scrollbar-width: none; scroll-behavior: smooth; }
+        .team-slider-container::-webkit-scrollbar { display: none; }
+        .team-slider-track { display: flex; gap: 25px; padding: 0 10px; width: max-content; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 20; width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--primary-color); color: #fff; font-size: 20px; cursor: pointer; box-shadow: 0 0 20px rgba(246, 173, 85, 0.6); display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; opacity: 0.9; }
+        .nav-btn:hover { transform: translateY(-50%) scale(1.1); background: #fff; color: var(--primary-color); opacity: 1; }
+        .prev-btn { left: -10px; } .next-btn { right: -10px; }
+        @media (max-width: 1200px) { .prev-btn { left: 10px; } .next-btn { right: 10px; } }
+        @media (max-width: 768px) { .nav-btn { width: 40px; height: 40px; font-size: 16px; opacity: 0.8; } }
+        .team-card { background: rgba(0, 0, 0, 0.75); border: 1px solid rgba(255, 255, 255, 0.1); padding: 35px 25px; border-radius: 20px; text-align: center; transition: transform 0.3s ease, border-color 0.3s ease; display: flex; flex-direction: column; align-items: center; width: 320px; flex-shrink: 0; scroll-snap-align: center; }
+        .team-card:hover { transform: translateY(-7px); border-color: var(--primary-color); }
+        .team-img { width: 160px; height: 160px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-color); margin-bottom: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+        .team-name { font-family: var(--font-heading); color: var(--text-white); font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+        .team-role { display: block; color: var(--primary-color); font-family: var(--font-body); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; min-height: 40px; display: flex; align-items: center; justify-content: center; }
+        .team-desc { color: var(--text-gray); font-size: 14px; line-height: 1.6; text-align: left; width: 100%; }
+        .desc-spacer { margin-top: 15px; display: block; }
 
-        /* Cards */
-        .card {
-            /* Hintergrund auf Schwarz geändert */
-            background: #000000;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 25px;
-            border-radius: 15px;
-            text-align: center;
-        }
+        .profile-container { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 30px; }
+        @media (min-width: 768px) { .profile-container { flex-direction: row; text-align: left; align-items: flex-start; } }
+        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-color); flex-shrink: 0; }
+        .profile-text p { color: var(--text-gray); margin-bottom: 15px; font-size: 15px; }
 
-        .card p {
-            font-size: 15px;
-            color: var(--text-gray);
-        }
+        footer { text-align: center; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: var(--text-gray); display: flex; flex-direction: column; align-items: center; }
+        .footer-logo { width: 60px; height: auto; margin-bottom: 20px; }
+        .social-icons { margin-bottom: 20px; }
+        .social-icons a { color: var(--text-white); font-size: 24px; margin: 0 10px; transition: color 0.3s; }
+        .social-icons a:hover { color: var(--primary-color); }
+        footer a { color: var(--text-gray); text-decoration: none; cursor: pointer; }
 
-        .card i {
-            font-size: 30px;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
+        .proven-expert-badge { position: fixed; bottom: 20px; right: 20px; background-color: #ffffff; width: 110px; padding: 10px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 9999; text-align: center; font-family: 'Poppins', sans-serif; border-top: 3px solid #f6ad55; transition: transform 0.3s ease; cursor: default; }
+        .proven-expert-badge:hover { transform: translateY(-3px); }
+        .pe-logo { font-weight: 700; font-size: 13px; color: #2d3748; margin-bottom: 5px; line-height: 1; }
+        .pe-logo span { color: #f6ad55; }
+        .pe-stars { color: #fbbf24; font-size: 12px; margin-bottom: 5px; letter-spacing: 1px; }
+        .pe-rating { font-weight: 800; font-size: 20px; color: #2d3748; line-height: 1; margin-bottom: 2px; }
+        .pe-subtext { font-size: 10px; color: #718096; line-height: 1.3; }
+        .pe-date { font-size: 9px; color: #a0aec0; margin-top: 5px; border-top: 1px solid #edf2f7; padding-top: 5px; }
 
-        .card.white-border {
-            border: 1px solid var(--text-white);
-        }
-
-        /* Stats Section */
-        .stat-box {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--primary-color);
-            padding: 20px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: var(--font-heading);
-            font-size: 40px;
-            font-weight: 800;
-            color: var(--text-white);
-            display: block;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: var(--text-gray);
-        }
-
-        /* NEW STRATEGY SECTION STYLES */
-        .strategy-box {
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--primary-color);
-            border-radius: 20px;
-            padding: 40px 30px;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-            box-shadow: 0 0 40px rgba(0,0,0,0.4);
-            transition: border-color 0.5s ease;
-        }
-
-        .strategy-list {
-            list-style: none;
-            padding: 0;
-            margin: 30px 0;
-        }
-
-        .strategy-list li {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            font-size: 18px;
-            color: var(--text-white);
-            line-height: 1.4;
-        }
-
-        .strategy-list i {
-            color: #22c55e; /* Green checkmark */
-            margin-right: 15px;
-            margin-top: 4px; /* Align visually with text */
-            font-size: 20px;
-            min-width: 20px; /* Prevent squishing */
-        }
-
-        .price-container {
-            text-align: center;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .price-label {
-            font-size: 20px;
-            color: var(--text-gray);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .price-value {
-            font-family: var(--font-heading);
-            font-size: 56px;
-            font-weight: 800;
-            color: var(--primary-color);
-            line-height: 1;
-            transition: color 0.5s ease;
-        }
-
-        /* NEW SCARCITY SECTION STYLES */
-        .scarcity-section {
-            padding: 50px 0;
-            background-color: rgba(127, 29, 29, 0.2); /* Red background with transparency */
-            border-bottom: 1px solid rgba(239, 68, 68, 0.2);
-            text-align: center;
-        }
-
-        .scarcity-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .warning-badge {
-            display: inline-block;
-            background-color: #dc2626; /* Red 600 */
-            color: white;
-            font-weight: 700;
-            padding: 4px 16px;
-            border-radius: 50px;
-            font-size: 14px;
-            margin-bottom: 15px;
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.5);
-            animation: scarcity-pulse 2s infinite;
-        }
-
-        @keyframes scarcity-pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-        }
-
-        .scarcity-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: white;
-        }
-
-        .scarcity-text {
-            color: #d1d5db; /* Gray 300 */
-            font-size: 18px;
-            line-height: 1.6;
-        }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 2000; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+        .modal-overlay.active { display: flex; }
+        .modal-content { background: #1a1a1a; border: 1px solid var(--primary-color); padding: 40px; border-radius: 15px; max-width: 600px; width: 90%; position: relative; text-align: left; color: var(--text-gray); box-shadow: 0 0 30px rgba(0,0,0,0.5); max-height: 85vh; overflow-y: auto; }
+        .modal-content::-webkit-scrollbar { width: 8px; }
+        .modal-content::-webkit-scrollbar-track { background: #000; }
+        .modal-content::-webkit-scrollbar-thumb { background: var(--primary-color); border-radius: 4px; }
+        .modal-content h3 { color: var(--text-white); font-family: var(--font-heading); margin-bottom: 20px; font-size: 24px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .modal-content h4 { color: var(--text-white); font-family: var(--font-heading); margin-top: 20px; margin-bottom: 10px; font-size: 18px; }
+        .modal-content p { margin-bottom: 10px; line-height: 1.6; font-size: 14px; }
+        .modal-content strong { color: var(--text-white); }
+        .close-modal { position: absolute; top: 15px; right: 20px; color: var(--text-gray); font-size: 32px; cursor: pointer; transition: color 0.3s; line-height: 1; z-index: 10; }
+        .close-modal:hover { color: var(--primary-color); }
 
         /* -----------------------------------------------------------
-           NEW: TEAM SECTION STYLES (Slider & Transparent)
+           STYLES FÜR PLATINUM, GOLD & STARTER (Container)
         ----------------------------------------------------------- */
-        .team-section {
-            /* Hintergrund transparent gemacht */
-            background-color: transparent; 
-            padding: 80px 0;
+        /* Common for additional views */
+        #view-platinum, #view-gold, #view-starter {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            width: 100%; position: fixed; top: 0; left: 0; z-index: 500;
         }
 
-        /* Slider Wrapper to hold Container + Buttons */
-        .slider-wrapper {
-            position: relative;
-            width: 100%;
-            /* Max-Width an Container anpassen, oder Full width lassen */
-        }
+        #view-platinum { background: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%); }
+        #view-gold { background: radial-gradient(circle at 50% 0%, #451a03 0%, #000000 100%); }
+        /* Starter: Dark Bronze/Copper radial background */
+        #view-starter { background: radial-gradient(circle at 50% 0%, #431407 0%, #0c0a09 100%); }
 
-        /* Slider Container Styles */
-        .team-slider-container {
-            width: 100%;
-            overflow-x: auto; /* Horizontal scrolling */
-            padding-bottom: 20px; /* Space for scrollbar if visible */
-            
-            /* Hide scrollbar visually but keep functionality */
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            scroll-behavior: smooth;
-        }
+        .bg-blob-1 { position: fixed; top: -10%; left: -10%; width: 50%; height: 50%; background: #1d4ed8; filter: blur(150px); opacity: 0.15; z-index: -1; animation: float 10s ease-in-out infinite; }
+        .bg-blob-2 { position: fixed; bottom: -10%; right: -10%; width: 50%; height: 50%; background: #4f46e5; filter: blur(150px); opacity: 0.15; z-index: -1; animation: float 12s ease-in-out infinite reverse; }
+        @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, 40px); } 100% { transform: translate(0, 0); } }
+
+        /* Text Effects */
+        .platinum-text { background: linear-gradient(90deg, var(--shimmer-1) 0%, var(--shimmer-4) 25%, var(--shimmer-2) 45%, #ffffff 50%, var(--shimmer-3) 55%, var(--shimmer-4) 75%, var(--shimmer-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
+        .gold-text { background: linear-gradient(90deg, var(--gold-1) 0%, var(--gold-4) 25%, var(--gold-2) 45%, #ffffff 50%, var(--gold-3) 55%, var(--gold-4) 75%, var(--gold-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
+        .bronze-text { background: linear-gradient(90deg, var(--bronze-1) 0%, var(--bronze-2) 25%, var(--bronze-3) 45%, #ffffff 50%, var(--bronze-2) 55%, var(--bronze-3) 75%, var(--bronze-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
         
-        .team-slider-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari and Opera */
-        }
+        @keyframes shine { to { background-position: 200% center; } }
 
-        .team-slider-track {
-            display: flex;
-            gap: 25px; /* Abstand zwischen den Karten */
-            padding: 0 10px; /* Kleiner Puffer an den Seiten */
-            width: max-content; /* Track so breit wie der Inhalt */
-        }
+        /* Buttons */
+        .btn-platinum { background: linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%); color: #0f172a; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(226, 232, 240, 0.2); }
+        .btn-platinum:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(226, 232, 240, 0.4); }
 
-        /* Navigation Buttons */
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 20;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            background: var(--primary-color);
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(246, 173, 85, 0.6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            opacity: 0.9;
-        }
+        .btn-gold { background: linear-gradient(135deg, #fcd34d 0%, #d97706 100%); color: #451a03; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(217, 119, 6, 0.3); }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(217, 119, 6, 0.5); }
 
-        .nav-btn:hover {
-            transform: translateY(-50%) scale(1.1);
-            background: #fff;
-            color: var(--primary-color);
-            opacity: 1;
-        }
-
-        .prev-btn {
-            left: -10px; /* Leicht außerhalb oder am Rand */
-        }
-
-        .next-btn {
-            right: -10px; /* Leicht außerhalb oder am Rand */
-        }
-
-        @media (max-width: 1200px) {
-            .prev-btn { left: 10px; }
-            .next-btn { right: 10px; }
-        }
-
-        /* Mobile Anpassung: Kleinere Buttons */
-        @media (max-width: 768px) {
-            .nav-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 16px;
-                opacity: 0.8;
-            }
-        }
-
-        /* Team Card Design - Angepasst für Slider und Lesbarkeit */
-        .team-card {
-            /* Dunklerer Hintergrund für Lesbarkeit auf transparentem Section-Background */
-            background: rgba(0, 0, 0, 0.75); 
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 35px 25px;
-            border-radius: 20px;
-            text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            
-            /* Fixe Breite für den Slider */
-            width: 320px; 
-            flex-shrink: 0; /* Verhindert Schrumpfen im Flex-Container */
-            
-            /* Optional: Snap-Align für schöneres Scrollen auf Mobile */
-            scroll-snap-align: center;
-        }
-
-        .team-card:hover {
-            transform: translateY(-7px);
-            border-color: var(--primary-color);
-        }
-
-        /* Runde Bilder */
-        .team-img {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-color);
-            margin-bottom: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-
-        /* Typografie */
-        .team-name {
-            font-family: var(--font-heading);
-            color: var(--text-white);
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .team-role {
-            display: block;
-            color: var(--primary-color);
-            font-family: var(--font-body);
-            font-weight: 600;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-            min-height: 40px; /* Einheitliche Höhe für Alignment */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .team-desc {
-            color: var(--text-gray);
-            font-size: 14px;
-            line-height: 1.6;
-            text-align: left;
-            width: 100%;
-        }
-
-        /* Hilfsklasse für Paragraphen-Abstand im Text */
-        .desc-spacer {
-            margin-top: 15px;
-            display: block;
-        }
-
-        /* Profile Section (Old Florian Block) */
-        .profile-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 30px;
-        }
-
-        @media (min-width: 768px) {
-            .profile-container {
-                flex-direction: row;
-                text-align: left;
-                align-items: flex-start;
-            }
-        }
-
-        .profile-img {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary-color);
-            flex-shrink: 0;
-        }
-
-        .profile-text p {
-            color: var(--text-gray);
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 14px;
-            color: var(--text-gray);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .footer-logo {
-            width: 60px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-
-        .social-icons {
-            margin-bottom: 20px;
-        }
-
-        .social-icons a {
-            color: var(--text-white);
-            font-size: 24px;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-
-        .social-icons a:hover {
-            color: var(--primary-color);
-        }
-
-        footer a {
-            color: var(--text-gray);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* -----------------------------------------------------------
-           PROVEN EXPERT WIDGET
-        ----------------------------------------------------------- */
-        .proven-expert-badge {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #ffffff;
-            width: 110px; /* Breite reduziert von 140px auf 110px */
-            padding: 10px;
-            border-radius: 4px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 9999;
-            text-align: center;
-            font-family: 'Poppins', sans-serif;
-            border-top: 3px solid #f6ad55; /* Orange accent line */
-            transition: transform 0.3s ease;
-            cursor: default;
-        }
-
-        .proven-expert-badge:hover {
-            transform: translateY(-3px);
-        }
-
-        .pe-logo {
-            font-weight: 700;
-            font-size: 13px;
-            color: #2d3748;
-            margin-bottom: 5px;
-            line-height: 1;
-        }
-
-        .pe-logo span {
-            color: #f6ad55;
-        }
-
-        .pe-stars {
-            color: #fbbf24; /* Amber-400 for stars */
-            font-size: 12px;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-
-        .pe-rating {
-            font-weight: 800;
-            font-size: 20px;
-            color: #2d3748;
-            line-height: 1;
-            margin-bottom: 2px;
-        }
-
-        .pe-subtext {
-            font-size: 10px;
-            color: #718096;
-            line-height: 1.3;
-        }
-
-        .pe-date {
-            font-size: 9px;
-            color: #a0aec0;
-            margin-top: 5px;
-            border-top: 1px solid #edf2f7;
-            padding-top: 5px;
-        }
-
-        /* -----------------------------------------------------------
-           MODAL STYLES (POPUP)
-        ----------------------------------------------------------- */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: #1a1a1a;
-            border: 1px solid var(--primary-color);
-            padding: 40px;
-            border-radius: 15px;
-            max-width: 600px; /* Breiter für viel Text */
-            width: 90%;
-            position: relative;
-            text-align: left;
-            color: var(--text-gray);
-            box-shadow: 0 0 30px rgba(0,0,0,0.5);
-            /* Scrollbar für lange Inhalte */
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
-        /* Scrollbar Styling */
-        .modal-content::-webkit-scrollbar {
-            width: 8px;
-        }
-        .modal-content::-webkit-scrollbar-track {
-            background: #000; 
-        }
-        .modal-content::-webkit-scrollbar-thumb {
-            background: var(--primary-color); 
-            border-radius: 4px;
-        }
-
-        .modal-content h3 {
-            color: var(--text-white);
-            font-family: var(--font-heading);
-            margin-bottom: 20px;
-            font-size: 24px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 10px;
-        }
+        .btn-bronze { background: linear-gradient(135deg, #fdba74 0%, #ea580c 100%); color: #431407; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(234, 88, 12, 0.3); }
+        .btn-bronze:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(234, 88, 12, 0.5); }
         
-        .modal-content h4 {
-            color: var(--text-white);
-            font-family: var(--font-heading);
-            margin-top: 20px;
-            margin-bottom: 10px;
-            font-size: 18px;
-        }
-
-        .modal-content p {
-            margin-bottom: 10px;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        .modal-content strong {
-            color: var(--text-white);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            color: var(--text-gray);
-            font-size: 32px;
-            cursor: pointer;
-            transition: color 0.3s;
-            line-height: 1;
-            z-index: 10;
-        }
-
-        .close-modal:hover {
-            color: var(--primary-color);
-        }
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
 
     </style>
 </head>
 <body>
 
-    <!-- Theme Toggle Button -->
-    <button id="theme-toggle" aria-label="Hintergrundfarbe ändern">
-        <i class="fa-solid fa-palette"></i>
-    </button>
+    <!-- NAVIGATION CONTROLS -->
+    <div class="nav-controls">
+        <!-- Switch Button -->
+        <button id="view-toggle" class="ctrl-btn" aria-label="Ansicht wechseln">
+            <!-- Startet Default -->
+            <i class="fa-solid fa-layer-group"></i>
+        </button>
 
-    <!-- Hintergrund Overlay & Tint -->
-    <div class="bg-fixed"></div>
-    <div class="bg-tint"></div>
-
-    <!-- PROVEN EXPERT WIDGET (Fixed Bottom Right) -->
-    <div class="proven-expert-badge">
-        <div class="pe-logo">Proven<span>Expert</span></div>
-        <div class="pe-rating">5.00</div>
-        <div class="pe-stars">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-        </div>
-        <div class="pe-subtext">SEHR GUT</div>
-        <div class="pe-subtext">50 Bewertungen</div>
-        <div class="pe-date" id="pe-date-display">Stand: ...</div>
+        <!-- Theme Toggle -->
+        <button id="theme-toggle" class="ctrl-btn" aria-label="Hintergrundfarbe ändern">
+            <i class="fa-solid fa-palette"></i>
+        </button>
     </div>
 
-    <!-- IMPRESSUM MODAL (POPUP) -->
-    <div id="impressum-modal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" data-target="impressum-modal">&times;</span>
-            <h3>Impressum</h3>
-            <p>
-                <strong>Florian Merzenich</strong><br>
-                Am Eichelgärtchen 36B<br>
-                56283 Halsenbach
-            </p>
-            <p>
-                Telefon: 015253846630<br>
-                E-Mail: managment@florian-merzenich.de
-            </p>
-            <p>
-                <strong>Vertretungsberechtigte/r Geschäftsführer/in:</strong><br>
-                Florian Merzenich
-            </p>
-            <p>
-                <strong>Registernummer:</strong><br>
-                HE461931
-            </p>
-        </div>
-    </div>
-
-    <!-- DATENSCHUTZ MODAL (POPUP) -->
-    <div id="datenschutz-modal" class="modal-overlay">
-        <div class="modal-content">
-            <span class="close-modal" data-target="datenschutz-modal">&times;</span>
-            <h3>Datenschutzerklärung</h3>
-            
-            <p><strong>Merzenix LTD</strong> legt großen Wert auf den Schutz Ihrer Daten. Datenschutz ist uns wichtig und wir möchten, dass Sie sich beim Besuch unserer Website sicher fühlen. Bitte beachten Sie, dass diese Datenschutzerklärung Beispieltexte enthält und nicht vollständig ist. Je nach den Funktionen unserer Website kann der Inhalt unserer Datenschutzerklärung variieren. Wir als Website-Betreiber müssen sicherstellen, dass die Datenschutzerklärung alle Drittkomponenten auflistet, die auf unserer Website verwendet werden. Der Link zur Datenschutzerklärung muss von jeder Seite unserer Website aus erreichbar sein.</p>
-
-            <h4>Datenerhebung, -nutzung und Weitergabe</h4>
-            <p><strong>Kontrolle über Daten</strong><br>
-            Wir informieren Sie über die Art der gesammelten Informationen auf unserer Website, wie wir sie nutzen und ob wir sie an Dritte weitergeben.</p>
-            <p><strong>Datensicherheit</strong><br>
-            Sie haben das Recht, Ihre personenbezogenen Informationen und Daten einzusehen, zu ändern und zu aktualisieren. Wenn Sie Bedenken bezüglich der Datenverwendung haben, können Sie sich gerne an uns wenden.</p>
-            <p>Der Schutz Ihrer Daten ist uns ein wichtiges Anliegen. Wir ergreifen verschiedene Schutzmaßnahmen, um die Sicherheit Ihrer Daten zu gewährleisten, einschließlich Datenverschlüsselung und sichere Serverstandorte. Erfahren Sie hier mehr über unsere Datenschutzpraktiken.</p>
-
-            <h4>Grundsätzliches</h4>
-            <p>Als Betreiber dieser Seite nehmen wir den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung. Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder e-Mail-Adresse) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben. Wir weisen darauf hin, daß die Datenübertragung im Internet (z.B. bei der Kommunikation per e-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.</p>
-
-            <h4>Begriffserläuterungen</h4>
-            <p>Die Datenschutzerklärung dieses Unternehmens beruht auf den Begriffen, die durch den Europäischen Richtlinien- und Verordnungsgeber beim Erlaß der Datenschutz-Grundverordnung (DS-GVO) verwendet wurden. Unsere Datenschutzerklärung soll sowohl für die Öffentlichkeit als auch für unsere Kunden und Geschäftspartner einfach lesbar und verständlich sein. Um dies zu gewährleisten, möchten wir vorab die verwendeten Begriffe erläutern.</p>
-            
-            <p><strong>Personenbezogene Daten:</strong><br>
-            Alle Informationen, die sich auf eine identifizierte oder identifizierbare natürliche Person (im Folgenden „betroffene Person“) beziehen. Als identifizierbar wird eine natürliche Person angesehen, die direkt oder indirekt, insbesondere mittels Zuordnung zu einer Kennung wie einem Namen, zu einer Kennummer, zu Standortdaten, zu einer Online-Kennung oder zu einem oder mehreren besonderen Merkmalen, die Ausdruck der wie auch immer gearteten Identität dieser natürlichen Person sind, identifiziert werden kann.</p>
-            
-            <p><strong>Betroffene Person:</strong><br>
-            Jede identifizierte oder identifizierbare natürliche Person, deren personenbezogene Daten von dem für die Verarbeitung Verantwortlichen verarbeitet werden.</p>
-            
-            <p><strong>Verarbeitung:</strong><br>
-            Jeder mit oder ohne Hilfe automatisierter Verfahren ausgeführte Vorgang oder jede solche Vorgangsreihe im Zusammenhang mit personenbezogenen Daten wie das Erheben, das Erfassen, die Organisation, das Ordnen, die Speicherung, die Anpassung oder Veränderung, das Auslesen, das Abfragen, die Verwendung, die Offenlegung durch Übermittlung, Verbreitung oder eine andere Form der Bereitstellung, den Abgleich oder die Verknüpfung, die Einschränkung, das Löschen oder die Vernichtung.</p>
-            
-            <p><strong>Einschränkung der Verarbeitung:</strong><br>
-            Die Markierung gespeicherter personenbezogener Daten mit dem Ziel, ihre künftige Verarbeitung einzuschränken.</p>
-            
-            <p><strong>Profiling:</strong><br>
-            Jede Art der automatisierten Verarbeitung personenbezogener Daten, die darin besteht, daß diese personenbezogenen Daten verwendet werden, um bestimmte persönliche Aspekte, die sich auf eine natürliche Person beziehen, zu bewerten, insbesondere, um Aspekte bezüglich Arbeitsleistung, wirtschaftlicher Lage, Gesundheit, persönlicher Vorlieben, Interessen, Zuverlässigkeit, Verhalten, Aufenthaltsort oder Ortswechsel dieser natürlichen Person zu analysieren oder vorherzusagen.</p>
-            
-            <p><strong>Pseudonymisierung:</strong><br>
-            Die Verarbeitung personenbezogener Daten in einer Weise, auf welche die personenbezogenen Daten ohne Hinzuziehung zusätzlicher Informationen nicht mehr einer spezifischen betroffenen Person zugeordnet werden können, sofern diese zusätzlichen Informationen gesondert aufbewahrt werden und technischen und organisatorischen Maßnahmen unterliegen, die gewährleisten, daß die personenbezogenen Daten nicht einer identifizierten oder identifizierbaren natürlichen Person zugewiesen werden.</p>
-            
-            <p><strong>Verantwortlicher oder für die Verarbeitung Verantwortlicher:</strong><br>
-            Die natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten entscheidet.</p>
-
-            <p><strong>Auftragsverarbeiter:</strong><br>
-            Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, die personenbezogene Daten im Auftrag des Verantwortlichen verarbeitet.</p>
-
-            <p><strong>Empfänger:</strong><br>
-            Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle, der personenbezogene Daten offengelegt werden, unabhängig davon, ob es sich bei ihr um einen Dritten handelt oder nicht.</p>
-
-            <p><strong>Dritter:</strong><br>
-            Eine natürliche oder juristische Person, Behörde, Einrichtung oder andere Stelle außer der betroffenen Person, dem Verantwortlichen, dem Auftragsverarbeiter und den Personen, die unter der unmittelbaren Verantwortung des Verantwortlichen oder des Auftragsverarbeiters befugt sind, die personenbezogenen Daten zu verarbeiten.</p>
-            
-            <p><strong>Einwilligung:</strong><br>
-            Jede von der betroffenen Person freiwillig für den bestimmten Fall in informierter Weise und unmissverständlich abgegebene Willensbekundung in Form einer Erklärung oder einer sonstigen eindeutigen bestätigenden Handlung, mit der die betroffene Person zu verstehen gibt, daß sie mit der Verarbeitung der sie betreffenden personenbezogenen Daten einverstanden ist.</p>
-
-            <h4>Rechtsgrundlage der Verarbeitung</h4>
-            <p>Art. 6 I lit. a DS-GVO dient unserem Unternehmen als Rechtsgrundlage für Verarbeitungsvorgänge, bei denen wir eine Einwilligung für einen bestimmten Verarbeitungszweck einholen. Ist die Verarbeitung personenbezogener Daten zur Erfüllung eines Kundenauftrags erforderlich, wie z.B. bei Verarbeitungsvorgängen im Rahmen einer Warenlieferung oder der Erbringung von Dienstleistungen, so beruht die Verarbeitung auf Art. 6 I lit. b DS-GVO. Gleiches gilt für solche Verarbeitungsvorgänge, die zur Durchführung vorvertraglicher Maßnahmen erforderlich sind, etwa in Fällen von Anfragen zu unseren Produkten oder Dienstleistungen. Unterliegt unser Unternehmen einer rechtlichen Verpflichtung, durch welche eine Verarbeitung von personenbezogenen Daten erforderlich wird, wie z.B. zur Erfüllung steuerlicher Pflichten, so basiert die Verarbeitung auf Art. 6 I lit. c DS-GVO.</p>
-            <p>Ebenfalls könnten Verarbeitungsvorgänge auf Art. 6 I lit. f DS-GVO beruhen. Auf dieser Rechtsgrundlage basieren Verarbeitungsvorgänge, die von keiner der vorgenannten Rechtsgrundlagen erfasst werden, wenn die Verarbeitung zur Wahrung eines berechtigten Interesses unseres Unternehmens oder eines Dritten erforderlich ist, sofern die Interessen, Grundrechte und Grundfreiheiten der betroffenen Person nicht überwiegen.</p>
-            <p>Basiert die Verarbeitung personenbezogener Daten auf Artikel 6 I lit. f DS-GVO, ist unser berechtigtes Interesse die Durchführung unserer Geschäftstätigkeit zugunsten des Wohlergehens unserer Mitarbeiter.</p>
-
-            <h4>Cookies</h4>
-            <p>Unsere Internetseite verwendet sogenannte Cookies. Cookies richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren. Sie dienen lediglich dazu, unser Angebot benutzerfreundlicher, effektiver und sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem Rechner abgelegt werden und die Ihr Browser speichert. Die meisten der von uns verwendeten Cookies sind so genannte „Session-Cookies“. Sie werden nach Ende Ihres Besuchs automatisch gelöscht. Andere Cookies bleiben auf Ihrem Endgerät gespeichert, bis Sie diese löschen. Diese Cookies ermöglichen es uns, Ihren Browser beim nächsten Besuch wiederzuerkennen. Sie können Ihren Browser so einstellen, dass Sie über das Setzen von Cookies informiert werden und Cookies nur im Einzelfall erlauben, die Annahme von Cookies für bestimmte Fälle oder generell ausschließen sowie das automatische Löschen der Cookies beim Schließen des Browser aktivieren. Bei der Deaktivierung von Cookies kann die Funktionalität dieser Website eingeschränkt sein.</p>
-
-            <h4>Server-Log-Files</h4>
-            <p>Der Provider der Seiten erhebt und speichert automatisch Informationen in sogenannten Server-Log Files, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p>
-            <ul>
-                <li>Browsertyp und Browserversion</li>
-                <li>verwendetes Betriebssystem</li>
-                <li>Referrer URL</li>
-                <li>Hostname des zugreifenden Rechners</li>
-                <li>Datum und Uhrzeit der Serveranfrage</li>
-                <li>eine Internet-Protokoll-Adresse (IP-Adresse)</li>
-                <li>der Internet-Service-Provider des zugreifenden Systems</li>
-            </ul>
-            <p>Diese Daten sind nicht bestimmten Personen zuordenbar. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Wir behalten uns vor, diese Daten nachträglich zu prüfen, wenn uns konkrete Anhaltspunkte für eine rechtswidrige Nutzung bekannt werden.</p>
-
-            <h4>Kontaktformular</h4>
-            <p>Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Angaben aus dem Anfrageformular inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
-
-            <h4>SSL-Verschlüsselung</h4>
-            <p>Diese Seite nutzt aus Gründen der Sicherheit und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel der Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und an dem Schloß-Symbol in Ihrer Browserzeile. Wenn die SSL-Verschlüsselung aktiviert ist, können die Daten, die Sie an uns übermitteln, nicht von Dritten mitgelesen werden.</p>
-
-            <h4>Routinemäßige Löschung / Sperrung personenbezogener Daten</h4>
-            <p>Der für die Verarbeitung Verantwortliche verarbeitet und speichert personenbezogene Daten der betroffenen Person nur für den Zeitraum, der zur Erreichung des Speicherungszwecks erforderlich ist oder sofern dies durch den Europäischen Richtlinien- und Verordnungsgeber oder einen anderen Gesetzgeber in Gesetzen oder Vorschriften, welchen der für die Verarbeitung Verantwortliche unterliegt, vorgesehen wurde. Entfällt der Speicherungszweck oder läuft eine vom Europäischen Richtlinien- und Verordnungsgeber oder einem anderen zuständigen Gesetzgeber vorgeschriebene Speicherfrist ab, werden die personenbezogenen Daten routinemäßig und entsprechend den gesetzlichen Vorschriften gesperrt bzw. gelöscht.</p>
-
-            <h4>Rechte der betroffenen Person</h4>
-            <p>Möchte eine betroffene Person eines oder mehrere dieser Rechte in Anspruch nehmen, kann sie sich hierzu jederzeit an einen Mitarbeiter des für die Verarbeitung Verantwortlichen wenden.</p>
-
-            <p><strong>Recht auf Bestätigung</strong><br>
-            Jede betroffene Person hat das Recht, von dem für die Verarbeitung Verantwortlichen eine Bestätigung darüber zu verlangen, ob sie betreffende personenbezogene Daten verarbeitet werden.</p>
-
-            <p><strong>Recht auf Auskunft</strong><br>
-            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, jederzeit von dem für die Verarbeitung Verantwortlichen unentgeltliche Auskunft über die zu seiner Person gespeicherten personenbezogenen Daten und eine Kopie dieser Auskunft zu erhalten. Ferner hat die betroffene Person das Recht auf Auskunft über folgende Informationen:</p>
-            <ul>
-                <li>die Verarbeitungszwecke</li>
-                <li>die Kategorien personenbezogener Daten, die verarbeitet werden</li>
-                <li>die Empfänger oder Kategorien von Empfängern, gegenüber denen die personenbezogenen Daten offengelegt worden sind oder noch offengelegt werden</li>
-                <li>falls möglich die geplante Dauer, für die die personenbezogenen Daten gespeichert werden</li>
-                <li>das Bestehen eines Rechts auf Berichtigung oder Löschung der sie betreffenden personenbezogenen Daten</li>
-                <li>das Bestehen eines Beschwerderechts bei einer Aufsichtsbehörde</li>
-                <li>wenn die personenbezogenen Daten nicht bei der betroffenen Person erhoben werden: Alle verfügbaren Informationen über die Herkunft der Daten</li>
-                <li>das Bestehen einer automatisierten Entscheidungsfindung einschließlich Profiling</li>
-            </ul>
-
-            <p><strong>Recht auf Berichtigung</strong><br>
-            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, die unverzügliche Berichtigung sie betreffender unrichtiger personenbezogener Daten zu verlangen.</p>
-
-            <p><strong>Recht auf Löschung</strong><br>
-            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, von dem Verantwortlichen zu verlangen, daß die sie betreffenden personenbezogenen Daten unverzüglich gelöscht werden, sofern einer der gesetzlich geregelten Gründe zutrifft (z.B. Zweckentfall, Widerruf der Einwilligung).</p>
-
-            <p><strong>Recht auf Einschränkung der Verarbeitung</strong><br>
-            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, von dem Verantwortlichen die Einschränkung der Verarbeitung zu verlangen, wenn eine der gesetzlichen Voraussetzungen gegeben ist (z.B. Bestreiten der Richtigkeit).</p>
-
-            <p><strong>Recht auf Datenübertragbarkeit</strong><br>
-            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, die sie betreffenden personenbezogenen Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten.</p>
-
-            <p><strong>Recht auf Widerspruch</strong><br>
-            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, aus Gründen, die sich aus ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung sie betreffender personenbezogener Daten Widerspruch einzulegen.</p>
-
-            <p><strong>Automatisierte Entscheidungen im Einzelfall einschließlich Profiling</strong><br>
-            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, nicht einer ausschließlich auf einer automatisierten Verarbeitung beruhenden Entscheidung unterworfen zu werden.</p>
-
-            <p><strong>Recht auf Widerruf einer datenschutzrechtlichen Einwilligung</strong><br>
-            Jede von der Verarbeitung personenbezogener Daten betroffene Person hat das Recht, eine Einwilligung zur Verarbeitung personenbezogener Daten jederzeit zu widerrufen.</p>
-
-            <h4>Name und Anschrift des für die Verarbeitung Verantwortlichen</h4>
-            <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung, sonstiger in den Mitgliedstaaten der Europäischen Union geltenden Datenschutzgesetze und anderer Bestimmungen mit datenschutzrechtlichem Charakter ist das Unternehmen:</p>
-            <p>© 2025 Florian Merzenich</p>
-        </div>
-    </div>
-
-    <main class="container">
+    <!-- ==============================================
+         VIEW 1: STANDARD (HOME)
+         ============================================= -->
+    <div id="view-standard" class="view-section">
         
-        <!-- HERO SECTION -->
-        <header class="hero-section">
-            <!-- Logo -->
-            <img src="logo_weiß.png" alt="Logo" class="logo">
+        <div class="bg-fixed"></div>
+        <div class="bg-tint"></div>
 
-            <!-- Text Content -->
-            <!-- Änderung: 12 Jahre auf 9 Jahre geändert -->
-            <h2 class="sub-headline">9 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.</h2>
-            <h1 class="main-headline">
-                <span style="display: inline; text-decoration: line-through; text-decoration-color: #ef4444; text-decoration-thickness: 3px; opacity: 0.9;">60 Minuten Netflix</span> oder<br>
-                <span style="color: var(--primary-color); transition: color 0.5s ease;">60 Minuten für immer in seine Zukunft investieren</span>
-            </h1>
-
-            <!-- Hero Image: Laptop Komposition -->
-            <div class="hero-img-container">
-                <div class="laptop-wrapper">
-                    <!-- Das Originalbild als Rahmen -->
-                    <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Laptop Frame" class="laptop-frame">
-                    <!-- Das neue Bild als Bildschirm-Inhalt -->
-                    <img src="hero_bg.JPG" alt="Screen Content" class="laptop-screen">
-                </div>
+        <div class="proven-expert-badge">
+            <div class="pe-logo">Proven<span>Expert</span></div>
+            <div class="pe-rating">5.00</div>
+            <div class="pe-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
             </div>
-
-            <!-- CTA & Timer -->
-            <div class="cta-wrapper">
-                <a href="#" class="btn-main pulse">
-                    JETZT GRATIS 1:1 GESPRÄCH SICHERN
-                </a>
-                <!-- ID hinzugefügt bei der Zahl -->
-                <p class="cta-subtext">Sichere dir 1 von <span id="daily-slots">3</span> freien Plätzen zum persönlichen 1:1 Gespräch mit mir</p>
-
-                <div class="countdown-wrapper">
-                    <p class="countdown-label">Noch verfügbar bis:</p>
-                    <div id="countdown" class="timer">
-                        <div class="timer-part"><div id="d">00</div><span>Tage</span></div>
-                        <div class="timer-part"><div id="h">00</div><span>Std</span></div>
-                        <div class="timer-part"><div id="m">15</div><span>Min</span></div>
-                        <div class="timer-part"><div id="s">00</div><span>Sek</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Flying Banners (Marquee) -->
-            <div class="marquee-container">
-                <div class="marquee-content">
-                    <!-- Set 1 -->
-                    <img src="focus.png" class="marquee-logo" alt="Focus">
-                    <img src="wirtschaftswoche.png" class="marquee-logo invert" alt="WirtschaftsWoche">
-                    <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
-                    <img src="london.png" class="marquee-logo" alt="London Daily News">
-                    <span class="marquee-text">Business Magazin</span>
-
-                    <!-- Set 2 -->
-                    <img src="focus.png" class="marquee-logo" alt="Focus">
-                    <img src="wirtschaftswoche.png" class="marquee-logo invert" alt="WirtschaftsWoche">
-                    <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
-                    <img src="london.png" class="marquee-logo" alt="London Daily News">
-                    <span class="marquee-text">Business Magazin</span>
-                </div>
-            </div>
-
-        </header>
-
-        <!-- BENEFITS SECTION -->
-        <section>
-            <h3 class="section-title white">Wo stehst du nach der Masterclass?</h3>
-            <div class="grid-3">
-                <div class="card">
-                    <p>Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p>
-                </div>
-                <div class="card">
-                    <p>Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p>
-                </div>
-                <div class="card">
-                    <p>Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- AUDIENCE SECTION -->
-        <section>
-            <h3 class="section-title">Für wen ist diese Masterclass?</h3>
-            <div class="grid-3">
-                <div class="card white-border">
-                    <i class="fa-solid fa-chart-pie"></i>
-                    <p>Für dich, wenn du schon investiert bist, aber <em>ehrlich gesagt</em> keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.</p>
-                </div>
-                <div class="card white-border">
-                    <i class="fa-solid fa-user-shield"></i>
-                    <p>Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p>
-                </div>
-                <div class="card white-border">
-                    <i class="fa-solid fa-coins"></i>
-                    <p>Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher verunsichert hat.</p>
-                </div>
-            </div>
-            
-            <div style="margin-top: 40px; text-align: center;">
-                <a href="#" class="btn-main">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
-            </div>
-        </section>
-
-        <!-- STATS SECTION -->
-        <section>
-            <div class="grid-3">
-                <div class="stat-box">
-                    <span class="stat-number">9+</span>
-                    <span class="stat-label">Jahre Erfahrung</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number">16.500+</span>
-                    <span class="stat-label">Menschen begleitet</span>
-                </div>
-                <div class="stat-box">
-                    <span class="stat-number">2.5 Mio €+</span>
-                    <span class="stat-label">Crypto Gewinne</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTENT SECTION -->
-        <section>
-            <h3 class="section-title">Was du in der exklusiven Masterclass lernen wirst</h3>
-            <div class="grid-3">
-                <div class="card">
-                    <h4 style="color:var(--primary-color); margin-bottom:10px; transition: color 0.5s ease;">4-Schritte-System</h4>
-                    <p>Du bekommst ein glasklares 4-Step-Framework, mit dem du dich im Bärenmarkt richtig positionierst.</p>
-                </div>
-                <div class="card">
-                    <h4 style="color:var(--primary-color); margin-bottom:10px; transition: color 0.5s ease;">Fehler-Vermeider</h4>
-                    <p>Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie für immer streichst.</p>
-                </div>
-                <div class="card">
-                    <h4 style="color:var(--primary-color); margin-bottom:10px; transition: color 0.5s ease;">Zukunfts-Kompass</h4>
-                    <p>Ein klares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten.</p>
-                </div>
-            </div>
-            <div style="margin-top: 40px; text-align: center;">
-                <a href="#" class="btn-main pulse">Sei Dabei</a>
-            </div>
-        </section>
-
-        <!-- STRATEGY CALL SECTION (NEW) -->
-        <section class="strategy-section">
-            <div class="strategy-box">
-                <h3 class="section-title white" style="margin-bottom: 30px;">Was du im kostenlosen Strategiegespräch bekommst:</h3>
-                
-                <ul class="strategy-list">
-                    <li><i class="fa-solid fa-check"></i> Ausführliche Analyse deiner Ist-Situation</li>
-                    <li><i class="fa-solid fa-check"></i> Einblick in die Struktur eines 3h-Deep-Dive Calls</li>
-                    <li><i class="fa-solid fa-check"></i> Zugang zur exklusiven Telegram-Gruppe</li>
-                    <li><i class="fa-solid fa-check"></i> Erklärvideos & Vorlagen für deine Unabhängigkeit</li>
-                </ul>
-
-                <div class="price-container">
-                    <p class="price-label">Dein Investment heute:</p>
-                    <p class="price-value">0,00 €</p>
-                </div>
-
-                <!-- ADDED CTA 1 -->
-                <div style="margin-top: 40px; text-align: center;">
-                    <a href="#" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- SCARCITY SECTION (URGENCY) - NEU EINGEFÜGT -->
-        <section class="scarcity-section">
-            <div class="scarcity-container">
-                <div class="warning-badge">ACHTUNG</div>
-                <h3 class="scarcity-title">Bitte lies das, bevor du klickst:</h3>
-                <p class="scarcity-text">
-                    Ich arbeite persönlich mit meinen Klienten. Mein Tag hat auch nur 24 Stunden.
-                    <br><br>
-                    <strong style="color: white;">Bitte klicke nur auf den Button, wenn du über mind. 3.000 € freies Investitionskapital verfügst und bereit bist, Verantwortung zu übernehmen.</strong>
-                </p>
-            </div>
-        </section>
-
-        <!-- NEW TEAM SECTION (SLIDER MODE) -->
-        <section class="team-section">
-            <h3 class="section-title">Das Experten-Team an deiner Seite</h3>
-            
-            <div class="slider-wrapper">
-                <button class="nav-btn prev-btn" id="slideLeft"><i class="fa-solid fa-chevron-left"></i></button>
-                
-                <div class="team-slider-container" id="team-slider">
-                <div class="team-slider-track">
-                    
-                    <!-- 1. Anja (Anna) - Verschoben an den Anfang -->
-                    <div class="team-card">
-                        <img src="gitarbeiter/anna.jpg" alt="Anja Dautzenberg" class="team-img">
-                        <h4 class="team-name">Anja Dautzenberg</h4>
-                        <span class="team-role">Organisation & Backoffice</span>
-                        <p class="team-desc">
-                            Anja Dautzenberg ist die zentrale organisatorische Schnittstelle unseres Unternehmens und die rechte Hand der Geschäftsführung.
-                            Sie sorgt für Struktur, Ordnung und reibungslose Abläufe und verantwortet das Backoffice, die Teamorganisation, Rechnungen und Verträge, sowie die Dokumentation und Prozessdarstellung.
-                            <span class="desc-spacer">
-                                Darüber hinaus führt Anja Onboarding-Gespräche, übernimmt Bedarfsanalysen, sammelt systematisch Feedback und begleitet unsere Teilnehmer zuverlässig über WhatsApp und Telegram im Support.
-                            </span>
-                            <span class="desc-spacer">
-                                👉 Ihr Fokus: Stabilität, Verlässlichkeit und ein professionelles Erlebnis für Team und Teilnehmer.
-                            </span>
-                        </p>
-                    </div>
-
-                    <!-- 2. Jonathan (Jona) -->
-                    <div class="team-card">
-                        <img src="gitarbeiter/jona.jpg" alt="Jonathan Rosenfeld" class="team-img">
-                            <h4 class="team-name">Jonathan Rosenfeld</h4>
-                            <span class="team-role">Head of Education · Blockchain-Trainer</span>
-                            <p class="team-desc">
-                                Jonathan Rosenfeld ist Head of Education und verantwortlich für die inhaltliche und fachliche Exzellenz unserer Blockchain-Akademie. Er entwickelt und strukturiert die Lerninhalte, analysiert kontinuierlich die Krypto- und Blockchain-Märkte, bildet unsere Trainer aus und stellt sicher, dass alle Inhalte und Strategien höchsten Qualitätsstandards entsprechen.
-                                <span class="desc-spacer">
-                                    Als erfahrener Blockchain-Trainer begleitet Jonathan zudem unsere Masterplan-Goldkunden persönlich und sorgt dafür, dass komplexe Strategien klar verstanden und sauber umgesetzt werden.
-                                </span>
-                                <span class="desc-spacer">
-                                    👉 Sein Fokus: Qualität, Struktur und nachhaltige Ergebnisse auf höchstem Niveau.
-                                </span>
-                            </p>
-                        </div>
-
-                        <!-- 3. Markus -->
-                        <div class="team-card">
-                            <img src="gitarbeiter/markus.jpg" alt="Markus Hoffmann" class="team-img">
-                            <h4 class="team-name">Markus Hoffmann</h4>
-                            <span class="team-role">Ultimate Mastermind Platinum · CCFE-zertifiziert</span>
-                            <p class="team-desc">
-                                Markus Hoffmann ist verantwortlich für unsere Ultimate Mastermind Platinum Kunden und begleitet sie persönlich und eng auf ihrem Weg im Krypto-Markt. Als CCFE-zertifizierter Blockchain-Trainer verbindet er fundiertes Fachwissen mit strategischem Denken und einem hohen Qualitätsanspruch.
-                                <span class="desc-spacer">
-                                    Er übernimmt persönliche High-Value-Calls, sorgt für klare Qualitätsstandards, begleitet die einzelnen Kunden individuell und stellt mit seinem 24-Stunden-Support sicher, dass Fragen, Entscheidungen und Umsetzungen jederzeit professionell betreut werden.
-                                </span>
-                                <span class="desc-spacer">
-                                    👉 Sein Fokus: Exzellenz, Nähe zum Kunden und Umsetzung auf höchstem Niveau.
-                                </span>
-                            </p>
-                        </div>
-
-                        <!-- 4. Alexander (Alex) -->
-                        <div class="team-card">
-                            <img src="gitarbeiter/alex.jpg" alt="Alexander von Berg" class="team-img">
-                            <h4 class="team-name">Alexander von Berg</h4>
-                            <span class="team-role">Blockchain-Trainer (CCFE-zertifiziert)</span>
-                            <p class="team-desc">
-                                Alexander begleitet unsere Teilnehmer Schritt für Schritt in die Welt der Kryptowährungen.
-                                Als CCFE-zertifizierter Blockchain-Trainer vermittelt er praxisnahes Wissen rund um Wallets, Börsen, Strategien und Sicherheit und sorgt dafür, dass unsere Kunden fundierte Entscheidungen treffen und souverän handeln können.
-                                <span class="desc-spacer">
-                                    👉 Sein Fokus: Verständnis, Sicherheit und nachhaltiger Erfolg im Krypto-Markt.
-                                </span>
-                            </p>
-                        </div>
-
-                        <!-- 5. Maximilian (Maxi) -->
-                        <div class="team-card">
-                            <img src="gitarbeiter/maxi.jpg" alt="Maximilian Steger" class="team-img">
-                            <h4 class="team-name">Maximilian Steger</h4>
-                            <span class="team-role">Blockchain-Trainer</span>
-                            <p class="team-desc">
-                                Maximilian kommt aus dem wunderschönen Frankfurt am Main, wo er auch seine Ausbildung im Finanzbereich absolviert hat, und lebt heute vor den Toren Frankfurts in Bad Soden.
-                                Als Teil der jüngeren Generation bringt er Leidenschaft, Disziplin und ein starkes Praxisverständnis in die Arbeit mit Kryptowährungen ein und begleitet unsere Teilnehmer klar, ruhig und verständlich bei der Umsetzung im Krypto-Markt.
-                                <span class="desc-spacer">
-                                    👉 Sein Fokus: moderne Finanzbildung, Sicherheit und saubere Umsetzung.
-                                </span>
-                            </p>
-                        </div>
-
-                        <!-- 6. Leonie -->
-                    <div class="team-card">
-                        <img src="gitarbeiter/leonie.jpg" alt="Leonie Falkner" class="team-img">
-                        <h4 class="team-name">Leonie Falkner</h4>
-                        <span class="team-role">Marketing & Content Managerin</span>
-                        <p class="team-desc">
-                            Leonie ist verantwortlich für die Außenwirkung unserer Blockchain-Akademie.
-                            Sie entwickelt und steuert unseren Content auf Social Media, sorgt für klare Positionierung, Vertrauen und Sichtbarkeit und übersetzt komplexe Krypto-Themen in verständliche, ansprechende Inhalte.
-                            <span class="desc-spacer">
-                                👉 Ihr Ziel: Menschen abholen, informieren und für den nächsten Schritt begeistern.
-                            </span>
-                        </p>
-                    </div>
-
-                    <!-- 7. Kevin -->
-                    <div class="team-card">
-                        <!-- Änderung: .jpg wieder zurück zu .jpeg geändert -->
-                        <img src="gitarbeiter/kevin.jpeg" alt="Kevin Feist" class="team-img">
-                        <h4 class="team-name">Kevin Feist</h4>
-                        <span class="team-role" style="font-size: 11px;">Blockchain-Experte & Strategic Client Advisor</span>
-                        <p class="team-desc">
-                            Kevin Feist ist ausgewiesener Blockchain-Experte aus dem Raum Koblenz. Mit seiner abgeschlossenen CCFE-Zertifizierung verfügt er über fundiertes Fachwissen in der professionellen Bewertung und strategischen Nutzung digitaler Assets.
-                            <span class="desc-spacer">
-                                Er betreut gezielt High-Value-Kunden, entwickelt individuelle Lösungsansätze auf höchstem Niveau und ist maßgeblich in die Planung und Umsetzung exklusiver Events eingebunden.
-                            </span>
-                            <span class="desc-spacer">
-                                👉 Als Familienvater verbindet er unternehmerische Klarheit mit Verantwortung, Weitblick und strukturiertem Handeln.
-                            </span>
-                        </p>
-                    </div>
-
-                    <!-- 8. Florian (CEO) - Verschoben ans Ende -->
-                    <div class="team-card">
-                        <img src="gitarbeiter/florian.jpg" alt="Florian Merzenich" class="team-img">
-                        <h4 class="team-name">Florian Merzenich</h4>
-                        <span class="team-role">Founder · Geschäftsführer · CEO</span>
-                        <p class="team-desc">
-                            Florian Merzenich ist Gründer, Inhaber und Geschäftsführer der Blockchain-Akademie und steht für klare Finanzbildung, Verantwortung und echte Begleitung auf Augenhöhe. Er kommt aus dem Raum Koblenz, die Geschäftsstelle des Unternehmens befindet sich im Raum Koblenz.
-                            <span class="desc-spacer"></span>
-                            Mit einem starken unternehmerischen Mindset, langjähriger Erfahrung und dem Anspruch, Menschen wirklich an die Hand zu nehmen, hat Florian eine Akademie aufgebaut, die weit über reine Theorie hinausgeht. Sein Fokus liegt darauf, komplexe Finanz- und Krypto-Themen verständlich, praxisnah und nachhaltig zu vermitteln.
-                            <span class="desc-spacer" style="color: var(--primary-color); font-weight: 600;">
-                                👉 Sein Ziel: Menschen befähigen, selbstbestimmte finanzielle Entscheidungen zu treffen und langfristig Vermögen aufzubauen.
-                            </span>
-                        </p>
-                    </div>
-
-                </div>
-            </div>
-            
-            <button class="nav-btn next-btn" id="slideRight"><i class="fa-solid fa-chevron-right"></i></button>
-            
-            <!-- Disclaimer Text -->
-            <div style="text-align: center; margin-top: 15px; opacity: 0.1; font-size: 8px; color: var(--text-white); font-weight: 300;">
-                Das Team besteht aus freiberuflichen Menschen sowie nicht-realen KI-Bots, die das Unternehmen Florian Merzenich aus Überzeugung unterstützen.
-            </div>
-
-        </section>
-
-        <!-- PROFILE SECTION -->
-        <section>
-            <div class="profile-container">
-                <img src="xlg.jpg" alt="Florian Merzenich" class="profile-img">
-                <div class="profile-text">
-                    <h3 class="sub-headline" style="border:none; padding:0; margin-bottom:5px; color:var(--text-gray);">Das ist</h3>
-                    <h2 class="section-title white" style="text-align: left; margin-bottom: 20px; font-size: 36px;">Florian Merzenich</h2>
-                    
-                    <p>Florian Merzenich ist Experte für Investitionen und Krypto. Er gilt als Marktführer in der „Crypto-Investor-Ausbildung“ und ist bereits seit 2013 aktiv.</p>
-                    
-                    <p>Mit über <strong>120.000 € Investition</strong> in seine eigene Persönlichkeitsentwicklung hilft er heute Unternehmern, ihr Vermögen strategisch und ohne Spekulation zu steuern.</p>
-                    
-                    <p style="font-style: italic; color: var(--primary-color);">„System statt Finanzprodukt“ – für absolute Unabhängigkeit von Banken, Trends und Hypes.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ADDED CTA 2 (BOTTOM) -->
-        <div style="padding: 40px 0 60px; text-align: center;">
-             <a href="#" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
+            <div class="pe-subtext">SEHR GUT</div>
+            <div class="pe-subtext">50 Bewertungen</div>
+            <div class="pe-date" id="pe-date-display">Stand: ...</div>
         </div>
 
-        <!-- FOOTER -->
-        <footer>
-            <img src="logo_weiß.png" alt="Logo" class="footer-logo">
-
-            <div class="social-icons">
-                <a href="#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <!-- Modals -->
+        <div id="impressum-modal" class="modal-overlay">
+            <div class="modal-content">
+                <span class="close-modal" data-target="impressum-modal">&times;</span>
+                <h3>Impressum</h3>
+                <p><strong>Florian Merzenich</strong><br>Am Eichelgärtchen 36B<br>56283 Halsenbach</p>
+                <p>Telefon: 015253846630<br>E-Mail: managment@florian-merzenich.de</p>
+                <p><strong>Geschäftsführer:</strong><br>Florian Merzenich</p>
+                <p><strong>Registernummer:</strong><br>HE461931</p>
             </div>
-            <p>
-                <a href="#" id="impressum-link">Impressum</a> | 
-                <a href="#" id="datenschutz-link">Datenschutz</a>
-            </p>
-        </footer>
+        </div>
 
-    </main>
+        <div id="datenschutz-modal" class="modal-overlay">
+            <div class="modal-content">
+                <span class="close-modal" data-target="datenschutz-modal">&times;</span>
+                <h3>Datenschutzerklärung</h3>
+                <p><strong>Merzenix LTD</strong> legt großen Wert auf den Schutz Ihrer Daten...</p>
+                <p>© 2025 Florian Merzenich</p>
+            </div>
+        </div>
+
+        <main class="container">
+            <header class="hero-section">
+                <img src="logo_weiß.png" alt="Logo" class="logo">
+                <h2 class="sub-headline">9 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.</h2>
+                <h1 class="main-headline">
+                    <span style="display: inline-block; opacity: 0.9;">60 Minuten <span class="netflix-strike">NETFLIX</span></span> oder<br>
+                    <span style="color: var(--primary-color); transition: color 0.5s ease;">60 Minuten für immer in seine Zukunft investieren</span>
+                </h1>
+                <div class="hero-img-container">
+                    <div class="laptop-wrapper">
+                        <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Laptop Frame" class="laptop-frame">
+                        <img src="hero_bg.JPG" alt="Screen Content" class="laptop-screen">
+                    </div>
+                </div>
+                <div class="cta-wrapper">
+                    <a href="#" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
+                    <p class="cta-subtext">Sichere dir 1 von <span id="daily-slots">3</span> freien Plätzen zum persönlichen 1:1 Gespräch mit mir</p>
+                    <div class="countdown-wrapper">
+                        <p class="countdown-label">Noch verfügbar bis:</p>
+                        <div id="countdown" class="timer">
+                            <div class="timer-part"><div id="d">00</div><span>Tage</span></div>
+                            <div class="timer-part"><div id="h">00</div><span>Std</span></div>
+                            <div class="timer-part"><div id="m">15</div><span>Min</span></div>
+                            <div class="timer-part"><div id="s">00</div><span>Sek</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <img src="focus.png" class="marquee-logo" alt="Focus">
+                        <img src="wirtschaftswoche.png" class="marquee-logo invert" alt="WirtschaftsWoche">
+                        <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
+                        <img src="london.png" class="marquee-logo" alt="London Daily News">
+                        <span class="marquee-text">Business Magazin</span>
+                        <img src="focus.png" class="marquee-logo" alt="Focus">
+                        <img src="wirtschaftswoche.png" class="marquee-logo invert" alt="WirtschaftsWoche">
+                        <img src="ntv.jpg" class="marquee-logo" style="border-radius: 4px;" alt="n-tv">
+                        <img src="london.png" class="marquee-logo" alt="London Daily News">
+                        <span class="marquee-text">Business Magazin</span>
+                    </div>
+                </div>
+            </header>
+
+            <section>
+                <h3 class="section-title white">Wo stehst du nach der Masterclass?</h3>
+                <div class="grid-3">
+                    <div class="card"><p>Nie wieder wirst du panisch ins Portfolio schauen und hoffen, dass der Schaden nicht so peinlich hoch ist, wie du befürchtest.</p></div>
+                    <div class="card"><p>Du wirst nicht mehr diesen versteckten Neid spüren, wenn andere Gewinne zeigen, während du dich klein fühlst.</p></div>
+                    <div class="card"><p>Nie wieder wirst du innerlich zusammenzucken, wenn jemand nach deinen Gewinnen fragt, weil du weißt, dass du eigentlich nur Verluste hast.</p></div>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="section-title">Für wen ist diese Masterclass?</h3>
+                <div class="grid-3">
+                    <div class="card white-border"><i class="fa-solid fa-chart-pie"></i><p>Für dich, wenn du schon investiert bist, aber <em>ehrlich gesagt</em> keine Ahnung hast, ob dein Portfolio überhaupt sinnvoll ist.</p></div>
+                    <div class="card white-border"><i class="fa-solid fa-user-shield"></i><p>Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p></div>
+                    <div class="card white-border"><i class="fa-solid fa-coins"></i><p>Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher verunsichert hat.</p></div>
+                </div>
+                <div style="margin-top: 40px; text-align: center;"><a href="#" class="btn-main">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a></div>
+            </section>
+
+            <section>
+                <div class="grid-3">
+                    <div class="stat-box"><span class="stat-number">9+</span><span class="stat-label">Jahre Erfahrung</span></div>
+                    <div class="stat-box"><span class="stat-number">6.500+</span><span class="stat-label">Menschen begleitet</span></div>
+                    <div class="stat-box"><span class="stat-number">2.5 Mio €+</span><span class="stat-label">Crypto Gewinne</span></div>
+                </div>
+            </section>
+
+            <section>
+                <h3 class="section-title">Was du in der exklusiven Masterclass lernen wirst</h3>
+                <div class="grid-3">
+                    <div class="card"><h4 style="color:var(--primary-color);">4-Schritte-System</h4><p>Du bekommst ein glasklares 4-Step-Framework, mit dem du dich im Bärenmarkt richtig positionierst.</p></div>
+                    <div class="card"><h4 style="color:var(--primary-color);">Fehler-Vermeider</h4><p>Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie für immer streichst.</p></div>
+                    <div class="card"><h4 style="color:var(--primary-color);">Zukunfts-Kompass</h4><p>Ein klares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten.</p></div>
+                </div>
+                <div style="margin-top: 40px; text-align: center;"><a href="#" class="btn-main pulse">Sei Dabei</a></div>
+            </section>
+
+            <section class="strategy-section">
+                <div class="strategy-box">
+                    <h3 class="section-title white">Was du im kostenlosen Strategiegespräch bekommst:</h3>
+                    <ul class="strategy-list">
+                        <li><i class="fa-solid fa-check"></i> Ausführliche Analyse deiner Ist-Situation</li>
+                        <li><i class="fa-solid fa-check"></i> Einblick in die Struktur eines 3h-Deep-Dive Calls</li>
+                        <li><i class="fa-solid fa-check"></i> Zugang zur exklusiven Telegram-Gruppe</li>
+                        <li><i class="fa-solid fa-check"></i> Erklärvideos & Vorlagen für deine Unabhängigkeit</li>
+                    </ul>
+                    <div class="price-container">
+                        <p class="price-label">Dein Investment heute:</p>
+                        <p class="price-value">0,00 €</p>
+                    </div>
+                    <div style="margin-top: 40px; text-align: center;"><a href="#" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a></div>
+                </div>
+            </section>
+
+            <section class="scarcity-section">
+                <div class="scarcity-container">
+                    <div class="warning-badge">ACHTUNG</div>
+                    <h3 class="scarcity-title">Bitte lies das, bevor du klickst:</h3>
+                    <p class="scarcity-text">Ich arbeite persönlich mit meinen Klienten. Mein Tag hat auch nur 24 Stunden.<br><br><strong style="color: white;">Bitte klicke nur auf den Button, wenn du über mind. 3.000 € freies Investitionskapital verfügst und bereit bist, Verantwortung zu übernehmen.</strong></p>
+                </div>
+            </section>
+
+            <section class="team-section">
+                <h3 class="section-title">Das Experten-Team an deiner Seite</h3>
+                <div class="slider-wrapper">
+                    <button class="nav-btn prev-btn" id="slideLeft"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="team-slider-container" id="team-slider">
+                        <div class="team-slider-track">
+                            <div class="team-card"><img src="gitarbeiter/anna.jpg" alt="Anja" class="team-img"><h4 class="team-name">Anja Dautzenberg</h4><span class="team-role">Organisation & Backoffice</span><p class="team-desc">Anja Dautzenberg ist die zentrale organisatorische Schnittstelle...<span class="desc-spacer">Darüber hinaus führt Anja Onboarding-Gespräche...</span><span class="desc-spacer">👉 Ihr Fokus: Stabilität...</span></p></div>
+                            <div class="team-card"><img src="gitarbeiter/jona.jpg" alt="Jonathan" class="team-img"><h4 class="team-name">Jonathan Rosenfeld</h4><span class="team-role">Head of Education</span><p class="team-desc">Jonathan Rosenfeld ist Head of Education...<span class="desc-spacer">Als erfahrener Blockchain-Trainer...</span><span class="desc-spacer">👉 Sein Fokus: Qualität...</span></p></div>
+                            <div class="team-card"><img src="gitarbeiter/markus.jpg" alt="Markus" class="team-img"><h4 class="team-name">Markus Hoffmann</h4><span class="team-role">Ultimate Mastermind</span><p class="team-desc">Markus Hoffmann ist verantwortlich für unsere Ultimate Mastermind...<span class="desc-spacer">Er übernimmt persönliche High-Value-Calls...</span><span class="desc-spacer">👉 Sein Fokus: Exzellenz...</span></p></div>
+                            <div class="team-card"><img src="gitarbeiter/alex.jpg" alt="Alexander" class="team-img"><h4 class="team-name">Alexander von Berg</h4><span class="team-role">Blockchain-Trainer</span><p class="team-desc">Alexander begleitet unsere Teilnehmer Schritt für Schritt...<span class="desc-spacer">👉 Sein Fokus: Verständnis...</span></p></div>
+                            <div class="team-card"><img src="gitarbeiter/maxi.jpg" alt="Maximilian" class="team-img"><h4 class="team-name">Maximilian Steger</h4><span class="team-role">Blockchain-Trainer</span><p class="team-desc">Maximilian kommt aus dem wunderschönen Frankfurt...<span class="desc-spacer">👉 Sein Fokus: moderne Finanzbildung...</span></p></div>
+                            <div class="team-card"><img src="gitarbeiter/leonie.jpg" alt="Leonie" class="team-img"><h4 class="team-name">Leonie Falkner</h4><span class="team-role">Marketing</span><p class="team-desc">Leonie ist verantwortlich für die Außenwirkung...<span class="desc-spacer">👉 Ihr Ziel: Menschen abholen...</span></p></div>
+                            <div class="team-card"><img src="gitarbeiter/kevin.jpeg" alt="Kevin" class="team-img"><h4 class="team-name">Kevin Feist</h4><span class="team-role">Blockchain-Experte</span><p class="team-desc">Kevin Feist ist ausgewiesener Blockchain-Experte...<span class="desc-spacer">Er betreut gezielt High-Value-Kunden...</span><span class="desc-spacer">👉 Als Familienvater...</span></p></div>
+                            <div class="team-card"><img src="gitarbeiter/florian.jpg" alt="Florian" class="team-img"><h4 class="team-name">Florian Merzenich</h4><span class="team-role">CEO</span><p class="team-desc">Florian Merzenich ist Gründer, Inhaber und Geschäftsführer...<span class="desc-spacer">Mit einem starken unternehmerischen Mindset...</span><span class="desc-spacer" style="color:var(--primary-color);">👉 Sein Ziel: Menschen befähigen...</span></p></div>
+                        </div>
+                    </div>
+                    <button class="nav-btn next-btn" id="slideRight"><i class="fa-solid fa-chevron-right"></i></button>
+                    <div style="text-align: center; margin-top: 15px; opacity: 0.3; font-size: 11px; color: var(--text-white); font-weight: 300;">Das Team besteht aus freiberuflichen Menschen sowie nicht-realen KI-Bots.</div>
+                </div>
+            </section>
+
+            <section>
+                <div class="profile-container">
+                    <img src="xlg.jpg" alt="Florian Merzenich" class="profile-img">
+                    <div class="profile-text">
+                        <h3 class="sub-headline" style="border:none; padding:0; margin-bottom:5px; color:var(--text-gray);">Das ist</h3>
+                        <h2 class="section-title white" style="text-align: left; margin-bottom: 20px; font-size: 36px;">Florian Merzenich</h2>
+                        <p>Florian Merzenich ist Experte für Investitionen und Krypto. Er gilt als Marktführer in der „Crypto-Investor-Ausbildung“ und ist bereits seit 2013 aktiv.</p>
+                        <p>Mit über <strong>120.000 € Investition</strong> in seine eigene Persönlichkeitsentwicklung hilft er heute Unternehmern, ihr Vermögen strategisch und ohne Spekulation zu steuern.</p>
+                        <p style="font-style: italic; color: var(--primary-color);">„System statt Finanzprodukt“ – für absolute Unabhängigkeit von Banken, Trends und Hypes.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div style="padding: 40px 0 60px; text-align: center;">
+                 <a href="#" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
+            </div>
+
+            <footer>
+                <img src="logo_weiß.png" alt="Logo" class="footer-logo">
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+                <p><a href="#" id="impressum-link">Impressum</a> | <a href="#" id="datenschutz-link">Datenschutz</a></p>
+            </footer>
+        </main>
+    </div>
+
+
+    <!-- ==============================================
+         VIEW 2: KRYPTO-STARTER (NEU - BRONZE)
+         ============================================== -->
+    <div id="view-starter" class="view-section view-hidden p-4 md:p-8">
+        
+        <div class="bg-blob-1"></div>
+        <div class="bg-blob-2"></div>
+
+        <main class="w-full max-w-6xl bg-stone-950/80 backdrop-blur-xl border border-bronze-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
+            
+            <!-- LEFT: IMAGES -->
+            <div class="relative h-auto bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-bronze-900/30">
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-bronze-700/40 aspect-video lg:aspect-auto lg:h-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
+                    <!-- Bildquelle geändert auf start.webp und Filter entfernt -->
+                    <img src="start.webp" alt="Starter Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute top-3 right-3 z-20">
+                        <span class="text-[9px] font-bold text-stone-900 bg-bronze-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 1</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-bronze-700/40 aspect-video lg:aspect-auto lg:h-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent opacity-50 z-10 transition-opacity group-hover:opacity-30"></div>
+                    <img src="flo_seminar.webp" alt="Florian Merzenich Live" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter contrast-125 brightness-90">
+                    <div class="absolute bottom-3 left-3 z-20">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-bronze-500 animate-pulse"></span>
+                            <p class="text-[10px] font-bold text-bronze-100 uppercase tracking-widest drop-shadow-md">Sicher Starten</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: CONTENT -->
+            <div class="p-6 md:p-8 lg:p-10 flex flex-col max-h-[90vh] lg:max-h-[85vh] overflow-y-auto custom-scroll lg:order-2">
+                <div class="mb-3 hidden lg:block pt-2">
+                    <span class="text-[10px] font-bold text-bronze-300 uppercase tracking-widest border border-bronze-700/50 bg-bronze-900/20 px-2 py-1 rounded-full">Sicherheit & Basis</span>
+                </div>
+
+                <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Krypto <span class="bronze-text">STARTER</span></h1>
+                <p class="text-stone-400 text-xs mb-6 font-medium">Zielgruppe: Anfänger, Skeptiker & Sicherheitsbewusste</p>
+
+                <div class="space-y-4 mb-8">
+                    <!-- 1 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-bronze-700/30 shrink-0"><i data-lucide="user-check" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-bronze-100 text-sm">Persönlicher Onboarding-Call (60 Min)</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Individuelle Zielanalyse & klare Roadmap (Was kaufen, was meiden).</p>
+                        </div>
+                    </div>
+                    <!-- 2 -->
+                    <div class="flex gap-3 items-start bg-bronze-900/10 p-2 -mx-2 rounded-lg border border-bronze-500/20">
+                        <div class="bg-bronze-500/20 p-1.5 rounded-lg border border-bronze-500/30 shrink-0"><i data-lucide="shield" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-bronze-200 text-sm flex items-center gap-2">Sichere Setup-Begleitung <span class="text-[8px] bg-bronze-600 text-white px-1 py-0.5 rounded uppercase tracking-wider">Safety First</span></h3>
+                            <p class="text-[10px] text-bronze-200/70 leading-tight mt-0.5">Wallet-Setup (Cold/Hot), Backup-Strategien & Anti-Scam-Training.</p>
+                        </div>
+                    </div>
+                    <!-- 3 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-bronze-700/30 shrink-0"><i data-lucide="pie-chart" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-bronze-100 text-sm">Persönliches Starter-Portfolio</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">5–8 solide Coins (BTC-Fokus), Kaufzonen & Sparplan. Kein Zocken.</p>
+                        </div>
+                    </div>
+                    <!-- 4 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-bronze-700/30 shrink-0"><i data-lucide="users" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-bronze-100 text-sm">Zugang Private Starter Community</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Geschlossener Telegram-Bereich mit wöchentlichen Updates.</p>
+                        </div>
+                    </div>
+                    <!-- 5 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-bronze-700/30 shrink-0"><i data-lucide="compass" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-bronze-100 text-sm">Exit- & Sicherheitsfahrplan</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Emotionen kontrollieren, Fehler vermeiden & Gewinne sichern.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-auto border-t border-bronze-900/50 pt-6 pb-2">
+                    <div class="flex justify-between items-end mb-4">
+                        <div>
+                            <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Start-Investment</p>
+                            <div class="text-3xl md:text-4xl font-black text-white leading-none">1.999 €</div>
+                            <p class="text-[9px] text-stone-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <p class="text-[10px] text-bronze-400 font-bold mb-1">Von „Angst vor Fehlern“ zu</p>
+                            <p class="text-[9px] text-stone-400">„Sicherem Handeln“</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-bronze w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
+                        Sicher Starten <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <div class="mt-4 flex justify-between items-center text-[9px] text-stone-600 border-b border-bronze-900/30 pb-4 mb-4">
+                        <p>Sichere Zahlungsabwicklung</p>
+                        <div class="flex gap-3"><a href="#" class="hover:text-bronze-400">Impressum</a><a href="#" class="hover:text-bronze-400">AGB</a></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- ==============================================
+         VIEW 3: MASTERPLAN GOLD
+         ============================================== -->
+    <div id="view-gold" class="view-section view-hidden p-4 md:p-8">
+        
+        <div class="bg-blob-1"></div>
+        <div class="bg-blob-2"></div>
+
+        <main class="w-full max-w-6xl bg-stone-900/80 backdrop-blur-xl border border-gold-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
+            
+            <!-- LEFT: IMAGES -->
+            <div class="relative h-auto bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-gold-900/30">
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-gold-700/40 aspect-video lg:aspect-auto lg:h-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
+                    <!-- Bildquelle geändert auf gold.webp und Filter entfernt -->
+                    <img src="gold.webp" alt="Masterplan Gold Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute top-3 right-3 z-20">
+                        <span class="text-[9px] font-bold text-stone-900 bg-gold-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 2</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-gold-700/40 aspect-video lg:aspect-auto lg:h-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent opacity-50 z-10 transition-opacity group-hover:opacity-30"></div>
+                    <img src="flo_seminar.webp" alt="Florian Merzenich Live" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter contrast-125">
+                    <div class="absolute bottom-3 left-3 z-20">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-gold-500 animate-pulse"></span>
+                            <p class="text-[10px] font-bold text-gold-100 uppercase tracking-widest drop-shadow-md">Portfolio Builder</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: CONTENT -->
+            <div class="p-6 md:p-8 lg:p-10 flex flex-col max-h-[90vh] lg:max-h-[85vh] overflow-y-auto custom-scroll lg:order-2">
+                <div class="mb-3 hidden lg:block pt-2">
+                    <span class="text-[10px] font-bold text-gold-300 uppercase tracking-widest border border-gold-700/50 bg-gold-900/20 px-2 py-1 rounded-full">Klarheit & Strategie</span>
+                </div>
+
+                <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Masterplan <span class="gold-text">GOLD</span></h1>
+                <p class="text-stone-400 text-xs mb-6 font-medium">Zielgruppe: Investoren, Unternehmer & Ambitionierte</p>
+
+                <div class="space-y-4 mb-8">
+                    <!-- 1 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="target" class="w-4 h-4 text-gold-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-gold-100 text-sm">Strategischer Deep-Dive-Call (90 Min)</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Vermögensstruktur, Ziele (12–36 Monate) & persönliche Risikomatrix.</p>
+                        </div>
+                    </div>
+                    <!-- 2 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="map" class="w-4 h-4 text-gold-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-gold-100 text-sm">Dein individueller Krypto-Masterplan</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Marktzyklen verstehen, BTC-Akkumulation & Cash-Reserve-Management.</p>
+                        </div>
+                    </div>
+                    <!-- 3 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="layers" class="w-4 h-4 text-gold-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-gold-100 text-sm">Premium Portfolio-Aufbau</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">10–15 Coins (BTC, Layer-1/2, KI/DeFi) mit konkreten Kaufzonen.</p>
+                        </div>
+                    </div>
+                    <!-- 4 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="refresh-cw" class="w-4 h-4 text-gold-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-gold-100 text-sm">Monatliche Portfolio-Reviews (3 Mon.)</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Live-Call: Anpassungen, Markteinschätzung & Fehlerkorrekturen.</p>
+                        </div>
+                    </div>
+                    <!-- 5 Highlight -->
+                    <div class="flex gap-3 items-start bg-gold-900/10 p-2 -mx-2 rounded-lg border border-gold-500/20">
+                        <div class="bg-gold-500/20 p-1.5 rounded-lg border border-gold-500/30 shrink-0"><i data-lucide="send" class="w-4 h-4 text-gold-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-gold-200 text-sm">Exklusiver Gold-Telegram-Channel</h3>
+                            <p class="text-[10px] text-gold-200/70 leading-tight mt-0.5">Markt-Insights, Chancen & Risiken, Warnung vor Hypes.</p>
+                        </div>
+                    </div>
+                    <!-- 6 -->
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="trending-up" class="w-4 h-4 text-gold-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-gold-100 text-sm">Exit- & Gewinnstrategie</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Teilverkäufe, Absicherung & strategische steuerliche Denkweise.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-auto border-t border-gold-900/50 pt-6 pb-2">
+                    <div class="flex justify-between items-end mb-4">
+                        <div>
+                            <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Investment</p>
+                            <div class="text-3xl md:text-4xl font-black text-white leading-none">4.999 €</div>
+                            <p class="text-[9px] text-stone-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <p class="text-[10px] text-gold-400 font-bold mb-1">Von „Ich investiere“ zu</p>
+                            <p class="text-[9px] text-stone-400">„Ich habe einen klaren Masterplan“</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-gold w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
+                        Jetzt Gold-Status sichern <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <div class="mt-4 flex justify-between items-center text-[9px] text-stone-600 border-b border-gold-900/30 pb-4 mb-4">
+                        <p>Sichere Zahlungsabwicklung</p>
+                        <div class="flex gap-3"><a href="#" class="hover:text-gold-400">Impressum</a><a href="#" class="hover:text-gold-400">AGB</a></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+
+    <!-- ==============================================
+         VIEW 4: MASTERMIND PLATINUM (Original)
+         ============================================== -->
+    <div id="view-platinum" class="view-section view-hidden p-4 md:p-8">
+        
+        <div class="bg-blob-1"></div>
+        <div class="bg-blob-2"></div>
+
+        <main class="w-full max-w-6xl bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative my-auto">
+            
+            <div class="relative h-auto bg-slate-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-slate-800">
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-slate-800/50 aspect-video lg:aspect-auto lg:h-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
+                    <img src="mastermind.webp" alt="Mastermind Platin Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute top-3 right-3 z-20">
+                        <span class="text-[9px] font-bold text-slate-900 bg-platinum-200/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 3</span>
+                    </div>
+                </div>
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-slate-800/50 aspect-video lg:aspect-auto lg:h-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-50 z-10 transition-opacity group-hover:opacity-30"></div>
+                    <img src="flo_seminar.webp" alt="Florian Merzenich Seminar" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute bottom-3 left-3 z-20">
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                            <p class="text-[10px] font-bold text-white uppercase tracking-widest drop-shadow-md">Live Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 md:p-8 lg:p-10 flex flex-col max-h-[90vh] lg:max-h-[85vh] overflow-y-auto custom-scroll lg:order-2">
+                <div class="mb-3 hidden lg:block pt-2">
+                    <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest border border-blue-900/50 bg-blue-900/10 px-2 py-1 rounded-full">Exklusiver Zugang</span>
+                </div>
+
+                <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Mastermind <span class="platinum-text">PLATIN</span></h1>
+                <p class="text-slate-400 text-xs mb-6 font-medium">Zielgruppe: High Performer, Unternehmer & HNWIs</p>
+
+                <div class="space-y-4 mb-8">
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-slate-800/50 p-1.5 rounded-lg border border-slate-700/50 shrink-0"><i data-lucide="crosshair" class="w-4 h-4 text-platinum-300"></i></div>
+                        <div><h3 class="font-bold text-white text-sm">Private Strategie-Session (1:1)</h3><p class="text-[10px] text-slate-400 leading-tight mt-0.5">2h Deep Dive: Vermögensanalyse & Freiheits-Masterplan.</p></div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-slate-800/50 p-1.5 rounded-lg border border-slate-700/50 shrink-0"><i data-lucide="trending-up" class="w-4 h-4 text-platinum-300"></i></div>
+                        <div><h3 class="font-bold text-white text-sm">Maßgeschneiderte High-Level-Strategie</h3><p class="text-[10px] text-slate-400 leading-tight mt-0.5">Bitcoin als Speicher, Altcoins als Hebel, Profi-Risikosteuerung.</p></div>
+                    </div>
+                    <div class="flex gap-3 items-start bg-blue-900/10 p-2 -mx-2 rounded-lg border border-blue-500/20">
+                        <div class="bg-blue-500/20 p-1.5 rounded-lg border border-blue-500/30 shrink-0"><i data-lucide="message-circle" class="w-4 h-4 text-blue-300"></i></div>
+                        <div><h3 class="font-bold text-blue-100 text-sm flex items-center gap-2">Direkter Draht zu mir <span class="text-[8px] bg-blue-600 text-white px-1 py-0.5 rounded uppercase tracking-wider">Priority</span></h3><p class="text-[10px] text-blue-200/70 leading-tight mt-0.5">Persönlicher Chat & Sprachnachrichten. Nähe & Vertrauen.</p></div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-slate-800/50 p-1.5 rounded-lg border border-slate-700/50 shrink-0"><i data-lucide="users" class="w-4 h-4 text-platinum-300"></i></div>
+                        <div><h3 class="font-bold text-white text-sm">Private Mastermind Calls</h3><p class="text-[10px] text-slate-400 leading-tight mt-0.5">Unternehmer-Mindset. Kapital & Psychologie. Kein Anfänger-Talk.</p></div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-slate-800/50 p-1.5 rounded-lg border border-slate-700/50 shrink-0"><i data-lucide="shield-check" class="w-4 h-4 text-platinum-300"></i></div>
+                        <div><h3 class="font-bold text-white text-sm">6 Monate Begleitung & Pre-Insights</h3><p class="text-[10px] text-slate-400 leading-tight mt-0.5">Trends vor der Masse. Regelmäßige Check-ins für mentale Stabilität.</p></div>
+                    </div>
+                    <div class="flex gap-3 items-start opacity-75">
+                        <div class="bg-slate-800/30 p-1.5 rounded-lg border border-slate-700/30 shrink-0"><i data-lucide="glass-water" class="w-4 h-4 text-slate-500"></i></div>
+                        <div><h3 class="font-bold text-slate-300 text-sm">Private Events (Optional)</h3><p class="text-[10px] text-slate-500 leading-tight mt-0.5">Dinners & Netzwerk auf Augenhöhe.</p></div>
+                    </div>
+                </div>
+
+                <div class="mt-auto border-t border-slate-800 pt-6 pb-2">
+                    <div class="flex justify-between items-end mb-4">
+                        <div>
+                            <p class="text-[10px] text-slate-500 uppercase tracking-widest mb-0.5">Einmaliges Investment</p>
+                            <div class="text-3xl md:text-4xl font-black text-white leading-none">13.999 €</div>
+                            <p class="text-[9px] text-slate-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <div class="flex -space-x-2 justify-end mb-1">
+                                <div class="w-6 h-6 rounded-full border-2 border-slate-900 bg-slate-700"></div>
+                                <div class="w-6 h-6 rounded-full border-2 border-slate-900 bg-slate-600"></div>
+                                <div class="w-6 h-6 rounded-full border-2 border-slate-900 bg-slate-500 flex items-center justify-center text-[8px] font-bold text-white">+2</div>
+                            </div>
+                            <p class="text-[9px] text-slate-400">Nur noch 2 Plätze dieses Quartal</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-platinum w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
+                        Jetzt Platz anfragen <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <div class="mt-4 flex justify-between items-center text-[9px] text-slate-600 border-b border-slate-800 pb-4 mb-4">
+                        <p>Sichere Zahlungsabwicklung</p>
+                        <div class="flex gap-3"><a href="#" class="hover:text-slate-400">Impressum</a><a href="#" class="hover:text-slate-400">AGB</a></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <!-- SCRIPTS -->
     <script>
-        // 0. BUTTERY SMOOTH SCROLLING (LENIS) INIT
+        // VIEW SWITCHER LOGIC (4-Way Rotation: Std -> Starter -> Gold -> Plat -> Std)
         (function() {
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Easing Funktion für "Butter" Gefühl
-                direction: 'vertical',
-                gestureDirection: 'vertical',
-                smooth: true,
-                mouseMultiplier: 1,
-                smoothTouch: false,
-                touchMultiplier: 2,
+            const toggleBtn = document.getElementById('view-toggle');
+            const viewStandard = document.getElementById('view-standard');
+            const viewStarter = document.getElementById('view-starter');
+            const viewGold = document.getElementById('view-gold');
+            const viewPlatinum = document.getElementById('view-platinum');
+            const btnIcon = toggleBtn.querySelector('i');
+            
+            // State: 0 = Standard, 1 = Starter (Bronze), 2 = Gold, 3 = Platinum
+            let currentState = 0;
+            let lucideInitialized = false;
+
+            toggleBtn.addEventListener('click', () => {
+                // Cycle state: 0 -> 1 -> 2 -> 3 -> 0
+                currentState = (currentState + 1) % 4;
+
+                // Init Lucide if needed
+                if (currentState > 0 && !lucideInitialized && window.lucide) {
+                    lucide.createIcons();
+                    lucideInitialized = true;
+                }
+
+                // Hide all
+                viewStandard.classList.add('view-hidden');
+                viewStarter.classList.add('view-hidden');
+                viewGold.classList.add('view-hidden');
+                viewPlatinum.classList.add('view-hidden');
+                
+                // Reset Button Classes
+                toggleBtn.classList.remove('nav-btn-bronze', 'nav-btn-gold', 'nav-btn-platinum');
+                btnIcon.className = ''; 
+
+                if (currentState === 1) {
+                    // Show Starter (Bronze)
+                    viewStarter.classList.remove('view-hidden');
+                    // Next is Gold -> Show Coins Stack
+                    toggleBtn.classList.add('nav-btn-bronze');
+                    btnIcon.classList.add('fa-solid', 'fa-coins'); 
+                
+                } else if (currentState === 2) {
+                    // Show Gold
+                    viewGold.classList.remove('view-hidden');
+                    // Next is Platinum -> Show Gem
+                    toggleBtn.classList.add('nav-btn-gold');
+                    btnIcon.classList.add('fa-regular', 'fa-gem');
+
+                } else if (currentState === 3) {
+                    // Show Platinum
+                    viewPlatinum.classList.remove('view-hidden');
+                    // Next is Home -> Show House
+                    toggleBtn.classList.add('nav-btn-platinum');
+                    btnIcon.classList.add('fa-solid', 'fa-house');
+
+                } else {
+                    // Show Standard (0)
+                    viewStandard.classList.remove('view-hidden');
+                    // Next is Starter -> Show Layers (Steps)
+                    btnIcon.classList.add('fa-solid', 'fa-layer-group');
+                }
+                
+                window.scrollTo(0, 0);
             });
+        })();
 
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
-
+        // OTHER SCRIPTS
+        (function() {
+            const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), direction: 'vertical', smooth: true });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
             requestAnimationFrame(raf);
-
-            // Optional: Macht Anker-Links auch smooth
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    const targetId = this.getAttribute('href');
-                    if (targetId && targetId !== '#') {
+                    if(this.getAttribute('href') !== '#') {
                         e.preventDefault();
-                        const targetElement = document.querySelector(targetId);
-                        if (targetElement) {
-                            lenis.scrollTo(targetElement);
-                        }
+                        const t = document.querySelector(this.getAttribute('href'));
+                        if(t) lenis.scrollTo(t);
                     }
                 });
             });
         })();
 
-        // 1. COUNTDOWN TIMER
         (function() {
             let duration = 15 * 60;
-            const displayDays = document.getElementById('d');
-            const displayHours = document.getElementById('h');
-            const displayMinutes = document.getElementById('m');
-            const displaySeconds = document.getElementById('s');
-            let timer = duration, minutes, seconds;
-
+            const d = document.getElementById('d'), h = document.getElementById('h'), m = document.getElementById('m'), s = document.getElementById('s');
+            let timer = duration, min, sec;
             setInterval(function () {
-                minutes = parseInt(timer / 60, 10);
-                seconds = parseInt(timer % 60, 10);
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-                
-                if (displayDays) displayDays.textContent = "00";
-                if (displayHours) displayHours.textContent = "00";
-                if (displayMinutes) displayMinutes.textContent = minutes;
-                if (displaySeconds) displaySeconds.textContent = seconds;
-
-                if (--timer < 0) { timer = duration; }
+                min = parseInt(timer / 60, 10); sec = parseInt(timer % 60, 10);
+                min = min < 10 ? "0" + min : min; sec = sec < 10 ? "0" + sec : sec;
+                if(d) d.textContent="00"; if(h) h.textContent="00"; if(m) m.textContent=min; if(s) s.textContent=sec;
+                if (--timer < 0) timer = duration;
             }, 1000);
         })();
 
-        // 2. SET CURRENT DATE FOR PROVEN EXPERT
         (function() {
-            const dateElement = document.getElementById('pe-date-display');
-            if (dateElement) {
-                const today = new Date();
-                // Format: DD.MM.YYYY
-                const dateString = today.toLocaleDateString('de-DE', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric'
-                });
-                dateElement.textContent = `Stand: ${dateString}`;
-            }
+            const el = document.getElementById('pe-date-display');
+            if(el) el.textContent = `Stand: ${new Date().toLocaleDateString('de-DE', {day:'2-digit',month:'2-digit',year:'numeric'})}`;
         })();
 
-        // 3. THEME SWITCHER
         (function() {
-            const body = document.body;
-            const toggleBtn = document.getElementById('theme-toggle');
-            
-            // Themes: Default (Brown/Orange), Blue, Red
-            // States: 0 = Default, 1 = Blue, 2 = Red
-            let currentState = 0;
-
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', () => {
-                    currentState = (currentState + 1) % 3;
-
-                    // Reset classes
-                    body.classList.remove('theme-blue', 'theme-red');
-
-                    if (currentState === 1) {
-                        body.classList.add('theme-blue');
-                    } else if (currentState === 2) {
-                        body.classList.add('theme-red');
-                    }
-                    // State 0 ist default (keine extra Klasse)
-                });
-            }
-        })();
-
-        // 4. MODAL FUNKTIONALITÄT (IMPRESSUM & DATENSCHUTZ)
-        (function() {
-            const triggers = document.querySelectorAll('#impressum-link, #datenschutz-link');
-            const closeButtons = document.querySelectorAll('.close-modal');
-            const modals = document.querySelectorAll('.modal-overlay');
-
-            // Öffnen
-            triggers.forEach(trigger => {
-                trigger.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    let targetId;
-                    if(trigger.id === 'impressum-link') targetId = 'impressum-modal';
-                    if(trigger.id === 'datenschutz-link') targetId = 'datenschutz-modal';
-                    
-                    const modal = document.getElementById(targetId);
-                    if(modal) modal.classList.add('active');
-                });
-            });
-
-            // Schließen via X
-            closeButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const targetId = btn.getAttribute('data-target');
-                    const modal = document.getElementById(targetId);
-                    if(modal) modal.classList.remove('active');
-                });
-            });
-
-            // Schließen via Klick außerhalb
-            modals.forEach(modal => {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.classList.remove('active');
-                    }
-                });
+            const b = document.body, t = document.getElementById('theme-toggle');
+            let s = 0;
+            if(t) t.addEventListener('click', () => {
+                s = (s + 1) % 3; b.classList.remove('theme-blue','theme-red','theme-orange');
+                if(s===1) b.classList.add('theme-orange'); else if(s===2) b.classList.add('theme-red');
             });
         })();
 
-        // 5. DYNAMIC SLOTS (1-3 Plätze pro Tag, basierend auf Datum)
         (function() {
-            const slotsElement = document.getElementById('daily-slots');
-            if (slotsElement) {
-                const today = new Date();
-                // Erzeuge einen Seed aus dem Datum (z.B. 2023 + 10 + 27 = 2060)
-                // Damit bleibt die Zahl den ganzen Tag über gleich.
-                const seed = today.getFullYear() + today.getMonth() + today.getDate();
-                
-                // Einfacher Pseudo-Zufallsgenerator basierend auf dem Seed
-                // Modulo 3 ergibt 0, 1 oder 2. Plus 1 ergibt 1, 2 oder 3.
-                // Wir nutzen Math.sin für etwas mehr Variation als einfaches Hochzählen.
-                const x = Math.sin(seed) * 10000;
-                const slots = Math.floor((x - Math.floor(x)) * 3) + 1;
-
-                slotsElement.textContent = slots;
-            }
+            const tr = document.querySelectorAll('#impressum-link, #datenschutz-link'), cl = document.querySelectorAll('.close-modal'), mo = document.querySelectorAll('.modal-overlay');
+            tr.forEach(t => t.addEventListener('click', (e) => { e.preventDefault(); const m = document.getElementById(t.id === 'impressum-link' ? 'impressum-modal' : 'datenschutz-modal'); if(m) m.classList.add('active'); }));
+            cl.forEach(b => b.addEventListener('click', () => { const m = document.getElementById(b.getAttribute('data-target')); if(m) m.classList.remove('active'); }));
+            mo.forEach(m => m.addEventListener('click', (e) => { if(e.target===m) m.classList.remove('active'); }));
         })();
 
-        // 6. TEAM SLIDER NAVIGATION
         (function() {
-            const slider = document.getElementById('team-slider');
-            const leftBtn = document.getElementById('slideLeft');
-            const rightBtn = document.getElementById('slideRight');
+            const el = document.getElementById('daily-slots');
+            if(el) { const d = new Date(); const x = Math.sin(d.getFullYear()+d.getMonth()+d.getDate()) * 10000; el.textContent = Math.floor((x - Math.floor(x)) * 3) + 1; }
+        })();
 
-            if(slider && leftBtn && rightBtn) {
-                leftBtn.addEventListener('click', () => {
-                    // Scroll amount: Card width (320) + gap (25) = 345
-                    slider.scrollBy({ left: -345, behavior: 'smooth' });
-                });
-
-                rightBtn.addEventListener('click', () => {
-                    slider.scrollBy({ left: 345, behavior: 'smooth' });
-                });
+        (function() {
+            const s = document.getElementById('team-slider'), l = document.getElementById('slideLeft'), r = document.getElementById('slideRight');
+            if(s && l && r) {
+                l.addEventListener('click', () => s.scrollBy({ left: -345, behavior: 'smooth' }));
+                r.addEventListener('click', () => s.scrollBy({ left: 345, behavior: 'smooth' }));
             }
         })();
     </script>
