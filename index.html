@@ -802,7 +802,6 @@
 
     <!-- SCRIPTS -->
     <script>
-        // VIEW SWITCHER LOGIC (4-Way Rotation: Std -> Starter -> Gold -> Plat -> Std)
         (function() {
             const toggleBtn = document.getElementById('view-toggle');
             const viewStandard = document.getElementById('view-standard');
@@ -811,60 +810,84 @@
             const viewPlatinum = document.getElementById('view-platinum');
             const btnIcon = toggleBtn.querySelector('i');
             
-            // State: 0 = Standard, 1 = Starter (Bronze), 2 = Gold, 3 = Platinum
-            let currentState = 0;
             let lucideInitialized = false;
 
-            toggleBtn.addEventListener('click', () => {
-                // Cycle state: 0 -> 1 -> 2 -> 3 -> 0
-                currentState = (currentState + 1) % 4;
+            // Helper: State aus Hash lesen
+            function getStateFromHash() {
+                const hash = window.location.hash;
+                if (hash === '#startup') return 1;
+                if (hash === '#gold') return 2;
+                if (hash === '#platin') return 3;
+                return 0; // Default Standard
+            }
 
-                // Init Lucide if needed
-                if (currentState > 0 && !lucideInitialized && window.lucide) {
-                    lucide.createIcons();
-                    lucideInitialized = true;
-                }
-
-                // Hide all
+            // Helper: UI basierend auf State aktualisieren
+            function updateUI(state) {
+                // Alle verstecken
                 viewStandard.classList.add('view-hidden');
                 viewStarter.classList.add('view-hidden');
                 viewGold.classList.add('view-hidden');
                 viewPlatinum.classList.add('view-hidden');
                 
-                // Reset Button Classes
+                // Button Reset
                 toggleBtn.classList.remove('nav-btn-bronze', 'nav-btn-gold', 'nav-btn-platinum');
                 btnIcon.className = ''; 
 
-                if (currentState === 1) {
-                    // Show Starter (Bronze)
+                // Lucide Init check
+                if (state > 0 && !lucideInitialized && window.lucide) {
+                    lucide.createIcons();
+                    lucideInitialized = true;
+                }
+
+                if (state === 1) { // Starter
                     viewStarter.classList.remove('view-hidden');
-                    // Next is Gold -> Show Coins Stack
+                    // Button zeigt nächstes: Gold
                     toggleBtn.classList.add('nav-btn-bronze');
                     btnIcon.classList.add('fa-solid', 'fa-coins'); 
-                
-                } else if (currentState === 2) {
-                    // Show Gold
+                } else if (state === 2) { // Gold
                     viewGold.classList.remove('view-hidden');
-                    // Next is Platinum -> Show Gem
+                    // Button zeigt nächstes: Platinum
                     toggleBtn.classList.add('nav-btn-gold');
                     btnIcon.classList.add('fa-regular', 'fa-gem');
-
-                } else if (currentState === 3) {
-                    // Show Platinum
+                } else if (state === 3) { // Platinum
                     viewPlatinum.classList.remove('view-hidden');
-                    // Next is Home -> Show House
+                    // Button zeigt nächstes: Home
                     toggleBtn.classList.add('nav-btn-platinum');
                     btnIcon.classList.add('fa-solid', 'fa-house');
-
-                } else {
-                    // Show Standard (0)
+                } else { // Standard (0)
                     viewStandard.classList.remove('view-hidden');
-                    // Next is Starter -> Show Layers (Steps)
+                    // Button zeigt nächstes: Starter (Layers/Steps)
                     btnIcon.classList.add('fa-solid', 'fa-layer-group');
                 }
                 
                 window.scrollTo(0, 0);
+            }
+
+            // Event Listener: Hash Change (Browser Back/Forward oder direkte URL Eingabe)
+            window.addEventListener('hashchange', () => {
+                updateUI(getStateFromHash());
             });
+
+            // Event Listener: Button Click (Zyklisch durchschalten)
+            toggleBtn.addEventListener('click', () => {
+                const currentState = getStateFromHash();
+                const nextState = (currentState + 1) % 4;
+                
+                // Hash setzen triggert 'hashchange' -> updateUI wird aufgerufen
+                if (nextState === 0) window.location.hash = ''; 
+                else if (nextState === 1) window.location.hash = '#startup';
+                else if (nextState === 2) window.location.hash = '#gold';
+                else if (nextState === 3) window.location.hash = '#platin';
+                
+                // Fallback für Home (leerer Hash triggert manchmal kein Event in allen Browsern gleich schnell, aber meist ok)
+                if (nextState === 0) {
+                    history.pushState("", document.title, window.location.pathname + window.location.search);
+                    updateUI(0);
+                }
+            });
+
+            // Init Load
+            updateUI(getStateFromHash());
         })();
 
         // OTHER SCRIPTS
@@ -874,9 +897,11 @@
             requestAnimationFrame(raf);
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    if(this.getAttribute('href') !== '#') {
+                    // Verhindere Lenis Scroll für unsere View-Hashes
+                    const href = this.getAttribute('href');
+                    if(href !== '#' && href !== '#startup' && href !== '#gold' && href !== '#platin') {
                         e.preventDefault();
-                        const t = document.querySelector(this.getAttribute('href'));
+                        const t = document.querySelector(href);
                         if(t) lenis.scrollTo(t);
                     }
                 });
