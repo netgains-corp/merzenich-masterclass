@@ -40,8 +40,8 @@
                     colors: {
                         platinum: { 200: '#e2e8f0', 300: '#cbd5e1' },
                         gold: { 100: '#fef3c7', 300: '#fcd34d', 500: '#f59e0b', 700: '#b45309', 900: '#78350f' },
-                        // Silver palette updated
                         silver: { 100: '#f3f4f6', 300: '#d1d5db', 400: '#9ca3af', 500: '#6b7280', 700: '#374151', 900: '#111827' },
+                        mentoring: { 100: '#ecfdf5', 300: '#6ee7b7', 500: '#10b981', 700: '#047857', 900: '#064e3b' }, // Emerald Theme
                         bronze: { 100: '#ffedd5', 300: '#fdba74', 500: '#f97316', 700: '#c2410c', 900: '#7c2d12' },
                         infinity: { 100: '#f5d0fe', 300: '#e879f9', 500: '#d946ef', 700: '#a21caf', 900: '#701a75' }
                     },
@@ -97,6 +97,9 @@
 
             /* Silver Vars */
             --silver-1: #f9fafb; --silver-2: #d1d5db; --silver-3: #9ca3af; --silver-4: #4b5563;
+
+            /* Mentoring Vars */
+            --mentoring-1: #ecfdf5; --mentoring-2: #34d399; --mentoring-3: #059669; --mentoring-4: #064e3b;
 
             /* Infinity Vars */
             --infinity-1: #fae8ff; --infinity-2: #e879f9; --infinity-3: #c026d3; --infinity-4: #86198f;
@@ -160,6 +163,7 @@
         .ctrl-btn:hover { background: var(--primary-color); transform: scale(1.1); }
 
         /* Navigation Button Active States */
+        .nav-btn-mentoring { background: #10b981 !important; color: #fff !important; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5); }
         .nav-btn-silver { background: #d1d5db !important; color: #111827 !important; box-shadow: 0 0 15px rgba(209, 213, 219, 0.5); }
         .nav-btn-gold { background: #f59e0b !important; color: #000 !important; box-shadow: 0 0 15px rgba(245, 158, 11, 0.5); }
         .nav-btn-platinum { background: #e2e8f0 !important; color: #000 !important; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
@@ -327,7 +331,7 @@
            STYLES FÜR PLATINUM, GOLD, STARTER & INFINITY (Container)
         ----------------------------------------------------------- */
         /* Common for additional views */
-        #view-silver, #view-gold, #view-platinum, #view-infinity {
+        #view-mentoring, #view-silver, #view-gold, #view-platinum, #view-infinity {
             position: fixed;
             top: 0;
             left: 0;
@@ -361,6 +365,7 @@
         }
 
         /* Kind-Elemente (Die Karten) */
+        #view-mentoring > main,
         #view-silver > main, 
         #view-gold > main, 
         #view-platinum > main, 
@@ -383,6 +388,8 @@
         #view-gold { background: radial-gradient(circle at 50% 0%, #451a03 0%, #000000 100%); }
         /* Silver: Metallic/Gray radial background */
         #view-silver { background: radial-gradient(circle at 50% 0%, #374151 0%, #111827 100%); }
+        /* Mentoring: Emerald/Teal radial background */
+        #view-mentoring { background: radial-gradient(circle at 50% 0%, #064e3b 0%, #022c22 100%); }
         
         /* BACKGROUND ICON STYLE (Giant Watermark) - NUR NOCH FÜR INFINITY */
         .bg-icon-watermark {
@@ -412,35 +419,43 @@
             50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.08; }
         }
 
-        /* PLATINUM PATTERN (Emblemed Out - Diamonds) - SICHTBARER */
+        /* PLATINUM PATTERN */
         #view-platinum::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* SVG Diamant Pattern - Transparenz erhöht (0.15 stroke opacity) */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='rgba(226, 232, 240, 0.15)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 3h12l4 6-10 13L2 9z'/%3E%3Cpath d='M11 3 8 9l4 13 4-13-3-6'/%3E%3Cpath d='M2 9h20'/%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 60px 60px;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.6; /* Gesamtopazität erhöht */
+            opacity: 0.6;
         }
 
-        /* GOLD PATTERN (Emblemed Out - Crown) - SICHTBARER */
+        /* GOLD PATTERN */
         #view-gold::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* SVG Crown Pattern - Transparenz erhöht (0.2 stroke opacity) */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='rgba(252, 211, 77, 0.2)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14'/%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 60px 60px;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.6; /* Gesamtopazität erhöht */
+            opacity: 0.6;
         }
 
-        /* SILVER PATTERN (Emblemed Out - Circuit/Chip) */
+        /* SILVER PATTERN */
         #view-silver::before {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* SVG Circuit Pattern */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='rgba(209, 213, 219, 0.15)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12h5'/%3E%3Cpath d='M17 12h5'/%3E%3Cpath d='M12 2v5'/%3E%3Cpath d='M12 17v5'/%3E%3Cpath d='M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5z'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 60px 60px;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        /* MENTORING PATTERN (Box) */
+        #view-mentoring::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='rgba(52, 211, 153, 0.15)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12'/%3E%3C/svg%3E");
             background-repeat: repeat;
             background-size: 60px 60px;
             z-index: -1;
@@ -478,7 +493,6 @@
         /* INFINITY SPARKLE (Extra layer - MEHR FUNKEN) */
         #view-infinity::after {
             content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            /* Mehr Layer für mehr Dichte */
             background-image: 
                 radial-gradient(white, rgba(255,255,255,.8) 1px, transparent 2px),
                 radial-gradient(white, rgba(255,255,255,.6) 1px, transparent 2px),
@@ -502,6 +516,7 @@
         .gold-text { background: linear-gradient(90deg, var(--gold-1) 0%, var(--gold-4) 25%, var(--gold-2) 45%, #ffffff 50%, var(--gold-3) 55%, var(--gold-4) 75%, var(--gold-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
         .bronze-text { background: linear-gradient(90deg, var(--bronze-1) 0%, var(--bronze-2) 25%, var(--bronze-3) 45%, #ffffff 50%, var(--bronze-2) 55%, var(--bronze-3) 75%, var(--bronze-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
         .silver-text { background: linear-gradient(90deg, var(--silver-1) 0%, var(--silver-3) 25%, var(--silver-2) 45%, #ffffff 50%, var(--silver-3) 55%, var(--silver-4) 75%, var(--silver-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
+        .mentoring-text { background: linear-gradient(90deg, var(--mentoring-1) 0%, var(--mentoring-3) 25%, var(--mentoring-2) 45%, #ffffff 50%, var(--mentoring-3) 55%, var(--mentoring-4) 75%, var(--mentoring-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
         .infinity-text { background: linear-gradient(90deg, var(--infinity-1) 0%, var(--infinity-2) 25%, #ffffff 50%, var(--infinity-3) 75%, var(--infinity-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 3s linear infinite; }
         
         @keyframes shine { to { background-position: 200% center; } }
@@ -518,6 +533,9 @@
 
         .btn-silver { background: linear-gradient(135deg, #e5e7eb 0%, #6b7280 100%); color: #111827; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(209, 213, 219, 0.3); }
         .btn-silver:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(209, 213, 219, 0.5); }
+
+        .btn-mentoring { background: linear-gradient(135deg, #a7f3d0 0%, #059669 100%); color: #064e3b; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); }
+        .btn-mentoring:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(16, 185, 129, 0.5); }
 
         .btn-infinity { background: linear-gradient(135deg, #e879f9 0%, #a21caf 100%); color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 25px rgba(217, 70, 239, 0.4); }
         .btn-infinity:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(217, 70, 239, 0.6); filter: brightness(1.1); }
@@ -548,10 +566,9 @@
           VIEW 1: STANDARD (HOME)
           ============================================= -->
     <div id="view-standard" class="view-section">
-        
         <div class="bg-fixed"></div>
         <div class="bg-tint"></div>
-
+        <!-- ... (Rest of standard view remains unchanged) ... -->
         <div class="proven-expert-badge">
             <div class="pe-logo">Proven<span>Expert</span></div>
             <div class="pe-rating">5.00</div>
@@ -563,7 +580,6 @@
             <div class="pe-date" id="pe-date-display">Stand: ...</div>
         </div>
 
-        <!-- Modals -->
         <div id="impressum-modal" class="modal-overlay">
             <div class="modal-content">
                 <span class="close-modal" data-target="impressum-modal">&times;</span>
@@ -586,7 +602,6 @@
 
         <main class="container">
             <header class="hero-section">
-                <!-- .webp ersetzt & lazy -->
                 <img src="logo_weiß.webp" alt="Logo" class="logo" loading="lazy" decoding="async">
                 <h2 class="sub-headline">9 Jahre Crypto-Erfahrung zusammengefasst in 60 Min.</h2>
                 <h1 class="main-headline">
@@ -596,7 +611,6 @@
                 <div class="hero-img-container">
                     <div class="laptop-wrapper">
                         <img src="https://images.leadconnectorhq.com/image/f_webp/q_80/r_1200/u_https://assets.cdn.filesafe.space/H1mibqsfrrRD9o3Cjg0N/media/69249068c61b1199300f921f.png" alt="Laptop Frame" class="laptop-frame" decoding="async">
-                        <!-- .webp ersetzt & lazy entfernt wie gefordert für dieses eine Bild -->
                         <img src="hero_bg.webp" alt="Screen Content" class="laptop-screen" decoding="async">
                     </div>
                 </div>
@@ -615,7 +629,6 @@
                 </div>
                 <div class="marquee-container">
                     <div class="marquee-content">
-                        <!-- .webp ersetzt & lazy -->
                         <img src="focus.webp" class="marquee-logo" alt="Focus" loading="lazy" decoding="async">
                         <img src="wirtschaftswoche.webp" class="marquee-logo invert" alt="WirtschaftsWoche" loading="lazy" decoding="async">
                         <img src="ntv.webp" class="marquee-logo" style="border-radius: 4px;" alt="n-tv" loading="lazy" decoding="async">
@@ -686,11 +699,9 @@
                 </div>
             </section>
 
-            <!-- NEUER GALERIE BEREICH -->
             <section id="gallery">
                 <h3 class="section-title white">Einblicke in unsere Arbeit</h3>
                 <div class="gallery-grid">
-                    <!-- Platzhalter-Bilder, die sich automatisch anpassen -->
                     <div class="gallery-item"><img src="flo_seminar.webp" alt="Seminar" loading="lazy"></div>
                     <div class="gallery-item"><img src="mastermind.webp" alt="Mastermind" loading="lazy"></div>
                     <div class="gallery-item"><img src="start.webp" alt="Training" loading="lazy"></div>
@@ -714,7 +725,6 @@
                     <button class="nav-btn prev-btn" id="slideLeft"><i class="fa-solid fa-chevron-left"></i></button>
                     <div class="team-slider-container" id="team-slider">
                         <div class="team-slider-track">
-                            <!-- Team Cards & Lazy Images -->
                             <div class="team-card"><img src="gitarbeiter/anna.jpg" alt="Anja" class="team-img" loading="lazy" decoding="async"><h4 class="team-name">Anja Dautzenberg</h4><span class="team-role">Organisation & Backoffice</span><p class="team-desc">Anja Dautzenberg ist die zentrale organisatorische Schnittstelle unseres Unternehmens und die rechte Hand der Geschäftsführung. Sie sorgt für Struktur, Ordnung und reibungslose Abläufe.<span class="desc-spacer">👉 Ihr Fokus: Stabilität und Verlässlichkeit.</span></p></div>
                             <div class="team-card"><img src="gitarbeiter/jona.jpg" alt="Jonathan" class="team-img" loading="lazy" decoding="async"><h4 class="team-name">Jonathan Rosenfeld</h4><span class="team-role">Head of Education</span><p class="team-desc">Jonathan Rosenfeld ist Head of Education und verantwortlich für die inhaltliche Exzellenz. Er entwickelt die Lerninhalte und analysiert die Märkte.<span class="desc-spacer">👉 Sein Fokus: Qualität auf höchstem Niveau.</span></p></div>
                             <div class="team-card"><img src="gitarbeiter/markus.jpg" alt="Markus" class="team-img" loading="lazy" decoding="async"><h4 class="team-name">Markus Hoffmann</h4><span class="team-role">Ultimate Mastermind</span><p class="team-desc">Markus Hoffmann betreut unsere Platinum Kunden. Als CCFE-zertifizierter Trainer verbindet er Fachwissen mit strategischem Denken.<span class="desc-spacer">👉 Sein Fokus: Exzellenz und Kundennähe.</span></p></div>
@@ -732,7 +742,6 @@
 
             <section>
                 <div class="profile-container">
-                    <!-- .webp ersetzt & lazy -->
                     <img src="xlg.webp" alt="Florian Merzenich" class="profile-img" loading="lazy" decoding="async">
                     <div class="profile-text">
                         <h3 class="sub-headline" style="border:none; padding:0; margin-bottom:5px; color:var(--text-gray);">Das ist</h3>
@@ -749,12 +758,9 @@
             </div>
 
             <footer>
-                <!-- .webp ersetzt & lazy -->
                 <img src="logo_weiß.webp" alt="Logo" class="footer-logo" loading="lazy" decoding="async">
                 <div class="social-icons">
                     <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                    <!-- Twitter entfernt -->
-                    <!-- Youtube aktualisiert -->
                     <a href="https://www.youtube.com/@FlorianMerzenich" target="_blank"><i class="fa-brands fa-youtube"></i></a>
                 </div>
                 <p><a href="#" id="impressum-link">Impressum</a> | <a href="#" id="datenschutz-link">Datenschutz</a></p>
@@ -762,33 +768,117 @@
         </main>
     </div>
 
+    <!-- ==============================================
+          VIEW 2: MENTORING BOX (NEW)
+          ============================================== -->
+    <div id="view-mentoring" class="view-section view-hidden" data-lenis-prevent>
+        <div class="bg-blob-1"></div>
+        <div class="bg-blob-2"></div>
+
+        <main class="bg-stone-950/80 backdrop-blur-xl border border-mentoring-500/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
+            <!-- LEFT: IMAGES -->
+            <div class="relative bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-mentoring-900/30 h-full">
+                <!-- Square product image -->
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-mentoring-500/40 aspect-square w-full max-w-sm mx-auto">
+                    <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
+                    <img src="start.webp" alt="Mentoring Box" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
+                    <div class="absolute top-3 right-3 z-20">
+                        <span class="text-[9px] font-bold text-stone-900 bg-mentoring-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Einstieg</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: CONTENT -->
+            <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
+                <div class="mb-3 hidden lg:block pt-2">
+                    <span class="text-[10px] font-bold text-mentoring-300 uppercase tracking-widest border border-mentoring-500/50 bg-mentoring-900/20 px-2 py-1 rounded-full">Basis & Wissen</span>
+                </div>
+
+                <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Krypto <span class="mentoring-text">MENTORING BOX</span></h1>
+                <p class="text-stone-400 text-xs mb-6 font-medium">Zielgruppe: Unternehmer & Selbstentscheider</p>
+
+                <div class="space-y-4 mb-8">
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-mentoring-500/30 shrink-0"><i data-lucide="search" class="w-4 h-4 text-mentoring-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-mentoring-100 text-sm">Portfolio-Analyse per Fragebogen</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Kein 1:1 Call, aber individuelle Auswertung.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-mentoring-500/30 shrink-0"><i data-lucide="brain-circuit" class="w-4 h-4 text-mentoring-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-mentoring-100 text-sm">Persönliche Portfolio-Empfehlung</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Allokations-Feedback für deine Ziele (kein Anlageversprechen).</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-start bg-mentoring-900/10 p-2 -mx-2 rounded-lg border border-mentoring-500/20">
+                        <div class="bg-mentoring-500/20 p-1.5 rounded-lg border border-mentoring-500/30 shrink-0"><i data-lucide="video" class="w-4 h-4 text-mentoring-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-mentoring-100 text-sm">Bonus-Training: Marktzyklen</h3>
+                            <p class="text-[10px] text-mentoring-300/70 leading-tight mt-0.5">„Zyklen verstehen & emotional ruhig bleiben“.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-3 items-start">
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-mentoring-500/30 shrink-0"><i data-lucide="bell" class="w-4 h-4 text-mentoring-300"></i></div>
+                        <div>
+                            <h3 class="font-bold text-mentoring-100 text-sm">3 Monate Portfolio-Impulse</h3>
+                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Regelmäßige Updates & Denkimpulse (keine Signale).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-auto border-t border-mentoring-500/30 pt-6 pb-2">
+                    <div class="flex justify-between items-end mb-4">
+                        <div>
+                            <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Einmaliges Investment</p>
+                            <!-- Streichpreis -->
+                            <div class="line-through text-mentoring-500 text-3xl font-bold mb-1 opacity-60">899 €</div>
+                            <!-- Preis -->
+                            <div class="text-5xl md:text-6xl font-black text-white leading-none">399 €</div>
+                            <p class="text-[9px] text-stone-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
+                        </div>
+                        <div class="text-right hidden md:block">
+                            <p class="text-[10px] text-mentoring-400 font-bold mb-1">Gefühl nach Kauf:</p>
+                            <p class="text-[9px] text-stone-400">„Ich werde professionell begleitet.“</p>
+                        </div>
+                    </div>
+                    <a href="#" class="btn-mentoring w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
+                        Jetzt Box Sichern <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                    <div class="mt-4 flex justify-between items-center text-[9px] text-stone-600 border-b border-mentoring-900/30 pb-4 mb-4">
+                        <p>Sichere Zahlungsabwicklung</p>
+                        <div class="flex gap-3"><a href="#" class="hover:text-mentoring-400">Impressum</a><a href="#" class="hover:text-mentoring-400">AGB</a></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 
     <!-- ==============================================
-          VIEW 2: NEXT LEVEL SILVERLINE (updated from Starter)
+          VIEW 3: NEXT LEVEL SILVERLINE (updated)
           ============================================== -->
     <div id="view-silver" class="view-section view-hidden" data-lenis-prevent>
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
 
-        <!-- class "my-auto" entfernt, da wir das jetzt über CSS regeln -->
         <main class="bg-stone-950/80 backdrop-blur-xl border border-silver-500/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
             <div class="relative bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-silver-900/30 h-full">
-                <!-- ÄNDERUNG: aspect-square statt aspect-video und max-width hinzugefügt für gute Proportionen -->
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-silver-500/40 aspect-square w-full max-w-sm mx-auto">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
-                    <!-- .webp ersetzt & lazy -->
-                    <img src="start.webp" alt="Silverline Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
+                    <!-- Updated Image -->
+                    <img src="silverline.webp" alt="Silverline Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
                     <div class="absolute top-3 right-3 z-20">
-                        <span class="text-[9px] font-bold text-stone-900 bg-silver-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 1</span>
+                        <span class="text-[9px] font-bold text-stone-900 bg-silver-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 2</span>
                     </div>
                 </div>
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-silver-500/40 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent opacity-50 z-10 transition-opacity group-hover:opacity-30"></div>
-                    <!-- .webp ersetzt & lazy -->
-                    <img src="flo_seminar.webp" alt="Florian Merzenich Live" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter grayscale contrast-125 brightness-110" loading="lazy" decoding="async">
+                    <!-- Updated Image (no BW filter) -->
+                    <img src="flo_seminar.webp" alt="Florian Merzenich Live" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter contrast-125 brightness-110" loading="lazy" decoding="async">
                     <div class="absolute bottom-3 left-3 z-20">
                         <div class="flex items-center gap-2">
                             <span class="w-2 h-2 rounded-full bg-silver-500 animate-pulse"></span>
@@ -799,7 +889,6 @@
             </div>
 
             <!-- RIGHT: CONTENT -->
-            <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
             <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
                     <span class="text-[10px] font-bold text-silver-300 uppercase tracking-widest border border-silver-500/50 bg-silver-900/20 px-2 py-1 rounded-full">Sicherheit & Basis</span>
@@ -855,8 +944,8 @@
                     <div class="flex justify-between items-end mb-4">
                         <div>
                             <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Start-Investment</p>
-                            <!-- Streichpreis hinzugefügt -->
-                            <div class="line-through text-silver-400 text-lg font-bold mb-1 opacity-70">3.499 €</div>
+                            <!-- Streichpreis massiv vergrößert -->
+                            <div class="line-through text-silver-400 text-4xl font-bold mb-1 opacity-60">3.499 €</div>
                             <!-- Preis massiv vergrößert -->
                             <div class="text-5xl md:text-6xl font-black text-white leading-none">1.999 €</div>
                             <p class="text-[9px] text-stone-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
@@ -880,29 +969,26 @@
 
 
     <!-- ==============================================
-          VIEW 3: MASTERPLAN GOLD
+          VIEW 4: MASTERPLAN GOLD
           ============================================== -->
     <div id="view-gold" class="view-section view-hidden" data-lenis-prevent>
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
 
-        <!-- class "my-auto" entfernt -->
         <main class="bg-stone-900/80 backdrop-blur-xl border border-gold-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
             <div class="relative bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-gold-900/30 h-full">
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-gold-700/40 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
-                    <!-- .webp ersetzt & lazy -->
                     <img src="gold.webp" alt="Masterplan Gold Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
                     <div class="absolute top-3 right-3 z-20">
-                        <span class="text-[9px] font-bold text-stone-900 bg-gold-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 2</span>
+                        <span class="text-[9px] font-bold text-stone-900 bg-gold-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 3</span>
                     </div>
                 </div>
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-gold-700/40 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent opacity-50 z-10 transition-opacity group-hover:opacity-30"></div>
-                    <!-- .webp ersetzt & lazy -->
                     <img src="flo_seminar.webp" alt="Florian Merzenich Live" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter contrast-125" loading="lazy" decoding="async">
                     <div class="absolute bottom-3 left-3 z-20">
                         <div class="flex items-center gap-2">
@@ -914,7 +1000,6 @@
             </div>
 
             <!-- RIGHT: CONTENT -->
-            <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
             <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
                     <span class="text-[10px] font-bold text-gold-300 uppercase tracking-widest border border-gold-700/50 bg-gold-900/20 px-2 py-1 rounded-full">Klarheit & Strategie</span>
@@ -923,54 +1008,31 @@
                 <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Masterplan <span class="gold-text">GOLD</span></h1>
                 <p class="text-stone-400 text-xs mb-6 font-medium">Zielgruppe: Investoren, Unternehmer & Ambitionierte</p>
 
+                <!-- ... (Content unchanged) ... -->
                 <div class="space-y-4 mb-8">
-                    <!-- 1 -->
                     <div class="flex gap-3 items-start">
                         <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="target" class="w-4 h-4 text-gold-300"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gold-100 text-sm">Strategischer Deep-Dive-Call (90 Min)</h3>
-                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Vermögensstruktur, Ziele (12–36 Monate) & persönliche Risikomatrix.</p>
-                        </div>
+                        <div><h3 class="font-bold text-gold-100 text-sm">Strategischer Deep-Dive-Call (90 Min)</h3><p class="text-[10px] text-stone-400 leading-tight mt-0.5">Vermögensstruktur, Ziele (12–36 Monate) & persönliche Risikomatrix.</p></div>
                     </div>
-                    <!-- 2 -->
                     <div class="flex gap-3 items-start">
                         <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="map" class="w-4 h-4 text-gold-300"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gold-100 text-sm">Dein individueller Krypto-Masterplan</h3>
-                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Marktzyklen verstehen, BTC-Akkumulation & Cash-Reserve-Management.</p>
-                        </div>
+                        <div><h3 class="font-bold text-gold-100 text-sm">Dein individueller Krypto-Masterplan</h3><p class="text-[10px] text-stone-400 leading-tight mt-0.5">Marktzyklen verstehen, BTC-Akkumulation & Cash-Reserve-Management.</p></div>
                     </div>
-                    <!-- 3 -->
                     <div class="flex gap-3 items-start">
                         <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="layers" class="w-4 h-4 text-gold-300"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gold-100 text-sm">Premium Portfolio-Aufbau</h3>
-                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">10–15 Coins (BTC, Layer-1/2, KI/DeFi) mit konkreten Kaufzonen.</p>
-                        </div>
+                        <div><h3 class="font-bold text-gold-100 text-sm">Premium Portfolio-Aufbau</h3><p class="text-[10px] text-stone-400 leading-tight mt-0.5">10–15 Coins (BTC, Layer-1/2, KI/DeFi) mit konkreten Kaufzonen.</p></div>
                     </div>
-                    <!-- 4 -->
                     <div class="flex gap-3 items-start">
                         <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="refresh-cw" class="w-4 h-4 text-gold-300"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gold-100 text-sm">Monatliche Portfolio-Reviews (3 Mon.)</h3>
-                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Live-Call: Anpassungen, Markteinschätzung & Fehlerkorrekturen.</p>
-                        </div>
+                        <div><h3 class="font-bold text-gold-100 text-sm">Monatliche Portfolio-Reviews (3 Mon.)</h3><p class="text-[10px] text-stone-400 leading-tight mt-0.5">Live-Call: Anpassungen, Markteinschätzung & Fehlerkorrekturen.</p></div>
                     </div>
-                    <!-- 5 Highlight -->
                     <div class="flex gap-3 items-start bg-gold-900/10 p-2 -mx-2 rounded-lg border border-gold-500/20">
                         <div class="bg-gold-500/20 p-1.5 rounded-lg border border-gold-500/30 shrink-0"><i data-lucide="send" class="w-4 h-4 text-gold-300"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gold-200 text-sm">Exklusiver Gold-Telegram-Channel</h3>
-                            <p class="text-[10px] text-gold-200/70 leading-tight mt-0.5">Markt-Insights, Chancen & Risiken, Warnung vor Hypes.</p>
-                        </div>
+                        <div><h3 class="font-bold text-gold-200 text-sm">Exklusiver Gold-Telegram-Channel</h3><p class="text-[10px] text-gold-200/70 leading-tight mt-0.5">Markt-Insights, Chancen & Risiken, Warnung vor Hypes.</p></div>
                     </div>
-                    <!-- 6 -->
                     <div class="flex gap-3 items-start">
                         <div class="bg-stone-800/50 p-1.5 rounded-lg border border-gold-700/30 shrink-0"><i data-lucide="trending-up" class="w-4 h-4 text-gold-300"></i></div>
-                        <div>
-                            <h3 class="font-bold text-gold-100 text-sm">Exit- & Gewinnstrategie</h3>
-                            <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Teilverkäufe, Absicherung & strategische steuerliche Denkweise.</p>
-                        </div>
+                        <div><h3 class="font-bold text-gold-100 text-sm">Exit- & Gewinnstrategie</h3><p class="text-[10px] text-stone-400 leading-tight mt-0.5">Teilverkäufe, Absicherung & strategische steuerliche Denkweise.</p></div>
                     </div>
                 </div>
 
@@ -978,8 +1040,8 @@
                     <div class="flex justify-between items-end mb-4">
                         <div>
                             <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Investment</p>
-                            <!-- Streichpreis massiv vergrößert & sichtbar gemacht -->
-                            <div class="line-through text-stone-500 text-lg font-bold mb-1 opacity-70">7.499 €</div>
+                            <!-- Streichpreis massiv vergrößert -->
+                            <div class="line-through text-stone-500 text-4xl font-bold mb-1 opacity-60">7.499 €</div>
                             <!-- Preis massiv vergrößert -->
                             <div class="text-5xl md:text-6xl font-black text-white leading-none">4.999 €</div>
                             <p class="text-[9px] text-stone-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
@@ -1003,28 +1065,26 @@
 
 
     <!-- ==============================================
-          VIEW 4: MASTERMIND PLATINUM (Original)
+          VIEW 5: MASTERMIND PLATINUM (Original)
           ============================================== -->
     <div id="view-platinum" class="view-section view-hidden" data-lenis-prevent>
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
         
-        <!-- class "my-auto" entfernt -->
         <main class="bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <div class="relative bg-slate-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-slate-800 h-full">
+                <!-- Images same as before -->
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-slate-800/50 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
-                    <!-- .webp ersetzt & lazy -->
                     <img src="mastermind.webp" alt="Mastermind Platin Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
                     <div class="absolute top-3 right-3 z-20">
-                        <span class="text-[9px] font-bold text-slate-900 bg-platinum-200/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 3</span>
+                        <span class="text-[9px] font-bold text-slate-900 bg-platinum-200/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 4</span>
                     </div>
                 </div>
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-slate-800/50 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-50 z-10 transition-opacity group-hover:opacity-30"></div>
-                    <!-- .webp ersetzt & lazy -->
                     <img src="flo_seminar.webp" alt="Florian Merzenich Seminar" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
                     <div class="absolute bottom-3 left-3 z-20">
                         <div class="flex items-center gap-2">
@@ -1035,7 +1095,6 @@
                 </div>
             </div>
 
-            <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
             <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
                     <span class="text-[10px] font-bold text-blue-400 uppercase tracking-widest border border-blue-900/50 bg-blue-900/10 px-2 py-1 rounded-full">Exklusiver Zugang</span>
@@ -1044,6 +1103,7 @@
                 <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Mastermind <span class="platinum-text">PLATIN</span></h1>
                 <p class="text-slate-400 text-xs mb-6 font-medium">Zielgruppe: High Performer, Unternehmer & HNWIs</p>
 
+                <!-- Content ... -->
                 <div class="space-y-4 mb-8">
                     <div class="flex gap-3 items-start">
                         <div class="bg-slate-800/50 p-1.5 rounded-lg border border-slate-700/50 shrink-0"><i data-lucide="crosshair" class="w-4 h-4 text-platinum-300"></i></div>
@@ -1075,8 +1135,8 @@
                     <div class="flex justify-between items-end mb-4">
                         <div>
                             <p class="text-[10px] text-slate-500 uppercase tracking-widest mb-0.5">Einmaliges Investment</p>
-                            <!-- Streichpreis massiv vergrößert & sichtbar gemacht -->
-                            <div class="line-through text-stone-500 text-lg font-bold mb-1 opacity-70">17.999 €</div>
+                            <!-- Streichpreis massiv vergrößert -->
+                            <div class="line-through text-stone-500 text-4xl font-bold mb-1 opacity-60">17.999 €</div>
                             <!-- Preis massiv vergrößert -->
                             <div class="text-5xl md:text-6xl font-black text-white leading-none">13.999 €</div>
                             <p class="text-[9px] text-slate-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
@@ -1103,22 +1163,18 @@
     </div>
 
     <!-- ==============================================
-          VIEW 5: MASTERMIND INFINITY (NEU)
+          VIEW 6: MASTERMIND INFINITY (NEU)
           ============================================== -->
     <div id="view-infinity" class="view-section view-hidden" data-lenis-prevent>
         
         <i class="fa-solid fa-infinity bg-icon-watermark"></i>
 
-        <!-- class "my-auto" entfernt -->
         <main class="bg-black/60 backdrop-blur-2xl border border-infinity-700/50 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
-            <!-- LEFT: IMAGES -->
             <div class="relative bg-black/80 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-infinity-900/50 h-full">
                 
-                <!-- TOP HALF: INFINITY PRODUCT -->
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-infinity-500/40 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60 z-10 transition-opacity group-hover:opacity-40"></div>
-                    <!-- .webp ersetzt & lazy entfernt -->
                     <img src="infinity.webp" alt="Mastermind Infinity" class="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-110" decoding="async">
                     <div class="absolute top-3 right-3 z-20"><span class="text-[9px] font-bold text-black bg-infinity-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Invite Only</span></div>
                     
@@ -1128,10 +1184,8 @@
                     </div>
                 </div>
 
-                <!-- BOTTOM HALF: FLORIAN IMAGE (ADDED) -->
                 <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-infinity-500/40 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-50 z-10 transition-opacity group-hover:opacity-30"></div>
-                    <!-- .webp ersetzt & lazy -->
                     <img src="flo_seminar.webp" alt="Florian Merzenich Live" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter hue-rotate-15 contrast-125" loading="lazy" decoding="async">
                     <div class="absolute bottom-3 left-3 z-20">
                         <div class="flex items-center gap-2">
@@ -1143,8 +1197,6 @@
 
             </div>
 
-            <!-- RIGHT: CONTENT -->
-            <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
             <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
                     <span class="text-[10px] font-bold text-infinity-300 uppercase tracking-widest border border-infinity-700/50 bg-infinity-900/20 px-2 py-1 rounded-full animate-pulse">Highest Tier Access</span>
@@ -1153,6 +1205,7 @@
                 <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Mastermind <span class="infinity-text">INFINITY</span></h1>
                 <p class="text-stone-400 text-xs mb-6 font-medium">Zielgruppe: Visionäre, Industry Leaders & Family Offices</p>
 
+                <!-- Content ... -->
                 <div class="space-y-5 mb-8">
                     <!-- 1 -->
                     <div class="flex gap-3 items-start bg-infinity-900/20 p-2 -mx-2 rounded-xl border border-infinity-500/20">
@@ -1191,7 +1244,8 @@
                         <div>
                             <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Exklusives Investment</p>
                             <!-- PREIS ANPASSUNG -->
-                            <div class="text-5xl md:text-6xl font-black text-white leading-none">49.999 €</div>
+                            <div class="line-through text-stone-500 text-4xl font-bold mb-1 opacity-60">100.000 €</div>
+                            <div class="text-3xl md:text-4xl font-black text-white leading-none">49.999 €</div>
                             <p class="text-[9px] text-stone-500 mt-0.5">oder auf Anfrage</p>
                         </div>
                         <div class="text-right hidden md:block">
@@ -1220,6 +1274,7 @@
         (function() {
             const toggleBtn = document.getElementById('view-toggle');
             const viewStandard = document.getElementById('view-standard');
+            const viewMentoring = document.getElementById('view-mentoring');
             const viewSilver = document.getElementById('view-silver');
             const viewGold = document.getElementById('view-gold');
             const viewPlatinum = document.getElementById('view-platinum');
@@ -1231,10 +1286,11 @@
             // Helper: State aus Hash lesen
             function getStateFromHash() {
                 const hash = window.location.hash;
-                if (hash === '#silver') return 1; // Updated hash
-                if (hash === '#gold') return 2;
-                if (hash === '#platin') return 3;
-                if (hash === '#infinity') return 4;
+                if (hash === '#mentoring') return 1; // New first product
+                if (hash === '#silver') return 2;
+                if (hash === '#gold') return 3;
+                if (hash === '#platin') return 4;
+                if (hash === '#infinity') return 5;
                 return 0; // Default Standard
             }
 
@@ -1242,13 +1298,14 @@
             function updateUI(state) {
                 // Alle verstecken
                 viewStandard.classList.add('view-hidden');
+                viewMentoring.classList.add('view-hidden');
                 viewSilver.classList.add('view-hidden');
                 viewGold.classList.add('view-hidden');
                 viewPlatinum.classList.add('view-hidden');
                 viewInfinity.classList.add('view-hidden');
                 
                 // Button Reset
-                toggleBtn.classList.remove('nav-btn-silver', 'nav-btn-gold', 'nav-btn-platinum', 'nav-btn-infinity');
+                toggleBtn.classList.remove('nav-btn-mentoring', 'nav-btn-silver', 'nav-btn-gold', 'nav-btn-platinum', 'nav-btn-infinity');
                 btnIcon.className = ''; 
 
                 // Lucide Init check
@@ -1266,19 +1323,23 @@
                     if (window.lenisInstance) window.lenisInstance.start(); 
                 }
 
-                if (state === 1) { // Silver
+                if (state === 1) { // Mentoring
+                    viewMentoring.classList.remove('view-hidden');
+                    toggleBtn.classList.add('nav-btn-mentoring');
+                    btnIcon.classList.add('fa-solid', 'fa-box-open'); 
+                } else if (state === 2) { // Silver
                     viewSilver.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-silver');
                     btnIcon.classList.add('fa-solid', 'fa-coins'); 
-                } else if (state === 2) { // Gold
+                } else if (state === 3) { // Gold
                     viewGold.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-gold');
                     btnIcon.classList.add('fa-regular', 'fa-gem'); 
-                } else if (state === 3) { // Platinum
+                } else if (state === 4) { // Platinum
                     viewPlatinum.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-platinum');
                     btnIcon.classList.add('fa-solid', 'fa-infinity'); 
-                } else if (state === 4) { // Infinity
+                } else if (state === 5) { // Infinity
                     viewInfinity.classList.remove('view-hidden');
                     toggleBtn.classList.add('nav-btn-infinity');
                     btnIcon.classList.add('fa-solid', 'fa-house'); 
@@ -1293,6 +1354,7 @@
 
             // VELOCITY SKEW EFFECT (Wackelpudding beim Scrollen in Overlays)
             const scrollContainers = [
+                document.getElementById('view-mentoring'),
                 document.getElementById('view-silver'),
                 document.getElementById('view-gold'),
                 document.getElementById('view-platinum'),
@@ -1340,13 +1402,14 @@
             // Event Listener: Button Click
             toggleBtn.addEventListener('click', () => {
                 const currentState = getStateFromHash();
-                const nextState = (currentState + 1) % 5; 
+                const nextState = (currentState + 1) % 6; // Now 6 states (0-5)
                 
                 if (nextState === 0) window.location.hash = ''; 
-                else if (nextState === 1) window.location.hash = '#silver';
-                else if (nextState === 2) window.location.hash = '#gold';
-                else if (nextState === 3) window.location.hash = '#platin';
-                else if (nextState === 4) window.location.hash = '#infinity';
+                else if (nextState === 1) window.location.hash = '#mentoring';
+                else if (nextState === 2) window.location.hash = '#silver';
+                else if (nextState === 3) window.location.hash = '#gold';
+                else if (nextState === 4) window.location.hash = '#platin';
+                else if (nextState === 5) window.location.hash = '#infinity';
                 
                 if (nextState === 0) {
                     history.pushState("", document.title, window.location.pathname + window.location.search);
@@ -1369,7 +1432,7 @@
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
-                    if(href !== '#' && href !== '#silver' && href !== '#gold' && href !== '#platin' && href !== '#infinity') {
+                    if(href !== '#' && href !== '#mentoring' && href !== '#silver' && href !== '#gold' && href !== '#platin' && href !== '#infinity') {
                         e.preventDefault();
                         const t = document.querySelector(href);
                         if(t) lenis.scrollTo(t);
