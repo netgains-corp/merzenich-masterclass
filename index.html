@@ -6,7 +6,7 @@
     
     <!-- SEO OPTIMIERUNG -->
     <title>Florian Merzenich | Krypto Masterclass & Mastermind – Profitabel Investieren</title>
-    <meta name="description" content="Sichere dir deinen Platz in der Bärenmarkt Masterclass von Florian Merzenich. Lerne bewährte Krypto-Strategien für Anfänger und Investoren. Mastermind Platin, Gold & Starter Pakete für deinen Vermögensaufbau.">
+    <meta name="description" content="Sichere dir deinen Platz in der Bärenmarkt Masterclass von Florian Merzenich. Lerne bewährte Krypto-Strategien für Anfänger und Investoren. Mastermind Platin, Gold & Silverline Pakete für deinen Vermögensaufbau.">
     <meta name="keywords" content="Florian Merzenich, Krypto Masterclass, Bärenmarkt Strategie, Bitcoin kaufen, Krypto Coaching, Mastermind Platin, Krypto Ausbildung, Blockchain Investment, Finanzielle Freiheit, Krypto für Anfänger">
     <meta name="author" content="Florian Merzenich">
     <meta name="robots" content="index, follow">
@@ -28,7 +28,7 @@
     <!-- Icons laden (FontAwesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Icons (Lucide für Platinum/Gold/Starter/Infinity) -->
+    <!-- Icons (Lucide für Platinum/Gold/Silver/Infinity) -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <!-- Tailwind CSS -->
@@ -40,6 +40,8 @@
                     colors: {
                         platinum: { 200: '#e2e8f0', 300: '#cbd5e1' },
                         gold: { 100: '#fef3c7', 300: '#fcd34d', 500: '#f59e0b', 700: '#b45309', 900: '#78350f' },
+                        // Silver palette updated
+                        silver: { 100: '#f3f4f6', 300: '#d1d5db', 400: '#9ca3af', 500: '#6b7280', 700: '#374151', 900: '#111827' },
                         bronze: { 100: '#ffedd5', 300: '#fdba74', 500: '#f97316', 700: '#c2410c', 900: '#7c2d12' },
                         infinity: { 100: '#f5d0fe', 300: '#e879f9', 500: '#d946ef', 700: '#a21caf', 900: '#701a75' }
                     },
@@ -83,7 +85,9 @@
             --text-gray: #cbd5e0;
             --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Poppins', sans-serif;
-            --overlay-color: rgba(0, 40, 255, 0.85); 
+            
+            /* START-FARBE: Braun/Orange (wie vorher theme-orange) */
+            --overlay-color: rgba(246, 173, 85, 0.1);
             
             /* Platinum Vars */
             --shimmer-1: #e2e8f0; --shimmer-2: #a5f3fc; --shimmer-3: #f5d0fe; --shimmer-4: #94a3b8;
@@ -91,8 +95,8 @@
             /* Gold Vars */
             --gold-1: #fffbeb; --gold-2: #fcd34d; --gold-3: #fbbf24; --gold-4: #d97706;
 
-            /* Bronze/Starter Vars */
-            --bronze-1: #fff7ed; --bronze-2: #fdba74; --bronze-3: #f97316; --bronze-4: #9a3412;
+            /* Silver Vars */
+            --silver-1: #f9fafb; --silver-2: #d1d5db; --silver-3: #9ca3af; --silver-4: #4b5563;
 
             /* Infinity Vars */
             --infinity-1: #fae8ff; --infinity-2: #e879f9; --infinity-3: #c026d3; --infinity-4: #86198f;
@@ -123,22 +127,17 @@
             transition: background-color 0.5s ease;
         }
 
-        /* VIEW CONTAINER LOGIC & MASKS & RUBBER BANDING */
+        /* VIEW CONTAINER LOGIC & SCROLL FIX */
         .view-section { 
             display: block; 
             opacity: 1; 
             transition: opacity 0.5s ease-in-out;
-            
-            /* (1) STATIC CSS MASK: Fade out top/bottom 40px */
-            /* Damit der Inhalt hinter der Maske scrollt, muss die Maske auf dem festen Container liegen */
-            mask-image: linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
         }
         .view-hidden { display: none !important; opacity: 0; }
 
-        /* Für die Inhalte in den Views, damit Skew funktioniert, brauchen wir eine Transition */
+        /* Für die Inhalte in den Views */
         main {
-            transition: transform 0.1s ease-out; /* Smooth return from skew */
+            transition: transform 0.1s ease-out;
             will-change: transform;
         }
 
@@ -161,7 +160,7 @@
         .ctrl-btn:hover { background: var(--primary-color); transform: scale(1.1); }
 
         /* Navigation Button Active States */
-        .nav-btn-bronze { background: #fdba74 !important; color: #431407 !important; box-shadow: 0 0 15px rgba(253, 186, 116, 0.5); }
+        .nav-btn-silver { background: #d1d5db !important; color: #111827 !important; box-shadow: 0 0 15px rgba(209, 213, 219, 0.5); }
         .nav-btn-gold { background: #f59e0b !important; color: #000 !important; box-shadow: 0 0 15px rgba(245, 158, 11, 0.5); }
         .nav-btn-platinum { background: #e2e8f0 !important; color: #000 !important; box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
         .nav-btn-infinity { background: linear-gradient(135deg, #d946ef, #8b5cf6) !important; color: #fff !important; box-shadow: 0 0 20px rgba(217, 70, 239, 0.6); border: none !important; }
@@ -169,13 +168,14 @@
         /* -----------------------------------------------------------
            STYLES FÜR SEITE 1 (Original)
         ----------------------------------------------------------- */
-        body.theme-orange { --overlay-color: rgba(246, 173, 85, 0.1); }
+        /* Theme Classes */
+        body.theme-blue { --overlay-color: rgba(0, 40, 255, 0.85); }
         body.theme-red { --overlay-color: rgba(160, 0, 0, 0.85); }
+        /* Braun ist jetzt default im :root */
 
         .bg-fixed { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: url('https://storage.googleapis.com/msgsndr/H1mibqsfrrRD9o3Cjg0N/media/692493104580ec493c7ca068.jpg') center center / cover no-repeat; opacity: 0.85; }
         .bg-tint { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background-color: var(--overlay-color); mix-blend-mode: overlay; pointer-events: none; transition: background-color 0.5s ease; }
 
-        /* Schmalerer Container für breiteren Rand */
         .container { width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
         
         .hero-section { display: flex; flex-direction: column; align-items: center; text-align: center; padding-top: 5px; padding-bottom: 30px; }
@@ -183,8 +183,10 @@
         .sub-headline { font-family: var(--font-heading); font-size: 15px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text-white); margin-bottom: 10px; border: 2px solid var(--text-white); padding: 5px 12px; display: inline-block; border-radius: 50px; line-height: 1.2; }
         .main-headline { font-family: var(--font-heading); font-size: clamp(24px, 5vw, 42px); font-weight: 800; line-height: 1.2; margin-bottom: 10px; }
         .main-headline > span { color: var(--text-white); display: block; margin-top: 5px; }
+        
+        /* Netflix Strike Update: Weißer Strich */
         .netflix-strike { position: relative; display: inline-block; font-family: 'Bebas Neue', sans-serif; color: #E50914; font-size: 1.1em; letter-spacing: 1px; }
-        .netflix-strike::after { content: ''; position: absolute; left: -5%; right: -5%; top: 45%; height: 4px; background: #ef4444; transform: rotate(-15deg); opacity: 0.9; border-radius: 2px; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
+        .netflix-strike::after { content: ''; position: absolute; left: -5%; right: -5%; top: 45%; height: 4px; background: #ffffff; transform: rotate(-15deg); opacity: 0.9; border-radius: 2px; box-shadow: 0 0 5px rgba(0,0,0,0.5); }
 
         .hero-img-container { width: 100%; display: flex; justify-content: center; margin-bottom: 15px; position: relative; }
         .laptop-wrapper { position: relative; width: 100%; max-width: 600px; }
@@ -205,7 +207,7 @@
         .timer-part div { font-family: var(--font-heading); font-weight: 800; font-size: 42px; color: var(--primary-color); line-height: 1; margin-bottom: 2px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
         .timer-part span { font-size: 10px; color: #cbd5e0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .marquee-container { width: 100%; overflow: hidden; margin-top: 50px; margin-bottom: 20px; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+        .marquee-container { width: 100%; overflow: hidden; margin-top: 50px; margin-bottom: 20px; }
         .marquee-content { display: flex; align-items: center; gap: 60px; width: max-content; animation: marquee-scroll 25s linear infinite; }
         .marquee-logo { height: 40px; width: auto; object-fit: contain; opacity: 0.7; transition: opacity 0.3s; }
         .marquee-logo:hover { opacity: 1; }
@@ -293,11 +295,39 @@
         .close-modal { position: absolute; top: 15px; right: 20px; color: var(--text-gray); font-size: 32px; cursor: pointer; transition: color 0.3s; line-height: 1; z-index: 10; }
         .close-modal:hover { color: var(--primary-color); }
 
+        /* GALERIE */
+        .gallery-grid {
+            column-count: 1;
+            column-gap: 1rem;
+        }
+        @media (min-width: 768px) {
+            .gallery-grid { column-count: 2; }
+        }
+        @media (min-width: 1024px) {
+            .gallery-grid { column-count: 3; }
+        }
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+        .gallery-item img:hover {
+            transform: scale(1.02);
+            border-color: var(--primary-color);
+        }
+
         /* -----------------------------------------------------------
            STYLES FÜR PLATINUM, GOLD, STARTER & INFINITY (Container)
         ----------------------------------------------------------- */
         /* Common for additional views */
-        #view-platinum, #view-gold, #view-starter, #view-infinity {
+        #view-silver, #view-gold, #view-platinum, #view-infinity {
             position: fixed;
             top: 0;
             left: 0;
@@ -326,15 +356,14 @@
             overscroll-behavior: contain;
             overscroll-behavior-y: auto; 
             
-            /* Maske für Fade-Out Effekt oben/unten */
-            mask-image: linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40px, black calc(100% - 40px), transparent 100%);
+            /* Fix für "Festsitzen" */
+            touch-action: pan-y;
         }
 
         /* Kind-Elemente (Die Karten) */
-        #view-platinum > main, 
+        #view-silver > main, 
         #view-gold > main, 
-        #view-starter > main, 
+        #view-platinum > main, 
         #view-infinity > main {
             /* Magie: margin: auto zentriert vertikal WENN Platz da ist. 
                Wenn kein Platz, klebt es oben und erlaubt Scrollen. */
@@ -352,8 +381,8 @@
 
         #view-platinum { background: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%); }
         #view-gold { background: radial-gradient(circle at 50% 0%, #451a03 0%, #000000 100%); }
-        /* Starter: Dark Bronze/Copper radial background */
-        #view-starter { background: radial-gradient(circle at 50% 0%, #431407 0%, #0c0a09 100%); }
+        /* Silver: Metallic/Gray radial background */
+        #view-silver { background: radial-gradient(circle at 50% 0%, #374151 0%, #111827 100%); }
         
         /* BACKGROUND ICON STYLE (Giant Watermark) - NUR NOCH FÜR INFINITY */
         .bg-icon-watermark {
@@ -405,6 +434,18 @@
             z-index: -1;
             pointer-events: none;
             opacity: 0.6; /* Gesamtopazität erhöht */
+        }
+
+        /* SILVER PATTERN (Emblemed Out - Circuit/Chip) */
+        #view-silver::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            /* SVG Circuit Pattern */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 24 24' fill='none' stroke='rgba(209, 213, 219, 0.15)' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 12h5'/%3E%3Cpath d='M17 12h5'/%3E%3Cpath d='M12 2v5'/%3E%3Cpath d='M12 17v5'/%3E%3Cpath d='M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5z'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 60px 60px;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.5;
         }
 
         /* INFINITY BACKGROUND (Animated Gradient) */
@@ -460,6 +501,7 @@
         .platinum-text { background: linear-gradient(90deg, var(--shimmer-1) 0%, var(--shimmer-4) 25%, var(--shimmer-2) 45%, #ffffff 50%, var(--shimmer-3) 55%, var(--shimmer-4) 75%, var(--shimmer-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
         .gold-text { background: linear-gradient(90deg, var(--gold-1) 0%, var(--gold-4) 25%, var(--gold-2) 45%, #ffffff 50%, var(--gold-3) 55%, var(--gold-4) 75%, var(--gold-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
         .bronze-text { background: linear-gradient(90deg, var(--bronze-1) 0%, var(--bronze-2) 25%, var(--bronze-3) 45%, #ffffff 50%, var(--bronze-2) 55%, var(--bronze-3) 75%, var(--bronze-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
+        .silver-text { background: linear-gradient(90deg, var(--silver-1) 0%, var(--silver-3) 25%, var(--silver-2) 45%, #ffffff 50%, var(--silver-3) 55%, var(--silver-4) 75%, var(--silver-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 4s linear infinite; }
         .infinity-text { background: linear-gradient(90deg, var(--infinity-1) 0%, var(--infinity-2) 25%, #ffffff 50%, var(--infinity-3) 75%, var(--infinity-1) 100%); background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; animation: shine 3s linear infinite; }
         
         @keyframes shine { to { background-position: 200% center; } }
@@ -473,6 +515,9 @@
 
         .btn-bronze { background: linear-gradient(135deg, #fdba74 0%, #ea580c 100%); color: #431407; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(234, 88, 12, 0.3); }
         .btn-bronze:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(234, 88, 12, 0.5); }
+
+        .btn-silver { background: linear-gradient(135deg, #e5e7eb 0%, #6b7280 100%); color: #111827; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(209, 213, 219, 0.3); }
+        .btn-silver:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(209, 213, 219, 0.5); }
 
         .btn-infinity { background: linear-gradient(135deg, #e879f9 0%, #a21caf 100%); color: #fff; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 0 25px rgba(217, 70, 239, 0.4); }
         .btn-infinity:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(217, 70, 239, 0.6); filter: brightness(1.1); }
@@ -500,8 +545,8 @@
     </div>
 
     <!-- ==============================================
-         VIEW 1: STANDARD (HOME)
-         ============================================= -->
+          VIEW 1: STANDARD (HOME)
+          ============================================= -->
     <div id="view-standard" class="view-section">
         
         <div class="bg-fixed"></div>
@@ -556,7 +601,7 @@
                     </div>
                 </div>
                 <div class="cta-wrapper">
-                    <a href="#" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
+                    <a href="https://flos-funnel.pages.dev/" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
                     <p class="cta-subtext">Sichere dir 1 von <span id="daily-slots">3</span> freien Plätzen zum persönlichen 1:1 Gespräch mit mir</p>
                     <div class="countdown-wrapper">
                         <p class="countdown-label">Noch verfügbar bis:</p>
@@ -603,7 +648,7 @@
                     <div class="card white-border"><i class="fa-solid fa-user-shield"></i><p>Für dich, wenn du keinen Chaos-Hype mehr willst, sondern endlich jemanden, dem du vertrauen kannst.</p></div>
                     <div class="card white-border"><i class="fa-solid fa-coins"></i><p>Für dich, wenn du eigentlich weißt, dass du für deine Familie vorsorgen musst, aber Krypto dich bisher verunsichert hat.</p></div>
                 </div>
-                <div style="margin-top: 40px; text-align: center;"><a href="#" class="btn-main">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a></div>
+                <div style="margin-top: 40px; text-align: center;"><a href="https://flos-funnel.pages.dev/" class="btn-main">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a></div>
             </section>
 
             <section>
@@ -621,7 +666,7 @@
                     <div class="card"><h4 style="color:var(--primary-color);">Fehler-Vermeider</h4><p>Du lernst die 4 größten Fehler, die 99% der Anleger machen, und wie du sie für immer streichst.</p></div>
                     <div class="card"><h4 style="color:var(--primary-color);">Zukunfts-Kompass</h4><p>Ein klares Bild, wie die nächsten 6–18 Monate im Markt aussehen könnten.</p></div>
                 </div>
-                <div style="margin-top: 40px; text-align: center;"><a href="#" class="btn-main pulse">Sei Dabei</a></div>
+                <div style="margin-top: 40px; text-align: center;"><a href="https://flos-funnel.pages.dev/" class="btn-main pulse">Sei Dabei</a></div>
             </section>
 
             <section class="strategy-section">
@@ -637,7 +682,21 @@
                         <p class="price-label">Dein Investment heute:</p>
                         <p class="price-value">0,00 €</p>
                     </div>
-                    <div style="margin-top: 40px; text-align: center;"><a href="#" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a></div>
+                    <div style="margin-top: 40px; text-align: center;"><a href="https://flos-funnel.pages.dev/" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a></div>
+                </div>
+            </section>
+
+            <!-- NEUER GALERIE BEREICH -->
+            <section id="gallery">
+                <h3 class="section-title white">Einblicke in unsere Arbeit</h3>
+                <div class="gallery-grid">
+                    <!-- Platzhalter-Bilder, die sich automatisch anpassen -->
+                    <div class="gallery-item"><img src="flo_seminar.webp" alt="Seminar" loading="lazy"></div>
+                    <div class="gallery-item"><img src="mastermind.webp" alt="Mastermind" loading="lazy"></div>
+                    <div class="gallery-item"><img src="start.webp" alt="Training" loading="lazy"></div>
+                    <div class="gallery-item"><img src="gold.webp" alt="Gold Call" loading="lazy"></div>
+                    <div class="gallery-item"><img src="infinity.webp" alt="Event" loading="lazy"></div>
+                    <div class="gallery-item"><img src="hero_bg.webp" alt="Team" loading="lazy"></div>
                 </div>
             </section>
 
@@ -686,7 +745,7 @@
             </section>
 
             <div style="padding: 40px 0 60px; text-align: center;">
-                 <a href="#" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
+                 <a href="https://flos-funnel.pages.dev/" class="btn-main pulse">JETZT GRATIS 1:1 GESPRÄCH SICHERN</a>
             </div>
 
             <footer>
@@ -705,35 +764,35 @@
 
 
     <!-- ==============================================
-         VIEW 2: KRYPTO-STARTER (NEU - BRONZE)
-         ============================================== -->
-    <div id="view-starter" class="view-section view-hidden">
+          VIEW 2: NEXT LEVEL SILVERLINE (updated from Starter)
+          ============================================== -->
+    <div id="view-silver" class="view-section view-hidden" data-lenis-prevent>
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
 
         <!-- class "my-auto" entfernt, da wir das jetzt über CSS regeln -->
-        <main class="bg-stone-950/80 backdrop-blur-xl border border-bronze-700/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
+        <main class="bg-stone-950/80 backdrop-blur-xl border border-silver-500/30 rounded-3xl overflow-hidden shadow-2xl grid lg:grid-cols-2 relative">
             
             <!-- LEFT: IMAGES -->
-            <div class="relative bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-bronze-900/30 h-full">
+            <div class="relative bg-stone-950 flex flex-col p-6 lg:p-8 gap-6 lg:order-1 justify-center border-r border-silver-900/30 h-full">
                 <!-- ÄNDERUNG: aspect-square statt aspect-video und max-width hinzugefügt für gute Proportionen -->
-                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-bronze-700/40 aspect-square w-full max-w-sm mx-auto">
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-silver-500/40 aspect-square w-full max-w-sm mx-auto">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-900 to-transparent opacity-30 z-10 transition-opacity group-hover:opacity-10"></div>
                     <!-- .webp ersetzt & lazy -->
-                    <img src="start.webp" alt="Starter Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
+                    <img src="start.webp" alt="Silverline Paket" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async">
                     <div class="absolute top-3 right-3 z-20">
-                        <span class="text-[9px] font-bold text-stone-900 bg-bronze-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 1</span>
+                        <span class="text-[9px] font-bold text-stone-900 bg-silver-300/95 px-2 py-1 rounded-md uppercase tracking-widest shadow-lg backdrop-blur-sm">Paket 1</span>
                     </div>
                 </div>
-                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-bronze-700/40 aspect-video lg:aspect-auto lg:h-80">
+                <div class="relative overflow-hidden group rounded-2xl shadow-2xl border border-silver-500/40 aspect-video lg:aspect-auto lg:h-80">
                     <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 to-transparent opacity-50 z-10 transition-opacity group-hover:opacity-30"></div>
                     <!-- .webp ersetzt & lazy -->
-                    <img src="flo_seminar.webp" alt="Florian Merzenich Live" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter contrast-125 brightness-90" loading="lazy" decoding="async">
+                    <img src="flo_seminar.webp" alt="Florian Merzenich Live" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 filter grayscale contrast-125 brightness-110" loading="lazy" decoding="async">
                     <div class="absolute bottom-3 left-3 z-20">
                         <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-bronze-500 animate-pulse"></span>
-                            <p class="text-[10px] font-bold text-bronze-100 uppercase tracking-widest drop-shadow-md">Sicher Starten</p>
+                            <span class="w-2 h-2 rounded-full bg-silver-500 animate-pulse"></span>
+                            <p class="text-[10px] font-bold text-silver-100 uppercase tracking-widest drop-shadow-md">Next Level</p>
                         </div>
                     </div>
                 </div>
@@ -743,73 +802,76 @@
             <!-- ÄNDERUNG: KEIN max-h, KEIN overflow-y-auto. Einfach fließen lassen. -->
             <div class="p-6 md:p-8 lg:p-10 flex flex-col lg:order-2">
                 <div class="mb-3 hidden lg:block pt-2">
-                    <span class="text-[10px] font-bold text-bronze-300 uppercase tracking-widest border border-bronze-700/50 bg-bronze-900/20 px-2 py-1 rounded-full">Sicherheit & Basis</span>
+                    <span class="text-[10px] font-bold text-silver-300 uppercase tracking-widest border border-silver-500/50 bg-silver-900/20 px-2 py-1 rounded-full">Sicherheit & Basis</span>
                 </div>
 
-                <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Krypto <span class="bronze-text">STARTER</span></h1>
+                <h1 class="text-2xl md:text-3xl font-black text-white mb-2">Next Level <span class="silver-text">SILVERLINE</span></h1>
                 <p class="text-stone-400 text-xs mb-6 font-medium">Zielgruppe: Anfänger, Skeptiker & Sicherheitsbewusste</p>
 
                 <div class="space-y-4 mb-8">
                     <!-- 1 -->
                     <div class="flex gap-3 items-start">
-                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-bronze-700/30 shrink-0"><i data-lucide="user-check" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-silver-500/30 shrink-0"><i data-lucide="user-check" class="w-4 h-4 text-silver-300"></i></div>
                         <div>
-                            <h3 class="font-bold text-bronze-100 text-sm">Persönlicher Onboarding-Call (60 Min)</h3>
+                            <h3 class="font-bold text-silver-100 text-sm">Persönlicher Onboarding-Call (60 Min)</h3>
                             <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Individuelle Zielanalyse & klare Roadmap (Was kaufen, was meiden).</p>
                         </div>
                     </div>
                     <!-- 2 -->
-                    <div class="flex gap-3 items-start bg-bronze-900/10 p-2 -mx-2 rounded-lg border border-bronze-500/20">
-                        <div class="bg-bronze-500/20 p-1.5 rounded-lg border border-bronze-500/30 shrink-0"><i data-lucide="shield" class="w-4 h-4 text-bronze-300"></i></div>
+                    <div class="flex gap-3 items-start bg-silver-900/10 p-2 -mx-2 rounded-lg border border-silver-500/20">
+                        <div class="bg-silver-500/20 p-1.5 rounded-lg border border-silver-500/30 shrink-0"><i data-lucide="shield" class="w-4 h-4 text-silver-300"></i></div>
                         <div>
-                            <h3 class="font-bold text-bronze-200 text-sm flex items-center gap-2">Sichere Setup-Begleitung <span class="text-[8px] bg-bronze-600 text-white px-1 py-0.5 rounded uppercase tracking-wider">Safety First</span></h3>
-                            <p class="text-[10px] text-bronze-200/70 leading-tight mt-0.5">Wallet-Setup (Cold/Hot), Backup-Strategien & Anti-Scam-Training.</p>
+                            <h3 class="font-bold text-silver-100 text-sm flex items-center gap-2">Sichere Setup-Begleitung <span class="text-[8px] bg-silver-500 text-white px-1 py-0.5 rounded uppercase tracking-wider">Safety First</span></h3>
+                            <p class="text-[10px] text-silver-300/70 leading-tight mt-0.5">Wallet-Setup (Cold/Hot), Backup-Strategien & Anti-Scam-Training.</p>
                         </div>
                     </div>
                     <!-- 3 -->
                     <div class="flex gap-3 items-start">
-                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-bronze-700/30 shrink-0"><i data-lucide="pie-chart" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-silver-500/30 shrink-0"><i data-lucide="pie-chart" class="w-4 h-4 text-silver-300"></i></div>
                         <div>
-                            <h3 class="font-bold text-bronze-100 text-sm">Persönliches Starter-Portfolio</h3>
+                            <h3 class="font-bold text-silver-100 text-sm">Persönliches Starter-Portfolio</h3>
                             <p class="text-[10px] text-stone-400 leading-tight mt-0.5">5–8 solide Coins (BTC-Fokus), Kaufzonen & Sparplan. Kein Zocken.</p>
                         </div>
                     </div>
                     <!-- 4 -->
                     <div class="flex gap-3 items-start">
-                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-bronze-700/30 shrink-0"><i data-lucide="users" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-silver-500/30 shrink-0"><i data-lucide="users" class="w-4 h-4 text-silver-300"></i></div>
                         <div>
-                            <h3 class="font-bold text-bronze-100 text-sm">Zugang Private Starter Community</h3>
+                            <h3 class="font-bold text-silver-100 text-sm">Zugang Private Silver Community</h3>
                             <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Geschlossener Telegram-Bereich mit wöchentlichen Updates.</p>
                         </div>
                     </div>
                     <!-- 5 -->
                     <div class="flex gap-3 items-start">
-                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-bronze-700/30 shrink-0"><i data-lucide="compass" class="w-4 h-4 text-bronze-300"></i></div>
+                        <div class="bg-stone-800/50 p-1.5 rounded-lg border border-silver-500/30 shrink-0"><i data-lucide="compass" class="w-4 h-4 text-silver-300"></i></div>
                         <div>
-                            <h3 class="font-bold text-bronze-100 text-sm">Exit- & Sicherheitsfahrplan</h3>
+                            <h3 class="font-bold text-silver-100 text-sm">Exit- & Sicherheitsfahrplan</h3>
                             <p class="text-[10px] text-stone-400 leading-tight mt-0.5">Emotionen kontrollieren, Fehler vermeiden & Gewinne sichern.</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="mt-auto border-t border-bronze-900/50 pt-6 pb-2">
+                <div class="mt-auto border-t border-silver-500/30 pt-6 pb-2">
                     <div class="flex justify-between items-end mb-4">
                         <div>
                             <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Start-Investment</p>
-                            <div class="text-3xl md:text-4xl font-black text-white leading-none">1.999 €</div>
+                            <!-- Streichpreis hinzugefügt -->
+                            <div class="line-through text-silver-400 text-lg font-bold mb-1 opacity-70">3.499 €</div>
+                            <!-- Preis massiv vergrößert -->
+                            <div class="text-5xl md:text-6xl font-black text-white leading-none">1.999 €</div>
                             <p class="text-[9px] text-stone-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
                         </div>
                         <div class="text-right hidden md:block">
-                            <p class="text-[10px] text-bronze-400 font-bold mb-1">Von „Angst vor Fehlern“ zu</p>
+                            <p class="text-[10px] text-silver-400 font-bold mb-1">Von „Angst vor Fehlern“ zu</p>
                             <p class="text-[9px] text-stone-400">„Sicherem Handeln“</p>
                         </div>
                     </div>
-                    <a href="#" class="btn-bronze w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
+                    <a href="#" class="btn-silver w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
                         Sicher Starten <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
-                    <div class="mt-4 flex justify-between items-center text-[9px] text-stone-600 border-b border-bronze-900/30 pb-4 mb-4">
+                    <div class="mt-4 flex justify-between items-center text-[9px] text-stone-600 border-b border-silver-900/30 pb-4 mb-4">
                         <p>Sichere Zahlungsabwicklung</p>
-                        <div class="flex gap-3"><a href="#" class="hover:text-bronze-400">Impressum</a><a href="#" class="hover:text-bronze-400">AGB</a></div>
+                        <div class="flex gap-3"><a href="#" class="hover:text-silver-400">Impressum</a><a href="#" class="hover:text-silver-400">AGB</a></div>
                     </div>
                 </div>
             </div>
@@ -818,9 +880,9 @@
 
 
     <!-- ==============================================
-         VIEW 3: MASTERPLAN GOLD
-         ============================================== -->
-    <div id="view-gold" class="view-section view-hidden">
+          VIEW 3: MASTERPLAN GOLD
+          ============================================== -->
+    <div id="view-gold" class="view-section view-hidden" data-lenis-prevent>
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
@@ -916,7 +978,10 @@
                     <div class="flex justify-between items-end mb-4">
                         <div>
                             <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Investment</p>
-                            <div class="text-3xl md:text-4xl font-black text-white leading-none">4.999 €</div>
+                            <!-- Streichpreis massiv vergrößert & sichtbar gemacht -->
+                            <div class="line-through text-stone-500 text-lg font-bold mb-1 opacity-70">7.499 €</div>
+                            <!-- Preis massiv vergrößert -->
+                            <div class="text-5xl md:text-6xl font-black text-white leading-none">4.999 €</div>
                             <p class="text-[9px] text-stone-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
                         </div>
                         <div class="text-right hidden md:block">
@@ -924,7 +989,7 @@
                             <p class="text-[9px] text-stone-400">„Ich habe einen klaren Masterplan“</p>
                         </div>
                     </div>
-                    <a href="#" class="btn-gold w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
+                    <a href="https://flos-funnel.pages.dev/" class="btn-gold w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
                         Jetzt Gold-Status sichern <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                     <div class="mt-4 flex justify-between items-center text-[9px] text-stone-600 border-b border-gold-900/30 pb-4 mb-4">
@@ -938,9 +1003,9 @@
 
 
     <!-- ==============================================
-         VIEW 4: MASTERMIND PLATINUM (Original)
-         ============================================== -->
-    <div id="view-platinum" class="view-section view-hidden">
+          VIEW 4: MASTERMIND PLATINUM (Original)
+          ============================================== -->
+    <div id="view-platinum" class="view-section view-hidden" data-lenis-prevent>
         
         <div class="bg-blob-1"></div>
         <div class="bg-blob-2"></div>
@@ -1010,7 +1075,10 @@
                     <div class="flex justify-between items-end mb-4">
                         <div>
                             <p class="text-[10px] text-slate-500 uppercase tracking-widest mb-0.5">Einmaliges Investment</p>
-                            <div class="text-3xl md:text-4xl font-black text-white leading-none">13.999 €</div>
+                            <!-- Streichpreis massiv vergrößert & sichtbar gemacht -->
+                            <div class="line-through text-stone-500 text-lg font-bold mb-1 opacity-70">17.999 €</div>
+                            <!-- Preis massiv vergrößert -->
+                            <div class="text-5xl md:text-6xl font-black text-white leading-none">13.999 €</div>
                             <p class="text-[9px] text-slate-500 mt-0.5">zzgl. gesetzl. MwSt.</p>
                         </div>
                         <div class="text-right hidden md:block">
@@ -1022,7 +1090,7 @@
                             <p class="text-[9px] text-slate-400">Nur noch 2 Plätze dieses Quartal</p>
                         </div>
                     </div>
-                    <a href="#" class="btn-platinum w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
+                    <a href="https://flos-funnel.pages.dev/" class="btn-platinum w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
                         Jetzt Platz anfragen <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                     </a>
                     <div class="mt-4 flex justify-between items-center text-[9px] text-slate-600 border-b border-slate-800 pb-4 mb-4">
@@ -1035,9 +1103,9 @@
     </div>
 
     <!-- ==============================================
-         VIEW 5: MASTERMIND INFINITY (NEU)
-         ============================================== -->
-    <div id="view-infinity" class="view-section view-hidden">
+          VIEW 5: MASTERMIND INFINITY (NEU)
+          ============================================== -->
+    <div id="view-infinity" class="view-section view-hidden" data-lenis-prevent>
         
         <i class="fa-solid fa-infinity bg-icon-watermark"></i>
 
@@ -1123,7 +1191,7 @@
                         <div>
                             <p class="text-[10px] text-stone-500 uppercase tracking-widest mb-0.5">Exklusives Investment</p>
                             <!-- PREIS ANPASSUNG -->
-                            <div class="text-3xl md:text-4xl font-black text-white leading-none">49.999 €</div>
+                            <div class="text-5xl md:text-6xl font-black text-white leading-none">49.999 €</div>
                             <p class="text-[9px] text-stone-500 mt-0.5">oder auf Anfrage</p>
                         </div>
                         <div class="text-right hidden md:block">
@@ -1135,7 +1203,7 @@
                             </div>
                         </div>
                     </div>
-                    <a href="#" class="btn-infinity w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
+                    <a href="https://flos-funnel.pages.dev/" class="btn-infinity w-full py-4 rounded-xl text-center flex items-center justify-center gap-2 text-base group pulse">
                         Bewerbung einreichen <i data-lucide="sparkles" class="w-4 h-4 group-hover:rotate-12 transition-transform"></i>
                     </a>
                     <div class="mt-4 flex justify-between items-center text-[9px] text-stone-600 border-b border-infinity-900/30 pb-4 mb-4">
@@ -1152,7 +1220,7 @@
         (function() {
             const toggleBtn = document.getElementById('view-toggle');
             const viewStandard = document.getElementById('view-standard');
-            const viewStarter = document.getElementById('view-starter');
+            const viewSilver = document.getElementById('view-silver');
             const viewGold = document.getElementById('view-gold');
             const viewPlatinum = document.getElementById('view-platinum');
             const viewInfinity = document.getElementById('view-infinity');
@@ -1163,7 +1231,7 @@
             // Helper: State aus Hash lesen
             function getStateFromHash() {
                 const hash = window.location.hash;
-                if (hash === '#startup') return 1;
+                if (hash === '#silver') return 1; // Updated hash
                 if (hash === '#gold') return 2;
                 if (hash === '#platin') return 3;
                 if (hash === '#infinity') return 4;
@@ -1174,13 +1242,13 @@
             function updateUI(state) {
                 // Alle verstecken
                 viewStandard.classList.add('view-hidden');
-                viewStarter.classList.add('view-hidden');
+                viewSilver.classList.add('view-hidden');
                 viewGold.classList.add('view-hidden');
                 viewPlatinum.classList.add('view-hidden');
                 viewInfinity.classList.add('view-hidden');
                 
                 // Button Reset
-                toggleBtn.classList.remove('nav-btn-bronze', 'nav-btn-gold', 'nav-btn-platinum', 'nav-btn-infinity');
+                toggleBtn.classList.remove('nav-btn-silver', 'nav-btn-gold', 'nav-btn-platinum', 'nav-btn-infinity');
                 btnIcon.className = ''; 
 
                 // Lucide Init check
@@ -1190,18 +1258,17 @@
                 }
 
                 // SCROLL LOGIC FIX:
-                // Wenn Overlay offen (state > 0), sperren wir den Body-Scroll, damit das Overlay exklusiv scrollt.
                 if (state > 0) {
-                    document.body.style.overflow = 'hidden'; // Body einfrieren
-                    if (window.lenisInstance) window.lenisInstance.stop(); // Lenis stoppen
+                    document.body.style.overflow = 'hidden'; 
+                    if (window.lenisInstance) window.lenisInstance.stop(); 
                 } else {
-                    document.body.style.overflow = ''; // Body freigeben
-                    if (window.lenisInstance) window.lenisInstance.start(); // Lenis starten
+                    document.body.style.overflow = ''; 
+                    if (window.lenisInstance) window.lenisInstance.start(); 
                 }
 
-                if (state === 1) { // Starter
-                    viewStarter.classList.remove('view-hidden');
-                    toggleBtn.classList.add('nav-btn-bronze');
+                if (state === 1) { // Silver
+                    viewSilver.classList.remove('view-hidden');
+                    toggleBtn.classList.add('nav-btn-silver');
                     btnIcon.classList.add('fa-solid', 'fa-coins'); 
                 } else if (state === 2) { // Gold
                     viewGold.classList.remove('view-hidden');
@@ -1226,7 +1293,7 @@
 
             // VELOCITY SKEW EFFECT (Wackelpudding beim Scrollen in Overlays)
             const scrollContainers = [
-                document.getElementById('view-starter'),
+                document.getElementById('view-silver'),
                 document.getElementById('view-gold'),
                 document.getElementById('view-platinum'),
                 document.getElementById('view-infinity')
@@ -1276,7 +1343,7 @@
                 const nextState = (currentState + 1) % 5; 
                 
                 if (nextState === 0) window.location.hash = ''; 
-                else if (nextState === 1) window.location.hash = '#startup';
+                else if (nextState === 1) window.location.hash = '#silver';
                 else if (nextState === 2) window.location.hash = '#gold';
                 else if (nextState === 3) window.location.hash = '#platin';
                 else if (nextState === 4) window.location.hash = '#infinity';
@@ -1293,19 +1360,16 @@
             }, 50);
         })();
 
-        // OTHER SCRIPTS
+        // OTHER SCRIPTS (LENIS, ETC.)
         (function() {
             const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), direction: 'vertical', smooth: true });
-            window.lenisInstance = lenis; // Expose globally for resize calls
-            
+            window.lenisInstance = lenis; 
             function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
             requestAnimationFrame(raf);
-            
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const href = this.getAttribute('href');
-                    // Verhindere Scroll für unsere View-Hashes
-                    if(href !== '#' && href !== '#startup' && href !== '#gold' && href !== '#platin' && href !== '#infinity') {
+                    if(href !== '#' && href !== '#silver' && href !== '#gold' && href !== '#platin' && href !== '#infinity') {
                         e.preventDefault();
                         const t = document.querySelector(href);
                         if(t) lenis.scrollTo(t);
@@ -1314,6 +1378,7 @@
             });
         })();
 
+        // ... (Rest of existing scripts for timer, date, theme, modals, slots, team slider) ...
         (function() {
             let duration = 15 * 60;
             const d = document.getElementById('d'), h = document.getElementById('h'), m = document.getElementById('m'), s = document.getElementById('s');
